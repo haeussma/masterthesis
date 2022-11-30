@@ -1,0 +1,3 @@
+# Declaration of authorship
+
+I, Max Häußler, hereby declare, that...
