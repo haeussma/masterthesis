@@ -50,6 +50,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Results" href="results.html" />
@@ -90,11 +92,6 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="index.html">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
-        
-      
-      
-      <img src="_static/logo.png" class="logo" alt="logo">
       
       
       <h1 class="site-logo" id="site-title">Best practices: Enzyme kinetics</h1>
@@ -130,6 +127,11 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="abbreviations.html">
+   Abbreviations
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="introduction.html">
    Introduction
   </a>
@@ -150,8 +152,18 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="testsection.html">
-     section A
+    <a class="reference internal" href="scenarios/chymotrypsin_inhibition.html">
+     Assessment of the inhibitory properties of an designed albumin as a chymotrypsin inhibitor
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="scenarios/SLAC_kinetic_characterization.html">
+     Scenario C: SLAC characterization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="scenarios/effect_calibration_model.html">
+     Effect of absorption - concentration model on kinetic parameters
     </a>
    </li>
   </ul>
@@ -159,6 +171,16 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="discussion.html">
    Discussion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="conclusion.html">
+   Conclusion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="references.html">
+   References
   </a>
  </li>
 </ul>
@@ -312,14 +334,60 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#calibration-data">
-   2. Calibration data
+  <a class="reference internal nav-link" href="#calipytion">
+   2. CaliPytion
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-model-for-calibration-data">
+     2.1 Data model for calibration data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#linear-and-non-linear-fitting-of-calibration-equations">
+     2.2 Linear and non-linear fitting of calibration equations
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#kinetic-parameter-estimation">
-   3. Kinetic parameter estimation
+  <a class="reference internal nav-link" href="#enzymepynetics">
+   3. EnzymePynetics
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#overview">
+     3.1 Overview
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-model">
+     3.2 Data model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#kinetic-models">
+     3.3 Kinetic models
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#initialization">
+   3.4 Initialization
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-model-for-enzyme-kinetics-experiments">
+     3.1 Data model for enzyme kinetics experiments
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     3.2
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -346,14 +414,60 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#calibration-data">
-   2. Calibration data
+  <a class="reference internal nav-link" href="#calipytion">
+   2. CaliPytion
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-model-for-calibration-data">
+     2.1 Data model for calibration data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#linear-and-non-linear-fitting-of-calibration-equations">
+     2.2 Linear and non-linear fitting of calibration equations
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#kinetic-parameter-estimation">
-   3. Kinetic parameter estimation
+  <a class="reference internal nav-link" href="#enzymepynetics">
+   3. EnzymePynetics
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#overview">
+     3.1 Overview
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-model">
+     3.2 Data model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#kinetic-models">
+     3.3 Kinetic models
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#initialization">
+   3.4 Initialization
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-model-for-enzyme-kinetics-experiments">
+     3.1 Data model for enzyme kinetics experiments
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     3.2
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -369,15 +483,91 @@ title="Print to PDF"
 <h1>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">#</a></h1>
 <section id="enzymeml">
 <h2>1. EnzymeML<a class="headerlink" href="#enzymeml" title="Permalink to this headline">#</a></h2>
-<p>In its core, EnzymeML is a data model, structuring data and meta data of biocatalytic reactions. Thereby, properties of the reaction vessel, molecules involved in the reaction, as well as reaction properties like stoichiometry, pH, and temperature can be documented. Furthermore, properties of the protein catalyst like sequence, EC-number, UniProt ID can be stored alongside of potential reaction modifiers like inhibitory molecules.<br />
-Within the measurements section of the data model, measurement data of one or multiple measurements is stored. Each measurement contains data of identical measurement conditions as well as information about these conditions. Thus, data and meta data from experiments with differing conditions can be stored in a structured way.</p>
+<p>In its core, EnzymeML is a data model, structuring data and meta data of biocatalytic reactions. Thereby, properties of the reaction vessel, molecules involved in the reaction, as well as reaction properties like stoichiometry, pH, and temperature can be documented. Furthermore, properties of the protein catalyst like sequence, EC-number, UniProt ID can be stored alongside of potential reaction modifiers like inhibitory molecules. <span id="id1">[<a class="reference internal" href="references.html#id5" title="Jürgen Pleiss. Standardized data, scalable documentation, sustainable storage–enzymeml as a basis for fair data management in biocatalysis. ChemCatChem, 13(18):3909–3913, 2021.">Pleiss, 2021</a>]</span></p>
+<p>Within the measurements section of the data model, measurement data of one or multiple measurements is stored. Each measurement contains data of identical measurement conditions as well as information about these conditions. Thus, data and meta data from experiments with differing conditions can be stored in a structured way.</p>
 <p>The data model consists of descriptions for the reaction vessel,</p>
 </section>
-<section id="calibration-data">
-<h2>2. Calibration data<a class="headerlink" href="#calibration-data" title="Permalink to this headline">#</a></h2>
+<section id="calipytion">
+<h2>2. CaliPytion<a class="headerlink" href="#calipytion" title="Permalink to this headline">#</a></h2>
+<section id="data-model-for-calibration-data">
+<h3>2.1 Data model for calibration data<a class="headerlink" href="#data-model-for-calibration-data" title="Permalink to this headline">#</a></h3>
 </section>
-<section id="kinetic-parameter-estimation">
-<h2>3. Kinetic parameter estimation<a class="headerlink" href="#kinetic-parameter-estimation" title="Permalink to this headline">#</a></h2>
+<section id="linear-and-non-linear-fitting-of-calibration-equations">
+<h3>2.2 Linear and non-linear fitting of calibration equations<a class="headerlink" href="#linear-and-non-linear-fitting-of-calibration-equations" title="Permalink to this headline">#</a></h3>
+</section>
+</section>
+<section id="enzymepynetics">
+<h2>3. EnzymePynetics<a class="headerlink" href="#enzymepynetics" title="Permalink to this headline">#</a></h2>
+<section id="overview">
+<h3>3.1 Overview<a class="headerlink" href="#overview" title="Permalink to this headline">#</a></h3>
+<p>EnzymePynetics is a a python package, for kinetic parameter estimation of single-substrate enzyme reactions, which was developed during this thesis. The <code class="docutils literal notranslate"><span class="pre">ParameterEstimator</span></code> of EnzymePynetics estimates the kinetic parameters <span class="math notranslate nohighlight">\(k_{cat}\)</span> and <span class="math notranslate nohighlight">\(K_{m}\)</span> by fitting time-course measurement data of enzyme reactions to different Michaelis-Menten models. Thereby, the residuals between measured progress-curve and integrated Michaelis-Menten rate equations are minimized through a non-linear least-squares algorithm. Additionally, the inhibition constant <span class="math notranslate nohighlight">\(K_{i}\)</span> can be assessed for potential substrate or product inhibition. Furthermore, the inhibition constant of an enzyme inhibitor can be determined.</p>
+</section>
+<section id="data-model">
+<h3>3.2 Data model<a class="headerlink" href="#data-model" title="Permalink to this headline">#</a></h3>
+<p>Data models build the backbone of applications, by defining the relations between informations in an hierarchical manner.
+EnzymePynetics is based on a data model, resembling the experimental design of an enzyme kinetics assay. Thereby, all relevant data and metadata of an kinetic experiment are ordered in the base object <code class="docutils literal notranslate"><span class="pre">EnzymeKineticsExperiment</span></code>. On the metadata side, the base object consists of the attributes temperature with its respective unit, pH, and the name of the measured substance. Additionally, it can be specified whether the measurement data originates from substrate or product measurements. On the data side, <code class="docutils literal notranslate"><span class="pre">EnzymeKineticsExperiment</span></code> contains one or multiple <code class="docutils literal notranslate"><span class="pre">Measurements</span></code>. Each measurement stores the information of an experimental condition the enzyme was subjected to. Therefore, each measurement contains information on the initial substrate concentration, enzyme concentration, and inhibitor concentration if present, along with the respective concentration units. Each ‘measurement’ also contains the measured data, which itself consist of one or multiple replicates of the respective experimental condition.<br />
+The data model was was generated using <a class="reference external" href="https://github.com/JR-1991/software-driven-rdm">sdRDM</a>, a python tool allowing the creation and versioning of data models.</p>
+</section>
+<section id="kinetic-models">
+<h3>3.3 Kinetic models<a class="headerlink" href="#kinetic-models" title="Permalink to this headline">#</a></h3>
+<p>Besides the irreversible Michaelis-Menten rate equation (Eq. 1) inhibition models for competitive (Eq. 2), uncompetitive (Eq. 3), and non-competitive) inhibition (Eq. 4) were implemented. Thereby, <span class="math notranslate nohighlight">\(S\)</span>, <span class="math notranslate nohighlight">\(E\)</span>, and <span class="math notranslate nohighlight">\(I\)</span> denote the concentration of substrate, enzyme, and inhibitor, respectively. In therms of kinetic parameters, <span class="math notranslate nohighlight">\(k_{cat}\)</span> denotes the turnover number, <span class="math notranslate nohighlight">\(K_{m}\)</span> the Michaelis-Menten constant of the substrate,whereas <span class="math notranslate nohighlight">\(K_{ic}\)</span> and <span class="math notranslate nohighlight">\(K_{iu}\)</span> describe the competitive and uncompetitive inhibition constant, respectively.</p>
+<div class="math notranslate nohighlight" id="equation-irreversible-mm">
+<span class="eqno">(1)<a class="headerlink" href="#equation-irreversible-mm" title="Permalink to this equation">#</a></span>\[\frac{dS}{dt} = -\frac{k_{cat} * E * S}{K_{m} + S}\]</div>
+<div class="math notranslate nohighlight" id="equation-competitive-inhibition">
+<span class="eqno">(2)<a class="headerlink" href="#equation-competitive-inhibition" title="Permalink to this equation">#</a></span>\[\frac{dS}{dt} = -\frac{k_{cat} * E * S}{K_{m} * (1+\frac{I}{K_{ic}}) + S}\]</div>
+<div class="math notranslate nohighlight" id="equation-uncompetitive-inhibition">
+<span class="eqno">(3)<a class="headerlink" href="#equation-uncompetitive-inhibition" title="Permalink to this equation">#</a></span>\[\frac{dS}{dt} = -\frac{k_{cat} * E * S}{K_{m} * (1+\frac{I}{K_{iu}}) * S}\]</div>
+<div class="math notranslate nohighlight" id="equation-noncompetitive-inhibition">
+<span class="eqno">(4)<a class="headerlink" href="#equation-noncompetitive-inhibition" title="Permalink to this equation">#</a></span>\[\frac{dS}{dt} = -\frac{k_{cat} * E * S}{K_{m} * (1+\frac{I}{K_{ic}}) + (1+\frac{I}{K_{iu}}) + S}\]</div>
+<p>By default, <span class="math notranslate nohighlight">\(E\)</span> is assumed to be constant throughout the reaction. If required, the kinetic models can be extended by the parameter <span class="math notranslate nohighlight">\(K_{inact}\)</span>, which describes the time-dependent inactivation rate of the enzyme. The decease in active enzyme is modeled with Eq. 5:</p>
+<div class="math notranslate nohighlight" id="equation-enzyme-inactivation">
+<span class="eqno">(5)<a class="headerlink" href="#equation-enzyme-inactivation" title="Permalink to this equation">#</a></span>\[\frac{dE}{dt} = -K_{inact} * E\]</div>
+</section>
+</section>
+<section id="initialization">
+<h2>3.4 Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">#</a></h2>
+<p>Whereas the <code class="docutils literal notranslate"><span class="pre">EnzymeKineticsExperiment</span></code> object solely serves a
+The <code class="docutils literal notranslate"><span class="pre">ParameterEstimator</span></code> harbors the functionalities for parameter estimation. Data can be provided by passing data as an <code class="docutils literal notranslate"><span class="pre">EnzymeKineticsExperiment</span></code> object. Alternatively, an EnzymeML documents can be provided as the data source via <a class="reference external" href="https://github.com/EnzymeML/PyEnzyme">PyEnzyme</a> software.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">EnzymePynetics.tools.parameterestimator</span> <span class="kn">import</span> <span class="n">ParameterEstimator</span>
+<span class="kn">from</span> <span class="nn">EnzymePynetics.core.enzymekineticsexperiment</span> <span class="kn">import</span> <span class="n">EnzymeKineticsExperiment</span>
+<span class="kn">import</span> <span class="nn">pyenzyme</span>
+
+<span class="c1"># Define data</span>
+<span class="n">experimental_data</span> <span class="o">=</span> <span class="n">EnzymeKineticsExperiment</span><span class="p">(</span>
+    <span class="n">pH</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
+    <span class="n">reactant_name</span><span class="o">=</span><span class="s2">&quot;test substance&quot;</span><span class="p">,</span>
+    <span class="o">...</span><span class="p">)</span>
+
+<span class="n">enzymeml_document</span> <span class="o">=</span> <span class="n">pyenzyme</span><span class="o">.</span><span class="n">EnzymeMLDocument</span><span class="o">.</span><span class="n">fromFile</span><span class="p">(</span><span class="s2">&quot;enzymeML_dataset.omex&quot;</span><span class="p">)</span>
+
+<span class="c1"># Initialize the parameter estimator from an &#39;EnzymeKineticsExperiment&#39; instance</span>
+<span class="n">estimator</span> <span class="o">=</span> <span class="n">ParameterEstimator</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">experimental_data</span><span class="p">)</span>
+
+<span class="c1"># ... or directly from an EnzymeML document.</span>
+<span class="n">estimator</span> <span class="o">=</span> <span class="n">ParameterEstimator</span><span class="o">.</span><span class="n">from_EnzymeML</span><span class="p">(</span>
+    <span class="n">enzmldoc</span><span class="o">=</span><span class="n">enzymeml_document</span><span class="p">,</span>
+    <span class="n">reactant_id</span><span class="o">=</span><span class="s2">&quot;s1&quot;</span><span class="p">,</span>
+    <span class="n">measured_species</span><span class="o">=</span><span class="s2">&quot;product&quot;</span><span class="p">,</span>
+    <span class="n">inhibitor_id</span><span class="o">=</span><span class="s2">&quot;s2&quot;</span><span class="p">)</span>
+
+<span class="c1"># Fit experimental data to kinetic models and get the fit report of all models</span>
+<span class="n">estimator</span><span class="o">.</span><span class="n">fit_models</span><span class="p">()</span>
+
+<span class="c1"># Visualize data with the best fitting model</span>
+<span class="n">estimator</span><span class="o">.</span><span class="n">visualize</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>Visualization</strong></p>
+<section id="data-model-for-enzyme-kinetics-experiments">
+<h3>3.1 Data model for enzyme kinetics experiments<a class="headerlink" href="#data-model-for-enzyme-kinetics-experiments" title="Permalink to this headline">#</a></h3>
+</section>
+<section id="id2">
+<h3>3.2<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
+<div class="dropdown admonition">
+<p class="admonition-title">Click the button to reveal!</p>
+<p>Some hidden toggle content!</p>
+</div>
+</section>
 </section>
 </section>
 

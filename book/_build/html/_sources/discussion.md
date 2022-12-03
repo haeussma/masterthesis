@@ -1,6 +1,16 @@
 # Discussion
 
-## Data management
+Discuss both viewpoints: biologist and RSE.
+
+---
+
+## Data management / lab digitalization
+
+- temperature in MTPs
+
+## Jupyter notebooks
+
+- great documentation (FAIR)
 
 In this project, a robust and FAIR workflow from analytical raw-data to kinetic parameters was established. Thereby, the output of a analytical device was used directly as the input of the modeling pipeline.
 
@@ -8,4 +18,19 @@ Despite the robust workflow, after the data is written to an EnzymeML document, 
 
 Despite the easy applicability of the workflow, after the data is initialized,
 
-## Best-practices kinetic moeling
+## Current state in kinetic modeling of enzyme kinetics
+
+## Model selection in enzyme kinetics: calibration and kinetic model
+
+- Best-practices kinetic modeling
+  - initial rates vs progress-curve analysis
+    - initial rates not suited to estimate conversion after 24 h.
+- Cost of additional parameters
+- Model selection criteria
+- How to assess the quality of a model
+  - what does the model represent (not newtonian mechanics)
+
+## Inactivation
+
+- deterioration during catalysis
+- adsorption to MTP surface (hydrophobic interaction)

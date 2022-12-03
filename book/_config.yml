@@ -3,7 +3,7 @@
 
 title: "Best practices: Enzyme kinetics"
 author: Max Häußler
-logo: images/logo.png
+logo: ../images/logo.png
 copyright: "2022"
 
 # Force re-execution of notebooks on each build.
@@ -31,3 +31,14 @@ repository:
 html:
   #use_issues_button: true
   use_repository_button: true
+
+sphinx:
+  config:
+    bibtex_reference_style: author_year
+
+parse:
+  myst_enable_extensions:
+    # don't forget to list any other extensions you want enabled,
+    # including those that are enabled by default!
+    - amsmath
+    - dollarmath

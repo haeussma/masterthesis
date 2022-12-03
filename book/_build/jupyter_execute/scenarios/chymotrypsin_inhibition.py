@@ -13,7 +13,7 @@
 
 # ## Imports
 
-# In[23]:
+# In[1]:
 
 
 import numpy as np
@@ -32,11 +32,11 @@ warnings.filterwarnings('ignore')
 # 
 # In order to convert the time-course absorption signal into concenrtation, a standard of p-NA was applied in the range of 0 - 0.3 mM in duplicates. The measured absorbance values were stored as an excel-file. In the following cell, a CaliPytion ```StandardCurve``` is generated directly from the excel-data.
 
-# In[24]:
+# In[2]:
 
 
 product_standard = StandardCurve.from_excel(
-    path="../round5_control/pNA-standard.xlsx",
+    path="../../data/chymotrypsin_inhibition/pNA-standard.xlsx",
     reactant_id="s1",
     wavelength=410,
     sheet_name="csv", 
@@ -53,12 +53,12 @@ product_standard.visualize()
 # 
 # All experimental data was filled in the EnzymeML Excel template. In the next cell, ```EnzymeMLDocument```s are created by reading the excel template and the measured absorption data is calculated based on the ```StandardCurve``` above.
 
-# In[32]:
+# In[3]:
 
 
 # Load data from 
-chymo_HSAwt = pe.EnzymeMLDocument.fromTemplate("/Users/maxhaussler/Dropbox/master_thesis/data/marwa/final/each set/chymo_HSAwt copy.xlsx")
-chymo_HSAM3 = pe.EnzymeMLDocument.fromTemplate("/Users/maxhaussler/Dropbox/master_thesis/data/marwa/final/each set/chymo_HSA(M3) copy.xlsx")
+chymo_HSAwt = pe.EnzymeMLDocument.fromTemplate("../../data/chymotrypsin_inhibition/chymo_HSAwt.xlsx")
+chymo_HSAM3 = pe.EnzymeMLDocument.fromTemplate("../../data/chymotrypsin_inhibition/chymo_HSA(M3).xlsx")
 
 # Apply standard curve to 'EnzymeMLDocument's
 chymo_HSAwt = product_standard.apply_to_EnzymeML(chymo_HSAwt, "s1")
@@ -73,7 +73,7 @@ plt.show()
 # 
 # Since the experimental data from the HSA wild-type and the HSA(M3) variant originate from independent experiments, the control reactions without the respective inhibitor were compared. Therefore, kinetic parameters were estimated for each dataset, after deleting measurement in which inhibitor was present.
 
-# In[ ]:
+# In[4]:
 
 
 # Create copys of the data sets and delete measuremnts with inhibitor present.
@@ -90,7 +90,7 @@ del m3_control.measurement_dict["m6"]
 del m3_control.measurement_dict["m7"]
 
 
-# In[ ]:
+# In[5]:
 
 
 # Estimate kinetic parameters of the control reactions of the HSA wild-type data set.
@@ -99,7 +99,7 @@ kinetics_wt_control.fit_models(stop_time_index=-1, display_output=False)
 kinetics_wt_control.visualize()
 
 
-# In[ ]:
+# In[6]:
 
 
 # Estimate kinetic parameters of the control reactions of the HSA(M3) data set.
@@ -111,13 +111,13 @@ kinetics_m3_control.visualize()
 # Statistical analysis between the parameters $k_{cat}$ and $K_{m}$ high correlation above 0.98. This indicates, that the highest applied substrate concentration of 2 mM is lower than the $K_{m}$ of the enzyme under the given experimental conditions. Therefore, $k_{cat}$ and $K_{m}$ cannot be detemined independently. Instead, the catalytic efficiency $\frac{k_{cat}}{K_{m}}$ is used to assess the comparability of the two data sets.  
 # In the cell below, 
 
-# In[ ]:
+# In[7]:
 
 
 kinetics_wt_control.result_dict.drop(columns=["kcat [1/min]", "Km [mmole / l]"])
 
 
-# In[ ]:
+# In[8]:
 
 
 kinetics_m3_control.result_dict.drop(columns=["kcat [1/min]", "Km [mmole / l]"])
@@ -127,7 +127,7 @@ kinetics_m3_control.result_dict.drop(columns=["kcat [1/min]", "Km [mmole / l]"])
 
 # ## Parameter estimation for $K_{i}$
 
-# In[ ]:
+# In[9]:
 
 
 kinetics_HSAwt = ParameterEstimator.from_EnzymeML(chymo_HSAwt, reactant_id="s1", inhibitor_id="s2", measured_species="product")
@@ -135,7 +135,7 @@ kinetics_HSAwt.fit_models(initial_substrate_concs=[0.25, 0.5, 1], stop_time_inde
 kinetics_HSAwt.visualize()
 
 
-# In[ ]:
+# In[10]:
 
 
 kinetics_HSAM3 = ParameterEstimator.from_EnzymeML(chymo_HSAM3, reactant_id="s1", inhibitor_id="s3", measured_species="product")
@@ -143,19 +143,19 @@ kinetics_HSAM3.fit_models(initial_substrate_concs=[0.25, 0.5, 1], stop_time_inde
 kinetics_HSAM3.visualize()
 
 
-# In[ ]:
+# In[11]:
 
 
 kinetics_HSAwt.result_dict.drop(columns=["kcat [1/min]", "Km [mmole / l]"])
 
 
-# In[ ]:
+# In[12]:
 
 
 kinetics_HSAM3.result_dict.drop(columns=["kcat [1/min]", "Km [mmole / l]"])
 
 
-# In[ ]:
+# In[13]:
 
 
 fig, axes = plt.subplots(1,2, figsize=(15,5), sharey=True, sharex=True)
@@ -168,4 +168,5 @@ for e, (doc, ax) in enumerate(zip([kinetics_HSAwt ,kinetics_HSAM3], axes.flatten
 handles, labels = ax.get_legend_handles_labels()
 
 fig.legend(handles, labels, loc="lower center", ncol=2, title="initial SGGPpNA  [mM]", bbox_to_anchor=(0.5,-0.15))
+plt.show()
 

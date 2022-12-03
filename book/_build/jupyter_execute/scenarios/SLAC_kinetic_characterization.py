@@ -1,17 +1,33 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # ABTS Small Laccase from *Streptomyces coelicolor*
+# # Scenario C: SLAC characterization
 # 
-# In this data set, 
+# Data provided by Alaric Prins (Biocatalysis and Technical Biology, Cape Peninsula University of Technology, Capetown, South Africa)
+# 
+# ## Project background
+# In this scenario, the catalytic properties of the small laccase from *Streptomyces coelicolor* (SLAC) were investigated. Therefore, the enzymatic oxidation of 2,2'-Azino-bis(3-ethylbenzothiazoline-6-sulfonic acid) (ABTS) to its radical product ABTS<sup>+·</sup> was studied in the pH range between pH 3&nbsp;-&nbsp;5.5 and temperature range between 25°C&nbsp;-&nbsp;45°C. In total 30 kinetic enzyme assays in a substrate range between 0&nbsp;-&nbsp;200&nbsp;uM of ABTS were conducted. For each pH - temperature condition a seperate ABTS standard curve and absorption spectrum was recorded, in order to account for absorbance changes do to reaction conditions. Each enzyme reaction was followed for 15 min photometrically at two seperate wavelengths, measuring substrate depletion and product accumululation simultaneously. Therefore, preliminary experiments confirmed, that ABTS absorbs at 340 nm, whereas the ABTS<sup>+·</sup> radical product absorbs at 420 nm, which is in accordance with literature {cite:p}`wang2019multi`
+# Overall, the dataset consists of more than 100&nbsp;000 individual absorbance reads. Thus, data preperation was automated by custom parser functions, which were tailored for the output of the used spectro photometer. Consequently, the tedious and error-prone manual copying of raw data was automated. Information on the involved reactants, and the enzyme was filled in an EnzymeML Excel spreadsheet, which served as a meta data container.
+# 
+# ![Fig33](../images/workflow_SLAC.png)
+# _Fig. 22: Schematic workflow of the SLAC characterization data flow._
+# 
 # 
 # All data except for measurement data was entered into an EnzymeML Excel-template. Therein, concentration information of the enzyme and initial substrate was specified. All other information was parsed from the .txt output of the photometer.
 
-# In[2]:
+# In[ ]:
 
 
-get_ipython().run_line_magic('load_ext', 'autoreload')
-get_ipython().run_line_magic('autoreload', '2')
+{
+    "tags": [
+        "hide-cell"
+    ]
+}
+
+
+# In[22]:
+
+
 from typing import Dict, List
 import pyenzyme as pe
 import numpy as np
@@ -28,23 +44,35 @@ from CaliPytion.tools.standardcurve import StandardCurve
 from EnzymePynetics.tools.parameterestimator import ParameterEstimator
 
 # Custom functions for data mapping
-from parser_functions import measurement_data_to_EnzymeML
+from parser_functions import measurement_data_to_EnzymeML, plot
 from parser_functions import read_measurement_data, read_calibration_data
 
 import warnings
 warnings.filterwarnings('ignore')
 
 
-# ## 1. Data preparation
+# ## Data preparation
 # 
-# The first measurement in each dataset represents a control reaction with 0 mM ABTS. Therefore, the mean value of measurements without substrate is used to blanc the data by subtracting it from all measurement data. Afterwards, the control reaction is deleted from the dataset.
+# ### Experimental data
+# 
+# In the next cell, time-course absorption data from the enzyme reactions is read in and parsed to individual EnzymeML documents.
 
-# In[3]:
+# In[4]:
 
 
+# Specify the location of the data sets
 directory_measurement_data = "../../data/SLAC_kinetic_characterization/TimeCourseData"
 directory_standard_data = "../../data/SLAC_kinetic_characterization/StandardData"
 directory_spectrum_data = "../../data/SLAC_kinetic_characterization/SpectrumData"
+path_EnzymeML_templates = "../../data/SLAC_kinetic_characterization/EnzymeML_templates"
+
+# Define IDs for species, listed in the EnzymeML Excel template
+substrate_id = "s0"
+product_id = "s1"
+substrate_control_id = "s2"
+product_control_id = "s3"
+species_ids = [substrate_id, product_id, substrate_control_id, product_control_id]
+
 
 # Parse measurement data from photometer output
 raw_data_dict = {}
@@ -54,37 +82,35 @@ for path in os.listdir(directory_measurement_data):
     temp = data["temperature"]
     raw_data_dict[f"{pH} {temp}"] = data
 
+EnzymeML_template_dict = {
+    3.0: "EnzymeML_SLAC_pH3.xlsm",
+    3.5: "EnzymeML_SLAC_pH3_5.xlsm",
+    4.0: "EnzymeML_SLAC_pH4.xlsm",
+    4.5: "EnzymeML_SLAC_pH4_5.xlsm",
+    5.0: "EnzymeML_SLAC_pH5.xlsm",
+    5.5: "EnzymeML_SLAC_pH5_5.xlsm",
+}
 
-# In[4]:
-
-
-path_EnzymeML_template = "../../data/SLAC_kinetic_characterization/EnzymeML_SLAC_empty.xlsm"
-
-# Define IDs for species, listed in the EnzymeML-template
-substrate_id = "s0"
-product_id = "s1"
-substrate_control_id = "s2"
-product_control_id = "s3"
-species_ids = [substrate_id, product_id, substrate_control_id, product_control_id]
-
-
-# Write data to EnzymeMLDocument
+# Write absorption data to EnzymeMLDocuments
 absortion_enzymemldocs: List[pe.EnzymeMLDocument] = []
 for name, data in raw_data_dict.items():
+    pH = data["pH"]
     absortion_enzymemldocs.append(measurement_data_to_EnzymeML(
-        template_path=path_EnzymeML_template,
+        template_path=f"{path_EnzymeML_templates}/{EnzymeML_template_dict[pH]}",
         measurement_data=data,
         species_ids=species_ids,
         data_unit="umole / l",
         time_unit="s"))
 
-
+# Sort documents by ascending pH and temperature
 absortion_enzymemldocs = sorted(absortion_enzymemldocs, key=lambda x: (x.getReaction("r0").ph, x.getReaction("r0").temperature))
 
 
-# ### 1.1 Blanking of absorption data
+# ### Blanking of time-course absorption data
+# 
+# All experiments contain a control reaction without substrate. The control reaction is used in the next cell to subtract the absorption, contributed from enzyme and buffer. After blanking, the control measurement is deleted from the dataset.
 
-# In[4]:
+# In[5]:
 
 
 # Blanc measurement data
@@ -99,25 +125,27 @@ for enzmldoc in absortion_enzymemldocs:
         for rep, replicate in enumerate(measurement.getReactant("s2").replicates):
             blanced_data = [value - blanc for value in replicate.data]
             enzmldoc.measurement_dict[id].getReactant("s2").replicates[rep].data = blanced_data
+
+        for rep, replicate in enumerate(measurement.getReactant("s1").replicates):
+            blanced_data = [value - blanc for value in replicate.data]
+            enzmldoc.measurement_dict[id].getReactant("s1").replicates[rep].data = blanced_data
+        for rep, replicate in enumerate(measurement.getReactant("s3").replicates):
+            blanced_data = [value - blanc for value in replicate.data]
+            enzmldoc.measurement_dict[id].getReactant("s3").replicates[rep].data = blanced_data
     
-    # Delete blanking measurement 'm0'
+    # Delete control measurement 'm0'
     del enzmldoc.measurement_dict["m0"]
 
 
-# In[5]:
-
-
-absortion_enzymemldocs[14].visualize()
-plt.show()
-
-
-# ### 1.2 Application of calibration data
+# ### Calibration data
+# 
+# Nextup, calibration data was loaded and converted into individual instances of the calibration data model. Some meta data of the calibration needs to be provided to the custom ```read_calibration_data``` function, since the output of the used spectro photometer only contains a minimum of information. Thereafter, a ```StandardCurve``` is created for each calibration data set. Thereby, only absoption values below 3 are considered, since higher absorption values cannot be converted into concentration accurately. 
+# Lastly, the fit of each standard curves is visualized.
 
 # In[6]:
 
 
-# Script to load calibration raw-data
-
+# Load calibration raw data
 calibration_data = []
 standard_directory = np.sort(os.listdir(directory_standard_data))
 spectrum_directory = np.sort(os.listdir(directory_spectrum_data))
@@ -139,22 +167,18 @@ for standard, spectrum in zip(standard_directory, spectrum_directory):
     for pH in result.keys():
         calibration_data.append(result[pH])
 
+# Sort calibration data by ascending pH and temperature
 calibration_data = sorted(calibration_data, key = lambda x: (x.pH, x.temperature))
 
 # Generate standard curves for ABTS calibration data
 standard_curves: List[StandardCurve] = []
 for calibration in list(calibration_data):
-    standard_curves.append(StandardCurve(calibration_data=calibration, wavelength=340, cutoff_absorption=3, show_output=False))
+    standard_curves.append(StandardCurve(calibration_data=calibration, wavelength=340, cutoff_absorption=3.2, show_output=False))
 
 # Sort standard curves by ascending pH and temperature.
 standard_curves = sorted(standard_curves, key = lambda x: (x.calibration_data.pH, x.calibration_data.temperature))
 
-
-# In[7]:
-
-
 # Visualize all fitted standard curves 
-
 fig, axes = plt.subplots(6,5, figsize=(10, 13), sharey=True, sharex=True)
 for i, (standard, ax) in enumerate(zip(standard_curves[:30], axes.flatten())):
     if not i%5:
@@ -166,51 +190,11 @@ for i, (standard, ax) in enumerate(zip(standard_curves[:30], axes.flatten())):
 plt.tight_layout()
 
 
-# In[8]:
+# The figure above shows the standard curves for all experimental conditions of this scenario. Since the absorption proterties ABTS change with pH, the calibration range differs between some pH values, due to the upper absorption limit. In consequence, the upper calibration limit for reactions at pH 3, pH 3.5, and pH 5.5 is at 150 uM of ABTS, whereas for all other pH values the upper limit is at 175 uM. The sulfonate groups of ABTS are deprotonated for more neutral pH values. Therefore, the absorption properties of ABTS might decrease. Calibration curve data at pH 5.5 shows larger variation between the repeats. In this case, pipetting of one of the the three repeats differs from the other two, which should be considered for kinetic parameter estimation. In contrast to pH, the temperature during calibration affected the calibration curve only marginally.  
+# 
+# Nextup, the generate standard curves were used to convert the absorption measurement data into concentration data. Thereby, the respective concentration values were only calculated, if the measured absorption was within the respective calibration bounds
 
-
-fig, axes = plt.subplots(10,5, figsize=(10, 20), sharey=True, sharex=True)
-for i, (doc, ax) in enumerate(zip(calibration_data, axes.flatten())):
-    if not i%5:
-        ax.set_ylabel("ABTS [uM]")
-    ax.plot(doc.spectrum.wavelength, doc.spectrum.absorption[0].values)
-    ax.axvline(340, color="orange", label="substrate datection 340 nm")
-    ax.axvline(420, color="green", label="product detection 420 nm")
-    ax.set_title(f"pH {doc.pH}, {doc.temperature}°C")
-    if i in [100]:
-        ax.set_xlabel("wavelength [nm]")
-handles, labels = ax.get_legend_handles_labels()
-fig.legend(handles, labels, loc="lower center", ncol=len(labels), title="detection wavelengths", bbox_to_anchor=(0.5,-0.03))
-plt.tight_layout()
-
-
-# In[9]:
-
-
-path= "/Users/maxhaussler/Dropbox/master_thesis/data/alaric/2022-10-04 - ABTS Radical Spectrum 230-600nm.xlsx"
-spectrum_df = pd.read_excel(path)
-
-
-# In[10]:
-
-
-cmap = matplotlib.cm.get_cmap('tab20')
-
-
-doc = calibration_data[0] 
-plt.plot(doc.spectrum.wavelength, doc.spectrum.absorption[0].values, color=cmap(0.0), label="ABTS")
-plt.plot(spectrum_df["wavelength"], spectrum_df["absorption"], color=cmap(0.1), label="ABTS radical")
-plt.axvline(340, color=cmap(0.0), linestyle ="--")
-plt.axvline(420, color=cmap(0.1), linestyle ="--")
-
-plt.ylabel("absorption")
-plt.xlabel("wavelength [nm]")
-plt.legend()
-plt.title("absorption spectrum of ABTS and ABTS radical")
-plt.show()
-
-
-# In[9]:
+# In[7]:
 
 
 # Calculate concentrations by applying standard curves to 'EnzymeMLDocuments'.
@@ -228,34 +212,17 @@ for standard_curve, abso_enzmldoc in zip(standard_curves, absortion_enzymemldocs
     concentration_enzymemldocs.append(conc_enzmldoc)
 
 
-# ### 1.3 Kinetic parameter estimantion
-
-# In[ ]:
-
-
-# Run parameter estimator for all datasets, utilizing multi-processing.
-def run_ParameterEstimator(enzmldoc: pe.EnzymeMLDocument):    
-    kinetics = ParameterEstimator.from_EnzymeML(enzmldoc, "s0", "substrate")
-    kinetics.fit_models(enzyme_inactivation=True, only_irrev_MM=True, display_output=False)
-    return kinetics
-
-results = Parallel(n_jobs=8)(delayed(run_ParameterEstimator)(enzmldoc) for enzmldoc in concentration_enzymemldocs)
-
-
-# ## 2. Results
+# ## Quality control through mass balance analysis
 # 
-# ### 2.1 Quality control through mass balance analysis
-# 
-# ABTS absorbs at 340 nm whereas ABTS radical, the reaction product, is known to absorb at 420 nm [REFERENCE]. In contrast to the substrate, no calibration standard is available for the product.
-# Nevertheless, product build-up was followd beside substrate depletion over the time-course of the reaction. Therefore, the following mass balance equation can be established under the assumption of mass conservation:  
+# Since product and substrate of the SLAC reaction were simultaneously recorded, mass balance analysis was conductas as a control of quality. By assuming mass conservation, the following concentration balance can be established:
 # $0 = S_{(t)} + P_{(t)} - S_{0}$
-# 
-# Thereby, substrate absorbance signals were converted into concentrations by using the respective standard curve. Product concentration was determined, assuming a linear relationship between absorption and concentration. Thus, the parameter $k$ was introduced to the mass balance equation:  
+# Thereby, $S_{0}$ denotes the initial substrate concentration, whereas $S_{(t)}$ and $P_{(t)}$ describe the substrate and product concentration for each time point $t$. $S_{t}$ and $S_{0}$ were individually measured. Thus each enzyme reaction with a given initial substrate concentration had a control reaction with identical substrate concentration. In contrast to the substrate, no calibration standard is available for the product. Therefore, an additional parameter §k§ was introdiced to the mass balance equation, assuming linear relationship between the product concentration and its signal:
 # $0 = S_{(t)} + P_{(t)}k - S_{0}$
 # 
-# In the following cell, $k$ is determined for each assay seperately, by minimizing the slope of each time-course measurement of the assay. 
+# $k$ was determined for each data set individually by a minimization algorithm. The minimization objective was to find the optimal $k$, which minimizes all slopes of a given reaction condition. Thereafter, the mass balances of all measurements were visualized.
+# 
 
-# In[10]:
+# In[8]:
 
 
 # Defenition of parameter 'k'
@@ -332,33 +299,80 @@ plt.tight_layout()
 
 
 
-# In[13]:
+# The figure above shows the mass balances for all experiments. For all reactions, except for pH 4, 45°C and pH 4.5, 35°C, the product and substrate is in balance over the reaction time-course. Mass balances, diverging from 0 uM indicate, result likely from pipetting errors, eighter increasing or decreasing the substrate concentration in the enzyme- or control reaction. In the reactions at pH 4, 45°C and pH 4.5, 35°C the mass balance slopes are not linear. This indicates issues with the measurement, presumably from the spectro photometer. Therefore, the respective measurements might result in wrong parameter estimations.
+
+# ## Kinetic parameter estimantion
+# 
+# ### Model choice
+# 
+# Model selection is vital for parameter estimation. Thus, different settings for the parameter estimator were tested. Firstly, substrate and product inhibition models were excluded, since in some of the experiments the actual initial substrate concentration was higher than the specified initial substrate concentration. This results calculated product concentrations with negative value. Hence, product inhibition models were excluede, since no acurate information on product concentration was available.  
+# Secondly, substrate inhibition models were excluded, since the model was not able to describe the observed reaction kinetics. This was evident from a higher Akaike information criterion as well as more than 100 % standard deviation on the estimated parameters.  
+# Lastly, the irreversible Michaelis-Menten model with and without time-dependent enzyme inactivation was compared, since enzyme inactivation was observed in previous experiments. Estimated parameters and the fitted models are shown for the experimental data at pH 3 and 25°C. Once without enzyme inactivation and once with.
+
+# In[9]:
 
 
-for doc, k in zip(concentration_enzymemldocs, f):
+fig, axes = plt.subplots(1,2, figsize=(10,5), sharey=True, sharex=True)
+for i, ax in enumerate(axes.flatten()):
+    if i == 0:
+        print("Estimated parameters without time-dependent enzyme inactivation:")
+        kinetics = ParameterEstimator.from_EnzymeML(concentration_enzymemldocs[0], "s0", "substrate")
+        kinetics.fit_models(only_irrev_MM=True)
+        kinetics.visualize(ax=ax, title="without enzyme inactivation")
+        ax.set_ylabel("ABTS [uM]")
+        print("\n")
+    else:
+        print("Estimated parameters with time-dependent enzyme inactivation:")
+        kinetics = ParameterEstimator.from_EnzymeML(concentration_enzymemldocs[0], "s0", "substrate")
+        kinetics.fit_models(enzyme_inactivation=True, only_irrev_MM=True)
+        kinetics.visualize(ax=ax, title="with enzyme inactivation")
+    ax.set_xlabel("time [s]")
+handles, labels = ax.get_legend_handles_labels()
+fig.legend(handles, labels, loc="lower center", ncol=len(labels), title="initial ABTS [uM]", bbox_to_anchor=(0.5,-0.09))
+plt.tight_layout()
 
-    ph = doc.getReaction("r0").ph
-    plt.scatter(ph, k, color=cmap(0))
-    old_ph = ph
 
-plt.ylabel("k")
-plt.xlabel("pH")
-plt.title("k for each data set")
-plt.show()
+# Both plots in the above figure contain the same experimental data. The left plot shows the fitted model with enzyme inactivation and the right without enzyme inactivation, which is shown as solid lines. Visually, the model with enzyme inactinvation describes the data better, since the model intersects the data points more directly, compared to the model without enzyme inactivation. Statistically, this is characterized through a lower Akaike information criterion, as well as lower standard deviations on the estimated parameters. 
+# In absolute therms, the estimated $K_{m}$ of both models is approximately identical, whereas the $k_{cat}$ estimate is approximately 33% lower for the model without enzyme inactivation. Hence, the model without enzyme inactivation underestimates the turnover number of the enzyme.
+# 
+# Thus, irreversible Michaelis-Menten model with time-dependent enzyme inactivation was selected for the parameter estimation for all data sets.
+
+# In[10]:
+
+
+# Run parameter estimator for all datasets, utilizing multi-processing.
+def run_ParameterEstimator(enzmldoc: pe.EnzymeMLDocument):    
+    kinetics = ParameterEstimator.from_EnzymeML(enzmldoc, "s0", "substrate")
+    kinetics.fit_models(enzyme_inactivation=True, only_irrev_MM=True, display_output=False)
+    return kinetics
+
+results = Parallel(n_jobs=8)(delayed(run_ParameterEstimator)(enzmldoc) for enzmldoc in concentration_enzymemldocs)
+results = sorted(results, key=lambda x: (x.data.pH, x.data.temperature))
 
 
 # In[11]:
 
 
-concentration_enzymemldocs[14].visualize()
+# Visualize all fitted models
+fig, axes = plt.subplots(6,5, figsize=(12.5, 15), sharey=True, sharex=True)
+for i, (doc, ax) in enumerate(zip(results, axes.flatten())):
+    ph = doc.data.pH
+    if not i%5:
+        ax.set_ylabel("ABTS [uM]")
+    doc.visualize(ax=ax, title = f"pH {doc.data.pH}, {doc.data.temperature}°C")
+    if i in [25,26,27,28,29]:
+        ax.set_xlabel("time [s]")
+    if i == 0:
+        handles, labels = ax.get_legend_handles_labels()
+        fig.legend(handles, labels, loc="lower center", ncol=len(labels), title="initial ABTS [uM]", bbox_to_anchor=(0.5,-0.04))
+plt.tight_layout()
 
 
-# Estimated parameters for the kinetic assay at pH 5.5 and 25°C were discarded from the dataset, since they reached the upper parameter limit for kcat and Km. Hence, it can be assumed, that the enzyme is not active at the given conditions.
+# The above plot shows all kinetic experiments, fitted to the irreversible Michaelis-Menten model with time-dependent enzyme inactivation. Based on the reaction slopes, no catalytic avtivity is observable for reactions at pH 5 or higher.
+# In the following cells, the resulting kinetic parameters were extracted and visualized. As in the mass balance analysis, the reactions at pH 4, 45°C and pH 4.5, 35°C differ from other experiments of the respective pH. In both cases, every applied substrate concentration is higher than intended in the design of the experiment. Furthermore, the resulting parameter estimates have a high uncertanty. Therefore, the respective measurements are excluded from further analysis. Additionaly, the results from pH 5.5, 35°C were excluded, since the uncertainty of the parameters could not be estimated.
 
-# In[16]:
+# In[20]:
 
-
-results = sorted(results, key=lambda x: (x.data.pH, x.data.temperature))
 
 # Get kinetic parameters of all datasets
 kcat = []
@@ -380,9 +394,8 @@ for result in results:
     Km_std.append(params["Km"].stderr)
 
     ki.append(params["K_ie"].value)
-    ki_std.append(params["K_ie"].stderr)    
+    ki_std.append(params["K_ie"].stderr)  
 
-    
     correlation = params["k_cat"].correl
     if correlation == None:
         corr_kcat_km.append(float("nan"))
@@ -394,7 +407,7 @@ for result in results:
 
 df = pd.DataFrame.from_dict({
     'pH':pH, 
-    "temperature":temperature, 
+    "temperature [C]":temperature, 
     'kcat [1/s]':kcat, 
     'kcat stderr':kcat_std, 
     'Km [uM]':Km, 
@@ -403,90 +416,58 @@ df = pd.DataFrame.from_dict({
     "Enzyme inactivation std":ki_std,
     "correlation kcat/Km":corr_kcat_km})
 
-df["kcat/Km"] = df["kcat [1/s]"] / df["Km [uM]"]
-kcat_km_stderr =((df["kcat stderr"]/df["kcat [1/s]"])**2+(df["Km stderr"]/df["Km [uM]"])**2)**0.5 * df["kcat/Km"]
+df["kcat/Km [1/s * uM]"] = df["kcat [1/s]"] / df["Km [uM]"]
+kcat_km_stderr =((df["kcat stderr"]/df["kcat [1/s]"])**2+(df["Km stderr"]/df["Km [uM]"])**2)**0.5 * df["kcat/Km [1/s * uM]"]
 df["kcat/Km stderr"] = kcat_km_stderr
 
 df = df.drop(index=25) # reached parameter boundaries --> inactive
-df = df.drop(index=12) #Km really high stddev
+#df = df.drop(index=12) #Km really high stddev
 df = df.drop(index=17) #kcat outlier
 df = df.drop(index=14) #kcat outlier, mass balance outlier
 
-
-
-# In[17]:
-
-
+df["zeros"] = np.zeros(27)
 df
 
 
-# In[18]:
-
-
-ph_map = sns.color_palette("husl")
-ph_colors = [ph_map[(x)] for x in np.arange(6)]
-pH_dict = dict(zip([3.0, 3.5, 4.0, 4.5, 5.0, 5.5], ph_colors))
-pH_tuples = [pH_dict[x] for x in df["pH"].values]
-
-temperature_map = matplotlib.cm.get_cmap('coolwarm')
-colors = [temperature_map(x) for x in np.linspace(0,1,5)]
-color_dict = dict(zip([25, 30, 35, 40 ,45], colors))
-color_tuples = [color_dict[x] for x in df["temperature"]]
-
-ax = plt.gca()
-for i, (km, kcat, km_error, kcat_error, color, label) in enumerate(zip(df["Km [uM]"], df["kcat [1/s]"], df["Km stderr"], df["kcat stderr"], pH_tuples, df["pH"].values)):
-
-    ax.scatter(km, kcat, color = color, label = label if not i % 5 else "")
-    ax.errorbar(km, kcat, yerr=kcat_error,xerr=km_error, fmt=".", ecolor=color, markersize=0)
-plt.legend(title = "pH")
-plt.ylabel("kcat [1/s]")
-plt.xlabel("Km [uM]")
-plt.xlim([0,200])
-
-
-# In[19]:
-
-
-ax = plt.gca()
-for i, (correlation, Km, km_error, kcat_error, color, label) in enumerate(zip(df["correlation kcat/Km"], df["Km [uM]"], df["Km stderr"], df["kcat stderr"], pH_tuples, df["pH"].values)):
-
-    ax.scatter(Km, correlation, color = color, label = label if not i % 5 else "")
-    ax.errorbar(Km, correlation, xerr=km_error, fmt=".", ecolor=color, markersize=0)
-plt.legend(title = "pH")
-plt.ylabel("correlation between kcat and Km")
-plt.xlabel("Km [uM]")
-plt.xlim([0,200])
-
-
-# In[20]:
-
-
-ax = plt.gca()
-for i, (kcatkm, kcatkm_error, pH, color, label) in enumerate(zip(df["kcat/Km"], df["kcat/Km stderr"], df["pH"] , color_tuples, df["temperature"].values)):
-
-    ax.scatter(pH, kcatkm, color = color, label = label if i in [0,1,2,3,4] else "")
-    ax.errorbar(pH, kcatkm, yerr=kcatkm_error, fmt=".", ecolor=color, markersize=0)
-plt.legend(title = "temperature [C]")
-plt.ylabel("kcat/Km [1/s * uM]")
-plt.xlabel("pH")
-
+# ### Parameter estimates for $k_{cat}$ and $K_{m}$
+# 
+# corr
 
 # In[21]:
 
 
-ax = plt.gca()
-for i, (kcatkm, kcatkm_error, temp, color, label) in enumerate(zip(df["kcat/Km"], df["kcat/Km stderr"], df["temperature"] , pH_tuples, df["pH"].values)):
-
-    ax.scatter(temp, kcatkm, color = color, label = label if not i %5 else "")
-    ax.errorbar(temp, kcatkm, yerr=kcatkm_error, fmt=".", ecolor=color, markersize=0)
-plt.legend(title = "pH")
-plt.ylabel("kcat/Km [1/s * uM]")
-plt.xlabel("temperature [C]")
-plt.xticks([25, 30, 35, 40, 45])
-plt.legend(title = "pH", loc="center right", bbox_to_anchor=(1.18,0.5))
+fig, axes = plt.subplots(1,2, figsize=(12.8, 4.8), sharey=False, sharex=False)
+for i, ax in enumerate(axes.flatten()):
+    if i==1:
+        plot(df, xdata="Km [uM]", ydata="kcat [1/s]", xerror="Km stderr", yerror="kcat stderr", colors="pH", ax=ax)
+    else:
+        plot(df, xdata="pH", ydata="kcat/Km [1/s * uM]", xerror="zeros", yerror="kcat/Km stderr", colors="temperature [C]", ax=ax)
+    
 
 
-# In[22]:
+# The figure on the left shows the catalytic efficiency $\frac{k_{cat}}{K_{m}}$ over the pH value of each reaction. The highest catalytic efficiency was observed at pH 3 and 45°C. Increasing the pH by 0.5 reduced $\frac{k_{cat}}{K_{m}}$ approximatel by half. For higher pH values, $\frac{k_{cat}}{K_{m}}$ is even more decreased. The catalytic efficiency is therefore highly sensitive to the pH. This might source from different causes. Eighter deprotonation ABTS sulfonate groups for more neutral pH values or protonation changes of the enzyme might hinder catalysis at higher pH values.  
+# In terms of temperature, higher $\frac{k_{cat}}{K_{m}}$ was achieved at higher temperatures. SLAC might even be more active at higher temperatures and pH values.
+# 
+# #### Correlation between $k_{cat}$ and $K_{m}$
+# 
+# The parameter estimates for $k_{cat}$ and $K_{m}$ showed correlation. For experiments at pH 3 and pH 3.5, the parameters were correlated between 0.5 - 0.85. This indeicates, that the highest initial substrate concentration, which was applied for parameter estimation was not sufficently high. Ideally, the highest initial substrate concentration applied for a kinetic experiment should be 10-fold higher than $K_{m}$ to avoid correlation. In this scenario, only reactions with an initial substrate concentration of 150 uM were used for parameter estimation, due to the limited photometric measurement range of ABTS. Hence, ABTS was only applied 1.5-fold to 6-fold of $K_{m}$.  
+# For reactions at pH values of 4 and above, positive as well as negative correlations were observed. 
+# As the figure above on the right shows, $K_{m}$ was estimated in the range of 25 - 105 uM in the mentioned pH range. 
+# For reactions at higher pH values positive and negative correlations were observed.
+# Correlation of 0.5 - 0.85 was observed between $k_{cat}$ and $K_{m}$ parameter estimates
+# Parameter estimates for $k_{cat}$ and $K_{m}$ were correlated between 0.5 and
+# High correlation between 0.5 and 0.85 was observed for almost all experimental conditions. This indicates that the parameters kcat and Km cannot be estimated independently. In this case the highest applied substrate concentration is too low, compared to the Km of the enzyme. Therefore, 
+# The highest initial substrate concentration should be at least 5-fold higher than the enzyme's Km. SOURCE. 
+# Low and also negative correlations were observed for reactions with pH values at and above pH 4. 
+# The figure on the left shows $k_{cat}$ over $K_{m}$ for all experimental conditions, whereas the pH is color-coded. The 
+# 
+# #### 
+# 
+# whereas the right figure visualizes the catalytic efficiency $\frac{k_{cat}}{K_{m}}$ over the pH value. As visible in 
+# 
+# For pH values of 5 and above, almost no catalytic activity was observed. Therefore, data of these experimental conditions is excluded from further analysis. 
+
+# In[16]:
 
 
 ax = plt.gca()
@@ -500,7 +481,7 @@ plt.xlabel("kcat [1/s]")
 plt.ylim(0,0.004)
 
 
-# In[23]:
+# In[ ]:
 
 
 ax = plt.gca()
@@ -514,7 +495,7 @@ plt.xlabel("pH")
 plt.ylim(0,0.004)
 
 
-# In[24]:
+# In[ ]:
 
 
 ax = plt.gca()
@@ -528,7 +509,7 @@ plt.xlabel("pH")
 plt.ylim(0,0.004)
 
 
-# In[25]:
+# In[ ]:
 
 
 ax = plt.gca()
@@ -541,14 +522,7 @@ plt.ylabel("Enzyme inactivation [1/s]")
 plt.xlabel("kcat [1/s]")
 
 
-# In[26]:
-
-
-sns.scatterplot(data=df, x="pH", y="Enzyme inactivation [1/s]", hue="temperature", palette=sns.color_palette("coolwarm", as_cmap=True))
-plt.show()
-
-
-# In[27]:
+# In[ ]:
 
 
 corr = df.corr()
@@ -567,90 +541,7 @@ sns.heatmap(corr,
 
 
 
-# In[28]:
-
-
-corr = df.corr()
-
-sns.heatmap(corr, 
-        xticklabels=corr.columns,
-        yticklabels=corr.columns,
-        cmap = sns.color_palette("vlag", as_cmap=True))
-#plt.xticks(rotation=45) 
-
-
-# ## Delete all parameters above 5
-
-# In[29]:
-
-
-results = sorted(results, key=lambda x: (x.data.pH, x.data.temperature))
-
-# Get kinetic parameters of all datasets
-kcat = []
-kcat_std = []
-Km = []
-Km_std = []
-ki = []
-ki_std = []
-pH = []
-temperature = []
-corr_kcat_km = []
-for result in results:
-    params = result.get_parameter_dict()
-
-    kcat.append(params["k_cat"].value)
-    kcat_std.append(params["k_cat"].stderr)
-
-    Km.append(params["Km"].value)
-    Km_std.append(params["Km"].stderr)
-
-    ki.append(params["K_ie"].value)
-    ki_std.append(params["K_ie"].stderr)    
-
-    
-    correlation = params["k_cat"].correl
-    if correlation == None:
-        corr_kcat_km.append(float("nan"))
-    else:
-        corr_kcat_km.append(correlation["Km"])
-
-    pH.append(result.data.pH)
-    temperature.append(result.data.temperature)
-
-df = pd.DataFrame.from_dict({
-    'pH':pH, 
-    "temperature":temperature, 
-    'kcat [1/s]':kcat, 
-    "Enzyme inactivation [1/s]":ki,
-    'Km [uM]':Km,
-    "correlation kcat/Km":corr_kcat_km,
-    'Km stderr':Km_std,
-    'kcat stderr':kcat_std,
-    "Enzyme inactivation std":ki_std,})
-
-df["kcat/Km"] = df["kcat [1/s]"] / df["Km [uM]"]
-#kcat_km_stderr =((df["kcat stderr"]/df["kcat [1/s]"])**2+(df["Km stderr"]/df["Km [uM]"])**2)**0.5 * df["kcat/Km"]
-#df["kcat/Km stderr"] = kcat_km_stderr
-
-
-
-df = df.drop(index=25) # reached parameter boundaries --> inactive
-df = df.drop(index=12) #Km really high stddev
-df = df.drop(index=17) #kcat outlier
-df = df.drop(index=14) #kcat outlier
-
-df = df.loc[:19]
-df
-
-
 # In[ ]:
-
-
-
-
-
-# In[30]:
 
 
 rho = df.corr()
@@ -669,65 +560,6 @@ sns.heatmap(corr,
         yticklabels=corr.columns,
         cmap = sns.color_palette("vlag", as_cmap=True))
 #plt.xticks(rotation=45) 
-
-
-# In[ ]:
-
-
-ax = plt.gca()
-for i, (correlation, Km, km_error, color, label) in enumerate(zip(df["correlation kcat/Km"], df["Km [uM]"], df["Km stderr"], pH_tuples, df["pH"].values)):
-
-    ax.scatter(Km, correlation, color = color, label = label if not i % 5 else "")
-    ax.errorbar(Km, correlation, xerr=km_error, fmt=".", ecolor=color, markersize=0)
-plt.legend(title = "pH")
-plt.ylabel("correlation kcat - Km")
-plt.xlabel("Km [uM]")
-plt.xlim([0,200])
-plt.title("correlation between kcat and Km")
-
-
-# In[ ]:
-
-
-ax = plt.gca()
-for i, (kcat, ki_error, kcat_error, ki, color, label) in enumerate(zip(df["kcat [1/s]"], df["Enzyme inactivation std"], df["kcat stderr"], df["Enzyme inactivation [1/s]"] , color_tuples, df["temperature"].values)):
-
-    ax.scatter(kcat, ki, color = color, label = label if i in [0,1,2,3,4] else "")
-    ax.errorbar(kcat, ki, yerr=ki_error, xerr=kcat_error, fmt=".", ecolor=color, markersize=0)
-plt.legend(title = "temperature [C]")
-plt.ylabel("Enzyme inactivation [1/s]")
-plt.xlabel("kcat [1/s]")
-
-
-# In[ ]:
-
-
-ax = plt.gca()
-for i, (ph, ki_error, kcat_error, ki, color, label) in enumerate(zip(df["pH"], df["Enzyme inactivation std"], df["kcat stderr"], df["Enzyme inactivation [1/s]"] , color_tuples, df["temperature"].values)):
-
-    ax.scatter(ph, ki, color = color, label = label if i in [0,1,2,3,4] else "")
-    ax.errorbar(ph, ki, yerr=ki_error, xerr=kcat_error, fmt=".", ecolor=color, markersize=0)
-plt.legend(title = "temperature [C]")
-plt.ylabel("Enzyme inactivation [1/s]")
-plt.xlabel("pH")
-plt.xticks([3,3.5,4,4.5])
-
-
-# In[ ]:
-
-
-fig, axes = plt.subplots(6,5, figsize=(12.5, 15), sharey=True, sharex=True)
-for i, (doc, ax) in enumerate(zip(results, axes.flatten())):
-    ph = doc.data.pH
-    if not i%5:
-        ax.set_ylabel("ABTS [uM]")
-    doc.visualize(ax=ax, title = f"pH {doc.data.pH}, {doc.data.temperature}°C")
-    if i in [25,26,27,28,29]:
-        ax.set_xlabel("time [s]")
-    if i == 0:
-        handles, labels = ax.get_legend_handles_labels()
-        fig.legend(handles, labels, loc="lower center", ncol=len(labels), title="initial ABTS [uM]", bbox_to_anchor=(0.5,-0.04))
-plt.tight_layout()
 
 
 # ### Effekt of calibration temperature and pH on kinetic parameters
@@ -755,80 +587,6 @@ for standard in standards_variations:
 
 
 
-
-
-# In[ ]:
-
-
-# Get kinetic parameters of all datasets
-kcat = []
-kcat_std = []
-Km = []
-Km_std = []
-ki = []
-ki_std = []
-temperature = [25,30,35,40,45,45,45,45,45,45,45]
-pH = [3,3,3,3,3,3,3.5,4,4.5,5,5.5]
-for result in kinetics:
-    params = result.get_parameter_dict()
-
-    kcat.append(params["k_cat"].value)
-    kcat_std.append(params["k_cat"].stderr)
-
-    Km.append(params["Km"].value)
-    Km_std.append(params["Km"].stderr)
-
-    ki.append(params["K_ie"].value)
-    ki_std.append(params["K_ie"].stderr)
-
-
-df = pd.DataFrame.from_dict({
-    'pH':pH, 
-    "temperature":temperature, 
-    'kcat [1/s]':kcat, 
-    'kcat stderr':kcat_std, 
-    'Km [uM]':Km, 
-    'Km stderr':Km_std, 
-    "Enzyme inactivation [1/s]":ki,
-    "Enzyme inactivation std":ki_std})
-
-df["kcat/Km"] = df["kcat [1/s]"] / df["Km [uM]"]
-kcat_km_stderr =((df["kcat stderr"]/df["kcat [1/s]"])**2+(df["Km stderr"]/df["Km [uM]"])**2)**0.5 * df["kcat/Km"]
-df["kcat/Km stderr"] = kcat_km_stderr
-
-
-# In[ ]:
-
-
-df
-
-
-# In[ ]:
-
-
-ph_map = sns.color_palette("husl")
-ph_colors = [ph_map[(x)] for x in np.arange(6)]
-pH_dict = dict(zip([3.0, 3.5, 4.0, 4.5, 5.0, 5.5], ph_colors))
-pH_tuples = [pH_dict[x] for x in df["pH"].values]
-
-temperature_map = matplotlib.cm.get_cmap('coolwarm')
-colors = [temperature_map(x) for x in np.linspace(0,1,5)]
-color_dict = dict(zip([25, 30, 35, 40 ,45], colors))
-color_tuples = [color_dict[x] for x in df["temperature"]]
-
-
-
-ax = plt.gca()
-for i, (kcatkm, kcatkm_error, temp, color, label) in enumerate(zip(df["kcat/Km"], df["kcat/Km stderr"], df["temperature"] , pH_tuples, df["pH"].values)):
-
-    ax.scatter(temp, kcatkm, color = color, label = label if i in [5,6,7,8,9,10] else "")
-    ax.errorbar(temp, kcatkm, yerr=kcatkm_error, fmt=".", ecolor=color, markersize=0)
-plt.legend(title = "pH")
-plt.ylabel("kcat/Km [1/s * uM]")
-plt.xlabel("temperature [C]")
-plt.xticks([25, 30, 35, 40, 45])
-plt.legend(title = "pH", loc="center right", bbox_to_anchor=(1.18,0.5))
-plt.title("Dataset of pH 3 and 45°C calibrated with different standards")
 
 
 # ## Using linear calibration instead of 3rd polynominal model
@@ -931,12 +689,6 @@ model_names
 # In[ ]:
 
 
-print(len(kinetics))
-
-
-# In[ ]:
-
-
 kcat = []
 kcat_std = []
 Km = []
@@ -1020,6 +772,3 @@ kinetics.visualize()
 
 
 
-
-# - Redox potential of ABTS
-# - Higher pH values --> sulfonate groups are fully deprotonated. 

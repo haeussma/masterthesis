@@ -24,3 +24,7 @@
    3. Enzyme inactivation
    4. Standard curves
 5. conclusion
+
+# Calibration
+
+Here is my nifty citation {cite}`perez2011python`.

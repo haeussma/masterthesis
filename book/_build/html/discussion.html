@@ -52,7 +52,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="section A" href="testsection.html" />
+    <link rel="next" title="Conclusion" href="conclusion.html" />
+    <link rel="prev" title="Scenario C: SLAC characterization" href="scenarios/SLAC_kinetic_characterization.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -89,11 +90,6 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="index.html">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
-        
-      
-      
-      <img src="_static/logo.png" class="logo" alt="logo">
       
       
       <h1 class="site-logo" id="site-title">Best practices: Enzyme kinetics</h1>
@@ -149,8 +145,13 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="testsection.html">
-     section A
+    <a class="reference internal" href="scenarios/chymotrypsin_inhibition.html">
+     Assessment of the inhibitory properties of an designed albumin as a chymotrypsin inhibitor
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="scenarios/SLAC_kinetic_characterization.html">
+     Scenario C: SLAC characterization
     </a>
    </li>
   </ul>
@@ -158,6 +159,16 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Discussion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="conclusion.html">
+   Conclusion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="references.html">
+   References
   </a>
  </li>
 </ul>
@@ -306,13 +317,28 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#data-management">
-   Data management
+  <a class="reference internal nav-link" href="#data-management-lab-digitalization">
+   Data management / lab digitalization
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#best-practices-kinetic-moeling">
-   Best-practices kinetic moeling
+  <a class="reference internal nav-link" href="#jupyter-notebooks">
+   Jupyter notebooks
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#current-state-in-kinetic-modeling-of-enzyme-kinetics">
+   Current state in kinetic modeling of enzyme kinetics
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-selection-in-enzyme-kinetics-calibration-and-kinetic-model">
+   Model selection in enzyme kinetics: calibration and kinetic model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#inactivation">
+   Inactivation
   </a>
  </li>
 </ul>
@@ -335,13 +361,28 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#data-management">
-   Data management
+  <a class="reference internal nav-link" href="#data-management-lab-digitalization">
+   Data management / lab digitalization
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#best-practices-kinetic-moeling">
-   Best-practices kinetic moeling
+  <a class="reference internal nav-link" href="#jupyter-notebooks">
+   Jupyter notebooks
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#current-state-in-kinetic-modeling-of-enzyme-kinetics">
+   Current state in kinetic modeling of enzyme kinetics
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-selection-in-enzyme-kinetics-calibration-and-kinetic-model">
+   Model selection in enzyme kinetics: calibration and kinetic model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#inactivation">
+   Inactivation
   </a>
  </li>
 </ul>
@@ -356,14 +397,53 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="discussion">
 <h1>Discussion<a class="headerlink" href="#discussion" title="Permalink to this headline">#</a></h1>
-<section id="data-management">
-<h2>Data management<a class="headerlink" href="#data-management" title="Permalink to this headline">#</a></h2>
+<p>Discuss both viewpoints: biologist and RSE.</p>
+<hr class="docutils" />
+<section id="data-management-lab-digitalization">
+<h2>Data management / lab digitalization<a class="headerlink" href="#data-management-lab-digitalization" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>temperature in MTPs</p></li>
+</ul>
+</section>
+<section id="jupyter-notebooks">
+<h2>Jupyter notebooks<a class="headerlink" href="#jupyter-notebooks" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>great documentation (FAIR)</p></li>
+</ul>
 <p>In this project, a robust and FAIR workflow from analytical raw-data to kinetic parameters was established. Thereby, the output of a analytical device was used directly as the input of the modeling pipeline.</p>
 <p>Despite the robust workflow, after the data is written to an EnzymeML document, manual copying of data into the EnzymeML spreadsheet is prone to human error. Especially, for large datasets with many time points and reactants. Hence, manufacturers should enable direct access to the measurement device, for instance via an API. (Control and laer experiments)</p>
 <p>Despite the easy applicability of the workflow, after the data is initialized,</p>
 </section>
-<section id="best-practices-kinetic-moeling">
-<h2>Best-practices kinetic moeling<a class="headerlink" href="#best-practices-kinetic-moeling" title="Permalink to this headline">#</a></h2>
+<section id="current-state-in-kinetic-modeling-of-enzyme-kinetics">
+<h2>Current state in kinetic modeling of enzyme kinetics<a class="headerlink" href="#current-state-in-kinetic-modeling-of-enzyme-kinetics" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="model-selection-in-enzyme-kinetics-calibration-and-kinetic-model">
+<h2>Model selection in enzyme kinetics: calibration and kinetic model<a class="headerlink" href="#model-selection-in-enzyme-kinetics-calibration-and-kinetic-model" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Best-practices kinetic modeling</p>
+<ul>
+<li><p>initial rates vs progress-curve analysis</p>
+<ul>
+<li><p>initial rates not suited to estimate conversion after 24 h.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Cost of additional parameters</p></li>
+<li><p>Model selection criteria</p></li>
+<li><p>How to assess the quality of a model</p>
+<ul>
+<li><p>what does the model represent (not newtonian mechanics)</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="inactivation">
+<h2>Inactivation<a class="headerlink" href="#inactivation" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>deterioration during catalysis</p></li>
+<li><p>adsorption to MTP surface (hydrophobic interaction)</p></li>
+</ul>
 </section>
 </section>
 
@@ -394,12 +474,19 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="testsection.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="scenarios/SLAC_kinetic_characterization.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">section A</p>
+            <p class="prev-next-title">Scenario C: SLAC characterization</p>
         </div>
+    </a>
+    <a class='right-next' id="next-link" href="conclusion.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Conclusion</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             </footer>
