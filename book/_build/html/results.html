@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Results &#8212; Best practices: Enzyme kinetics</title>
+    <title>Results &#8212; Best practices in enzyme kinetics: an EnzymeML based workflow for reproducible parameter estimation</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -52,7 +52,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Assessment of the inhibitory properties of an designed albumin as a chymotrypsin inhibitor" href="scenarios/chymotrypsin_inhibition.html" />
+    <link rel="next" title="Scenario A:Chymotrypsin inhibiton by a designed albumin fusion protein" href="scenarios/chymotrypsin_inhibition.html" />
     <link rel="prev" title="Methods" href="methods.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -92,7 +92,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <h1 class="site-logo" id="site-title">Best practices: Enzyme kinetics</h1>
+      <h1 class="site-logo" id="site-title">Best practices in enzyme kinetics: an EnzymeML based workflow for reproducible parameter estimation</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
@@ -151,12 +151,32 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="scenarios/chymotrypsin_inhibition.html">
-     Assessment of the inhibitory properties of an designed albumin as a chymotrypsin inhibitor
+     <strong>
+      Scenario A:
+     </strong>
+     <br/>
+     Chymotrypsin inhibiton by a designed albumin fusion protein
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="scenarios/glycosidase_inhibition.html">
+     <strong>
+      Scenario B:
+     </strong>
+     <br/>
+     <span class="math notranslate nohighlight">
+      \(\alpha\)
+     </span>
+     -glucosidase inhibition by fucoidan
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="scenarios/SLAC_kinetic_characterization.html">
-     Scenario C: SLAC characterization
+     <strong>
+      Scenario C:
+     </strong>
+     <br/>
+     SLAC characterization
     </a>
    </li>
    <li class="toctree-l2">
@@ -304,12 +324,36 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#workflow">
+   Workflow
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -321,6 +365,19 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#workflow">
+   Workflow
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -331,6 +388,10 @@ title="Print to PDF"
   <section class="tex2jax_ignore mathjax_ignore" id="results">
 <h1>Results<a class="headerlink" href="#results" title="Permalink to this headline">#</a></h1>
 <p>The development of the workflow was driven by different research scenarios, which are discussed in this chapter. Each scenario, had its specific requirements how and what kinetic parameters should be estimated from the raw data. Therefore, the software tools were developed to consider the needs of different experimental approaches.</p>
+<section id="workflow">
+<h2>Workflow<a class="headerlink" href="#workflow" title="Permalink to this headline">#</a></h2>
+<p>Absorbance data + standard curve –&gt; concentration data –&gt; parameter estimation –&gt; parameteres</p>
+</section>
 <div class="toctree-wrapper compound">
 </div>
 </section>
@@ -372,7 +433,7 @@ title="Print to PDF"
     <a class='right-next' id="next-link" href="scenarios/chymotrypsin_inhibition.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Assessment of the inhibitory properties of an designed albumin as a chymotrypsin inhibitor</p>
+        <p class="prev-next-title"><strong>Scenario A:</strong><br>Chymotrypsin inhibiton by a designed albumin fusion protein</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

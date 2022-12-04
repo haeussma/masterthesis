@@ -2,7 +2,9 @@
 
 Discuss both viewpoints: biologist and RSE.
 
----
+## Reproducibility in enzyme kinetics
+
+- Need for documentation without limiting experimental possibilities
 
 ## Data management / lab digitalization
 
@@ -34,3 +36,8 @@ Despite the easy applicability of the workflow, after the data is initialized,
 
 - deterioration during catalysis
 - adsorption to MTP surface (hydrophobic interaction)
+
+## Percision of kinetic parameters
+
+- how percise should parameters be
+- randomized order in MTPs

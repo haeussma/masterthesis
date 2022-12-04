@@ -1,7 +1,7 @@
 # Book settings
 # Learn more at https://jupyterbook.org/customize/config.html
 
-title: "Best practices: Enzyme kinetics"
+title: "Best practices in enzyme kinetics: an EnzymeML based workflow for reproducible parameter estimation"
 author: Max Häußler
 logo: ../images/logo.png
 copyright: "2022"

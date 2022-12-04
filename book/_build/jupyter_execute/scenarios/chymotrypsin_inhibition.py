@@ -1,17 +1,24 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Assessment of the inhibitory properties of an designed albumin as a chymotrypsin inhibitor
+# # __Scenario A:__<br>Chymotrypsin inhibiton by a designed albumin fusion protein
 # 
+# Data provided by Marwa Mohamed (Institute of Cell Biology and Immunology, University of Stuttgart, Stuttgart, Germany)
+# 
+# Assessment of the inhibitory properties of an designed albumin as a chymotrypsin inhibitor
+# 
+# # Project background
 # In this scenaro, the inhibitory effect of a human serum albumin mutant on chymotrypsin was investigated. Thereby, the inhibition constant $K_{i}$ of the HSA wild-type was compared to HSA(M3) mutant. Both HSAs were fusionized into fusion proteins individually through a huFc.  
 # Experimental data from the HSA(wt)-huFc and HSA(M3)-huFc originate from two independent experiments. In each experiment the initial substrate concentration was varied. Once with the respective inhibitor, and once without. Therefore, $K_{i}$ and $K_{m}$ were determined indenpendently from each other. Additionally, each individual reaction condition was prepared in duplicates to ensure repeatability.  
 # Since 
 # 
 # ## Experimental design
 # 
-# In order to assess the effect of the introduced mutations to the HSA(M3) variant, $K_{i}$ of the HSA wild-type was compared to the one of the HSA(M3) variant. Therefore, two indevidual experiments were conducted, estimating $K_{i}$ for each experiment individually. Each experiment consisted of enzyme reactions with initial substrate concentrations in the range of 0.25 - 2 mM, with and without the respective HSA.
-
-# ## Imports
+# In order to assess the effect of the introduced mutations to the HSA(M3) variant, $K_{i}$ of the HSA wild-type was compared to HSA(M3) variant. Therefore, two indevidual experiments were conducted, estimating $K_{i}$ for each experiment individually. Each experiment consisted of enzyme reactions with initial substrate concentrations in the range of 0.25 - 2 mM, with and without the respective HSA.
+# 
+# ## Data preparation
+# 
+# ### Imports
 
 # In[1]:
 
@@ -28,7 +35,7 @@ import warnings
 warnings.filterwarnings('ignore')
 
 
-# ## Conversion of absortion signal into concentrations
+# ### Conversion of absortion signal to concentration
 # 
 # In order to convert the time-course absorption signal into concenrtation, a standard of p-NA was applied in the range of 0 - 0.3 mM in duplicates. The measured absorbance values were stored as an excel-file. In the following cell, a CaliPytion ```StandardCurve``` is generated directly from the excel-data.
 
@@ -49,7 +56,7 @@ product_standard.visualize()
 
 # Based on the Akaike information criterion (AIC), the relation between concentration and absorption is best described by a quadratic function. Additionally, the visualization of the fit shows 
 
-# ## Load experimental data
+# ### Load experimental data
 # 
 # All experimental data was filled in the EnzymeML Excel template. In the next cell, ```EnzymeMLDocument```s are created by reading the excel template and the measured absorption data is calculated based on the ```StandardCurve``` above.
 
@@ -73,7 +80,7 @@ plt.show()
 # 
 # Since the experimental data from the HSA wild-type and the HSA(M3) variant originate from independent experiments, the control reactions without the respective inhibitor were compared. Therefore, kinetic parameters were estimated for each dataset, after deleting measurement in which inhibitor was present.
 
-# In[4]:
+# In[14]:
 
 
 # Create copys of the data sets and delete measuremnts with inhibitor present.
@@ -89,17 +96,14 @@ del m3_control.measurement_dict["m5"]
 del m3_control.measurement_dict["m6"]
 del m3_control.measurement_dict["m7"]
 
-
-# In[5]:
-
-
 # Estimate kinetic parameters of the control reactions of the HSA wild-type data set.
 kinetics_wt_control = ParameterEstimator.from_EnzymeML(wt_control, "s1", "product")
 kinetics_wt_control.fit_models(stop_time_index=-1, display_output=False)
 kinetics_wt_control.visualize()
+plt.show()
 
 
-# In[6]:
+# In[15]:
 
 
 # Estimate kinetic parameters of the control reactions of the HSA(M3) data set.

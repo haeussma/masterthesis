@@ -2,6 +2,10 @@
 
 Discuss both viewpoints: biologist and RSE.
 
+## Reproducibility in enzyme kinetics
+
+- Need for documentation without limiting experimental possibilities
+
 ## Data management / lab digitalization
 
 - temperature in MTPs

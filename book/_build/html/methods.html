@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Methods &#8212; Best practices: Enzyme kinetics</title>
+    <title>Methods &#8212; Best practices in enzyme kinetics: an EnzymeML based workflow for reproducible parameter estimation</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -94,7 +94,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <h1 class="site-logo" id="site-title">Best practices: Enzyme kinetics</h1>
+      <h1 class="site-logo" id="site-title">Best practices in enzyme kinetics: an EnzymeML based workflow for reproducible parameter estimation</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
@@ -153,12 +153,32 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="scenarios/chymotrypsin_inhibition.html">
-     Assessment of the inhibitory properties of an designed albumin as a chymotrypsin inhibitor
+     <strong>
+      Scenario A:
+     </strong>
+     <br/>
+     Chymotrypsin inhibiton by a designed albumin fusion protein
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="scenarios/glycosidase_inhibition.html">
+     <strong>
+      Scenario B:
+     </strong>
+     <br/>
+     <span class="math notranslate nohighlight">
+      \(\alpha\)
+     </span>
+     -glucosidase inhibition by fucoidan
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="scenarios/SLAC_kinetic_characterization.html">
-     Scenario C: SLAC characterization
+     <strong>
+      Scenario C:
+     </strong>
+     <br/>
+     SLAC characterization
     </a>
    </li>
    <li class="toctree-l2">
@@ -507,6 +527,7 @@ title="Print to PDF"
 <p>Data models build the backbone of applications, by defining the relations between informations in an hierarchical manner.
 EnzymePynetics is based on a data model, resembling the experimental design of an enzyme kinetics assay. Thereby, all relevant data and metadata of an kinetic experiment are ordered in the base object <code class="docutils literal notranslate"><span class="pre">EnzymeKineticsExperiment</span></code>. On the metadata side, the base object consists of the attributes temperature with its respective unit, pH, and the name of the measured substance. Additionally, it can be specified whether the measurement data originates from substrate or product measurements. On the data side, <code class="docutils literal notranslate"><span class="pre">EnzymeKineticsExperiment</span></code> contains one or multiple <code class="docutils literal notranslate"><span class="pre">Measurements</span></code>. Each measurement stores the information of an experimental condition the enzyme was subjected to. Therefore, each measurement contains information on the initial substrate concentration, enzyme concentration, and inhibitor concentration if present, along with the respective concentration units. Each ‘measurement’ also contains the measured data, which itself consist of one or multiple replicates of the respective experimental condition.<br />
 The data model was was generated using <a class="reference external" href="https://github.com/JR-1991/software-driven-rdm">sdRDM</a>, a python tool allowing the creation and versioning of data models.</p>
+<p>An extensive documentation of the data model can be accessed in the <a class="reference external" href="https://github.com/haeussma/EnzymePynetics/blob/main/specifications/EnzymeKinetics.md">specifications</a> of the software package.</p>
 </section>
 <section id="kinetic-models">
 <h3>3.3 Kinetic models<a class="headerlink" href="#kinetic-models" title="Permalink to this headline">#</a></h3>
@@ -527,7 +548,9 @@ The data model was was generated using <a class="reference external" href="https
 <section id="initialization">
 <h2>3.4 Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">#</a></h2>
 <p>Whereas the <code class="docutils literal notranslate"><span class="pre">EnzymeKineticsExperiment</span></code> object solely serves a
-The <code class="docutils literal notranslate"><span class="pre">ParameterEstimator</span></code> harbors the functionalities for parameter estimation. Data can be provided by passing data as an <code class="docutils literal notranslate"><span class="pre">EnzymeKineticsExperiment</span></code> object. Alternatively, an EnzymeML documents can be provided as the data source via <a class="reference external" href="https://github.com/EnzymeML/PyEnzyme">PyEnzyme</a> software.</p>
+The <code class="docutils literal notranslate"><span class="pre">ParameterEstimator</span></code> harbors the functionalities for parameter estimation. Data can be provided by passing data as an <code class="docutils literal notranslate"><span class="pre">EnzymeKineticsExperiment</span></code> object. Alternatively, an EnzymeML documents can be provided as the data source via <a class="reference external" href="https://github.com/EnzymeML/PyEnzyme">PyEnzyme</a> software.<br />
+Initially, product concentration is calculated, if the input data is from substrate measurements. Substrate is calculated, if product data was provided. The calculation is based on the initial substrate concentration, which needs to be provided for all measurements. The parameter estimation is then based on substrate data.<br />
+In the background, rough estimates for <span class="math notranslate nohighlight">\(k_{cat}\)</span>, <span class="math notranslate nohighlight">\(K_{m}\)</span>, and <span class="math notranslate nohighlight">\(K_{i}\)</span> are calculated based on the fastest reaction rate in the provided dataset. Initial parameter estimates are needed as a starting point for the solver, whereas the parameter space is limited to ±1000-fold its estimated value for each parameter.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">EnzymePynetics.tools.parameterestimator</span> <span class="kn">import</span> <span class="n">ParameterEstimator</span>
 <span class="kn">from</span> <span class="nn">EnzymePynetics.core.enzymekineticsexperiment</span> <span class="kn">import</span> <span class="n">EnzymeKineticsExperiment</span>
 <span class="kn">import</span> <span class="nn">pyenzyme</span>

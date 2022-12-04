@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Scenario C: SLAC characterization &#8212; Best practices: Enzyme kinetics</title>
+    <title>Scenario C:SLAC characterization &#8212; Best practices in enzyme kinetics: an EnzymeML based workflow for reproducible parameter estimation</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -54,8 +54,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Discussion" href="../discussion.html" />
-    <link rel="prev" title="Assessment of the inhibitory properties of an designed albumin as a chymotrypsin inhibitor" href="chymotrypsin_inhibition.html" />
+    <link rel="next" title="Effect of absorption - concentration model on kinetic parameters" href="effect_calibration_model.html" />
+    <link rel="prev" title="Scenario B:\(\alpha\)-glucosidase inhibition by fucoidan" href="glycosidase_inhibition.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -94,7 +94,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <h1 class="site-logo" id="site-title">Best practices: Enzyme kinetics</h1>
+      <h1 class="site-logo" id="site-title">Best practices in enzyme kinetics: an EnzymeML based workflow for reproducible parameter estimation</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
@@ -127,6 +127,11 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="../abbreviations.html">
+   Abbreviations
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="../introduction.html">
    Introduction
   </a>
@@ -148,12 +153,37 @@ const thebe_selector_output = ".output, .cell_output"
   <ul class="current">
    <li class="toctree-l2">
     <a class="reference internal" href="chymotrypsin_inhibition.html">
-     Assessment of the inhibitory properties of an designed albumin as a chymotrypsin inhibitor
+     <strong>
+      Scenario A:
+     </strong>
+     <br/>
+     Chymotrypsin inhibiton by a designed albumin fusion protein
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="glycosidase_inhibition.html">
+     <strong>
+      Scenario B:
+     </strong>
+     <br/>
+     <span class="math notranslate nohighlight">
+      \(\alpha\)
+     </span>
+     -glucosidase inhibition by fucoidan
     </a>
    </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     Scenario C: SLAC characterization
+     <strong>
+      Scenario C:
+     </strong>
+     <br/>
+     SLAC characterization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="effect_calibration_model.html">
+     Effect of absorption - concentration model on kinetic parameters
     </a>
    </li>
   </ul>
@@ -353,23 +383,40 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#experimental-design">
+   Experimental design
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#wet-lab">
+     Wet lab
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-management">
+     Data management
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#data-preparation">
    Data preparation
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#experimental-data">
-     Experimental data
+    <a class="reference internal nav-link" href="#imports">
+     Imports
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#blanking-of-time-course-absorption-data">
-     Blanking of time-course absorption data
+    <a class="reference internal nav-link" href="#experimantal-data">
+     Experimantal data
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#calibration-data">
-     Calibration data
+    <a class="reference internal nav-link" href="#concentration-calculation">
+     Concentration calculation
     </a>
    </li>
   </ul>
@@ -414,10 +461,16 @@ title="Print to PDF"
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id2">
+      <a class="reference internal nav-link" href="#time-dependent-enzyme-inactivation">
+       Time-dependent enzyme inactivation
       </a>
      </li>
     </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#correlation-analysis">
+     Correlation analysis
+    </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#effekt-of-calibration-temperature-and-ph-on-kinetic-parameters">
@@ -440,7 +493,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Scenario C: SLAC characterization</h1>
+                <h1>Scenario C:<br>SLAC characterization</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -456,23 +509,40 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#experimental-design">
+   Experimental design
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#wet-lab">
+     Wet lab
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-management">
+     Data management
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#data-preparation">
    Data preparation
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#experimental-data">
-     Experimental data
+    <a class="reference internal nav-link" href="#imports">
+     Imports
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#blanking-of-time-course-absorption-data">
-     Blanking of time-course absorption data
+    <a class="reference internal nav-link" href="#experimantal-data">
+     Experimantal data
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#calibration-data">
-     Calibration data
+    <a class="reference internal nav-link" href="#concentration-calculation">
+     Concentration calculation
     </a>
    </li>
   </ul>
@@ -517,10 +587,16 @@ title="Print to PDF"
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id2">
+      <a class="reference internal nav-link" href="#time-dependent-enzyme-inactivation">
+       Time-dependent enzyme inactivation
       </a>
      </li>
     </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#correlation-analysis">
+     Correlation analysis
+    </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#effekt-of-calibration-temperature-and-ph-on-kinetic-parameters">
@@ -544,28 +620,36 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="scenario-c-slac-characterization">
-<h1>Scenario C: SLAC characterization<a class="headerlink" href="#scenario-c-slac-characterization" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="scenario-c-br-slac-characterization">
+<h1><strong>Scenario C:</strong><br>SLAC characterization<a class="headerlink" href="#scenario-c-br-slac-characterization" title="Permalink to this headline">#</a></h1>
 <p>Data provided by Alaric Prins (Biocatalysis and Technical Biology, Cape Peninsula University of Technology, Capetown, South Africa)</p>
 <section id="project-background">
 <h2>Project background<a class="headerlink" href="#project-background" title="Permalink to this headline">#</a></h2>
-<p>In this scenario, the catalytic properties of the small laccase from <em>Streptomyces coelicolor</em> (SLAC) were investigated. Therefore, the enzymatic oxidation of 2,2’-Azino-bis(3-ethylbenzothiazoline-6-sulfonic acid) (ABTS) to its radical product ABTS<sup>+·</sup> was studied in the pH range between pH 3 - 5.5 and temperature range between 25°C - 45°C. In total 30 kinetic enzyme assays in a substrate range between 0 - 200 uM of ABTS were conducted. For each pH - temperature condition a seperate ABTS standard curve and absorption spectrum was recorded, in order to account for absorbance changes do to reaction conditions. Each enzyme reaction was followed for 15 min photometrically at two seperate wavelengths, measuring substrate depletion and product accumululation simultaneously. Therefore, preliminary experiments confirmed, that ABTS absorbs at 340 nm, whereas the ABTS<sup>+·</sup> radical product absorbs at 420 nm, which is in accordance with literature <span id="id1">[<a class="reference internal" href="../references.html#id2" title="Mengyun Wang, Daiyao Wang, Shiyi Qiu, Junyang Xiao, Huahua Cai, and Jing Zou. Multi-wavelength spectrophotometric determination of hydrogen peroxide in water by oxidative coloration of abts via fenton reaction. Environmental Science and Pollution Research, 26(26):27063–27072, 2019.">Wang <em>et al.</em>, 2019</a>]</span>
+<p>In this scenario, the catalytic properties of the small laccase from <em>Streptomyces coelicolor</em> (SLAC) were investigated. Therefore, the enzymatic oxidation of 2,2’-Azino-bis(3-ethylbenzothiazoline-6-sulfonic acid) (ABTS) to its radical form ABTS<sup>+·</sup> was studied in the pH range between pH 3 - 5.5 and temperature range between 25°C - 45°C. In total 30 kinetic enzyme assays in a substrate range between 0 - 200 uM of ABTS were conducted. For each pH - temperature condition a seperate ABTS standard curve and absorption spectrum was recorded, in order to account for absorbance changes do to reaction conditions. Each enzyme reaction was followed for 15 min photometrically at two seperate wavelengths, measuring substrate depletion and product accumululation simultaneously. Therefore, preliminary experiments confirmed, that ABTS absorbs at 340 nm, whereas the ABTS<sup>+·</sup> radical product absorbs at 420 nm, which is in accordance with literature <span id="id1">[<a class="reference internal" href="../references.html#id2" title="Mengyun Wang, Daiyao Wang, Shiyi Qiu, Junyang Xiao, Huahua Cai, and Jing Zou. Multi-wavelength spectrophotometric determination of hydrogen peroxide in water by oxidative coloration of abts via fenton reaction. Environmental Science and Pollution Research, 26(26):27063–27072, 2019.">Wang <em>et al.</em>, 2019</a>]</span>
 Overall, the dataset consists of more than 100 000 individual absorbance reads. Thus, data preperation was automated by custom parser functions, which were tailored for the output of the used spectro photometer. Consequently, the tedious and error-prone manual copying of raw data was automated. Information on the involved reactants, and the enzyme was filled in an EnzymeML Excel spreadsheet, which served as a meta data container.</p>
+<p>All data except for measurement data was entered into an EnzymeML Excel-template. Therein, concentration information of the enzyme and initial substrate was specified. All other information was parsed from the .txt output of the photometer.</p>
+</section>
+<section id="experimental-design">
+<h2>Experimental design<a class="headerlink" href="#experimental-design" title="Permalink to this headline">#</a></h2>
+<section id="wet-lab">
+<h3>Wet lab<a class="headerlink" href="#wet-lab" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>Dual wavelength</p></li>
+<li><p>control reactions</p></li>
+</ul>
+</section>
+<section id="data-management">
+<h3>Data management<a class="headerlink" href="#data-management" title="Permalink to this headline">#</a></h3>
 <p><img alt="Fig33" src="../_images/workflow_SLAC.png" />
 <em>Fig. 22: Schematic workflow of the SLAC characterization data flow.</em></p>
-<p>All data except for measurement data was entered into an EnzymeML Excel-template. Therein, concentration information of the enzyme and initial substrate was specified. All other information was parsed from the .txt output of the photometer.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-    <span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;hide-cell&quot;</span>
-    <span class="p">]</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
+<p>pipapapo.</p>
+</section>
+</section>
+<section id="data-preparation">
+<h2>Data preparation<a class="headerlink" href="#data-preparation" title="Permalink to this headline">#</a></h2>
+<section id="imports">
+<h3>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">#</a></h3>
+<div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span>
 <span class="kn">import</span> <span class="nn">pyenzyme</span> <span class="k">as</span> <span class="nn">pe</span>
@@ -591,22 +675,13 @@ Overall, the dataset consists of more than 100 000 individual absorbance reads.
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Cell</span> <span class="n">In</span> <span class="p">[</span><span class="mi">22</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-    <span class="p">:</span><span class="n">tags</span><span class="p">:</span> <span class="p">[</span><span class="n">hide</span><span class="o">-</span><span class="nb">input</span><span class="p">]</span>
-    <span class="o">^</span>
-<span class="ne">SyntaxError</span>: invalid syntax
-</pre></div>
-</div>
-</div>
 </div>
 </section>
-<section id="data-preparation">
-<h2>Data preparation<a class="headerlink" href="#data-preparation" title="Permalink to this headline">#</a></h2>
-<section id="experimental-data">
-<h3>Experimental data<a class="headerlink" href="#experimental-data" title="Permalink to this headline">#</a></h3>
-<p>In the next cell, time-course absorption data from the enzyme reactions is read in and parsed to individual EnzymeML documents.</p>
-<div class="cell docutils container">
+<section id="experimantal-data">
+<h3>Experimantal data<a class="headerlink" href="#experimantal-data" title="Permalink to this headline">#</a></h3>
+<p>Data from the enzyme reactions was loaded from the output files of the photometer and written to individual EnzymeML documents.</p>
+<p>All experiments contain a control reaction without substrate. The control reaction is used in the next cell to subtract the absorption, contributed from enzyme and buffer. After blanking, the control measurement is deleted from the dataset.</p>
+<div class="cell tag_hide_cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Specify the location of the data sets</span>
 <span class="n">directory_measurement_data</span> <span class="o">=</span> <span class="s2">&quot;../../data/SLAC_kinetic_characterization/TimeCourseData&quot;</span>
@@ -652,17 +727,8 @@ Overall, the dataset consists of more than 100 000 individual absorbance reads.
 
 <span class="c1"># Sort documents by ascending pH and temperature</span>
 <span class="n">absortion_enzymemldocs</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">absortion_enzymemldocs</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">getReaction</span><span class="p">(</span><span class="s2">&quot;r0&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">ph</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">getReaction</span><span class="p">(</span><span class="s2">&quot;r0&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">temperature</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="blanking-of-time-course-absorption-data">
-<h3>Blanking of time-course absorption data<a class="headerlink" href="#blanking-of-time-course-absorption-data" title="Permalink to this headline">#</a></h3>
-<p>All experiments contain a control reaction without substrate. The control reaction is used in the next cell to subtract the absorption, contributed from enzyme and buffer. After blanking, the control measurement is deleted from the dataset.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Blanc measurement data</span>
+
+<span class="c1"># Blanc measurement data</span>
 <span class="k">for</span> <span class="n">enzmldoc</span> <span class="ow">in</span> <span class="n">absortion_enzymemldocs</span><span class="p">:</span>
     <span class="n">blanc_measurement</span> <span class="o">=</span> <span class="n">enzmldoc</span><span class="o">.</span><span class="n">measurement_dict</span><span class="p">[</span><span class="s2">&quot;m0&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">getReactant</span><span class="p">(</span><span class="s2">&quot;s0&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replicates</span>
     <span class="n">blanc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">([</span><span class="n">repeat</span><span class="o">.</span><span class="n">data</span> <span class="k">for</span> <span class="n">repeat</span> <span class="ow">in</span> <span class="n">blanc_measurement</span><span class="p">])</span>
@@ -689,11 +755,11 @@ Overall, the dataset consists of more than 100 000 individual absorbance reads.
 </div>
 </div>
 </section>
-<section id="calibration-data">
-<h3>Calibration data<a class="headerlink" href="#calibration-data" title="Permalink to this headline">#</a></h3>
+<section id="concentration-calculation">
+<h3>Concentration calculation<a class="headerlink" href="#concentration-calculation" title="Permalink to this headline">#</a></h3>
 <p>Nextup, calibration data was loaded and converted into individual instances of the calibration data model. Some meta data of the calibration needs to be provided to the custom <code class="docutils literal notranslate"><span class="pre">read_calibration_data</span></code> function, since the output of the used spectro photometer only contains a minimum of information. Thereafter, a <code class="docutils literal notranslate"><span class="pre">StandardCurve</span></code> is created for each calibration data set. Thereby, only absoption values below 3 are considered, since higher absorption values cannot be converted into concentration accurately.
 Lastly, the fit of each standard curves is visualized.</p>
-<div class="cell docutils container">
+<div class="cell tag_hide_input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load calibration raw data</span>
 <span class="n">calibration_data</span> <span class="o">=</span> <span class="p">[]</span>
@@ -747,7 +813,7 @@ Lastly, the fit of each standard curves is visualized.</p>
 </div>
 <p>The figure above shows the standard curves for all experimental conditions of this scenario. Since the absorption proterties ABTS change with pH, the calibration range differs between some pH values, due to the upper absorption limit. In consequence, the upper calibration limit for reactions at pH 3, pH 3.5, and pH 5.5 is at 150 uM of ABTS, whereas for all other pH values the upper limit is at 175 uM. The sulfonate groups of ABTS are deprotonated for more neutral pH values. Therefore, the absorption properties of ABTS might decrease. Calibration curve data at pH 5.5 shows larger variation between the repeats. In this case, pipetting of one of the the three repeats differs from the other two, which should be considered for kinetic parameter estimation. In contrast to pH, the temperature during calibration affected the calibration curve only marginally.</p>
 <p>Nextup, the generate standard curves were used to convert the absorption measurement data into concentration data. Thereby, the respective concentration values were only calculated, if the measured absorption was within the respective calibration bounds</p>
-<div class="cell docutils container">
+<div class="cell tag_output_scroll tag_hide_cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate concentrations by applying standard curves to &#39;EnzymeMLDocuments&#39;.</span>
 <span class="n">concentration_enzymemldocs</span> <span class="o">=</span> <span class="p">[]</span>
@@ -809,12 +875,12 @@ Measurements &#39;[&#39;m9&#39;]&#39; removed from document, since respective me
 </section>
 <section id="quality-control-through-mass-balance-analysis">
 <h2>Quality control through mass balance analysis<a class="headerlink" href="#quality-control-through-mass-balance-analysis" title="Permalink to this headline">#</a></h2>
-<p>Since product and substrate of the SLAC reaction were simultaneously recorded, mass balance analysis was conductas as a control of quality. By assuming mass conservation, the following concentration balance can be established:
-<span class="math notranslate nohighlight">\(0 = S_{(t)} + P_{(t)} - S_{0}\)</span>
-Thereby, <span class="math notranslate nohighlight">\(S_{0}\)</span> denotes the initial substrate concentration, whereas <span class="math notranslate nohighlight">\(S_{(t)}\)</span> and <span class="math notranslate nohighlight">\(P_{(t)}\)</span> describe the substrate and product concentration for each time point <span class="math notranslate nohighlight">\(t\)</span>. <span class="math notranslate nohighlight">\(S_{t}\)</span> and <span class="math notranslate nohighlight">\(S_{0}\)</span> were individually measured. Thus each enzyme reaction with a given initial substrate concentration had a control reaction with identical substrate concentration. In contrast to the substrate, no calibration standard is available for the product. Therefore, an additional parameter §k§ was introdiced to the mass balance equation, assuming linear relationship between the product concentration and its signal:
+<p>Since product and substrate of the SLAC reaction were simultaneously recorded, mass balance analysis was conductas as a control of quality. By assuming mass conservation, the following concentration balance can be established:<br />
+<span class="math notranslate nohighlight">\(0 = S_{(t)} + P_{(t)} - S_{0}\)</span><br />
+Thereby, <span class="math notranslate nohighlight">\(S_{0}\)</span> denotes the initial substrate concentration, whereas <span class="math notranslate nohighlight">\(S_{(t)}\)</span> and <span class="math notranslate nohighlight">\(P_{(t)}\)</span> describe the substrate and product concentration for each time point <span class="math notranslate nohighlight">\(t\)</span>. <span class="math notranslate nohighlight">\(S_{t}\)</span> and <span class="math notranslate nohighlight">\(S_{0}\)</span> were individually measured. Thus each enzyme reaction with a given initial substrate concentration had a control reaction with identical substrate concentration. In contrast to the substrate, no calibration standard is available for the product. Therefore, an additional parameter §k§ was introdiced to the mass balance equation, assuming linear relationship between the product concentration and its signal:<br />
 <span class="math notranslate nohighlight">\(0 = S_{(t)} + P_{(t)}k - S_{0}\)</span></p>
 <p><span class="math notranslate nohighlight">\(k\)</span> was determined for each data set individually by a minimization algorithm. The minimization objective was to find the optimal <span class="math notranslate nohighlight">\(k\)</span>, which minimizes all slopes of a given reaction condition. Thereafter, the mass balances of all measurements were visualized.</p>
-<div class="cell docutils container">
+<div class="cell tag_hide_input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Defenition of parameter &#39;k&#39;</span>
 <span class="n">params</span> <span class="o">=</span> <span class="n">Parameters</span><span class="p">()</span>
@@ -903,7 +969,7 @@ Thereby, <span class="math notranslate nohighlight">\(S_{0}\)</span> denotes the
 <p>Model selection is vital for parameter estimation. Thus, different settings for the parameter estimator were tested. Firstly, substrate and product inhibition models were excluded, since in some of the experiments the actual initial substrate concentration was higher than the specified initial substrate concentration. This results calculated product concentrations with negative value. Hence, product inhibition models were excluede, since no acurate information on product concentration was available.<br />
 Secondly, substrate inhibition models were excluded, since the model was not able to describe the observed reaction kinetics. This was evident from a higher Akaike information criterion as well as more than 100 % standard deviation on the estimated parameters.<br />
 Lastly, the irreversible Michaelis-Menten model with and without time-dependent enzyme inactivation was compared, since enzyme inactivation was observed in previous experiments. Estimated parameters and the fitted models are shown for the experimental data at pH 3 and 25°C. Once without enzyme inactivation and once with.</p>
-<div class="cell docutils container">
+<div class="cell tag_hide_input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()):</span>
@@ -1013,7 +1079,7 @@ Fitting data to:
 <p>Both plots in the above figure contain the same experimental data. The left plot shows the fitted model with enzyme inactivation and the right without enzyme inactivation, which is shown as solid lines. Visually, the model with enzyme inactinvation describes the data better, since the model intersects the data points more directly, compared to the model without enzyme inactivation. Statistically, this is characterized through a lower Akaike information criterion, as well as lower standard deviations on the estimated parameters.
 In absolute therms, the estimated <span class="math notranslate nohighlight">\(K_{m}\)</span> of both models is approximately identical, whereas the <span class="math notranslate nohighlight">\(k_{cat}\)</span> estimate is approximately 33% lower for the model without enzyme inactivation. Hence, the model without enzyme inactivation underestimates the turnover number of the enzyme.</p>
 <p>Thus, irreversible Michaelis-Menten model with time-dependent enzyme inactivation was selected for the parameter estimation for all data sets.</p>
-<div class="cell docutils container">
+<div class="cell tag_hide_input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run parameter estimator for all datasets, utilizing multi-processing.</span>
 <span class="k">def</span> <span class="nf">run_ParameterEstimator</span><span class="p">(</span><span class="n">enzmldoc</span><span class="p">:</span> <span class="n">pe</span><span class="o">.</span><span class="n">EnzymeMLDocument</span><span class="p">):</span>    
@@ -1027,7 +1093,7 @@ In absolute therms, the estimated <span class="math notranslate nohighlight">\(K
 </div>
 </div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_hide_input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Visualize all fitted models</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">12.5</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -1051,7 +1117,7 @@ In absolute therms, the estimated <span class="math notranslate nohighlight">\(K
 </div>
 <p>The above plot shows all kinetic experiments, fitted to the irreversible Michaelis-Menten model with time-dependent enzyme inactivation. Based on the reaction slopes, no catalytic avtivity is observable for reactions at pH 5 or higher.
 In the following cells, the resulting kinetic parameters were extracted and visualized. As in the mass balance analysis, the reactions at pH 4, 45°C and pH 4.5, 35°C differ from other experiments of the respective pH. In both cases, every applied substrate concentration is higher than intended in the design of the experiment. Furthermore, the resulting parameter estimates have a high uncertanty. Therefore, the respective measurements are excluded from further analysis. Additionaly, the results from pH 5.5, 35°C were excluded, since the uncertainty of the parameters could not be estimated.</p>
-<div class="cell docutils container">
+<div class="cell tag_hide_input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get kinetic parameters of all datasets</span>
 <span class="n">kcat</span> <span class="o">=</span> <span class="p">[]</span>
@@ -1105,7 +1171,13 @@ In the following cells, the resulting kinetic parameters were extracted and visu
 <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span> <span class="c1">#kcat outlier, mass balance outlier</span>
 
 <span class="n">df</span><span class="p">[</span><span class="s2">&quot;zeros&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">27</span><span class="p">)</span>
-<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span>
 </pre></div>
 </div>
 </div>
@@ -1556,7 +1628,7 @@ In the following cells, the resulting kinetic parameters were extracted and visu
 <section id="parameter-estimates-for-k-cat-and-k-m">
 <h3>Parameter estimates for <span class="math notranslate nohighlight">\(k_{cat}\)</span> and <span class="math notranslate nohighlight">\(K_{m}\)</span><a class="headerlink" href="#parameter-estimates-for-k-cat-and-k-m" title="Permalink to this headline">#</a></h3>
 <p>corr</p>
-<div class="cell docutils container">
+<div class="cell tag_hide_input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">12.8</span><span class="p">,</span> <span class="mf">4.8</span><span class="p">),</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()):</span>
@@ -1569,99 +1641,32 @@ In the following cells, the resulting kinetic parameters were extracted and visu
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/SLAC_kinetic_characterization_22_0.png" src="../_images/SLAC_kinetic_characterization_22_0.png" />
+<img alt="../_images/SLAC_kinetic_characterization_23_0.png" src="../_images/SLAC_kinetic_characterization_23_0.png" />
 </div>
 </div>
 <p>The figure on the left shows the catalytic efficiency <span class="math notranslate nohighlight">\(\frac{k_{cat}}{K_{m}}\)</span> over the pH value of each reaction. The highest catalytic efficiency was observed at pH 3 and 45°C. Increasing the pH by 0.5 reduced <span class="math notranslate nohighlight">\(\frac{k_{cat}}{K_{m}}\)</span> approximatel by half. For higher pH values, <span class="math notranslate nohighlight">\(\frac{k_{cat}}{K_{m}}\)</span> is even more decreased. The catalytic efficiency is therefore highly sensitive to the pH. This might source from different causes. Eighter deprotonation ABTS sulfonate groups for more neutral pH values or protonation changes of the enzyme might hinder catalysis at higher pH values.<br />
 In terms of temperature, higher <span class="math notranslate nohighlight">\(\frac{k_{cat}}{K_{m}}\)</span> was achieved at higher temperatures. SLAC might even be more active at higher temperatures and pH values.</p>
 <section id="correlation-between-k-cat-and-k-m">
 <h4>Correlation between <span class="math notranslate nohighlight">\(k_{cat}\)</span> and <span class="math notranslate nohighlight">\(K_{m}\)</span><a class="headerlink" href="#correlation-between-k-cat-and-k-m" title="Permalink to this headline">#</a></h4>
-<p>The parameter estimates for <span class="math notranslate nohighlight">\(k_{cat}\)</span> and <span class="math notranslate nohighlight">\(K_{m}\)</span> showed correlation. For experiments at pH 3 and pH 3.5, the parameters were correlated between 0.5 - 0.85. This indeicates, that the highest initial substrate concentration, which was applied for parameter estimation was not sufficently high. Ideally, the highest initial substrate concentration applied for a kinetic experiment should be 10-fold higher than <span class="math notranslate nohighlight">\(K_{m}\)</span> to avoid correlation. In this scenario, only reactions with an initial substrate concentration of 150 uM were used for parameter estimation, due to the limited photometric measurement range of ABTS. Hence, ABTS was only applied 1.5-fold to 6-fold of <span class="math notranslate nohighlight">\(K_{m}\)</span>.<br />
+<p>The parameter estimates for <span class="math notranslate nohighlight">\(k_{cat}\)</span> and <span class="math notranslate nohighlight">\(K_{m}\)</span> showed correlation. For experiments at pH 3 and pH 3.5, the parameters were correlated between 0.5 - 0.85. This indeicates, that the highest initial substrate concentration, which was applied for parameter estimation was not sufficently high. Ideally, the highest initial substrate concentration applied for a kinetic experiment should be 10-fold higher than <span class="math notranslate nohighlight">\(K_{m}\)</span> to avoid correlation. In this scenario, only reactions with an initial substrate concentration of 150 uM were used for parameter estimation, due to the limited photometric measurement range of ABTS. Hence, ABTS was only applied 1.5-fold to 6-fold of the estimated <span class="math notranslate nohighlight">\(K_{m}\)</span>.<br />
 For reactions at pH values of 4 and above, positive as well as negative correlations were observed.
 As the figure above on the right shows, <span class="math notranslate nohighlight">\(K_{m}\)</span> was estimated in the range of 25 - 105 uM in the mentioned pH range.
 For reactions at higher pH values positive and negative correlations were observed.
-Correlation of 0.5 - 0.85 was observed between <span class="math notranslate nohighlight">\(k_{cat}\)</span> and <span class="math notranslate nohighlight">\(K_{m}\)</span> parameter estimates
-Parameter estimates for <span class="math notranslate nohighlight">\(k_{cat}\)</span> and <span class="math notranslate nohighlight">\(K_{m}\)</span> were correlated between 0.5 and
-High correlation between 0.5 and 0.85 was observed for almost all experimental conditions. This indicates that the parameters kcat and Km cannot be estimated independently. In this case the highest applied substrate concentration is too low, compared to the Km of the enzyme. Therefore,
-The highest initial substrate concentration should be at least 5-fold higher than the enzyme’s Km. SOURCE.
-Low and also negative correlations were observed for reactions with pH values at and above pH 4.
-The figure on the left shows <span class="math notranslate nohighlight">\(k_{cat}\)</span> over <span class="math notranslate nohighlight">\(K_{m}\)</span> for all experimental conditions, whereas the pH is color-coded. The</p>
-</section>
-<section id="id2">
-<h4><a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h4>
-<p>whereas the right figure visualizes the catalytic efficiency <span class="math notranslate nohighlight">\(\frac{k_{cat}}{K_{m}}\)</span> over the pH value. As visible in</p>
+Low and also negative correlations were observed for reactions with pH values at and above pH 4.</p>
+<p>The figure on the left shows <span class="math notranslate nohighlight">\(k_{cat}\)</span> over <span class="math notranslate nohighlight">\(K_{m}\)</span> for all experimental conditions, whereas the pH is color-coded. For reactions with identical pH values, <span class="math notranslate nohighlight">\(k_{cat}\)</span> and <span class="math notranslate nohighlight">\(K_{m}\)</span> both channge for different temperatures. This might also be attributed to the high correleation between the parameters. Thus, the true change of <span class="math notranslate nohighlight">\(k_{cat}\)</span> or <span class="math notranslate nohighlight">\(K_{m}\)</span> throu pH or temperature cannot be assessed.</p>
 <p>For pH values of 5 and above, almost no catalytic activity was observed. Therefore, data of these experimental conditions is excluded from further analysis.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">kcat</span><span class="p">,</span> <span class="n">ki_error</span><span class="p">,</span> <span class="n">kcat_error</span><span class="p">,</span> <span class="n">ki</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;kcat [1/s]&quot;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Enzyme inactivation std&quot;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;kcat stderr&quot;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Enzyme inactivation [1/s]&quot;</span><span class="p">]</span> <span class="p">,</span> <span class="n">color_tuples</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;temperature&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)):</span>
-
-    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">kcat</span><span class="p">,</span> <span class="n">ki</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="n">color</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="n">label</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">kcat</span><span class="p">,</span> <span class="n">ki</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">ki_error</span><span class="p">,</span> <span class="n">xerr</span><span class="o">=</span><span class="n">kcat_error</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="n">ecolor</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;temperature [C]&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Enzyme inactivation [1/s]&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;kcat [1/s]&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.004</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span> <span class="p">[</span><span class="mi">16</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">kcat</span><span class="p">,</span> <span class="n">ki_error</span><span class="p">,</span> <span class="n">kcat_error</span><span class="p">,</span> <span class="n">ki</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;kcat [1/s]&quot;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Enzyme inactivation std&quot;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;kcat stderr&quot;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Enzyme inactivation [1/s]&quot;</span><span class="p">]</span> <span class="p">,</span> <span class="n">color_tuples</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;temperature&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)):</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">kcat</span><span class="p">,</span> <span class="n">ki</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="n">color</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="n">label</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="n">ax</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">kcat</span><span class="p">,</span> <span class="n">ki</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">ki_error</span><span class="p">,</span> <span class="n">xerr</span><span class="o">=</span><span class="n">kcat_error</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="n">ecolor</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-
-<span class="ne">NameError</span>: name &#39;color_tuples&#39; is not defined
-</pre></div>
-</div>
-<img alt="../_images/SLAC_kinetic_characterization_24_1.png" src="../_images/SLAC_kinetic_characterization_24_1.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">ph</span><span class="p">,</span> <span class="n">ki_error</span><span class="p">,</span> <span class="n">kcat_error</span><span class="p">,</span> <span class="n">ki</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;pH&quot;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Enzyme inactivation std&quot;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;kcat stderr&quot;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Enzyme inactivation [1/s]&quot;</span><span class="p">]</span> <span class="p">,</span> <span class="n">color_tuples</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;temperature&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)):</span>
-
-    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">ph</span><span class="p">,</span> <span class="n">ki</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="n">color</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="n">label</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">ph</span><span class="p">,</span> <span class="n">ki</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">ki_error</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="n">ecolor</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;temperature [C]&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Enzyme inactivation [1/s]&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;pH&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.004</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.0, 0.004)
-</pre></div>
-</div>
-<img alt="../_images/SLAC_kinetic_characterization_25_1.png" src="../_images/SLAC_kinetic_characterization_25_1.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">temp</span><span class="p">,</span> <span class="n">ki_error</span><span class="p">,</span> <span class="n">kcat_error</span><span class="p">,</span> <span class="n">ki</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;temperature&quot;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Enzyme inactivation std&quot;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;kcat stderr&quot;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Enzyme inactivation [1/s]&quot;</span><span class="p">]</span> <span class="p">,</span> <span class="n">pH_tuples</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;pH&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)):</span>
-
-    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span> <span class="n">ki</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="n">color</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="n">label</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">i</span><span class="o">%</span><span class="k">5</span> else &quot;&quot;)
-    <span class="n">ax</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span> <span class="n">ki</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">ki_error</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="n">ecolor</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;temperature [C]&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Enzyme inactivation [1/s]&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;pH&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.004</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.0, 0.004)
-</pre></div>
-</div>
-<img alt="../_images/SLAC_kinetic_characterization_26_1.png" src="../_images/SLAC_kinetic_characterization_26_1.png" />
-</div>
-</div>
+</section>
+<section id="time-dependent-enzyme-inactivation">
+<h4>Time-dependent enzyme inactivation<a class="headerlink" href="#time-dependent-enzyme-inactivation" title="Permalink to this headline">#</a></h4>
+<ul class="simple">
+<li><p>haflife</p></li>
+<li><p>plots</p></li>
+<li><p>correlation / causality</p></li>
+</ul>
+</section>
+</section>
+<section id="correlation-analysis">
+<h3>Correlation analysis<a class="headerlink" href="#correlation-analysis" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
@@ -1679,7 +1684,7 @@ The figure on the left shows <span class="math notranslate nohighlight">\(k_{cat
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;kcat [1/s]&#39;)
 </pre></div>
 </div>
-<img alt="../_images/SLAC_kinetic_characterization_27_1.png" src="../_images/SLAC_kinetic_characterization_27_1.png" />
+<img alt="../_images/SLAC_kinetic_characterization_25_1.png" src="../_images/SLAC_kinetic_characterization_25_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1698,7 +1703,7 @@ The figure on the left shows <span class="math notranslate nohighlight">\(k_{cat
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot: &gt;
 </pre></div>
 </div>
-<img alt="../_images/SLAC_kinetic_characterization_28_1.png" src="../_images/SLAC_kinetic_characterization_28_1.png" />
+<img alt="../_images/SLAC_kinetic_characterization_26_1.png" src="../_images/SLAC_kinetic_characterization_26_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1737,29 +1742,6 @@ The figure on the left shows <span class="math notranslate nohighlight">\(k_{cat
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">corr</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
-
-<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">corr</span><span class="p">,</span> 
-        <span class="n">xticklabels</span><span class="o">=</span><span class="n">corr</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span>
-        <span class="n">yticklabels</span><span class="o">=</span><span class="n">corr</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span>
-        <span class="n">cmap</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s2">&quot;vlag&quot;</span><span class="p">,</span> <span class="n">as_cmap</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
-<span class="c1">#plt.xticks(rotation=45) </span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">Running</span> <span class="n">cells</span> <span class="k">with</span> <span class="s1">&#39;Python 3.10.8 (&#39;</span><span class="n">msc</span><span class="s1">&#39;)&#39;</span> <span class="n">requires</span> <span class="n">ipykernel</span> <span class="n">package</span><span class="o">.</span>
-
-<span class="n">Run</span> <span class="n">the</span> <span class="n">following</span> <span class="n">command</span> <span class="n">to</span> <span class="n">install</span> <span class="s1">&#39;ipykernel&#39;</span> <span class="n">into</span> <span class="n">the</span> <span class="n">Python</span> <span class="n">environment</span><span class="o">.</span> 
-
-<span class="ne">Command</span>: &#39;conda install -n msc ipykernel --update-deps --force-reinstall&#39;
-</pre></div>
-</div>
-</div>
-</div>
-</section>
 </section>
 <section id="effekt-of-calibration-temperature-and-ph-on-kinetic-parameters">
 <h3>Effekt of calibration temperature and pH on kinetic parameters<a class="headerlink" href="#effekt-of-calibration-temperature-and-ph-on-kinetic-parameters" title="Permalink to this headline">#</a></h3>
@@ -2065,17 +2047,17 @@ The figure on the left shows <span class="math notranslate nohighlight">\(k_{cat
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="chymotrypsin_inhibition.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="glycosidase_inhibition.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Assessment of the inhibitory properties of an designed albumin as a chymotrypsin inhibitor</p>
+            <p class="prev-next-title"><strong>Scenario B:</strong><br><span class="math notranslate nohighlight">\(\alpha\)</span>-glucosidase inhibition by fucoidan</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="../discussion.html" title="next page">
+    <a class='right-next' id="next-link" href="effect_calibration_model.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Discussion</p>
+        <p class="prev-next-title">Effect of absorption - concentration model on kinetic parameters</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

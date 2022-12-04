@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Effect of absorption - concentration model on kinetic parameters &#8212; Best practices: Enzyme kinetics</title>
+    <title>Effect of absorption - concentration model on kinetic parameters &#8212; Best practices in enzyme kinetics: an EnzymeML based workflow for reproducible parameter estimation</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -53,7 +53,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Discussion" href="../discussion.html" />
-    <link rel="prev" title="Scenario C: SLAC characterization" href="SLAC_kinetic_characterization.html" />
+    <link rel="prev" title="Scenario C:SLAC characterization" href="SLAC_kinetic_characterization.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -92,7 +92,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <h1 class="site-logo" id="site-title">Best practices: Enzyme kinetics</h1>
+      <h1 class="site-logo" id="site-title">Best practices in enzyme kinetics: an EnzymeML based workflow for reproducible parameter estimation</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
@@ -151,12 +151,32 @@ const thebe_selector_output = ".output, .cell_output"
   <ul class="current">
    <li class="toctree-l2">
     <a class="reference internal" href="chymotrypsin_inhibition.html">
-     Assessment of the inhibitory properties of an designed albumin as a chymotrypsin inhibitor
+     <strong>
+      Scenario A:
+     </strong>
+     <br/>
+     Chymotrypsin inhibiton by a designed albumin fusion protein
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="glycosidase_inhibition.html">
+     <strong>
+      Scenario B:
+     </strong>
+     <br/>
+     <span class="math notranslate nohighlight">
+      \(\alpha\)
+     </span>
+     -glucosidase inhibition by fucoidan
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="SLAC_kinetic_characterization.html">
-     Scenario C: SLAC characterization
+     <strong>
+      Scenario C:
+     </strong>
+     <br/>
+     SLAC characterization
     </a>
    </li>
    <li class="toctree-l2 current active">
@@ -333,12 +353,46 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data">
+   Data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#calibration">
+   Calibration
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#inactivation">
+   Inactivation
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -350,6 +404,29 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data">
+   Data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#calibration">
+   Calibration
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#inactivation">
+   Inactivation
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -361,6 +438,22 @@ title="Print to PDF"
 <h1>Effect of absorption - concentration model on kinetic parameters<a class="headerlink" href="#effect-of-absorption-concentration-model-on-kinetic-parameters" title="Permalink to this headline">#</a></h1>
 <p>In this analysis the influence of calibration model selection on the resulting parameters should was investigated. Each parameter estimation scenario in this work relies on the conversion from absorption data into concentration data. Therefore, a standard of the analyte, which was used to measure the enzyme activty, was provided with each kinetic experiment. Usually, a linear relationship between the absobance signal and concentration is assumed by experimentalists. Therefore, a linear calibration is applied.</p>
 <p>Experimentalists often restrict themselfs to only use the so called ‘linear’ range of the photometer below an absorption of 1. Thus, sacrificing a significant ammount of the measurement range of the analytical device.</p>
+<section id="data">
+<h2>Data<a class="headerlink" href="#data" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>chymotrypsin</p></li>
+<li><p>SLAC</p></li>
+<li><p>trametes</p></li>
+<li><p>glucosidase</p></li>
+<li></li>
+</ul>
+</section>
+<section id="calibration">
+<h2>Calibration<a class="headerlink" href="#calibration" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="inactivation">
+<h2>Inactivation<a class="headerlink" href="#inactivation" title="Permalink to this headline">#</a></h2>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -394,7 +487,7 @@ title="Print to PDF"
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Scenario C: SLAC characterization</p>
+            <p class="prev-next-title"><strong>Scenario C:</strong><br>SLAC characterization</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="../discussion.html" title="next page">

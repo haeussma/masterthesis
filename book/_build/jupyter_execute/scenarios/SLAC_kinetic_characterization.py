@@ -1,31 +1,34 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Scenario C: SLAC characterization
+# # __Scenario C:__<br>SLAC characterization
 # 
 # Data provided by Alaric Prins (Biocatalysis and Technical Biology, Cape Peninsula University of Technology, Capetown, South Africa)
 # 
 # ## Project background
-# In this scenario, the catalytic properties of the small laccase from *Streptomyces coelicolor* (SLAC) were investigated. Therefore, the enzymatic oxidation of 2,2'-Azino-bis(3-ethylbenzothiazoline-6-sulfonic acid) (ABTS) to its radical product ABTS<sup>+·</sup> was studied in the pH range between pH 3&nbsp;-&nbsp;5.5 and temperature range between 25°C&nbsp;-&nbsp;45°C. In total 30 kinetic enzyme assays in a substrate range between 0&nbsp;-&nbsp;200&nbsp;uM of ABTS were conducted. For each pH - temperature condition a seperate ABTS standard curve and absorption spectrum was recorded, in order to account for absorbance changes do to reaction conditions. Each enzyme reaction was followed for 15 min photometrically at two seperate wavelengths, measuring substrate depletion and product accumululation simultaneously. Therefore, preliminary experiments confirmed, that ABTS absorbs at 340 nm, whereas the ABTS<sup>+·</sup> radical product absorbs at 420 nm, which is in accordance with literature {cite:p}`wang2019multi`
+# In this scenario, the catalytic properties of the small laccase from *Streptomyces coelicolor* (SLAC) were investigated. Therefore, the enzymatic oxidation of 2,2'-Azino-bis(3-ethylbenzothiazoline-6-sulfonic acid) (ABTS) to its radical form ABTS<sup>+·</sup> was studied in the pH range between pH 3&nbsp;-&nbsp;5.5 and temperature range between 25°C&nbsp;-&nbsp;45°C. In total 30 kinetic enzyme assays in a substrate range between 0&nbsp;-&nbsp;200&nbsp;uM of ABTS were conducted. For each pH - temperature condition a seperate ABTS standard curve and absorption spectrum was recorded, in order to account for absorbance changes do to reaction conditions. Each enzyme reaction was followed for 15 min photometrically at two seperate wavelengths, measuring substrate depletion and product accumululation simultaneously. Therefore, preliminary experiments confirmed, that ABTS absorbs at 340 nm, whereas the ABTS<sup>+·</sup> radical product absorbs at 420 nm, which is in accordance with literature {cite:p}`wang2019multi`
 # Overall, the dataset consists of more than 100&nbsp;000 individual absorbance reads. Thus, data preperation was automated by custom parser functions, which were tailored for the output of the used spectro photometer. Consequently, the tedious and error-prone manual copying of raw data was automated. Information on the involved reactants, and the enzyme was filled in an EnzymeML Excel spreadsheet, which served as a meta data container.
-# 
-# ![Fig33](../images/workflow_SLAC.png)
-# _Fig. 22: Schematic workflow of the SLAC characterization data flow._
 # 
 # 
 # All data except for measurement data was entered into an EnzymeML Excel-template. Therein, concentration information of the enzyme and initial substrate was specified. All other information was parsed from the .txt output of the photometer.
+# 
+# ## Experimental design
+# 
+# ### Wet lab
+# - Dual wavelength
+# - control reactions
+# 
+# ### Data management
+# ![Fig33](../images/workflow_SLAC.png)
+# _Fig. 22: Schematic workflow of the SLAC characterization data flow._
+# 
+# pipapapo.
 
-# In[ ]:
+# ## Data preparation
+# 
+# ### Imports
 
-
-{
-    "tags": [
-        "hide-cell"
-    ]
-}
-
-
-# In[22]:
+# In[26]:
 
 
 from typing import Dict, List
@@ -51,11 +54,12 @@ import warnings
 warnings.filterwarnings('ignore')
 
 
-# ## Data preparation
+# ### Experimantal data
 # 
-# ### Experimental data
+# Data from the enzyme reactions was loaded from the output files of the photometer and written to individual EnzymeML documents.
 # 
-# In the next cell, time-course absorption data from the enzyme reactions is read in and parsed to individual EnzymeML documents.
+# 
+# All experiments contain a control reaction without substrate. The control reaction is used in the next cell to subtract the absorption, contributed from enzyme and buffer. After blanking, the control measurement is deleted from the dataset.
 
 # In[4]:
 
@@ -105,14 +109,6 @@ for name, data in raw_data_dict.items():
 # Sort documents by ascending pH and temperature
 absortion_enzymemldocs = sorted(absortion_enzymemldocs, key=lambda x: (x.getReaction("r0").ph, x.getReaction("r0").temperature))
 
-
-# ### Blanking of time-course absorption data
-# 
-# All experiments contain a control reaction without substrate. The control reaction is used in the next cell to subtract the absorption, contributed from enzyme and buffer. After blanking, the control measurement is deleted from the dataset.
-
-# In[5]:
-
-
 # Blanc measurement data
 for enzmldoc in absortion_enzymemldocs:
     blanc_measurement = enzmldoc.measurement_dict["m0"].getReactant("s0").replicates
@@ -137,7 +133,15 @@ for enzmldoc in absortion_enzymemldocs:
     del enzmldoc.measurement_dict["m0"]
 
 
-# ### Calibration data
+# 
+
+# In[5]:
+
+
+
+
+
+# ### Concentration calculation
 # 
 # Nextup, calibration data was loaded and converted into individual instances of the calibration data model. Some meta data of the calibration needs to be provided to the custom ```read_calibration_data``` function, since the output of the used spectro photometer only contains a minimum of information. Thereafter, a ```StandardCurve``` is created for each calibration data set. Thereby, only absoption values below 3 are considered, since higher absorption values cannot be converted into concentration accurately. 
 # Lastly, the fit of each standard curves is visualized.
@@ -194,7 +198,7 @@ plt.tight_layout()
 # 
 # Nextup, the generate standard curves were used to convert the absorption measurement data into concentration data. Thereby, the respective concentration values were only calculated, if the measured absorption was within the respective calibration bounds
 
-# In[7]:
+# In[25]:
 
 
 # Calculate concentrations by applying standard curves to 'EnzymeMLDocuments'.
@@ -214,10 +218,10 @@ for standard_curve, abso_enzmldoc in zip(standard_curves, absortion_enzymemldocs
 
 # ## Quality control through mass balance analysis
 # 
-# Since product and substrate of the SLAC reaction were simultaneously recorded, mass balance analysis was conductas as a control of quality. By assuming mass conservation, the following concentration balance can be established:
-# $0 = S_{(t)} + P_{(t)} - S_{0}$
-# Thereby, $S_{0}$ denotes the initial substrate concentration, whereas $S_{(t)}$ and $P_{(t)}$ describe the substrate and product concentration for each time point $t$. $S_{t}$ and $S_{0}$ were individually measured. Thus each enzyme reaction with a given initial substrate concentration had a control reaction with identical substrate concentration. In contrast to the substrate, no calibration standard is available for the product. Therefore, an additional parameter §k§ was introdiced to the mass balance equation, assuming linear relationship between the product concentration and its signal:
-# $0 = S_{(t)} + P_{(t)}k - S_{0}$
+# Since product and substrate of the SLAC reaction were simultaneously recorded, mass balance analysis was conductas as a control of quality. By assuming mass conservation, the following concentration balance can be established:  
+# $0 = S_{(t)} + P_{(t)} - S_{0}$  
+# Thereby, $S_{0}$ denotes the initial substrate concentration, whereas $S_{(t)}$ and $P_{(t)}$ describe the substrate and product concentration for each time point $t$. $S_{t}$ and $S_{0}$ were individually measured. Thus each enzyme reaction with a given initial substrate concentration had a control reaction with identical substrate concentration. In contrast to the substrate, no calibration standard is available for the product. Therefore, an additional parameter §k§ was introdiced to the mass balance equation, assuming linear relationship between the product concentration and its signal:  
+# $0 = S_{(t)} + P_{(t)}k - S_{0}$  
 # 
 # $k$ was determined for each data set individually by a minimization algorithm. The minimization objective was to find the optimal $k$, which minimizes all slopes of a given reaction condition. Thereafter, the mass balances of all measurements were visualized.
 # 
@@ -371,7 +375,7 @@ plt.tight_layout()
 # The above plot shows all kinetic experiments, fitted to the irreversible Michaelis-Menten model with time-dependent enzyme inactivation. Based on the reaction slopes, no catalytic avtivity is observable for reactions at pH 5 or higher.
 # In the following cells, the resulting kinetic parameters were extracted and visualized. As in the mass balance analysis, the reactions at pH 4, 45°C and pH 4.5, 35°C differ from other experiments of the respective pH. In both cases, every applied substrate concentration is higher than intended in the design of the experiment. Furthermore, the resulting parameter estimates have a high uncertanty. Therefore, the respective measurements are excluded from further analysis. Additionaly, the results from pH 5.5, 35°C were excluded, since the uncertainty of the parameters could not be estimated.
 
-# In[20]:
+# In[27]:
 
 
 # Get kinetic parameters of all datasets
@@ -426,6 +430,11 @@ df = df.drop(index=17) #kcat outlier
 df = df.drop(index=14) #kcat outlier, mass balance outlier
 
 df["zeros"] = np.zeros(27)
+
+
+# In[28]:
+
+
 df
 
 
@@ -450,64 +459,25 @@ for i, ax in enumerate(axes.flatten()):
 # 
 # #### Correlation between $k_{cat}$ and $K_{m}$
 # 
-# The parameter estimates for $k_{cat}$ and $K_{m}$ showed correlation. For experiments at pH 3 and pH 3.5, the parameters were correlated between 0.5 - 0.85. This indeicates, that the highest initial substrate concentration, which was applied for parameter estimation was not sufficently high. Ideally, the highest initial substrate concentration applied for a kinetic experiment should be 10-fold higher than $K_{m}$ to avoid correlation. In this scenario, only reactions with an initial substrate concentration of 150 uM were used for parameter estimation, due to the limited photometric measurement range of ABTS. Hence, ABTS was only applied 1.5-fold to 6-fold of $K_{m}$.  
+# The parameter estimates for $k_{cat}$ and $K_{m}$ showed correlation. For experiments at pH 3 and pH 3.5, the parameters were correlated between 0.5 - 0.85. This indeicates, that the highest initial substrate concentration, which was applied for parameter estimation was not sufficently high. Ideally, the highest initial substrate concentration applied for a kinetic experiment should be 10-fold higher than $K_{m}$ to avoid correlation. In this scenario, only reactions with an initial substrate concentration of 150 uM were used for parameter estimation, due to the limited photometric measurement range of ABTS. Hence, ABTS was only applied 1.5-fold to 6-fold of the estimated $K_{m}$.  
 # For reactions at pH values of 4 and above, positive as well as negative correlations were observed. 
 # As the figure above on the right shows, $K_{m}$ was estimated in the range of 25 - 105 uM in the mentioned pH range. 
 # For reactions at higher pH values positive and negative correlations were observed.
-# Correlation of 0.5 - 0.85 was observed between $k_{cat}$ and $K_{m}$ parameter estimates
-# Parameter estimates for $k_{cat}$ and $K_{m}$ were correlated between 0.5 and
-# High correlation between 0.5 and 0.85 was observed for almost all experimental conditions. This indicates that the parameters kcat and Km cannot be estimated independently. In this case the highest applied substrate concentration is too low, compared to the Km of the enzyme. Therefore, 
-# The highest initial substrate concentration should be at least 5-fold higher than the enzyme's Km. SOURCE. 
 # Low and also negative correlations were observed for reactions with pH values at and above pH 4. 
-# The figure on the left shows $k_{cat}$ over $K_{m}$ for all experimental conditions, whereas the pH is color-coded. The 
 # 
-# #### 
-# 
-# whereas the right figure visualizes the catalytic efficiency $\frac{k_{cat}}{K_{m}}$ over the pH value. As visible in 
+# The figure on the left shows $k_{cat}$ over $K_{m}$ for all experimental conditions, whereas the pH is color-coded. For reactions with identical pH values, $k_{cat}$ and $K_{m}$ both channge for different temperatures. This might also be attributed to the high correleation between the parameters. Thus, the true change of $k_{cat}$ or $K_{m}$ throu pH or temperature cannot be assessed.
 # 
 # For pH values of 5 and above, almost no catalytic activity was observed. Therefore, data of these experimental conditions is excluded from further analysis. 
-
-# In[16]:
-
-
-ax = plt.gca()
-for i, (kcat, ki_error, kcat_error, ki, color, label) in enumerate(zip(df["kcat [1/s]"], df["Enzyme inactivation std"], df["kcat stderr"], df["Enzyme inactivation [1/s]"] , color_tuples, df["temperature"].values)):
-
-    ax.scatter(kcat, ki, color = color, label = label if i in [0,1,2,3,4] else "")
-    ax.errorbar(kcat, ki, yerr=ki_error, xerr=kcat_error, fmt=".", ecolor=color, markersize=0)
-plt.legend(title = "temperature [C]")
-plt.ylabel("Enzyme inactivation [1/s]")
-plt.xlabel("kcat [1/s]")
-plt.ylim(0,0.004)
-
-
-# In[ ]:
-
-
-ax = plt.gca()
-for i, (ph, ki_error, kcat_error, ki, color, label) in enumerate(zip(df["pH"], df["Enzyme inactivation std"], df["kcat stderr"], df["Enzyme inactivation [1/s]"] , color_tuples, df["temperature"].values)):
-
-    ax.scatter(ph, ki, color = color, label = label if i in [0,1,2,3,4] else "")
-    ax.errorbar(ph, ki, yerr=ki_error, fmt=".", ecolor=color, markersize=0)
-plt.legend(title = "temperature [C]")
-plt.ylabel("Enzyme inactivation [1/s]")
-plt.xlabel("pH")
-plt.ylim(0,0.004)
-
-
-# In[ ]:
-
-
-ax = plt.gca()
-for i, (temp, ki_error, kcat_error, ki, color, label) in enumerate(zip(df["temperature"], df["Enzyme inactivation std"], df["kcat stderr"], df["Enzyme inactivation [1/s]"] , pH_tuples, df["pH"].values)):
-
-    ax.scatter(temp, ki, color = color, label = label if not i%5 else "")
-    ax.errorbar(temp, ki, yerr=ki_error, fmt=".", ecolor=color, markersize=0)
-plt.legend(title = "temperature [C]")
-plt.ylabel("Enzyme inactivation [1/s]")
-plt.xlabel("pH")
-plt.ylim(0,0.004)
-
+# 
+# #### Time-dependent enzyme inactivation
+# 
+# - haflife
+# - plots
+# - correlation / causality
+# 
+# ### Correlation analysis
+# 
+# 
 
 # In[ ]:
 
@@ -548,18 +518,6 @@ rho = df.corr()
 pval = df.corr(method=lambda x, y: pearsonr(x, y)[1]) - np.eye(*rho.shape)
 p = pval.applymap(lambda x: ''.join(['*' for t in [.05, .01, .001] if x<=t]))
 rho.round(2).astype(str) + p
-
-
-# In[ ]:
-
-
-corr = df.corr()
-
-sns.heatmap(corr, 
-        xticklabels=corr.columns,
-        yticklabels=corr.columns,
-        cmap = sns.color_palette("vlag", as_cmap=True))
-#plt.xticks(rotation=45) 
 
 
 # ### Effekt of calibration temperature and pH on kinetic parameters
