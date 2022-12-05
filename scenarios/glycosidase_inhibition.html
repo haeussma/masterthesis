@@ -1,0 +1,1788 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Scenario B:\(\alpha\)-glucosidase inhibition by fucoidan &#8212; From raw data to kinetic parameters: an EnzymeML based workflow for reproducible enzyme kinetics</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Scenario C:SLAC characterization" href="SLAC_kinetic_characterization.html" />
+    <link rel="prev" title="Scenario A:Chymotrypsin inhibiton by a designed albumin fusion protein" href="chymotrypsin_inhibition.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">From raw data to kinetic parameters: an EnzymeML based workflow for reproducible enzyme kinetics</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../welcome.html">
+                    Welcome
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../declaration.html">
+   Declaration of authorship
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../abstract.html">
+   Abstract
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../acknowledgements.html">
+   Acknowledgements
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../abbreviations.html">
+   Abbreviations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../methods.html">
+   Methods
+  </a>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../results.html">
+   Results
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="chymotrypsin_inhibition.html">
+     <strong>
+      Scenario A:
+     </strong>
+     <br/>
+     Chymotrypsin inhibiton by a designed albumin fusion protein
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     <strong>
+      Scenario B:
+     </strong>
+     <br/>
+     <span class="math notranslate nohighlight">
+      \(\alpha\)
+     </span>
+     -glucosidase inhibition by fucoidan
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SLAC_kinetic_characterization.html">
+     <strong>
+      Scenario C:
+     </strong>
+     <br/>
+     SLAC characterization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="effect_calibration_model.html">
+     Effect of absorption - concentration model on kinetic parameters
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../discussion.html">
+   Discussion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../conclusion.html">
+   Conclusion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../references.html">
+   References
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/haeussma/masterthesis/master?urlpath=tree/book/scenarios/glycosidase_inhibition.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+<a href="https://github.com/haeussma/masterthesis"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="bottom"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/scenarios/glycosidase_inhibition.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#project-background">
+   Project background
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#experimental-design">
+   Experimental design
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-preparation">
+   Data preparation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#imports">
+     Imports
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#experimental-data">
+     Experimental data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#concentration-calculation">
+     Concentration calculation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#parameter-estimation">
+     Parameter estimation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#k-cat-and-k-m">
+   <span class="math notranslate nohighlight">
+    \(k_{cat}\)
+   </span>
+   and
+   <span class="math notranslate nohighlight">
+    \(K_{m}\)
+   </span>
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Scenario B:<br>\alpha-glucosidase inhibition by fucoidan</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#project-background">
+   Project background
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#experimental-design">
+   Experimental design
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-preparation">
+   Data preparation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#imports">
+     Imports
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#experimental-data">
+     Experimental data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#concentration-calculation">
+     Concentration calculation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#parameter-estimation">
+     Parameter estimation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#k-cat-and-k-m">
+   <span class="math notranslate nohighlight">
+    \(k_{cat}\)
+   </span>
+   and
+   <span class="math notranslate nohighlight">
+    \(K_{m}\)
+   </span>
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="scenario-b-br-alpha-glucosidase-inhibition-by-fucoidan">
+<h1><strong>Scenario B:</strong><br><span class="math notranslate nohighlight">\(\alpha\)</span>-glucosidase inhibition by fucoidan<a class="headerlink" href="#scenario-b-br-alpha-glucosidase-inhibition-by-fucoidan" title="Permalink to this headline">#</a></h1>
+<p>Data provided by Chantal Daub (Biochemistry, Rhodes University, Makhanda, South Africa)</p>
+<section id="project-background">
+<h2>Project background<a class="headerlink" href="#project-background" title="Permalink to this headline">#</a></h2>
+<p>In this scenario, the inhibitory properties of fucoidan, a polysaccharide found in brown algae, on <span class="math notranslate nohighlight">\(\alpha\)</span>-glucosidase from <em>Saccharomyces cerevisiae</em> was investigated. Fucoidans are actively investigated in the fields of anit-cancer, anti-inflammation, and anti-coagulate, to name a fiew (<span id="id1">Li <em>et al.</em> [<a class="reference internal" href="../references.html#id7" title="Bo Li, Fei Lu, Xinjun Wei, and Ruixiang Zhao. Fucoidan: structure and bioactivity. Molecules, 13(8):1671–1695, 2008.">2008</a>]</span>). In a previous study (<span id="id2">Daub <em>et al.</em> [<a class="reference internal" href="../references.html#id6" title="Chantal Désirée Daub, Blessing Mabate, Samkelo Malgas, and Brett Ivan Pletschke. Fucoidan from ecklonia maxima is a powerful inhibitor of the diabetes-related enzyme, α-glucosidase. International journal of biological macromolecules, 151:412–420, 2020.">2020</a>]</span>), fucoidan from <em>E. maxima</em> showed an almost 2-fold lower IC<sub>50</sub> value, compared to acarbose. Thus, fucoidan is a potential antidiabetic drug candidate for the treatment of diabetes mellitus.
+In the following analysis, fucoidan from the brown algae species <em>Ecklonia maxima</em>, <em>Ecklonia radiata</em>, <em>Fucus vesiculosus</em>, S. CYM???????, and <em>Schimmelmannia elegans</em> were investigated for their inhibition constant <span class="math notranslate nohighlight">\(K_{i}\)</span> for <span class="math notranslate nohighlight">\(\alpha\)</span>-glucosidase inhibition.</p>
+</section>
+<section id="experimental-design">
+<h2>Experimental design<a class="headerlink" href="#experimental-design" title="Permalink to this headline">#</a></h2>
+<p>Extracted fucoidan from the mentioned brown algea species was applied in two different concentrations to enzyme reactions. Additionally, control reactions without inhibitor were performed. For the enzyme reactions, <em>p</em>-nitrophenyl-<span class="math notranslate nohighlight">\(\alpha\)</span>-D-glucopyranoside (pNPG) was applied as a substrate in a concentration range from 0.1 - 5 mM. Product accumulatin was followed photometrically in a micro titer plate at 405 nm for 20 min.</p>
+</section>
+<section id="data-preparation">
+<h2>Data preparation<a class="headerlink" href="#data-preparation" title="Permalink to this headline">#</a></h2>
+<section id="imports">
+<h3>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">#</a></h3>
+<div class="cell tag_hide_cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.colors</span> <span class="k">as</span> <span class="nn">mcolors</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pyenzyme</span> <span class="k">as</span> <span class="nn">pe</span>
+<span class="kn">from</span> <span class="nn">CaliPytion.tools.standardcurve</span> <span class="kn">import</span> <span class="n">StandardCurve</span>
+<span class="kn">from</span> <span class="nn">EnzymePynetics.tools.parameterestimator</span> <span class="kn">import</span> <span class="n">ParameterEstimator</span>
+
+
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+
+<span class="n">colors</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">mcolors</span><span class="o">.</span><span class="n">TABLEAU_COLORS</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="experimental-data">
+<h3>Experimental data<a class="headerlink" href="#experimental-data" title="Permalink to this headline">#</a></h3>
+<p>Time-course data of all kinetic experiments was collected in an Excel file, whereas the meta data was specified in individual EnzymeML Excel templates for each origin species of fucoidan. In the following cell the experimental data is loaded and blanked to subtract the absorbance contribution of enzyme, buffer, and the respective inhibitor for each measurement. Thereafter, the data is written to EnzymeML documents.</p>
+<div class="cell tag_hide_cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataset_path</span> <span class="o">=</span> <span class="s2">&quot;../../data/glucosidase_inhibition/experimental_data.xlsx&quot;</span>
+<span class="n">template_directory</span> <span class="o">=</span> <span class="s2">&quot;../../data/glucosidase_inhibition/EnzymeML_templates&quot;</span>   
+
+<span class="n">inhibitors</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">ExcelFile</span><span class="p">(</span><span class="n">dataset_path</span><span class="p">)</span><span class="o">.</span><span class="n">sheet_names</span><span class="p">)</span>
+<span class="n">initial_substrates</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+
+
+<span class="n">data_dict</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">inhibitor</span> <span class="ow">in</span> <span class="n">inhibitors</span><span class="p">:</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">dataset_path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="n">inhibitor</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">)</span>
+    <span class="n">blanc_no_inhibitor</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;buffer + enzyme&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">blank_low_inhibitor</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]]]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">blank_high_inhibitor</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]]]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">17</span><span class="p">:]</span>
+    <span class="n">keys</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+    <span class="n">df_no_inhibitor</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">keys</span><span class="p">[:</span><span class="mi">12</span><span class="p">]]</span>
+    <span class="n">df_low_inhibitor</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">keys</span><span class="p">[</span><span class="mi">12</span><span class="p">:</span><span class="mi">24</span><span class="p">]]</span>
+    <span class="n">df_high_inhibitor</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">keys</span><span class="p">[</span><span class="mi">24</span><span class="p">:]]</span>
+
+    <span class="n">df_no_inhibitor</span> <span class="o">=</span> <span class="n">df_no_inhibitor</span><span class="o">.</span><span class="n">subtract</span><span class="p">(</span><span class="n">blanc_no_inhibitor</span><span class="p">)</span>
+    <span class="n">df_low_inhibitor</span> <span class="o">=</span> <span class="n">df_low_inhibitor</span><span class="o">.</span><span class="n">subtract</span><span class="p">(</span><span class="n">blank_low_inhibitor</span><span class="p">)</span>
+    <span class="n">df_high_inhibitor</span> <span class="o">=</span> <span class="n">df_high_inhibitor</span><span class="o">.</span><span class="n">subtract</span><span class="p">(</span><span class="n">blank_high_inhibitor</span><span class="p">)</span>
+
+
+    <span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df_no_inhibitor</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+    <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df_low_inhibitor</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+    <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df_high_inhibitor</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+
+    <span class="n">data_dict</span><span class="p">[</span><span class="n">inhibitor</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="n">time</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span>
+
+<span class="c1"># Parse measurement data to EnzymeML documents</span>
+<span class="k">def</span> <span class="nf">measurement_data_to_EnzymeML</span><span class="p">(</span>
+    <span class="n">template_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">measurement_data</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="n">species_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">time</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="n">data_unit</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">time_unit</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pe</span><span class="o">.</span><span class="n">EnzymeMLDocument</span><span class="p">:</span>
+
+    <span class="n">enzmldoc</span><span class="p">:</span> <span class="n">pe</span><span class="o">.</span><span class="n">EnzymeMLDocument</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">EnzymeMLDocument</span><span class="o">.</span><span class="n">fromTemplate</span><span class="p">(</span><span class="n">template_path</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">IDs</span><span class="p">,</span> <span class="n">concentration</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">enzmldoc</span><span class="o">.</span><span class="n">measurement_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">measurement_data</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">counter</span><span class="p">,</span> <span class="n">replicate</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">concentration</span><span class="p">):</span>
+            
+            <span class="n">enzmldoc</span><span class="o">.</span><span class="n">getMeasurement</span><span class="p">(</span><span class="n">IDs</span><span class="p">)</span><span class="o">.</span><span class="n">addReplicates</span><span class="p">(</span><span class="n">pe</span><span class="o">.</span><span class="n">Replicate</span><span class="p">(</span>
+                <span class="nb">id</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Measurement</span><span class="si">{</span><span class="n">counter</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                <span class="n">species_id</span><span class="o">=</span><span class="n">species_id</span><span class="p">,</span>
+                <span class="n">data</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">replicate</span><span class="p">),</span>
+                <span class="n">data_unit</span><span class="o">=</span><span class="n">data_unit</span><span class="p">,</span>
+                <span class="n">time</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">time</span><span class="p">),</span>
+                <span class="n">time_unit</span><span class="o">=</span><span class="n">time_unit</span><span class="p">),</span> <span class="n">enzmldoc</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">enzmldoc</span>
+
+<span class="n">enzml_docs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">datas</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">data_dict</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+<span class="k">for</span> <span class="n">file</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">template_directory</span><span class="p">)),</span> <span class="n">datas</span><span class="p">):</span>
+    <span class="n">enzml_docs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">measurement_data_to_EnzymeML</span><span class="p">(</span>
+        <span class="n">template_path</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">template_directory</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">file</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="n">measurement_data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
+        <span class="n">time</span><span class="o">=</span><span class="n">time</span><span class="p">,</span>
+        <span class="n">species_id</span><span class="o">=</span><span class="s2">&quot;s1&quot;</span><span class="p">,</span>
+        <span class="n">data_unit</span><span class="o">=</span><span class="s2">&quot;mmole / l&quot;</span><span class="p">,</span>
+        <span class="n">time_unit</span><span class="o">=</span><span class="s2">&quot;min&quot;</span>
+    <span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="concentration-calculation">
+<h3>Concentration calculation<a class="headerlink" href="#concentration-calculation" title="Permalink to this headline">#</a></h3>
+<p>Standard data of the product was loaded from an excel file, and a standard curve was created. Then, the standard curve was applied to the EnzymeML documents, containing the absorption measurements for concentration calculation.</p>
+<div class="cell tag_hide_input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">path_calibration_data</span> <span class="o">=</span> <span class="s2">&quot;../../data/glucosidase_inhibition/p-NP_standard.xlsx&quot;</span>
+
+
+<span class="n">product_standard</span> <span class="o">=</span> <span class="n">StandardCurve</span><span class="o">.</span><span class="n">from_excel</span><span class="p">(</span>
+    <span class="n">path</span><span class="o">=</span><span class="n">path_calibration_data</span><span class="p">,</span>
+    <span class="n">reactant_id</span><span class="o">=</span><span class="s2">&quot;s1&quot;</span><span class="p">,</span> 
+    <span class="n">sheet_name</span><span class="o">=</span><span class="s2">&quot;csv&quot;</span><span class="p">,</span> 
+    <span class="n">wavelength</span><span class="o">=</span><span class="mi">405</span><span class="p">,</span> 
+    <span class="n">concentration_unit</span> <span class="o">=</span> <span class="s2">&quot;mmole / l&quot;</span><span class="p">,</span> 
+    <span class="n">cutoff_absorption</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">product_standard</span><span class="o">.</span><span class="n">visualize</span><span class="p">()</span>
+
+<span class="c1"># Apply calibration curves to absorption EnzymeML documents</span>
+<span class="k">for</span> <span class="n">enzmldoc</span> <span class="ow">in</span> <span class="n">enzml_docs</span><span class="p">:</span>
+    <span class="n">product_standard</span><span class="o">.</span><span class="n">apply_to_EnzymeML</span><span class="p">(</span><span class="n">enzmldoc</span><span class="p">,</span> <span class="s2">&quot;s1&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calibration data was automatically blanked.
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>AIC</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>3rd polynominal</th>
+      <td>-135</td>
+    </tr>
+    <tr>
+      <th>Quadratic</th>
+      <td>-135</td>
+    </tr>
+    <tr>
+      <th>Rational</th>
+      <td>-135</td>
+    </tr>
+    <tr>
+      <th>Linear</th>
+      <td>-125</td>
+    </tr>
+    <tr>
+      <th>Exponential</th>
+      <td>-11</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><img alt="../_images/glycosidase_inhibition_5_2.png" src="../_images/glycosidase_inhibition_5_2.png" />
+</div>
+</div>
+</section>
+<section id="parameter-estimation">
+<h3>Parameter estimation<a class="headerlink" href="#parameter-estimation" title="Permalink to this headline">#</a></h3>
+<p>Parameter estimation was perfomed with EnzymePynetics. Thereby, each data set was fitted to competitive, uncompetitive, and non-competitive inhibition models.</p>
+<div class="cell tag_hide_input tag_output_scroll docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kinetics</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">enzmldoc</span> <span class="ow">in</span> <span class="n">enzml_docs</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">ParameterEstimator</span><span class="o">.</span><span class="n">from_EnzymeML</span><span class="p">(</span><span class="n">enzmldoc</span><span class="o">=</span><span class="n">enzmldoc</span><span class="p">,</span><span class="n">reactant_id</span><span class="o">=</span><span class="s2">&quot;s1&quot;</span><span class="p">,</span> <span class="n">inhibitor_id</span><span class="o">=</span><span class="s2">&quot;s2&quot;</span><span class="p">,</span> <span class="n">measured_species</span><span class="o">=</span><span class="s2">&quot;product&quot;</span><span class="p">)</span>
+    <span class="n">result</span><span class="o">.</span><span class="n">fit_models</span><span class="p">()</span>
+    <span class="n">kinetics</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+    <span class="n">result</span><span class="o">.</span><span class="n">visualize</span><span class="p">(</span><span class="n">plot_means</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting data to:
+ - irreversible Michaelis Menten model
+ - competitive product inhibition model
+ - uncompetitive product inhibition model
+ - non-competitive product inhibition model
+ - substrate inhibition model
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>AIC</th>
+      <th>kcat [1/min]</th>
+      <th>Km [mmole / l]</th>
+      <th>kcat / Km [1/min * 1/mmole / l]</th>
+      <th>Ki competitive [mmole / l]</th>
+      <th>Ki uncompetitive [mmole / l]</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>non-competitive product inhibition</th>
+      <td>-2257</td>
+      <td>2480.867 +/- 10.41%</td>
+      <td>0.545 +/- 19.96%</td>
+      <td>4554.048 +/- 22.51%</td>
+      <td>0.040 +/- 24.85%</td>
+      <td>0.249 +/- 34.07%</td>
+    </tr>
+    <tr>
+      <th>competitive product inhibition</th>
+      <td>-2243</td>
+      <td>1756.430 +/- 2.72%</td>
+      <td>0.286 +/- 15.37%</td>
+      <td>6132.817 +/- 15.61%</td>
+      <td>0.027 +/- 25.68%</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <th>uncompetitive product inhibition</th>
+      <td>-2187</td>
+      <td>2912.596 +/- 14.85%</td>
+      <td>1.432 +/- 17.61%</td>
+      <td>2034.270 +/- 23.03%</td>
+      <td>-</td>
+      <td>0.108 +/- 29.22%</td>
+    </tr>
+    <tr>
+      <th>irreversible Michaelis Menten</th>
+      <td>-2146</td>
+      <td>1429.827 +/- 1.55%</td>
+      <td>0.603 +/- 4.92%</td>
+      <td>2372.038 +/- 5.16%</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <th>substrate inhibition</th>
+      <td>-2139</td>
+      <td>1455.278 +/- 1.73%</td>
+      <td>0.623 +/- 5.31%</td>
+      <td>2334.831 +/- 5.59%</td>
+      <td>-</td>
+      <td>248.634 +/- 61.85%</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fit report for non-competitive product inhibition model
+[[Fit Statistics]]
+    # fitting method   = leastsq
+    # function evals   = 54
+    # data points      = 237
+    # variables        = 4
+    chi-square         = 0.01676347
+    reduced chi-square = 7.1946e-05
+    Akaike info crit   = -2256.91734
+    Bayesian info crit = -2243.04510
+[[Variables]]
+    k_cat:  2480.86683 +/- 258.151536 (10.41%) (init = 3652.667)
+    Km:     0.54476083 +/- 0.10872800 (19.96%) (init = 1.6784)
+    K_iu:   0.24899154 +/- 0.08483063 (34.07%) (init = 0.1)
+    K_ic:   0.04004974 +/- 0.00995050 (24.85%) (init = 0.1)
+[[Correlations]] (unreported correlations are &lt; 0.100)
+    C(k_cat, K_iu) = -0.964
+    C(Km, K_iu)    = -0.808
+    C(Km, K_ic)    = 0.771
+    C(k_cat, Km)   = 0.731
+    C(K_iu, K_ic)  = -0.324
+    C(k_cat, K_ic) = 0.150
+</pre></div>
+</div>
+<img alt="../_images/glycosidase_inhibition_7_3.png" src="../_images/glycosidase_inhibition_7_3.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting data to:
+ - irreversible Michaelis Menten model
+ - competitive inhibition model
+ - uncompetitive inhibition model
+ - non-competitive inhibition model
+ - partially competitive inhibition model
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>AIC</th>
+      <th>kcat [1/min]</th>
+      <th>Km [mmole / l]</th>
+      <th>kcat / Km [1/min * 1/mmole / l]</th>
+      <th>Ki competitive [g / l]</th>
+      <th>Ki uncompetitive [g / l]</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>non-competitive inhibition</th>
+      <td>-6142</td>
+      <td>1639.222 +/- 1.65%</td>
+      <td>0.552 +/- 5.44%</td>
+      <td>2971.298 +/- 5.68%</td>
+      <td>0.109 +/- 10.27%</td>
+      <td>0.602 +/- 10.61%</td>
+    </tr>
+    <tr>
+      <th>competitive inhibition</th>
+      <td>-6055</td>
+      <td>1610.235 +/- 1.73%</td>
+      <td>0.526 +/- 5.80%</td>
+      <td>3062.265 +/- 6.05%</td>
+      <td>0.052 +/- 5.48%</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <th>partially competitive inhibition</th>
+      <td>-6053</td>
+      <td>1610.208 +/- 1.74%</td>
+      <td>0.526 +/- 5.80%</td>
+      <td>3062.405 +/- 6.05%</td>
+      <td>0.052 +/- 5.75%</td>
+      <td>1000.000 +/- 3817.44%</td>
+    </tr>
+    <tr>
+      <th>uncompetitive inhibition</th>
+      <td>-5819</td>
+      <td>1746.747 +/- 2.21%</td>
+      <td>0.742 +/- 6.49%</td>
+      <td>2353.001 +/- 6.86%</td>
+      <td>-</td>
+      <td>0.214 +/- 4.57%</td>
+    </tr>
+    <tr>
+      <th>irreversible Michaelis Menten</th>
+      <td>-4753</td>
+      <td>945.417 +/- 5.07%</td>
+      <td>0.809 +/- 15.18%</td>
+      <td>1168.173 +/- 16.00%</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fit report for non-competitive inhibition model
+[[Fit Statistics]]
+    # fitting method   = leastsq
+    # function evals   = 31
+    # data points      = 717
+    # variables        = 4
+    chi-square         = 0.13495950
+    reduced chi-square = 1.8928e-04
+    Akaike info crit   = -6142.32304
+    Bayesian info crit = -6124.02274
+[[Variables]]
+    k_cat:  1639.22182 +/- 27.1273263 (1.65%) (init = 4965.792)
+    Km:     0.55168535 +/- 0.03000408 (5.44%) (init = 2.281781)
+    K_iu:   0.60181800 +/- 0.06386257 (10.61%) (init = 0.1)
+    K_ic:   0.10943768 +/- 0.01123454 (10.27%) (init = 0.1)
+[[Correlations]] (unreported correlations are &lt; 0.100)
+    C(k_cat, Km)   = 0.822
+    C(K_iu, K_ic)  = -0.765
+    C(Km, K_ic)    = 0.469
+    C(k_cat, K_ic) = 0.322
+    C(k_cat, K_iu) = -0.306
+    C(Km, K_iu)    = -0.253
+</pre></div>
+</div>
+<img alt="../_images/glycosidase_inhibition_7_7.png" src="../_images/glycosidase_inhibition_7_7.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting data to:
+ - irreversible Michaelis Menten model
+ - competitive inhibition model
+ - uncompetitive inhibition model
+ - non-competitive inhibition model
+ - partially competitive inhibition model
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>AIC</th>
+      <th>kcat [1/min]</th>
+      <th>Km [mmole / l]</th>
+      <th>kcat / Km [1/min * 1/mmole / l]</th>
+      <th>Ki competitive [g / l]</th>
+      <th>Ki uncompetitive [g / l]</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>partially competitive inhibition</th>
+      <td>-7058</td>
+      <td>1075.485 +/- 1.11%</td>
+      <td>0.478 +/- 3.97%</td>
+      <td>2252.123 +/- 4.12%</td>
+      <td>0.000 +/- 271.89%</td>
+      <td>0.001 +/- 728.83%</td>
+    </tr>
+    <tr>
+      <th>non-competitive inhibition</th>
+      <td>-6658</td>
+      <td>1059.810 +/- 1.56%</td>
+      <td>0.483 +/- 5.51%</td>
+      <td>2194.677 +/- 5.73%</td>
+      <td>0.017 +/- 7.98%</td>
+      <td>0.789 +/- 48.63%</td>
+    </tr>
+    <tr>
+      <th>competitive inhibition</th>
+      <td>-6656</td>
+      <td>1046.201 +/- 1.46%</td>
+      <td>0.464 +/- 5.32%</td>
+      <td>2253.506 +/- 5.52%</td>
+      <td>0.015 +/- 5.33%</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <th>uncompetitive inhibition</th>
+      <td>-6260</td>
+      <td>1291.208 +/- 2.47%</td>
+      <td>1.151 +/- 6.12%</td>
+      <td>1121.648 +/- 6.60%</td>
+      <td>-</td>
+      <td>0.065 +/- 5.45%</td>
+    </tr>
+    <tr>
+      <th>irreversible Michaelis Menten</th>
+      <td>-5818</td>
+      <td>921.806 +/- 2.90%</td>
+      <td>1.070 +/- 8.06%</td>
+      <td>861.615 +/- 8.57%</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fit report for partially competitive inhibition model
+[[Fit Statistics]]
+    # fitting method   = leastsq
+    # function evals   = 272
+    # data points      = 720
+    # variables        = 4
+    chi-square         = 0.03936609
+    reduced chi-square = 5.4981e-05
+    Akaike info crit   = -7058.15327
+    Bayesian info crit = -7039.83626
+[[Variables]]
+    k_cat:  1075.48537 +/- 11.8902583 (1.11%) (init = 1620.85)
+    Km:     0.47754289 +/- 0.01896377 (3.97%) (init = 0.7447807)
+    K_iu:   6.1448e-04 +/- 0.00447849 (728.83%) (init = 0.1)
+    K_ic:   1.0000e-04 +/- 2.7189e-04 (271.89%) (init = 0.1)
+[[Correlations]] (unreported correlations are &lt; 0.100)
+    C(K_iu, K_ic) = -1.000
+    C(k_cat, Km)  = 0.779
+</pre></div>
+</div>
+<img alt="../_images/glycosidase_inhibition_7_11.png" src="../_images/glycosidase_inhibition_7_11.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting data to:
+ - irreversible Michaelis Menten model
+ - competitive inhibition model
+ - uncompetitive inhibition model
+ - non-competitive inhibition model
+ - partially competitive inhibition model
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>AIC</th>
+      <th>kcat [1/min]</th>
+      <th>Km [mmole / l]</th>
+      <th>kcat / Km [1/min * 1/mmole / l]</th>
+      <th>Ki competitive [g / l]</th>
+      <th>Ki uncompetitive [g / l]</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>competitive inhibition</th>
+      <td>-7326</td>
+      <td>1527.487 +/- 0.99%</td>
+      <td>0.938 +/- 2.87%</td>
+      <td>1628.994 +/- 3.04%</td>
+      <td>0.001 +/- 4.85%</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <th>non-competitive inhibition</th>
+      <td>-7324</td>
+      <td>1527.536 +/- 0.99%</td>
+      <td>0.938 +/- 2.88%</td>
+      <td>1628.803 +/- 3.04%</td>
+      <td>0.001 +/- 14.89%</td>
+      <td>15.494 +/- 36228.16%</td>
+    </tr>
+    <tr>
+      <th>partially competitive inhibition</th>
+      <td>-7324</td>
+      <td>1527.908 +/- 0.99%</td>
+      <td>0.939 +/- 2.88%</td>
+      <td>1627.963 +/- 3.04%</td>
+      <td>0.001 +/- 7.82%</td>
+      <td>999.141 +/- 139876.39%</td>
+    </tr>
+    <tr>
+      <th>uncompetitive inhibition</th>
+      <td>-7028</td>
+      <td>1531.314 +/- 1.22%</td>
+      <td>0.947 +/- 3.53%</td>
+      <td>1616.521 +/- 3.74%</td>
+      <td>-</td>
+      <td>0.002 +/- 7.52%</td>
+    </tr>
+    <tr>
+      <th>irreversible Michaelis Menten</th>
+      <td>-4775</td>
+      <td>667.025 +/- 10.33%</td>
+      <td>1.455 +/- 26.07%</td>
+      <td>458.453 +/- 28.04%</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fit report for competitive inhibition model
+[[Fit Statistics]]
+    # fitting method   = leastsq
+    # function evals   = 34
+    # data points      = 720
+    # variables        = 3
+    chi-square         = 0.02722244
+    reduced chi-square = 3.7967e-05
+    Akaike info crit   = -7325.73480
+    Bayesian info crit = -7311.99704
+[[Variables]]
+    k_cat:  1527.48678 +/- 15.1025514 (0.99%) (init = 2691.849)
+    Km:     0.93768696 +/- 0.02693290 (2.87%) (init = 1.236905)
+    K_ic:   0.00134723 +/- 6.5379e-05 (4.85%) (init = 0.1)
+[[Correlations]] (unreported correlations are &lt; 0.100)
+    C(k_cat, Km)   = 0.865
+    C(Km, K_ic)    = 0.407
+    C(k_cat, K_ic) = 0.294
+</pre></div>
+</div>
+<img alt="../_images/glycosidase_inhibition_7_15.png" src="../_images/glycosidase_inhibition_7_15.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting data to:
+ - irreversible Michaelis Menten model
+ - competitive inhibition model
+ - uncompetitive inhibition model
+ - non-competitive inhibition model
+ - partially competitive inhibition model
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>AIC</th>
+      <th>kcat [1/min]</th>
+      <th>Km [mmole / l]</th>
+      <th>kcat / Km [1/min * 1/mmole / l]</th>
+      <th>Ki competitive [g / l]</th>
+      <th>Ki uncompetitive [g / l]</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>partially competitive inhibition</th>
+      <td>-7611</td>
+      <td>885.193 +/- 0.65%</td>
+      <td>0.431 +/- 2.76%</td>
+      <td>2051.891 +/- 2.83%</td>
+      <td>0.175 +/- 28.00%</td>
+      <td>0.452 +/- 36.06%</td>
+    </tr>
+    <tr>
+      <th>non-competitive inhibition</th>
+      <td>-7574</td>
+      <td>900.852 +/- 0.92%</td>
+      <td>0.471 +/- 3.29%</td>
+      <td>1914.077 +/- 3.41%</td>
+      <td>0.966 +/- 7.73%</td>
+      <td>21.519 +/- 37.84%</td>
+    </tr>
+    <tr>
+      <th>competitive inhibition</th>
+      <td>-7568</td>
+      <td>885.729 +/- 0.67%</td>
+      <td>0.448 +/- 2.79%</td>
+      <td>1979.019 +/- 2.87%</td>
+      <td>0.841 +/- 5.36%</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <th>uncompetitive inhibition</th>
+      <td>-7324</td>
+      <td>975.489 +/- 1.06%</td>
+      <td>0.710 +/- 2.69%</td>
+      <td>1373.348 +/- 2.89%</td>
+      <td>-</td>
+      <td>3.737 +/- 6.80%</td>
+    </tr>
+    <tr>
+      <th>irreversible Michaelis Menten</th>
+      <td>-7096</td>
+      <td>874.452 +/- 0.94%</td>
+      <td>0.652 +/- 3.01%</td>
+      <td>1340.611 +/- 3.16%</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fit report for partially competitive inhibition model
+[[Fit Statistics]]
+    # fitting method   = leastsq
+    # function evals   = 124
+    # data points      = 720
+    # variables        = 4
+    chi-square         = 0.01825580
+    reduced chi-square = 2.5497e-05
+    Akaike info crit   = -7611.41698
+    Bayesian info crit = -7593.09998
+[[Variables]]
+    k_cat:  885.192687 +/- 5.78448532 (0.65%) (init = 1279.274)
+    Km:     0.43140343 +/- 0.01189835 (2.76%) (init = 0.5878264)
+    K_iu:   0.45219052 +/- 0.16305078 (36.06%) (init = 0.1)
+    K_ic:   0.17451878 +/- 0.04887071 (28.00%) (init = 0.1)
+[[Correlations]] (unreported correlations are &lt; 0.100)
+    C(K_iu, K_ic) = 0.994
+    C(k_cat, Km)  = 0.671
+    C(Km, K_ic)   = 0.146
+</pre></div>
+</div>
+<img alt="../_images/glycosidase_inhibition_7_19.png" src="../_images/glycosidase_inhibition_7_19.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting data to:
+ - irreversible Michaelis Menten model
+ - competitive inhibition model
+ - uncompetitive inhibition model
+ - non-competitive inhibition model
+ - partially competitive inhibition model
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>AIC</th>
+      <th>kcat [1/min]</th>
+      <th>Km [mmole / l]</th>
+      <th>kcat / Km [1/min * 1/mmole / l]</th>
+      <th>Ki competitive [g / l]</th>
+      <th>Ki uncompetitive [g / l]</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>non-competitive inhibition</th>
+      <td>-7110</td>
+      <td>1196.091 +/- 1.22%</td>
+      <td>0.693 +/- 3.86%</td>
+      <td>1724.867 +/- 4.04%</td>
+      <td>0.008 +/- 6.67%</td>
+      <td>0.272 +/- 39.90%</td>
+    </tr>
+    <tr>
+      <th>competitive inhibition</th>
+      <td>-7106</td>
+      <td>1191.620 +/- 1.21%</td>
+      <td>0.686 +/- 3.85%</td>
+      <td>1736.014 +/- 4.04%</td>
+      <td>0.007 +/- 3.65%</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <th>partially competitive inhibition</th>
+      <td>-7104</td>
+      <td>1191.646 +/- 1.21%</td>
+      <td>0.686 +/- 3.86%</td>
+      <td>1735.964 +/- 4.04%</td>
+      <td>0.007 +/- 9.27%</td>
+      <td>999.732 +/- 110814.71%</td>
+    </tr>
+    <tr>
+      <th>uncompetitive inhibition</th>
+      <td>-6381</td>
+      <td>1334.869 +/- 2.31%</td>
+      <td>1.095 +/- 6.22%</td>
+      <td>1218.643 +/- 6.63%</td>
+      <td>-</td>
+      <td>0.021 +/- 4.53%</td>
+    </tr>
+    <tr>
+      <th>irreversible Michaelis Menten</th>
+      <td>-5320</td>
+      <td>837.262 +/- 6.08%</td>
+      <td>1.586 +/- 14.95%</td>
+      <td>527.980 +/- 16.14%</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fit report for non-competitive inhibition model
+[[Fit Statistics]]
+    # fitting method   = leastsq
+    # function evals   = 48
+    # data points      = 720
+    # variables        = 4
+    chi-square         = 0.03661395
+    reduced chi-square = 5.1137e-05
+    Akaike info crit   = -7110.33552
+    Bayesian info crit = -7092.01851
+[[Variables]]
+    k_cat:  1196.09080 +/- 14.5632835 (1.22%) (init = 1686.748)
+    Km:     0.69343953 +/- 0.02673319 (3.86%) (init = 0.7750608)
+    K_iu:   0.27178749 +/- 0.10844409 (39.90%) (init = 0.1)
+    K_ic:   0.00750637 +/- 5.0042e-04 (6.67%) (init = 0.1)
+[[Correlations]] (unreported correlations are &lt; 0.100)
+    C(k_cat, Km)   = 0.834
+    C(K_iu, K_ic)  = -0.825
+    C(Km, K_ic)    = 0.477
+    C(k_cat, K_ic) = 0.334
+    C(k_cat, K_iu) = -0.159
+    C(Km, K_iu)    = -0.135
+</pre></div>
+</div>
+<img alt="../_images/glycosidase_inhibition_7_23.png" src="../_images/glycosidase_inhibition_7_23.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="k-cat-and-k-m">
+<h2><span class="math notranslate nohighlight">\(k_{cat}\)</span> and <span class="math notranslate nohighlight">\(K_{m}\)</span><a class="headerlink" href="#k-cat-and-k-m" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get kinetic parameters of all datasets</span>
+<span class="n">kcat</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">kcat_std</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">Km</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">Km_std</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">corr_kcat_km</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">kinetics</span><span class="p">:</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get_parameter_dict</span><span class="p">()</span>
+
+    <span class="n">kcat</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;k_cat&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+    <span class="n">kcat_std</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;k_cat&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+
+    <span class="n">Km</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;Km&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+    <span class="n">Km_std</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;Km&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+
+
+    <span class="n">correlation</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;k_cat&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">correl</span>
+    <span class="k">if</span> <span class="n">correlation</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">corr_kcat_km</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="s2">&quot;nan&quot;</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">corr_kcat_km</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">correlation</span><span class="p">[</span><span class="s2">&quot;Km&quot;</span><span class="p">])</span>
+
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">({</span>
+    <span class="s1">&#39;kcat [1/min]&#39;</span><span class="p">:</span><span class="n">kcat</span><span class="p">,</span> 
+    <span class="s1">&#39;kcat stderr&#39;</span><span class="p">:</span><span class="n">kcat_std</span><span class="p">,</span> 
+    <span class="s1">&#39;Km [mM]&#39;</span><span class="p">:</span><span class="n">Km</span><span class="p">,</span> 
+    <span class="s1">&#39;Km stderr&#39;</span><span class="p">:</span><span class="n">Km_std</span><span class="p">,</span> 
+    <span class="s2">&quot;correlation kcat/Km&quot;</span><span class="p">:</span><span class="n">corr_kcat_km</span><span class="p">})</span>
+
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>kcat [1/min]</th>
+      <th>kcat stderr</th>
+      <th>Km [mM]</th>
+      <th>Km stderr</th>
+      <th>correlation kcat/Km</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1650.543562</td>
+      <td>68.567687</td>
+      <td>0.537270</td>
+      <td>0.080309</td>
+      <td>-0.434760</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1768.422752</td>
+      <td>102.033022</td>
+      <td>1.461047</td>
+      <td>0.200855</td>
+      <td>0.912771</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1089.309474</td>
+      <td>15.733598</td>
+      <td>0.676981</td>
+      <td>0.031014</td>
+      <td>0.826747</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1474.870342</td>
+      <td>11.446200</td>
+      <td>1.260928</td>
+      <td>0.025848</td>
+      <td>0.893857</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>824.901555</td>
+      <td>5.351402</td>
+      <td>0.510622</td>
+      <td>0.012484</td>
+      <td>0.722688</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>1163.327292</td>
+      <td>17.444942</td>
+      <td>0.916960</td>
+      <td>0.039877</td>
+      <td>0.861308</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell tag_hide_input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">enzmldoc</span> <span class="o">=</span> <span class="n">enzml_docs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="k">del</span> <span class="n">enzmldoc</span><span class="o">.</span><span class="n">measurement_dict</span><span class="p">[</span><span class="s2">&quot;m6&quot;</span><span class="p">]</span>
+<span class="k">del</span> <span class="n">enzmldoc</span><span class="o">.</span><span class="n">measurement_dict</span><span class="p">[</span><span class="s2">&quot;m7&quot;</span><span class="p">]</span>
+<span class="k">del</span> <span class="n">enzmldoc</span><span class="o">.</span><span class="n">measurement_dict</span><span class="p">[</span><span class="s2">&quot;m8&quot;</span><span class="p">]</span>
+<span class="k">del</span> <span class="n">enzmldoc</span><span class="o">.</span><span class="n">measurement_dict</span><span class="p">[</span><span class="s2">&quot;m9&quot;</span><span class="p">]</span>
+<span class="k">del</span> <span class="n">enzmldoc</span><span class="o">.</span><span class="n">measurement_dict</span><span class="p">[</span><span class="s2">&quot;m10&quot;</span><span class="p">]</span>
+<span class="k">del</span> <span class="n">enzmldoc</span><span class="o">.</span><span class="n">measurement_dict</span><span class="p">[</span><span class="s2">&quot;m11&quot;</span><span class="p">]</span>
+<span class="k">del</span> <span class="n">enzmldoc</span><span class="o">.</span><span class="n">measurement_dict</span><span class="p">[</span><span class="s2">&quot;m12&quot;</span><span class="p">]</span>
+<span class="k">del</span> <span class="n">enzmldoc</span><span class="o">.</span><span class="n">measurement_dict</span><span class="p">[</span><span class="s2">&quot;m13&quot;</span><span class="p">]</span>
+<span class="k">del</span> <span class="n">enzmldoc</span><span class="o">.</span><span class="n">measurement_dict</span><span class="p">[</span><span class="s2">&quot;m14&quot;</span><span class="p">]</span>
+<span class="k">del</span> <span class="n">enzmldoc</span><span class="o">.</span><span class="n">measurement_dict</span><span class="p">[</span><span class="s2">&quot;m15&quot;</span><span class="p">]</span>
+<span class="k">del</span> <span class="n">enzmldoc</span><span class="o">.</span><span class="n">measurement_dict</span><span class="p">[</span><span class="s2">&quot;m16&quot;</span><span class="p">]</span>
+<span class="k">del</span> <span class="n">enzmldoc</span><span class="o">.</span><span class="n">measurement_dict</span><span class="p">[</span><span class="s2">&quot;m17&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide_input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kinetics</span> <span class="o">=</span> <span class="n">ParameterEstimator</span><span class="o">.</span><span class="n">from_EnzymeML</span><span class="p">(</span>
+    <span class="n">enzmldoc</span><span class="o">=</span><span class="n">enzmldoc</span><span class="p">,</span>
+    <span class="n">reactant_id</span><span class="o">=</span><span class="s2">&quot;s1&quot;</span><span class="p">,</span>
+    <span class="n">measured_species</span><span class="o">=</span><span class="s2">&quot;product&quot;</span><span class="p">)</span>
+
+<span class="n">kinetics</span><span class="o">.</span><span class="n">fit_models</span><span class="p">(</span><span class="n">enzyme_inactivation</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting data to:
+ - irreversible Michaelis Menten model
+ - competitive product inhibition model
+ - uncompetitive product inhibition model
+ - non-competitive product inhibition model
+ - substrate inhibition model
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>AIC</th>
+      <th>kcat [1/min]</th>
+      <th>Km [mmole / l]</th>
+      <th>ki time-dep enzyme-inactiv. [1/min]</th>
+      <th>kcat / Km [1/min * 1/mmole / l]</th>
+      <th>Ki competitive [mmole / l]</th>
+      <th>Ki uncompetitive [mmole / l]</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>competitive product inhibition</th>
+      <td>-2257</td>
+      <td>1879.010 +/- 2.96%</td>
+      <td>0.398 +/- 11.56%</td>
+      <td>0.023 +/- 24.42%</td>
+      <td>4716.196 +/- 11.93%</td>
+      <td>0.065 +/- 32.40%</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <th>non-competitive product inhibition</th>
+      <td>-2255</td>
+      <td>2477.180 +/- 24.37%</td>
+      <td>0.544 +/- 30.17%</td>
+      <td>0.000 +/- 3906.23%</td>
+      <td>4554.158 +/- 38.78%</td>
+      <td>0.040 +/- 39.86%</td>
+      <td>0.251 +/- 99.55%</td>
+    </tr>
+    <tr>
+      <th>irreversible Michaelis Menten</th>
+      <td>-2231</td>
+      <td>1883.439 +/- 2.90%</td>
+      <td>0.582 +/- 4.10%</td>
+      <td>0.043 +/- 10.25%</td>
+      <td>3234.668 +/- 5.03%</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <th>uncompetitive product inhibition</th>
+      <td>-2229</td>
+      <td>1883.604 +/- 3.08%</td>
+      <td>0.582 +/- 4.11%</td>
+      <td>0.043 +/- 10.34%</td>
+      <td>3234.343 +/- 5.14%</td>
+      <td>-</td>
+      <td>844.290 +/- 4979.17%</td>
+    </tr>
+    <tr>
+      <th>substrate inhibition</th>
+      <td>-2227</td>
+      <td>1892.295 +/- 3.08%</td>
+      <td>0.587 +/- 4.17%</td>
+      <td>0.043 +/- 11.03%</td>
+      <td>3222.920 +/- 5.18%</td>
+      <td>-</td>
+      <td>999.940 +/- 156.07%</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell tag_hide_input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kinetics</span><span class="o">.</span><span class="n">fit_models</span><span class="p">(</span>
+    <span class="n">enzyme_inactivation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+    <span class="n">start_time_index</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+    <span class="n">initial_substrate_concs</span><span class="o">=</span><span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting data to:
+ - irreversible Michaelis Menten model
+ - competitive product inhibition model
+ - uncompetitive product inhibition model
+ - non-competitive product inhibition model
+ - substrate inhibition model
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>AIC</th>
+      <th>kcat [1/min]</th>
+      <th>Km [mmole / l]</th>
+      <th>ki time-dep enzyme-inactiv. [1/min]</th>
+      <th>kcat / Km [1/min * 1/mmole / l]</th>
+      <th>Ki competitive [mmole / l]</th>
+      <th>Ki uncompetitive [mmole / l]</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>competitive product inhibition</th>
+      <td>-1367</td>
+      <td>1807.855 +/- 3.09%</td>
+      <td>0.660 +/- 8.33%</td>
+      <td>0.018 +/- 42.60%</td>
+      <td>2738.363 +/- 8.88%</td>
+      <td>0.145 +/- 28.45%</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <th>non-competitive product inhibition</th>
+      <td>-1365</td>
+      <td>1808.173 +/- 17.82%</td>
+      <td>0.660 +/- 19.81%</td>
+      <td>0.018 +/- 54.17%</td>
+      <td>2738.303 +/- 26.65%</td>
+      <td>0.145 +/- 35.04%</td>
+      <td>954.402 +/- 86749.69%</td>
+    </tr>
+    <tr>
+      <th>irreversible Michaelis Menten</th>
+      <td>-1342</td>
+      <td>1716.141 +/- 3.08%</td>
+      <td>0.907 +/- 3.62%</td>
+      <td>0.032 +/- 25.03%</td>
+      <td>1892.619 +/- 4.75%</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <th>uncompetitive product inhibition</th>
+      <td>-1340</td>
+      <td>1716.422 +/- 3.14%</td>
+      <td>0.907 +/- 4.10%</td>
+      <td>0.032 +/- 26.29%</td>
+      <td>1892.485 +/- 5.17%</td>
+      <td>-</td>
+      <td>999.612 +/- 10450.38%</td>
+    </tr>
+    <tr>
+      <th>substrate inhibition</th>
+      <td>-1339</td>
+      <td>1725.403 +/- 4.13%</td>
+      <td>0.914 +/- 5.89%</td>
+      <td>0.032 +/- 25.24%</td>
+      <td>1886.983 +/- 7.19%</td>
+      <td>-</td>
+      <td>999.998 +/- 575.44%</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell tag_hide_input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kinetics</span><span class="o">.</span><span class="n">visualize</span><span class="p">(</span><span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;irreversible Michaelis Menten&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;a-glucosidase reaction&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fit report for irreversible Michaelis Menten model
+[[Fit Statistics]]
+    # fitting method   = leastsq
+    # function evals   = 21
+    # data points      = 117
+    # variables        = 3
+    chi-square         = 0.00116138
+    reduced chi-square = 1.0188e-05
+    Akaike info crit   = -1341.87794
+    Bayesian info crit = -1333.59141
+[[Variables]]
+    k_cat:  1716.14120 +/- 52.8030058 (3.08%) (init = 3652.667)
+    Km:     0.90675489 +/- 0.03286791 (3.62%) (init = 1.6784)
+    K_ie:   0.03177073 +/- 0.00795342 (25.03%) (init = 0.01)
+[[Correlations]] (unreported correlations are &lt; 0.100)
+    C(k_cat, K_ie) = 0.883
+    C(Km, K_ie)    = -0.210
+    C(k_cat, Km)   = 0.198
+</pre></div>
+</div>
+<img alt="../_images/glycosidase_inhibition_13_1.png" src="../_images/glycosidase_inhibition_13_1.png" />
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./scenarios"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="chymotrypsin_inhibition.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><strong>Scenario A:</strong><br>Chymotrypsin inhibiton by a designed albumin fusion protein</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="SLAC_kinetic_characterization.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>Scenario C:</strong><br>SLAC characterization</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Max Häußler<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
