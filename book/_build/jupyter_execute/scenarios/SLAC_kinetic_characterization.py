@@ -28,7 +28,7 @@
 # 
 # ### Imports
 
-# In[26]:
+# In[33]:
 
 
 from typing import Dict, List
@@ -41,7 +41,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import copy
 from lmfit import Parameters, minimize
-from scipy.stats import linregress
+from scipy.stats import linregress, pearsonr
 from joblib import Parallel, delayed
 from CaliPytion.tools.standardcurve import StandardCurve
 from EnzymePynetics.tools.parameterestimator import ParameterEstimator
@@ -219,9 +219,16 @@ for standard_curve, abso_enzmldoc in zip(standard_curves, absortion_enzymemldocs
 # ## Quality control through mass balance analysis
 # 
 # Since product and substrate of the SLAC reaction were simultaneously recorded, mass balance analysis was conductas as a control of quality. By assuming mass conservation, the following concentration balance can be established:  
-# $0 = S_{(t)} + P_{(t)} - S_{0}$  
+# ```{math}
+# :label: mass_balance
+# 0 = S_{(t)} + P_{(t)} - S_{0}
+# ```
 # Thereby, $S_{0}$ denotes the initial substrate concentration, whereas $S_{(t)}$ and $P_{(t)}$ describe the substrate and product concentration for each time point $t$. $S_{t}$ and $S_{0}$ were individually measured. Thus each enzyme reaction with a given initial substrate concentration had a control reaction with identical substrate concentration. In contrast to the substrate, no calibration standard is available for the product. Therefore, an additional parameter §k§ was introdiced to the mass balance equation, assuming linear relationship between the product concentration and its signal:  
-# $0 = S_{(t)} + P_{(t)}k - S_{0}$  
+# 
+# ```{math}
+# :label: mass_balance_with_k
+# 0 = S_{(t)} + P_{(t)}k - S_{0}
+# ```
 # 
 # $k$ was determined for each data set individually by a minimization algorithm. The minimization objective was to find the optimal $k$, which minimizes all slopes of a given reaction condition. Thereafter, the mass balances of all measurements were visualized.
 # 
@@ -431,10 +438,6 @@ df = df.drop(index=14) #kcat outlier, mass balance outlier
 
 df["zeros"] = np.zeros(27)
 
-
-# In[28]:
-
-
 df
 
 
@@ -457,7 +460,7 @@ for i, ax in enumerate(axes.flatten()):
 # The figure on the left shows the catalytic efficiency $\frac{k_{cat}}{K_{m}}$ over the pH value of each reaction. The highest catalytic efficiency was observed at pH 3 and 45°C. Increasing the pH by 0.5 reduced $\frac{k_{cat}}{K_{m}}$ approximatel by half. For higher pH values, $\frac{k_{cat}}{K_{m}}$ is even more decreased. The catalytic efficiency is therefore highly sensitive to the pH. This might source from different causes. Eighter deprotonation ABTS sulfonate groups for more neutral pH values or protonation changes of the enzyme might hinder catalysis at higher pH values.  
 # In terms of temperature, higher $\frac{k_{cat}}{K_{m}}$ was achieved at higher temperatures. SLAC might even be more active at higher temperatures and pH values.
 # 
-# #### Correlation between $k_{cat}$ and $K_{m}$
+# ### Correlation between $k_{cat}$ and $K_{m}$
 # 
 # The parameter estimates for $k_{cat}$ and $K_{m}$ showed correlation. For experiments at pH 3 and pH 3.5, the parameters were correlated between 0.5 - 0.85. This indeicates, that the highest initial substrate concentration, which was applied for parameter estimation was not sufficently high. Ideally, the highest initial substrate concentration applied for a kinetic experiment should be 10-fold higher than $K_{m}$ to avoid correlation. In this scenario, only reactions with an initial substrate concentration of 150 uM were used for parameter estimation, due to the limited photometric measurement range of ABTS. Hence, ABTS was only applied 1.5-fold to 6-fold of the estimated $K_{m}$.  
 # For reactions at pH values of 4 and above, positive as well as negative correlations were observed. 
@@ -469,264 +472,34 @@ for i, ax in enumerate(axes.flatten()):
 # 
 # For pH values of 5 and above, almost no catalytic activity was observed. Therefore, data of these experimental conditions is excluded from further analysis. 
 # 
-# #### Time-dependent enzyme inactivation
+# ### Time-dependent enzyme inactivation
+# 
 # 
 # - haflife
 # - plots
 # - correlation / causality
 # 
-# ### Correlation analysis
+# ### Correlation analysis across all 
 # 
 # 
 
-# In[ ]:
+# In[36]:
 
 
-ax = plt.gca()
-for i, (kcat, kcat_error, ki, color, label) in enumerate(zip(df["kcat [1/s]"], df["Enzyme inactivation std"], df["Enzyme inactivation [1/s]"] , pH_tuples, df["pH"].values)):
+df_correlation = df.drop(columns=["kcat stderr", "Km stderr", "Enzyme inactivation std", "kcat stderr", "correlation kcat/Km", "kcat/Km stderr", "zeros"]).corr()
 
-    ax.scatter(kcat, ki, color = color, label = label if not i%5 else "")
-    ax.errorbar(kcat, ki, yerr=kcat_error, fmt=".", ecolor=color, markersize=0)
-plt.legend(title = "pH")
-plt.ylabel("Enzyme inactivation [1/s]")
-plt.xlabel("kcat [1/s]")
-
-
-# In[ ]:
-
-
-corr = df.corr()
-
-sns.heatmap(corr, 
-        xticklabels=corr.columns,
-        yticklabels=corr.columns,
+sns.heatmap(df_correlation, 
+        xticklabels=df_correlation.columns,
+        yticklabels=df_correlation.columns,
         cmap = sns.color_palette("vlag", as_cmap=True))
-#plt.xticks(rotation=45) 
+plt.show()
 
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-rho = df.corr()
-pval = df.corr(method=lambda x, y: pearsonr(x, y)[1]) - np.eye(*rho.shape)
+rho = df_correlation.corr()
+pval = df_correlation.corr(method=lambda x, y: pearsonr(x, y)[1]) - np.eye(*rho.shape)
 p = pval.applymap(lambda x: ''.join(['*' for t in [.05, .01, .001] if x<=t]))
 rho.round(2).astype(str) + p
 
 
-# ### Effekt of calibration temperature and pH on kinetic parameters
-
-# In[ ]:
-
-
-enzmldoc = enzmldoc_absorption_dict["3.0 45.0"]
-
-standards_variations = list(filter(lambda x: x.calibration_data.pH == 3.0, standard_list))
-[standards_variations.append(x) for x in list(filter(lambda x: x.calibration_data.temperature == 45 and x.calibration_data.pH < 6, standard_list))];
-
-
-# In[ ]:
-
-
-kinetics = []
-for standard in standards_variations:
-    print(copy.__file__)
-    doc = copy.deepcopy(enzmldoc)
-    standard.apply_to_EnzymeML(doc, species_id="s0", ommit_nan_measurements=True)
-    kinetic = (ParameterEstimator.from_EnzymeML(doc, reactant_id="s0", measured_species="substrate"))
-    kinetic.fit_models(enzyme_inactivation=True, only_irrev_MM=True)
-    kinetics.append(kinetic)
-
-
-
-
-
-# ## Using linear calibration instead of 3rd polynominal model
-
-# In[ ]:
-
-
-models = [None, "Linear"]
-kinetics=[]
-for model in models:
-    print(copy.__file__)
-    doc = copy.deepcopy(enzmldoc)
-    standards_variations[4].apply_to_EnzymeML(doc, species_id="s0", ommit_nan_measurements=True, model_name=model)
-    kinetic = (ParameterEstimator.from_EnzymeML(doc, reactant_id="s0", measured_species="substrate"))
-    kinetic.fit_models(enzyme_inactivation=True, only_irrev_MM=True)
-    kinetics.append(kinetic)
-
-# Get kinetic parameters of all datasets
-kcat = []
-kcat_std = []
-Km = []
-Km_std = []
-ki = []
-ki_std = []
-temperature = [45,45]
-pH = [3,3]
-for result in kinetics:
-    params = result.get_parameter_dict()
-
-    kcat.append(params["k_cat"].value)
-    kcat_std.append(params["k_cat"].stderr)
-
-    Km.append(params["Km"].value)
-    Km_std.append(params["Km"].stderr)
-
-    ki.append(params["K_ie"].value)
-    ki_std.append(params["K_ie"].stderr)
-
-
-df = pd.DataFrame.from_dict({
-    'pH':pH, 
-    "temperature":temperature, 
-    'kcat [1/s]':kcat, 
-    'kcat stderr':kcat_std, 
-    'Km [uM]':Km, 
-    'Km stderr':Km_std, 
-    "Enzyme inactivation [1/s]":ki,
-    "Enzyme inactivation std":ki_std})
-
-df["kcat/Km"] = df["kcat [1/s]"] / df["Km [uM]"]
-kcat_km_stderr =((df["kcat stderr"]/df["kcat [1/s]"])**2+(df["Km stderr"]/df["Km [uM]"])**2)**0.5 * df["kcat/Km"]
-df["kcat/Km stderr"] = kcat_km_stderr
-
-ph_map = sns.color_palette("husl")
-ph_colors = [ph_map[(x)] for x in np.arange(6)]
-pH_dict = dict(zip([3.0, 3.5, 4.0, 4.5, 5.0, 5.5], ph_colors))
-pH_tuples = [pH_dict[x] for x in df["pH"].values]
-
-temperature_map = matplotlib.cm.get_cmap('coolwarm')
-colors = [temperature_map(x) for x in np.linspace(0,1,5)]
-color_dict = dict(zip([25, 30, 35, 40 ,45], colors))
-color_tuples = [color_dict[x] for x in df["temperature"]]
-
-ax = plt.gca()
-for i, (km, kcat, km_error, kcat_error, color, label) in enumerate(zip(df["Km [uM]"], df["kcat [1/s]"], df["Km stderr"], df["kcat stderr"], pH_tuples, df["pH"].values)):
-
-    ax.scatter(km, kcat, color = color, label = label if not i % 5 else "")
-    ax.errorbar(km, kcat, yerr=kcat_error,xerr=km_error, fmt=".", ecolor=color, markersize=0)
-plt.legend(title = "pH")
-plt.ylabel("kcat [1/s]")
-plt.xlabel("Km [uM]")
-plt.xlim([0,200])
-
-
-# In[ ]:
-
-
-subset_enzymeml = [copy.deepcopy(x) for x in enzmldoc_absorption_dict.values() if x.getReaction("r0").temperature == 45]
-models = [None, "Linear"]
-calibration_data = [x for x in standard_curve_dict.values() if x.calibration_data.temperature == 45 and x.calibration_data.pH < 6]
-applied_model = {"best model": None, "Linear": "Linear"}
-
-kinetics = []
-model_names = []
-for doc, standard in zip(subset_enzymeml, calibration_data):
-    for name, value in applied_model.items():
-        d = copy.deepcopy(doc)
-        standard.apply_to_EnzymeML(d, species_id="s0", ommit_nan_measurements=True, model_name=value)
-        kinetic = (ParameterEstimator.from_EnzymeML(d, reactant_id="s0", measured_species="substrate"))
-        kinetic.fit_models(enzyme_inactivation=True, only_irrev_MM=True);
-        kinetics.append(kinetic)
-        kinetic.visualize()
-        model_names.append(name)
-
-
-
-model_names
-
-
-# In[ ]:
-
-
-kcat = []
-kcat_std = []
-Km = []
-Km_std = []
-ki = []
-ki_std = []
-temp = []
-calibration_model = np.tile(np.array(["best model", "linear calibration"]), 6)
-pH = np.repeat(np.array([3,3.5,4,4.5,5,5.5]), 2)
-for result in kinetics:
-    params = result.get_parameter_dict()
-    temp.append(result.data.temperature)
-
-    kcat.append(params["k_cat"].value)
-    kcat_std.append(params["k_cat"].stderr)
-
-    Km.append(params["Km"].value)
-    Km_std.append(params["Km"].stderr)
-
-    ki.append(params["K_ie"].value)
-    ki_std.append(params["K_ie"].stderr)
-
-
-df = pd.DataFrame.from_dict({
-    'pH':pH, 
-    "calibration model":calibration_model, 
-    'kcat [1/s]':kcat, 
-    'kcat stderr':kcat_std, 
-    'Km [uM]':Km, 
-    'Km stderr':Km_std, 
-    "Enzyme inactivation [1/s]":ki,
-    "temperature": temp,
-    "Enzyme inactivation std":ki_std})
-
-df["kcat/Km"] = df["kcat [1/s]"] / df["Km [uM]"]
-kcat_km_stderr =((df["kcat stderr"]/df["kcat [1/s]"])**2+(df["Km stderr"]/df["Km [uM]"])**2)**0.5 * df["kcat/Km"]
-df["kcat/Km stderr"] = kcat_km_stderr
-
-df
-        
-
-
-# In[ ]:
-
-
-ph_map = sns.color_palette("husl")
-ph_colors = [ph_map[(x)] for x in np.arange(6)]
-pH_dict = dict(zip([3.0, 3.5, 4.0, 4.5, 5.0, 5.5], ph_colors))
-pH_tuples = [pH_dict[x] for x in df["pH"].values]
-
-temperature_map = matplotlib.cm.get_cmap('coolwarm')
-colors = [temperature_map(x) for x in np.linspace(0,1,5)]
-color_dict = dict(zip([25, 30, 35, 40 ,45], colors))
-color_tuples = [color_dict[x] for x in df["temperature"]]
-
-cools = ["b", "orange", "b", "orange","b", "orange","b", "orange","b", "orange","b", "orange"]
-
-ax = plt.gca()
-for i, (kcatkm, kcatkm_error, temp, color, label) in enumerate(zip(df["kcat [1/s]"], df["kcat stderr"], df["pH"] , cools, df["calibration model"].values)):
-
-    ax.scatter(temp, kcatkm, color = color, label = label if i in [0,1] else "")
-    ax.errorbar(temp, kcatkm, yerr=kcatkm_error, fmt=".", color= color, markersize=0)
-plt.legend(title = "calibration model")
-plt.ylabel("kcat/Km [1/s * uM]")
-plt.xlabel("pH")
-plt.title("Datasets of various pHs and 45°C calibrated with different standard curve fits")
-
-
-# In[ ]:
-
-
-enzmldoc = concentration_enzymemldocs[4]
-
-kinetics = ParameterEstimator.from_EnzymeML(enzmldoc, "s0", "substrate")
-kinetics.fit_models(only_irrev_MM=True, enzyme_inactivation=False)
-kinetics.visualize()
-
-
-# In[ ]:
-
-
-
-
+# ## Discussion
+# 
+# 
