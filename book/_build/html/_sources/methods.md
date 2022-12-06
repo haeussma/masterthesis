@@ -18,19 +18,19 @@ The data model consists of descriptions for the reaction vessel,
 
 ### 3.1 Overview
 
-EnzymePynetics is a a python package, for kinetic parameter estimation of single-substrate enzyme reactions, which was developed during this thesis. The `ParameterEstimator` of EnzymePynetics estimates the kinetic parameters $k_{cat}$ and $K_{m}$ by fitting time-course measurement data of enzyme reactions to different Michaelis-Menten models. Thereby, the residuals between measured progress-curve and integrated Michaelis-Menten rate equations are minimized through a non-linear least-squares algorithm. Additionally, the inhibition constant $K_{i}$ can be assessed for potential substrate or product inhibition. Furthermore, the inhibition constant of an enzyme inhibitor can be determined.
+EnzymePynetics is a a python package, for kinetic parameter estimation of single-substrate enzyme reactions, which was developed during this thesis. The `ParameterEstimator` of EnzymePynetics estimates the kinetic parameters $k_{cat}$ and $K_{m}$ by fitting time-course measurement data of enzyme reactions to different Michaelis-Menten models. Thereby, the residuals between measurement data and integrated Michaelis-Menten rate equations are minimized through a non-linear least-squares algorithm. Additionally, the inhibition constant $K_{i}$ can be assessed for potential substrate or product inhibition. Furthermore, the inhibition constant of an enzyme inhibitor can be determined.
 
 ### 3.2 Data model
 
 Data models build the backbone of applications, by defining the relations between informations in an hierarchical manner.
-EnzymePynetics is based on a data model, resembling the experimental design of an enzyme kinetics assay. Thereby, all relevant data and metadata of an kinetic experiment are ordered in the base object `EnzymeKineticsExperiment`. On the metadata side, the base object consists of the attributes temperature with its respective unit, pH, and the name of the measured substance. Additionally, it can be specified whether the measurement data originates from substrate or product measurements. On the data side, `EnzymeKineticsExperiment` contains one or multiple `Measurements`. Each measurement stores the information of an experimental condition the enzyme was subjected to. Therefore, each measurement contains information on the initial substrate concentration, enzyme concentration, and inhibitor concentration if present, along with the respective concentration units. Each 'measurement' also contains the measured data, which itself consist of one or multiple replicates of the respective experimental condition.  
+EnzymePynetics is based on a data model, resembling the experimental design of an enzyme kinetics assay. Thereby, all relevant data and meta data of an kinetic experiment are ordered in the base object `EnzymeKineticsExperiment`. On the metadata side, the base object consists of the attributes temperature with its respective unit, pH, and the name of the measured substance. Additionally, it can be specified whether the measurement data originates from substrate or product measurements. On the data side, `EnzymeKineticsExperiment` contains one or multiple `Measurements`. Each measurement stores the information of an experimental condition, to which the enzyme was subjected. Therefore, each `Measurement` contains information on the initial substrate concentration, enzyme concentration, and inhibitor concentration, if present, along with the respective concentration units. Each `Measurement` contains the measured data, which itself consist of one or multiple replicates of the respective experimental condition.  
 The data model was was generated using [sdRDM](https://github.com/JR-1991/software-driven-rdm), a python tool allowing the creation and versioning of data models.
 
-An extensive documentation of the data model can be accessed in the [specifications](https://github.com/haeussma/EnzymePynetics/blob/main/specifications/EnzymeKinetics.md) of the software package.
+An extensive documentation of the data model can be accessed in the [specifications](https://github.com/haeussma/EnzymePynetics/blob/main/specifications/EnzymeKinetics.md) of the the software package.
 
 ### 3.3 Kinetic models
 
-Besides the irreversible Michaelis-Menten rate equation (Eq. 1) inhibition models for competitive (Eq. 2), uncompetitive (Eq. 3), and non-competitive) inhibition (Eq. 4) were implemented. Thereby, $S$, $E$, and $I$ denote the concentration of substrate, enzyme, and inhibitor, respectively. In therms of kinetic parameters, $k_{cat}$ denotes the turnover number, $K_{m}$ the Michaelis-Menten constant of the substrate,whereas $K_{ic}$ and $K_{iu}$ describe the competitive and uncompetitive inhibition constant, respectively.
+Besides the irreversible Michaelis-Menten rate equation (Eq. 1) inhibition models for competitive (Eq. 2), uncompetitive (Eq. 3), and non-competitive) inhibition (Eq. 4) were implemented. Thereby, $S$, $E$, and $I$ denote the concentration of substrate, enzyme, and inhibitor, respectively. In therms of kinetic parameters, $k_{cat}$ denotes the turnover number, $K_{m}$ the Michaelis-Menten constant of the substrate, whereas $K_{ic}$ and $K_{iu}$ describe the competitive and uncompetitive inhibition constant, respectively.
 
 ```{math}
 :label: irreversible_mm
@@ -52,14 +52,14 @@ Besides the irreversible Michaelis-Menten rate equation (Eq. 1) inhibition model
 \frac{dS}{dt} = -\frac{k_{cat} * E * S}{K_{m} * (1+\frac{I}{K_{ic}}) + (1+\frac{I}{K_{iu}}) + S}
 ```
 
-By default, $E$ is assumed to be constant throughout the reaction. If required, the kinetic models can be extended by the parameter $K_{inact}$, which describes the time-dependent inactivation rate of the enzyme. The decease in active enzyme is modeled with Eq. 5:
+By default, $E$ is assumed to be constant throughout the reaction. If required, the kinetic models can be extended by the parameter $K_{inact}$, which describes the time-dependent inactivation rate of the enzyme. The decrease in active enzyme is modeled by Eq. 5:
 
 ```{math}
 :label: enzyme_inactivation
 \frac{dE}{dt} = -K_{inact} * E
 ```
 
-## 3.4 Initialization
+### 3.4 Initialization
 
 Whereas the `EnzymeKineticsExperiment` object solely serves a
 The `ParameterEstimator` harbors the functionalities for parameter estimation. Data can be provided by passing data as an `EnzymeKineticsExperiment` object. Alternatively, an EnzymeML documents can be provided as the data source via [PyEnzyme](https://github.com/EnzymeML/PyEnzyme) software.  
@@ -96,14 +96,8 @@ estimator.fit_models()
 estimator.visualize()
 ```
 
-**Visualization**
+### 3.5 Visualization
 
-### 3.1 Data model for enzyme kinetics experiments
+## 4. Model selection
 
-### 3.2
-
-```{admonition} Click the button to reveal!
-:class: dropdown
-Some hidden toggle content!
-
-```
+Akaike information criterion

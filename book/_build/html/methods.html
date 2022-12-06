@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Methods &#8212; From raw data to kinetic parameters: an EnzymeML based workflow for reproducible enzyme kinetics</title>
+    <title>Methods &#8212; From raw data to kinetic parameters: an EnzymeML-based workflow for reproducible enzyme kinetics</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -94,7 +94,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <h1 class="site-logo" id="site-title">From raw data to kinetic parameters: an EnzymeML based workflow for reproducible enzyme kinetics</h1>
+      <h1 class="site-logo" id="site-title">From raw data to kinetic parameters: an EnzymeML-based workflow for reproducible enzyme kinetics</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
@@ -390,24 +390,22 @@ title="Print to PDF"
      3.3 Kinetic models
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#initialization">
+     3.4 Initialization
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#visualization">
+     3.5 Visualization
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#initialization">
-   3.4 Initialization
+  <a class="reference internal nav-link" href="#model-selection">
+   4. Model selection
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#data-model-for-enzyme-kinetics-experiments">
-     3.1 Data model for enzyme kinetics experiments
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id2">
-     3.2
-    </a>
-   </li>
-  </ul>
  </li>
 </ul>
 
@@ -470,24 +468,22 @@ title="Print to PDF"
      3.3 Kinetic models
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#initialization">
+     3.4 Initialization
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#visualization">
+     3.5 Visualization
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#initialization">
-   3.4 Initialization
+  <a class="reference internal nav-link" href="#model-selection">
+   4. Model selection
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#data-model-for-enzyme-kinetics-experiments">
-     3.1 Data model for enzyme kinetics experiments
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id2">
-     3.2
-    </a>
-   </li>
-  </ul>
  </li>
 </ul>
 
@@ -520,18 +516,18 @@ title="Print to PDF"
 <h2>3. EnzymePynetics<a class="headerlink" href="#enzymepynetics" title="Permalink to this headline">#</a></h2>
 <section id="overview">
 <h3>3.1 Overview<a class="headerlink" href="#overview" title="Permalink to this headline">#</a></h3>
-<p>EnzymePynetics is a a python package, for kinetic parameter estimation of single-substrate enzyme reactions, which was developed during this thesis. The <code class="docutils literal notranslate"><span class="pre">ParameterEstimator</span></code> of EnzymePynetics estimates the kinetic parameters <span class="math notranslate nohighlight">\(k_{cat}\)</span> and <span class="math notranslate nohighlight">\(K_{m}\)</span> by fitting time-course measurement data of enzyme reactions to different Michaelis-Menten models. Thereby, the residuals between measured progress-curve and integrated Michaelis-Menten rate equations are minimized through a non-linear least-squares algorithm. Additionally, the inhibition constant <span class="math notranslate nohighlight">\(K_{i}\)</span> can be assessed for potential substrate or product inhibition. Furthermore, the inhibition constant of an enzyme inhibitor can be determined.</p>
+<p>EnzymePynetics is a a python package, for kinetic parameter estimation of single-substrate enzyme reactions, which was developed during this thesis. The <code class="docutils literal notranslate"><span class="pre">ParameterEstimator</span></code> of EnzymePynetics estimates the kinetic parameters <span class="math notranslate nohighlight">\(k_{cat}\)</span> and <span class="math notranslate nohighlight">\(K_{m}\)</span> by fitting time-course measurement data of enzyme reactions to different Michaelis-Menten models. Thereby, the residuals between measurement data and integrated Michaelis-Menten rate equations are minimized through a non-linear least-squares algorithm. Additionally, the inhibition constant <span class="math notranslate nohighlight">\(K_{i}\)</span> can be assessed for potential substrate or product inhibition. Furthermore, the inhibition constant of an enzyme inhibitor can be determined.</p>
 </section>
 <section id="data-model">
 <h3>3.2 Data model<a class="headerlink" href="#data-model" title="Permalink to this headline">#</a></h3>
 <p>Data models build the backbone of applications, by defining the relations between informations in an hierarchical manner.
-EnzymePynetics is based on a data model, resembling the experimental design of an enzyme kinetics assay. Thereby, all relevant data and metadata of an kinetic experiment are ordered in the base object <code class="docutils literal notranslate"><span class="pre">EnzymeKineticsExperiment</span></code>. On the metadata side, the base object consists of the attributes temperature with its respective unit, pH, and the name of the measured substance. Additionally, it can be specified whether the measurement data originates from substrate or product measurements. On the data side, <code class="docutils literal notranslate"><span class="pre">EnzymeKineticsExperiment</span></code> contains one or multiple <code class="docutils literal notranslate"><span class="pre">Measurements</span></code>. Each measurement stores the information of an experimental condition the enzyme was subjected to. Therefore, each measurement contains information on the initial substrate concentration, enzyme concentration, and inhibitor concentration if present, along with the respective concentration units. Each ‘measurement’ also contains the measured data, which itself consist of one or multiple replicates of the respective experimental condition.<br />
+EnzymePynetics is based on a data model, resembling the experimental design of an enzyme kinetics assay. Thereby, all relevant data and meta data of an kinetic experiment are ordered in the base object <code class="docutils literal notranslate"><span class="pre">EnzymeKineticsExperiment</span></code>. On the metadata side, the base object consists of the attributes temperature with its respective unit, pH, and the name of the measured substance. Additionally, it can be specified whether the measurement data originates from substrate or product measurements. On the data side, <code class="docutils literal notranslate"><span class="pre">EnzymeKineticsExperiment</span></code> contains one or multiple <code class="docutils literal notranslate"><span class="pre">Measurements</span></code>. Each measurement stores the information of an experimental condition, to which the enzyme was subjected. Therefore, each <code class="docutils literal notranslate"><span class="pre">Measurement</span></code> contains information on the initial substrate concentration, enzyme concentration, and inhibitor concentration, if present, along with the respective concentration units. Each <code class="docutils literal notranslate"><span class="pre">Measurement</span></code> contains the measured data, which itself consist of one or multiple replicates of the respective experimental condition.<br />
 The data model was was generated using <a class="reference external" href="https://github.com/JR-1991/software-driven-rdm">sdRDM</a>, a python tool allowing the creation and versioning of data models.</p>
-<p>An extensive documentation of the data model can be accessed in the <a class="reference external" href="https://github.com/haeussma/EnzymePynetics/blob/main/specifications/EnzymeKinetics.md">specifications</a> of the software package.</p>
+<p>An extensive documentation of the data model can be accessed in the <a class="reference external" href="https://github.com/haeussma/EnzymePynetics/blob/main/specifications/EnzymeKinetics.md">specifications</a> of the the software package.</p>
 </section>
 <section id="kinetic-models">
 <h3>3.3 Kinetic models<a class="headerlink" href="#kinetic-models" title="Permalink to this headline">#</a></h3>
-<p>Besides the irreversible Michaelis-Menten rate equation (Eq. 1) inhibition models for competitive (Eq. 2), uncompetitive (Eq. 3), and non-competitive) inhibition (Eq. 4) were implemented. Thereby, <span class="math notranslate nohighlight">\(S\)</span>, <span class="math notranslate nohighlight">\(E\)</span>, and <span class="math notranslate nohighlight">\(I\)</span> denote the concentration of substrate, enzyme, and inhibitor, respectively. In therms of kinetic parameters, <span class="math notranslate nohighlight">\(k_{cat}\)</span> denotes the turnover number, <span class="math notranslate nohighlight">\(K_{m}\)</span> the Michaelis-Menten constant of the substrate,whereas <span class="math notranslate nohighlight">\(K_{ic}\)</span> and <span class="math notranslate nohighlight">\(K_{iu}\)</span> describe the competitive and uncompetitive inhibition constant, respectively.</p>
+<p>Besides the irreversible Michaelis-Menten rate equation (Eq. 1) inhibition models for competitive (Eq. 2), uncompetitive (Eq. 3), and non-competitive) inhibition (Eq. 4) were implemented. Thereby, <span class="math notranslate nohighlight">\(S\)</span>, <span class="math notranslate nohighlight">\(E\)</span>, and <span class="math notranslate nohighlight">\(I\)</span> denote the concentration of substrate, enzyme, and inhibitor, respectively. In therms of kinetic parameters, <span class="math notranslate nohighlight">\(k_{cat}\)</span> denotes the turnover number, <span class="math notranslate nohighlight">\(K_{m}\)</span> the Michaelis-Menten constant of the substrate, whereas <span class="math notranslate nohighlight">\(K_{ic}\)</span> and <span class="math notranslate nohighlight">\(K_{iu}\)</span> describe the competitive and uncompetitive inhibition constant, respectively.</p>
 <div class="math notranslate nohighlight" id="equation-irreversible-mm">
 <span class="eqno">(1)<a class="headerlink" href="#equation-irreversible-mm" title="Permalink to this equation">#</a></span>\[\frac{dS}{dt} = -\frac{k_{cat} * E * S}{K_{m} + S}\]</div>
 <div class="math notranslate nohighlight" id="equation-competitive-inhibition">
@@ -540,13 +536,12 @@ The data model was was generated using <a class="reference external" href="https
 <span class="eqno">(3)<a class="headerlink" href="#equation-uncompetitive-inhibition" title="Permalink to this equation">#</a></span>\[\frac{dS}{dt} = -\frac{k_{cat} * E * S}{K_{m} * (1+\frac{I}{K_{iu}}) * S}\]</div>
 <div class="math notranslate nohighlight" id="equation-noncompetitive-inhibition">
 <span class="eqno">(4)<a class="headerlink" href="#equation-noncompetitive-inhibition" title="Permalink to this equation">#</a></span>\[\frac{dS}{dt} = -\frac{k_{cat} * E * S}{K_{m} * (1+\frac{I}{K_{ic}}) + (1+\frac{I}{K_{iu}}) + S}\]</div>
-<p>By default, <span class="math notranslate nohighlight">\(E\)</span> is assumed to be constant throughout the reaction. If required, the kinetic models can be extended by the parameter <span class="math notranslate nohighlight">\(K_{inact}\)</span>, which describes the time-dependent inactivation rate of the enzyme. The decease in active enzyme is modeled with Eq. 5:</p>
+<p>By default, <span class="math notranslate nohighlight">\(E\)</span> is assumed to be constant throughout the reaction. If required, the kinetic models can be extended by the parameter <span class="math notranslate nohighlight">\(K_{inact}\)</span>, which describes the time-dependent inactivation rate of the enzyme. The decrease in active enzyme is modeled by Eq. 5:</p>
 <div class="math notranslate nohighlight" id="equation-enzyme-inactivation">
 <span class="eqno">(5)<a class="headerlink" href="#equation-enzyme-inactivation" title="Permalink to this equation">#</a></span>\[\frac{dE}{dt} = -K_{inact} * E\]</div>
 </section>
-</section>
 <section id="initialization">
-<h2>3.4 Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">#</a></h2>
+<h3>3.4 Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">#</a></h3>
 <p>Whereas the <code class="docutils literal notranslate"><span class="pre">EnzymeKineticsExperiment</span></code> object solely serves a
 The <code class="docutils literal notranslate"><span class="pre">ParameterEstimator</span></code> harbors the functionalities for parameter estimation. Data can be provided by passing data as an <code class="docutils literal notranslate"><span class="pre">EnzymeKineticsExperiment</span></code> object. Alternatively, an EnzymeML documents can be provided as the data source via <a class="reference external" href="https://github.com/EnzymeML/PyEnzyme">PyEnzyme</a> software.<br />
 Initially, product concentration is calculated, if the input data is from substrate measurements. Substrate is calculated, if product data was provided. The calculation is based on the initial substrate concentration, which needs to be provided for all measurements. The parameter estimation is then based on substrate data.<br />
@@ -580,17 +575,14 @@ In the background, rough estimates for <span class="math notranslate nohighlight
 <span class="n">estimator</span><span class="o">.</span><span class="n">visualize</span><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Visualization</strong></p>
-<section id="data-model-for-enzyme-kinetics-experiments">
-<h3>3.1 Data model for enzyme kinetics experiments<a class="headerlink" href="#data-model-for-enzyme-kinetics-experiments" title="Permalink to this headline">#</a></h3>
 </section>
-<section id="id2">
-<h3>3.2<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
-<div class="dropdown admonition">
-<p class="admonition-title">Click the button to reveal!</p>
-<p>Some hidden toggle content!</p>
-</div>
+<section id="visualization">
+<h3>3.5 Visualization<a class="headerlink" href="#visualization" title="Permalink to this headline">#</a></h3>
 </section>
+</section>
+<section id="model-selection">
+<h2>4. Model selection<a class="headerlink" href="#model-selection" title="Permalink to this headline">#</a></h2>
+<p>Akaike information criterion</p>
 </section>
 </section>
 

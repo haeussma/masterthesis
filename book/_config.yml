@@ -1,7 +1,7 @@
 # Book settings
 # Learn more at https://jupyterbook.org/customize/config.html
 
-title: "From raw data to kinetic parameters: an EnzymeML based workflow for reproducible enzyme kinetics"
+title: "From raw data to kinetic parameters: an EnzymeML-based workflow for reproducible enzyme kinetics"
 author: Max Häußler
 logo: ../images/logo.png
 copyright: "2022"
