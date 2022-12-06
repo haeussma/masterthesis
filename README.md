@@ -1,4 +1,2 @@
-# masterthesis
-
-[![deploy-book](https://github.com/haeussma/masterthesis/workflows/deploy.yaml/badge.svg)](https://github.com/haeussma/masterthesis/actions/workflows/deploy.yaml)
-# Best practices: FAIR modeling of enzyme catalyzed reactions
+# __Master thesis:__<br>From raw data to kinetic parameters: an EnzymeML based workflow for reproducible enzyme kinetics
+[![Jupyter Book Badge](https://jupyterbook.org/badge.svg)](https://haeussma.github.io/masterthesis/)
