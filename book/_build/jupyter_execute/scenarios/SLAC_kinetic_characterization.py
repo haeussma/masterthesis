@@ -463,9 +463,9 @@ for i, ax in enumerate(axes.flatten()):
 # 
 # ### Time-dependent enzyme inactivation
 # 
-# The time-dependent enzyme inactivaten rate $k_{inact}$, was estimated for each experiment, since the irreversible Michaels-Menten model did not describe the observed time-course data accurately. The halfife of the enzyme was calculated as shown in equation {eq}`enzyme_inactivation` {cite:p}`Buxbaum2015`.
+# The time-dependent enzyme inactivaten rate $k_{inact}$, was estimated for each experiment, since the irreversible Michaels-Menten model did not describe the observed time-course data accurately. The halfife of the enzyme was calculated as shown in equation {eq}`enzyme_halflife` {cite:p}`Buxbaum2015`.
 # ```{math}
-# :label: enzyme_inactivation
+# :label: enzyme_halflife
 # t_{\frac{1}{2}} = \frac{ln(2)}{k_{inact}}
 # ```
 

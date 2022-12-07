@@ -6,23 +6,37 @@
 # Data provided by Paulo Durão (Microbial & Enzyme Technology, Instituto de Tecnologia Química e Biológica, Oeiras, Portugal)
 # 
 # ## Project background
-# All investigated enzyme reaction without inhibitor showed progress curves behavior, which was not explainable by irreversible Michaelis-Menten kinetics. SUBSTRATE PRODUCT INHIBITION. All experiments had in commmon, that enzyme reactions were carried out in 96-well polystyrene micro titer plates (MTP), whereas the change in substrate and or product absorption was monitored photometrically. Initially, 
-# CotA laccase from *Bacillus subtilis*
+# All investigated enzyme reaction without inhibitor showed progress curves behavior, which was not explainable by irreversible Michaelis-Menten kinetics. SUBSTRATE PRODUCT INHIBITION. All experiments had in commmon, that enzyme reactions were carried out in 96-well polystyrene micro titer plates (MTP), whereas the change in substrate and or product absorption was monitored photometrically. 
+# One hypothesis for the observed time-dependent decrease of enzyme activity is potential hydrophobic interaction between the enzyme and the MTP suface. Thereby, hydrophobic regions of the enzyme's surface might interact with the hydrophobic reaction vessle, ultimately preventing substrate access to the active site of the enzyme.  
+# In order to test the hypothesis, an absorption experiment in which enzyme was incubated in MTP wells prior to reaction start was performed. Thereby, the enzyme activity should decrease with regard to the prior incubation time. If the hypothesis is correct, the calculated half life from the adsorption experiment 
+# should match with the half life of an enzyme kinetics experiment which was conducted in parallel.
+# 
+# For this experiment Co
+# 
+# 
+# 
 # 
 # __Show results of enzyme inactication across projects__ #TODO
 # 
 # All investigated enzyme reactions in this thesis showed a time-dependent decrease in catalytic activity, which was not explainable by the irreversible Michaelis-Menten model.
 # 
 # ### Experimental design
+# 
+# CotA laccase from *Bacillus subtilis*
+# Both experiments wer conducted with CotA from 
+# 
 # __Determination of enzyme inactivation trough adsorption__  
-# In order to test the hypothesis of time-dependent enzyme inactivation in MTP-wells through adsorption, the following experiment was conducted. Thereby, enzyme solution was incubated in individual MTP wells up to 1 h, prior to reaction start.  Then, individual enzyme reactions were started by transferring 2 µL of incubated enzyme in 10 min increments. Each proceeding enzyme reaction contained 256 nM CotA, 1 mM ABTS and was buffered in acetate pH 4. Product formation was followed photometrically at 420 nm and 25°C for 5 min, whereas concentrations were calculated assuming an extincion coefficient of ε = 36000 M<sup>-1</sup>cm<sup>-1</sup> for the ABTS radical product.
+# In order to test the hypothesis of time-dependent enzyme inactivation through adsorption to the MTP surface, the following experiment was conducted. Thereby, enzyme solution was incubated in individual MTP wells up to 1 h, prior to reaction start.  Then, individual enzyme reactions were started in triplicates by transferring 2 µL of incubated enzyme in 10 min increments. Each proceeding enzyme reaction contained 256 nM CotA, 1 mM ABTS and was buffered in acetate buffer at pH 4. Product formation was followed photometrically at 420 nm and 25°C for 5 min, whereas concentrations were calculated assuming an extincion coefficient of ε = 36000 M<sup>-1</sup>cm<sup>-1</sup> for the ABTS radical product.
 # 
 # __Enzyme kinetics experiment__  
-# The oxidation of ABTS by CotA was followed photometrically at
+# Enzymatic oxidation of ABTS to its radical form was followed photometrically at 420 nm at 25°C for 70 min. 
+# Thereby, ABTS was applied in a range from 0.01 mM - 2 mM. Each proceeding enzyme reaction contained 256 nM CotA, and was buffered in acetate buffer at pH 4.
 # 
-# ## Enzyme kinetics 
+# ### Experimantal data
 # 
-# ## Data Preparation
+# Experimantal data was provided as an Excel file, containing time-course absorption data. Meta data was written into the EnzymeML Excel template. Then, the experimantal data was written to an EnzymeML document by a parser function. Concentrations were calculated via the provided extinction coefficient of the ABTS radical (ε = 36000 M<sup>-1</sup>cm<sup>-1</sup>). 
+# 
+# ## Adsorption of enzyme to micro titer plate surface
 # 
 # ### Imports
 
@@ -47,9 +61,88 @@ warnings.filterwarnings('ignore')
 
 # ### Experimantal data
 # 
-# Experimantal data was provided as an Excel file, containing time-course absorption data. Meta data was written into the EnzymeML Excel template. Then, the experimantal data was written to an EnzymeML document by a parser function. Concentrations were calculated via the provided extinction coefficient of the ABTS radical (ε = 36000 M<sup>-1</sup>cm<sup>-1</sup>). 
+# Experimental data was provided as an Excel file. Data was loaded into an pandas DataFrame and the slopes of each incubation condition were calculated through linear regression. The resulting initial rates were used to calculate by which the enzyme activity decreases in regard to the incubation time tin the reaction vessel. Lastly the half life of the enzyme was calculated with equation {eq}`enzyme_halflife`
 
-# In[6]:
+# In[114]:
+
+
+# Load excel
+path = '../../data/enzyme_inactivation/Slide 2 - Activity effect of incubating CotA in MTP.xlsx'
+df = pd.read_excel(path, sheet_name='csv').set_index('time (min)')
+
+# replace values of '0**' with nan-values, since the measurement is incorrect
+df['0**'] = np.nan
+
+
+
+# Get data from Excel file
+columns = [int(x) for x in list(df.columns) if str(x).endswith("0")]
+time = df.index.values
+absorption = df.values.T.reshape(7,3,22)
+
+# Calculate concentrations
+extinction_coefficient = 36 # (1/mM * 1/cm)
+optical_length = 0.65 # cm
+
+def absorption_to_concentration(abso):
+    return abso / (extinction_coefficient*optical_length)
+
+concentration = absorption_to_concentration(absorption)
+concentration_mean = np.nanmean(concentration, axis = 1)
+concentration_std = np.nanstd(concentration, axis = 1)
+
+# Linear regression
+slopes = []
+intercepts = []
+stderrs = []
+for time_set in concentration:
+    mask = ~np.isnan(time_set)
+    time_regression = np.tile(time, 3).reshape(mask.shape)[mask].flatten()
+    data_regression = time_set[mask].flatten()
+    slope,intercept,_,_,stderr = (linregress(time_regression, data_regression))
+    slopes.append(slope)
+    intercepts.append(intercept)
+    stderrs.append(stderr)
+
+# Regression for the slopes between 10 and 60 mincolumns
+slope_of_slopes, intercept_of_slopes,_,_,_ = linregress(columns[1:], slopes[1:])
+
+# Half life in hours
+t12 = (np.log(2)/-slope_of_slopes)/60
+
+# Plot results
+colors = cm.tab10(np.linspace(0, 1, len(absorption)))
+fig, axes = plt.subplots(1,2, figsize=(12.8,4.8), sharey=False, sharex=False)
+
+for mean, std, label, slope, intercept, color in zip(concentration_mean, concentration_std, columns, slopes, intercepts, colors):
+    axes[0].errorbar(time, mean, std, fmt='o', label=label, alpha = 0.4, color=color)
+    axes[0].plot(np.array(time), np.array(time)*slope+intercept, '--', color=color)
+    axes[0].legend(title="CotA incubation\nin MTP-well [min]")
+    axes[0].set_ylabel('ABTS radical mM')
+    axes[0].set_xlabel('time [min]')
+    axes[0].set_title('Experimental data with calculated regression line')
+
+
+axes[1].errorbar(columns, slopes, stderrs, fmt='o', label="initial rates within the first 5 min")
+axes[1].set_xlabel("CotA incubation time\nin MTP-well [min]")
+axes[1].set_ylabel('rate [absorption / min]')
+axes[1].plot(np.array(columns[1:]), slope_of_slopes*np.array(columns[1:])+intercept_of_slopes, "--", color=colors[0], label=f"regression")
+axes[1].legend()
+axes[1].set_title('Initial rates of CotA reaction')
+
+plt.show()
+
+print(f"Calculated half life based on regression slope: {t12:.2f} h")
+
+
+# _Fig. XXX: Experimental data regression results of CotA experiment with different enzyme incubation times._
+# 
+# The left plot of figure XXX shows the change in product concentration over the first 5 minutes of the enzyme reaction. Therein, different enzyme incubation times prior to reaction start are color-coded. The first reaction without prior incubation shows large standard deviations between the experimental repeats. This might be the result of insufficient mixing or inconsisten ammount of enzyme between the repeats. All other slopes showed a gradually decreasing slope for increased incubation times.  
+# The plot on the right of figure XXX shows the initial rates of the enzyme reactions in relation to prior enzyme incubation time. Based on the calculated initial rates, the decrease
+# Due to the high standard deviation between 
+# 
+
+# In[92]:
 
 
 # Load experimental data from excel file
@@ -144,59 +237,4 @@ display(results.style.set_table_attributes('style="font-size: 12px"'))
 CotA_kinetics_with_inactivation.visualize("irreversible Michaelis Menten",alpha=0.2)
 
 
-# In[91]:
-
-
-# Load excel
-path = '../../data/enzyme_inactivation/Slide 2 - Activity effect of incubating CotA in MTP.xlsx'
-df = pd.read_excel(path, sheet_name='csv').set_index('time (min)')
-
-# replace values of '0**' with nan-values, since the measurement is incorrect
-df['0**'] = np.nan
-
-# Get data from Excel file
-columns = [int(x) for x in list(df.columns) if str(x).endswith("0")]
-time = df.index.values
-absorption = df.values.T.reshape(7,3,22)
-absorption_mean = np.nanmean(absorption, axis = 1)
-absorption_std = np.nanstd(absorption, axis = 1)
-
-# Linear regression
-slopes = []
-intercepts = []
-stderrs = []
-for time_set in absorption:
-    mask = ~np.isnan(time_set)
-    time_regression = np.tile(time, 3).reshape(mask.shape)[mask].flatten()
-    data_regression = time_set[mask].flatten()
-    slope,intercept,_,_,stderr = (linregress(time_regression, data_regression))
-    slopes.append(slope)
-    intercepts.append(intercept)
-    stderrs.append(stderr)
-
-# Regression for the slopes between 10 and 60 mincolumns
-slope_of_slopes, intercept_of_slopes,_,_,_ = linregress(columns[1:], slopes[1:])
-
-# Half life
-t12 = (np.log(0.5)/np.log(1+slope_of_slopes))/60
-
-# Plot results
-colors = cm.tab10(np.linspace(0, 1, len(absorption)))
-fig, axes = plt.subplots(2,1, figsize=(12.8,4.8), sharey=False, sharex=False)
-
-for mean, std, label, slope, intercept, color in zip(absorption_mean, absorption_std, columns, slopes, intercepts, colors):
-    plt.errorbar(time, mean, std, fmt='o', label=label, alpha = 0.4, color=color)
-    plt.plot(np.array(time), np.array(time)*slope+intercept, '--', color=color)
-    plt.legend(title="Enzyme incubation in MTP-well [min]")
-    plt.ylabel('absorption 420 nm')
-    plt.xlabel('time [min]')
-plt.show()
-
-
-plt.errorbar(columns, slopes, stderrs, fmt='o', label="initial rates within the first 5 min")
-plt.xlabel("enzyme incubation time in MTP-well [min]")
-plt.ylabel('rate [absorption / min]')
-plt.plot(np.array(columns[1:]), slope_of_slopes*np.array(columns[1:])+intercept_of_slopes, "--", color=colors[0], label=f"regression")
-plt.legend()
-plt.show()
-
+# ## Discussion
