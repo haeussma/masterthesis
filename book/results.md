@@ -14,3 +14,4 @@ The workflow was designed around EnzymeML, whereas it's data model serves
 - FAIR
 
 The following chapters show the developed workflow applied in different research scenarios. Each each of the following sections is an executable JupyterNotebook. Hence all figures for data visualization were generated at runtime of the analysis.
+Each notebook consists of a short description of the project's background and methodology carried out by the project partners in the wet lab. Additionally kinetic modeling steps as well as the results are shown. Lastly, project specific results are discussed.
