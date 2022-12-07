@@ -1,0 +1,781 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Scenario D:Time-dependent enzyme inactivation &#8212; From raw data to kinetic parameters: an EnzymeML-based workflow for reproducible enzyme kinetics</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Effect of calibration equation on kinetic parameters" href="effect_calibration_model.html" />
+    <link rel="prev" title="Scenario C:SLAC characterization" href="SLAC_kinetic_characterization.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">From raw data to kinetic parameters: an EnzymeML-based workflow for reproducible enzyme kinetics</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../welcome.html">
+                    Welcome
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../declaration.html">
+   Declaration of authorship
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../abstract.html">
+   Abstract
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../acknowledgements.html">
+   Acknowledgements
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../abbreviations.html">
+   Abbreviations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../methods.html">
+   Methods
+  </a>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../results.html">
+   Results
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="chymotrypsin_inhibition.html">
+     <strong>
+      Scenario A:
+     </strong>
+     <br/>
+     Chymotrypsin inhibiton by a designed albumin fusion protein
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="glycosidase_inhibition.html">
+     <strong>
+      Scenario B:
+     </strong>
+     <br/>
+     <span class="math notranslate nohighlight">
+      \(\alpha\)
+     </span>
+     -glucosidase inhibition by fucoidan
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SLAC_kinetic_characterization.html">
+     <strong>
+      Scenario C:
+     </strong>
+     <br/>
+     SLAC characterization
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     <strong>
+      Scenario D:
+     </strong>
+     <br/>
+     Time-dependent enzyme inactivation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="effect_calibration_model.html">
+     Effect of calibration equation on kinetic parameters
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../discussion.html">
+   Discussion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../conclusion.html">
+   Conclusion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../references.html">
+   References
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/haeussma/masterthesis/master?urlpath=tree/book/scenarios/enzyme_inactivation.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+<a href="https://github.com/haeussma/masterthesis"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="bottom"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/scenarios/enzyme_inactivation.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#project-background">
+   Project background
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-preparation">
+   Data Preparation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#imports">
+     Imports
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#experimantal-data">
+     Experimantal data
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Scenario D:<br>Time-dependent enzyme inactivation</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#project-background">
+   Project background
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-preparation">
+   Data Preparation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#imports">
+     Imports
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#experimantal-data">
+     Experimantal data
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="scenario-d-br-time-dependent-enzyme-inactivation">
+<h1><strong>Scenario D:</strong><br>Time-dependent enzyme inactivation<a class="headerlink" href="#scenario-d-br-time-dependent-enzyme-inactivation" title="Permalink to this headline">#</a></h1>
+<p>Data provided by Paulo Durão (Microbial &amp; Enzyme Technology, Instituto de Tecnologia Química e Biológica, Oeiras, Portugal)</p>
+<section id="project-background">
+<h2>Project background<a class="headerlink" href="#project-background" title="Permalink to this headline">#</a></h2>
+<p>All investigated enzyme reaction without inhibitor showed progress curves behavior, which was not explainable by irreversible Michaelis-Menten kinetics. SUBSTRATE PRODUCT INHIBITION. All experiments had in commmon, that enzyme reactions were carried out in 96-well polystyrene micro titer plates (MTP), whereas the change in substrate and or product absorption was monitored photometrically. Initially,
+CotA laccase from <em>Bacillus subtilis</em></p>
+<p><strong>Show results of enzyme inactication across projects</strong> #TODO</p>
+<p>All investigated enzyme reactions in this thesis showed a time-dependent decrease in catalytic activity, which was not explainable by the irreversible Michaelis-Menten model.</p>
+</section>
+<section id="data-preparation">
+<h2>Data Preparation<a class="headerlink" href="#data-preparation" title="Permalink to this headline">#</a></h2>
+<section id="imports">
+<h3>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">#</a></h3>
+<div class="cell tag_hide_input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">pyenzyme</span> <span class="k">as</span> <span class="nn">pe</span>
+<span class="kn">from</span> <span class="nn">EnzymePynetics.tools.parameterestimator</span> <span class="kn">import</span> <span class="n">ParameterEstimator</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span>
+
+
+<span class="c1">#TODO warning in EnzymePynetics</span>
+
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="experimantal-data">
+<h3>Experimantal data<a class="headerlink" href="#experimantal-data" title="Permalink to this headline">#</a></h3>
+<p>Experimantal data was provided as an Excel file, containing time-course absorption data. Meta data was written into the EnzymeML Excel template. Then, the experimantal data was written to an EnzymeML document by a parser function. Concentrations were calculated via the provided extinction coefficient of the ABTS radical (ε = 36000 M<sup>-1</sup>cm<sup>-1</sup>).</p>
+<div class="cell tag_hide_input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load experimental data from excel file</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s2">&quot;../../data/enzyme_inactivation/Repetition CotA ABTS kinetics higher volumes 2nd time.xlsx&quot;</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s2">&quot;csv&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;Time(min)&quot;</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">72</span><span class="p">)</span>
+<span class="n">time</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span>
+
+<span class="c1"># Calculate concentrations</span>
+<span class="n">extinction_coefficient</span> <span class="o">=</span> <span class="mi">36</span> <span class="c1"># (1/mM * 1/cm)</span>
+<span class="n">optical_length</span> <span class="o">=</span> <span class="mf">0.65</span> <span class="c1"># cm</span>
+
+<span class="k">def</span> <span class="nf">absorption_to_concentration</span><span class="p">(</span><span class="n">abso</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">abso</span> <span class="o">/</span> <span class="p">(</span><span class="n">extinction_coefficient</span><span class="o">*</span><span class="n">optical_length</span><span class="p">)</span>
+
+<span class="n">concentration_data</span> <span class="o">=</span> <span class="n">absorption_to_concentration</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="c1"># Parser function</span>
+<span class="k">def</span> <span class="nf">data_to_EnzymeML</span><span class="p">(</span>
+    <span class="n">template_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">measurement_data</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="n">species_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">data_unit</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">time_unit</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pe</span><span class="o">.</span><span class="n">EnzymeMLDocument</span><span class="p">:</span>
+
+    <span class="n">enzmldoc</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">EnzymeMLDocument</span><span class="o">.</span><span class="n">fromTemplate</span><span class="p">(</span><span class="n">template_path</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">IDs</span><span class="p">,</span> <span class="n">concentration</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">enzmldoc</span><span class="o">.</span><span class="n">measurement_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">measurement_data</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">counter</span><span class="p">,</span> <span class="n">replicate</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">concentration</span><span class="p">):</span>
+            <span class="n">rep</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">Replicate</span><span class="p">(</span>
+                <span class="nb">id</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Measurement</span><span class="si">{</span><span class="n">counter</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                <span class="n">species_id</span><span class="o">=</span><span class="n">species_id</span><span class="p">,</span>
+                <span class="n">data</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">replicate</span><span class="p">),</span>
+                <span class="n">data_unit</span><span class="o">=</span><span class="n">data_unit</span><span class="p">,</span>
+                <span class="n">time</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">time</span><span class="p">),</span>
+                <span class="n">time_unit</span><span class="o">=</span><span class="n">time_unit</span><span class="p">)</span>
+            <span class="n">enzmldoc</span><span class="o">.</span><span class="n">getMeasurement</span><span class="p">(</span><span class="n">IDs</span><span class="p">)</span><span class="o">.</span><span class="n">addReplicates</span><span class="p">(</span><span class="n">rep</span><span class="p">,</span> <span class="n">enzmldoc</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">enzmldoc</span>
+
+<span class="c1"># Write experimantal data to EnzymeML document vis parser function</span>
+<span class="n">enzmldoc</span> <span class="o">=</span> <span class="n">data_to_EnzymeML</span><span class="p">(</span>
+    <span class="n">template_path</span><span class="o">=</span><span class="s2">&quot;../../data/enzyme_inactivation/EnzymeML_CotA.xlsm&quot;</span><span class="p">,</span>
+    <span class="n">measurement_data</span><span class="o">=</span><span class="n">concentration_data</span><span class="p">,</span>
+    <span class="n">species_id</span><span class="o">=</span><span class="s2">&quot;s1&quot;</span><span class="p">,</span>
+    <span class="n">data_unit</span><span class="o">=</span><span class="s2">&quot;mmole / l&quot;</span><span class="p">,</span>
+    <span class="n">time_unit</span><span class="o">=</span><span class="s2">&quot;min&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide_input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Parameter estimation without time-dependent enzyme inactivation</span>
+<span class="n">CotA_kinetics</span> <span class="o">=</span> <span class="n">ParameterEstimator</span><span class="o">.</span><span class="n">from_EnzymeML</span><span class="p">(</span><span class="n">enzmldoc</span><span class="p">,</span> <span class="s2">&quot;s1&quot;</span><span class="p">,</span> <span class="s2">&quot;product&quot;</span><span class="p">)</span>
+<span class="n">CotA_kinetics</span><span class="o">.</span><span class="n">fit_models</span><span class="p">(</span><span class="n">enzyme_inactivation</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">display_output</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">CotA_kinetics</span><span class="o">.</span><span class="n">result_dict</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;kcat / Km [1/min * 1/mmole / l]&quot;</span><span class="p">])</span>
+<span class="n">df</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Enzyme inactivation&quot;</span><span class="p">,</span> <span class="s2">&quot;False&quot;</span><span class="p">)</span>
+
+<span class="c1"># Parameter estimation considering time-dependent enzyme inactivation</span>
+<span class="n">CotA_kinetics_with_inactivation</span> <span class="o">=</span> <span class="n">ParameterEstimator</span><span class="o">.</span><span class="n">from_EnzymeML</span><span class="p">(</span><span class="n">enzmldoc</span><span class="p">,</span> <span class="s2">&quot;s1&quot;</span><span class="p">,</span> <span class="s2">&quot;product&quot;</span><span class="p">)</span>
+<span class="n">CotA_kinetics_with_inactivation</span><span class="o">.</span><span class="n">fit_models</span><span class="p">(</span><span class="n">enzyme_inactivation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">display_output</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">df_inactivation</span> <span class="o">=</span> <span class="n">CotA_kinetics_with_inactivation</span><span class="o">.</span><span class="n">result_dict</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;kcat / Km [1/min * 1/mmole / l]&quot;</span><span class="p">])</span>
+<span class="n">df_inactivation</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Enzyme inactivation&quot;</span><span class="p">,</span> <span class="s2">&quot;True&quot;</span><span class="p">)</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df_inactivation</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;AIC&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">set_table_attributes</span><span class="p">(</span><span class="s1">&#39;style=&quot;font-size: 12px&quot;&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style type="text/css">
+</style>
+<table id="T_84ca5" style="font-size: 12px">
+  <thead>
+    <tr>
+      <th class="blank level0" >&nbsp;</th>
+      <th id="T_84ca5_level0_col0" class="col_heading level0 col0" >AIC</th>
+      <th id="T_84ca5_level0_col1" class="col_heading level0 col1" >Enzyme inactivation</th>
+      <th id="T_84ca5_level0_col2" class="col_heading level0 col2" >kcat [1/min]</th>
+      <th id="T_84ca5_level0_col3" class="col_heading level0 col3" >Km [mmole / l]</th>
+      <th id="T_84ca5_level0_col4" class="col_heading level0 col4" >Ki competitive [mmole / l]</th>
+      <th id="T_84ca5_level0_col5" class="col_heading level0 col5" >Ki uncompetitive [mmole / l]</th>
+      <th id="T_84ca5_level0_col6" class="col_heading level0 col6" >ki time-dep enzyme-inactiv. [1/min]</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th id="T_84ca5_level0_row0" class="row_heading level0 row0" >substrate inhibition</th>
+      <td id="T_84ca5_row0_col0" class="data row0 col0" >-29337</td>
+      <td id="T_84ca5_row0_col1" class="data row0 col1" >True</td>
+      <td id="T_84ca5_row0_col2" class="data row0 col2" >3.209 +/- 0.90%</td>
+      <td id="T_84ca5_row0_col3" class="data row0 col3" >0.047 +/- 1.73%</td>
+      <td id="T_84ca5_row0_col4" class="data row0 col4" >-</td>
+      <td id="T_84ca5_row0_col5" class="data row0 col5" >33.750 +/- 13.18%</td>
+      <td id="T_84ca5_row0_col6" class="data row0 col6" >0.007 +/- 4.12%</td>
+    </tr>
+    <tr>
+      <th id="T_84ca5_level0_row1" class="row_heading level0 row1" >competitive product inhibition</th>
+      <td id="T_84ca5_row1_col0" class="data row1 col0" >-29300</td>
+      <td id="T_84ca5_row1_col1" class="data row1 col1" >True</td>
+      <td id="T_84ca5_row1_col2" class="data row1 col2" >3.058 +/- 0.80%</td>
+      <td id="T_84ca5_row1_col3" class="data row1 col3" >0.037 +/- 3.55%</td>
+      <td id="T_84ca5_row1_col4" class="data row1 col4" >0.074 +/- 26.83%</td>
+      <td id="T_84ca5_row1_col5" class="data row1 col5" >-</td>
+      <td id="T_84ca5_row1_col6" class="data row1 col6" >0.006 +/- 5.27%</td>
+    </tr>
+    <tr>
+      <th id="T_84ca5_level0_row2" class="row_heading level0 row2" >non-competitive product inhibition</th>
+      <td id="T_84ca5_row2_col0" class="data row2 col0" >-29296</td>
+      <td id="T_84ca5_row2_col1" class="data row2 col1" >True</td>
+      <td id="T_84ca5_row2_col2" class="data row2 col2" >3.077 +/- 2.06%</td>
+      <td id="T_84ca5_row2_col3" class="data row2 col3" >0.037 +/- 5.14%</td>
+      <td id="T_84ca5_row2_col4" class="data row2 col4" >0.064 +/- 40.49%</td>
+      <td id="T_84ca5_row2_col5" class="data row2 col5" >0.984 +/- 297.88%</td>
+      <td id="T_84ca5_row2_col6" class="data row2 col6" >0.006 +/- 29.07%</td>
+    </tr>
+    <tr>
+      <th id="T_84ca5_level0_row3" class="row_heading level0 row3" >irreversible Michaelis Menten</th>
+      <td id="T_84ca5_row3_col0" class="data row3 col0" >-29287</td>
+      <td id="T_84ca5_row3_col1" class="data row3 col1" >True</td>
+      <td id="T_84ca5_row3_col2" class="data row3 col2" >3.095 +/- 0.77%</td>
+      <td id="T_84ca5_row3_col3" class="data row3 col3" >0.043 +/- 1.30%</td>
+      <td id="T_84ca5_row3_col4" class="data row3 col4" >-</td>
+      <td id="T_84ca5_row3_col5" class="data row3 col5" >-</td>
+      <td id="T_84ca5_row3_col6" class="data row3 col6" >0.007 +/- 4.18%</td>
+    </tr>
+    <tr>
+      <th id="T_84ca5_level0_row4" class="row_heading level0 row4" >uncompetitive product inhibition</th>
+      <td id="T_84ca5_row4_col0" class="data row4 col0" >-29283</td>
+      <td id="T_84ca5_row4_col1" class="data row4 col1" >True</td>
+      <td id="T_84ca5_row4_col2" class="data row4 col2" >3.102 +/- 0.99%</td>
+      <td id="T_84ca5_row4_col3" class="data row4 col3" >0.043 +/- 2.20%</td>
+      <td id="T_84ca5_row4_col4" class="data row4 col4" >-</td>
+      <td id="T_84ca5_row4_col5" class="data row4 col5" >3.259 +/- 198.94%</td>
+      <td id="T_84ca5_row4_col6" class="data row4 col6" >0.007 +/- 5.60%</td>
+    </tr>
+    <tr>
+      <th id="T_84ca5_level0_row5" class="row_heading level0 row5" >non-competitive product inhibition</th>
+      <td id="T_84ca5_row5_col0" class="data row5 col0" >-29276</td>
+      <td id="T_84ca5_row5_col1" class="data row5 col1" >False</td>
+      <td id="T_84ca5_row5_col2" class="data row5 col2" >3.312 +/- 1.52%</td>
+      <td id="T_84ca5_row5_col3" class="data row5 col3" >0.040 +/- 4.92%</td>
+      <td id="T_84ca5_row5_col4" class="data row5 col4" >0.024 +/- 12.73%</td>
+      <td id="T_84ca5_row5_col5" class="data row5 col5" >0.074 +/- 7.44%</td>
+      <td id="T_84ca5_row5_col6" class="data row5 col6" >nan</td>
+    </tr>
+    <tr>
+      <th id="T_84ca5_level0_row6" class="row_heading level0 row6" >uncompetitive product inhibition</th>
+      <td id="T_84ca5_row6_col0" class="data row6 col0" >-29157</td>
+      <td id="T_84ca5_row6_col1" class="data row6 col1" >False</td>
+      <td id="T_84ca5_row6_col2" class="data row6 col2" >3.413 +/- 1.61%</td>
+      <td id="T_84ca5_row6_col3" class="data row6 col3" >0.062 +/- 2.46%</td>
+      <td id="T_84ca5_row6_col4" class="data row6 col4" >-</td>
+      <td id="T_84ca5_row6_col5" class="data row6 col5" >0.060 +/- 6.63%</td>
+      <td id="T_84ca5_row6_col6" class="data row6 col6" >nan</td>
+    </tr>
+    <tr>
+      <th id="T_84ca5_level0_row7" class="row_heading level0 row7" >competitive product inhibition</th>
+      <td id="T_84ca5_row7_col0" class="data row7 col0" >-28969</td>
+      <td id="T_84ca5_row7_col1" class="data row7 col1" >False</td>
+      <td id="T_84ca5_row7_col2" class="data row7 col2" >2.638 +/- 0.33%</td>
+      <td id="T_84ca5_row7_col3" class="data row7 col3" >0.023 +/- 5.39%</td>
+      <td id="T_84ca5_row7_col4" class="data row7 col4" >0.013 +/- 11.76%</td>
+      <td id="T_84ca5_row7_col5" class="data row7 col5" >-</td>
+      <td id="T_84ca5_row7_col6" class="data row7 col6" >nan</td>
+    </tr>
+    <tr>
+      <th id="T_84ca5_level0_row8" class="row_heading level0 row8" >substrate inhibition</th>
+      <td id="T_84ca5_row8_col0" class="data row8 col0" >-28778</td>
+      <td id="T_84ca5_row8_col1" class="data row8 col1" >False</td>
+      <td id="T_84ca5_row8_col2" class="data row8 col2" >2.664 +/- 0.59%</td>
+      <td id="T_84ca5_row8_col3" class="data row8 col3" >0.046 +/- 1.96%</td>
+      <td id="T_84ca5_row8_col4" class="data row8 col4" >-</td>
+      <td id="T_84ca5_row8_col5" class="data row8 col5" >37.058 +/- 16.47%</td>
+      <td id="T_84ca5_row8_col6" class="data row8 col6" >nan</td>
+    </tr>
+    <tr>
+      <th id="T_84ca5_level0_row9" class="row_heading level0 row9" >irreversible Michaelis Menten</th>
+      <td id="T_84ca5_row9_col0" class="data row9 col0" >-28741</td>
+      <td id="T_84ca5_row9_col1" class="data row9 col1" >False</td>
+      <td id="T_84ca5_row9_col2" class="data row9 col2" >2.579 +/- 0.29%</td>
+      <td id="T_84ca5_row9_col3" class="data row9 col3" >0.042 +/- 1.48%</td>
+      <td id="T_84ca5_row9_col4" class="data row9 col4" >-</td>
+      <td id="T_84ca5_row9_col5" class="data row9 col5" >-</td>
+      <td id="T_84ca5_row9_col6" class="data row9 col6" >nan</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<ul class="simple">
+<li><p>Paulo</p>
+<ul>
+<li><p>Long measurement over 70 min.</p></li>
+<li><p>enzyme inacitivation model better fit with less parameters.</p></li>
+<li></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_sub</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">normal</span> <span class="o">=</span> <span class="s2">&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+-=()&quot;</span>
+    <span class="n">sub_s</span> <span class="o">=</span> <span class="s2">&quot;ₐ₈CDₑբGₕᵢⱼₖₗₘₙₒₚQᵣₛₜᵤᵥwₓᵧZₐ♭꜀ᑯₑբ₉ₕᵢⱼₖₗₘₙₒₚ૧ᵣₛₜᵤᵥwₓᵧ₂₀₁₂₃₄₅₆₇₈₉₊₋₌₍₎&quot;</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">maketrans</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">normal</span><span class="p">),</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sub_s</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">get_sub</span><span class="p">(</span><span class="s2">&quot;cat&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>꜀ₐₜ
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./scenarios"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="SLAC_kinetic_characterization.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><strong>Scenario C:</strong><br>SLAC characterization</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="effect_calibration_model.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Effect of calibration equation on kinetic parameters</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Max Häußler<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
