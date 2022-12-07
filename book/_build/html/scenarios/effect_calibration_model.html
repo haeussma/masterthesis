@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Effect of absorption - concentration model on kinetic parameters &#8212; From raw data to kinetic parameters: an EnzymeML-based workflow for reproducible enzyme kinetics</title>
+    <title>Effect of calibration equation on kinetic parameters &#8212; From raw data to kinetic parameters: an EnzymeML-based workflow for reproducible enzyme kinetics</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -53,7 +53,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Discussion" href="../discussion.html" />
-    <link rel="prev" title="Scenario C:SLAC characterization" href="SLAC_kinetic_characterization.html" />
+    <link rel="prev" title="Scenario D:Time-dependent enzyme inactivation" href="enzyme_inactivation.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -179,9 +179,18 @@ const thebe_selector_output = ".output, .cell_output"
      SLAC characterization
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="enzyme_inactivation.html">
+     <strong>
+      Scenario D:
+     </strong>
+     <br/>
+     Time-dependent enzyme inactivation
+    </a>
+   </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     Effect of absorption - concentration model on kinetic parameters
+     Effect of calibration equation on kinetic parameters
     </a>
    </li>
   </ul>
@@ -389,6 +398,18 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#inactivation">
    Inactivation
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#effekt-of-calibration-temperature-and-ph-on-kinetic-parameters">
+     Effekt of calibration temperature and pH on kinetic parameters
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-linear-calibration-instead-of-3rd-polynominal-model">
+   Using linear calibration instead of 3rd polynominal model
+  </a>
  </li>
 </ul>
 
@@ -399,7 +420,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Effect of absorption - concentration model on kinetic parameters</h1>
+                <h1>Effect of calibration equation on kinetic parameters</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -423,6 +444,18 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#inactivation">
    Inactivation
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#effekt-of-calibration-temperature-and-ph-on-kinetic-parameters">
+     Effekt of calibration temperature and pH on kinetic parameters
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-linear-calibration-instead-of-3rd-polynominal-model">
+   Using linear calibration instead of 3rd polynominal model
+  </a>
  </li>
 </ul>
 
@@ -434,8 +467,8 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="effect-of-absorption-concentration-model-on-kinetic-parameters">
-<h1>Effect of absorption - concentration model on kinetic parameters<a class="headerlink" href="#effect-of-absorption-concentration-model-on-kinetic-parameters" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="effect-of-calibration-equation-on-kinetic-parameters">
+<h1>Effect of calibration equation on kinetic parameters<a class="headerlink" href="#effect-of-calibration-equation-on-kinetic-parameters" title="Permalink to this headline">#</a></h1>
 <p>In this analysis the influence of calibration model selection on the resulting parameters should was investigated. Each parameter estimation scenario in this work relies on the conversion from absorption data into concentration data. Therefore, a standard of the analyte, which was used to measure the enzyme activty, was provided with each kinetic experiment. Usually, a linear relationship between the absobance signal and concentration is assumed by experimentalists. Therefore, a linear calibration is applied.</p>
 <p>Experimentalists often restrict themselfs to only use the so called ‘linear’ range of the photometer below an absorption of 1. Thus, sacrificing a significant ammount of the measurement range of the analytical device.</p>
 <section id="data">
@@ -453,6 +486,220 @@ title="Print to PDF"
 </section>
 <section id="inactivation">
 <h2>Inactivation<a class="headerlink" href="#inactivation" title="Permalink to this headline">#</a></h2>
+<section id="effekt-of-calibration-temperature-and-ph-on-kinetic-parameters">
+<h3>Effekt of calibration temperature and pH on kinetic parameters<a class="headerlink" href="#effekt-of-calibration-temperature-and-ph-on-kinetic-parameters" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">enzmldoc</span> <span class="o">=</span> <span class="n">enzmldoc_absorption_dict</span><span class="p">[</span><span class="s2">&quot;3.0 45.0&quot;</span><span class="p">]</span>
+
+<span class="n">standards_variations</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">calibration_data</span><span class="o">.</span><span class="n">pH</span> <span class="o">==</span> <span class="mf">3.0</span><span class="p">,</span> <span class="n">standard_list</span><span class="p">))</span>
+<span class="p">[</span><span class="n">standards_variations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">calibration_data</span><span class="o">.</span><span class="n">temperature</span> <span class="o">==</span> <span class="mi">45</span> <span class="ow">and</span> <span class="n">x</span><span class="o">.</span><span class="n">calibration_data</span><span class="o">.</span><span class="n">pH</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="p">,</span> <span class="n">standard_list</span><span class="p">))];</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="n">kinetics</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">standard</span> <span class="ow">in</span> <span class="n">standards_variations</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">copy</span><span class="o">.</span><span class="vm">__file__</span><span class="p">)</span>
+    <span class="n">doc</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">enzmldoc</span><span class="p">)</span>
+    <span class="n">standard</span><span class="o">.</span><span class="n">apply_to_EnzymeML</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">species_id</span><span class="o">=</span><span class="s2">&quot;s0&quot;</span><span class="p">,</span> <span class="n">ommit_nan_measurements</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">kinetic</span> <span class="o">=</span> <span class="p">(</span><span class="n">ParameterEstimator</span><span class="o">.</span><span class="n">from_EnzymeML</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">reactant_id</span><span class="o">=</span><span class="s2">&quot;s0&quot;</span><span class="p">,</span> <span class="n">measured_species</span><span class="o">=</span><span class="s2">&quot;substrate&quot;</span><span class="p">))</span>
+    <span class="n">kinetic</span><span class="o">.</span><span class="n">fit_models</span><span class="p">(</span><span class="n">enzyme_inactivation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">only_irrev_MM</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">kinetics</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">kinetic</span><span class="p">)</span>
+
+
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="using-linear-calibration-instead-of-3rd-polynominal-model">
+<h2>Using linear calibration instead of 3rd polynominal model<a class="headerlink" href="#using-linear-calibration-instead-of-3rd-polynominal-model" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">models</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;Linear&quot;</span><span class="p">]</span>
+<span class="n">kinetics</span><span class="o">=</span><span class="p">[]</span>
+<span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">copy</span><span class="o">.</span><span class="vm">__file__</span><span class="p">)</span>
+    <span class="n">doc</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">enzmldoc</span><span class="p">)</span>
+    <span class="n">standards_variations</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">apply_to_EnzymeML</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">species_id</span><span class="o">=</span><span class="s2">&quot;s0&quot;</span><span class="p">,</span> <span class="n">ommit_nan_measurements</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">model_name</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+    <span class="n">kinetic</span> <span class="o">=</span> <span class="p">(</span><span class="n">ParameterEstimator</span><span class="o">.</span><span class="n">from_EnzymeML</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">reactant_id</span><span class="o">=</span><span class="s2">&quot;s0&quot;</span><span class="p">,</span> <span class="n">measured_species</span><span class="o">=</span><span class="s2">&quot;substrate&quot;</span><span class="p">))</span>
+    <span class="n">kinetic</span><span class="o">.</span><span class="n">fit_models</span><span class="p">(</span><span class="n">enzyme_inactivation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">only_irrev_MM</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">kinetics</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">kinetic</span><span class="p">)</span>
+
+<span class="c1"># Get kinetic parameters of all datasets</span>
+<span class="n">kcat</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">kcat_std</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">Km</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">Km_std</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">ki</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">ki_std</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">temperature</span> <span class="o">=</span> <span class="p">[</span><span class="mi">45</span><span class="p">,</span><span class="mi">45</span><span class="p">]</span>
+<span class="n">pH</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">kinetics</span><span class="p">:</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get_parameter_dict</span><span class="p">()</span>
+
+    <span class="n">kcat</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;k_cat&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+    <span class="n">kcat_std</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;k_cat&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+
+    <span class="n">Km</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;Km&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+    <span class="n">Km_std</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;Km&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+
+    <span class="n">ki</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;K_ie&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+    <span class="n">ki_std</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;K_ie&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">({</span>
+    <span class="s1">&#39;pH&#39;</span><span class="p">:</span><span class="n">pH</span><span class="p">,</span> 
+    <span class="s2">&quot;temperature&quot;</span><span class="p">:</span><span class="n">temperature</span><span class="p">,</span> 
+    <span class="s1">&#39;kcat [1/s]&#39;</span><span class="p">:</span><span class="n">kcat</span><span class="p">,</span> 
+    <span class="s1">&#39;kcat stderr&#39;</span><span class="p">:</span><span class="n">kcat_std</span><span class="p">,</span> 
+    <span class="s1">&#39;Km [uM]&#39;</span><span class="p">:</span><span class="n">Km</span><span class="p">,</span> 
+    <span class="s1">&#39;Km stderr&#39;</span><span class="p">:</span><span class="n">Km_std</span><span class="p">,</span> 
+    <span class="s2">&quot;Enzyme inactivation [1/s]&quot;</span><span class="p">:</span><span class="n">ki</span><span class="p">,</span>
+    <span class="s2">&quot;Enzyme inactivation std&quot;</span><span class="p">:</span><span class="n">ki_std</span><span class="p">})</span>
+
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;kcat/Km&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;kcat [1/s]&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Km [uM]&quot;</span><span class="p">]</span>
+<span class="n">kcat_km_stderr</span> <span class="o">=</span><span class="p">((</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;kcat stderr&quot;</span><span class="p">]</span><span class="o">/</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;kcat [1/s]&quot;</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Km stderr&quot;</span><span class="p">]</span><span class="o">/</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Km [uM]&quot;</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;kcat/Km&quot;</span><span class="p">]</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;kcat/Km stderr&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kcat_km_stderr</span>
+
+<span class="n">ph_map</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s2">&quot;husl&quot;</span><span class="p">)</span>
+<span class="n">ph_colors</span> <span class="o">=</span> <span class="p">[</span><span class="n">ph_map</span><span class="p">[(</span><span class="n">x</span><span class="p">)]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)]</span>
+<span class="n">pH_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">([</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">],</span> <span class="n">ph_colors</span><span class="p">))</span>
+<span class="n">pH_tuples</span> <span class="o">=</span> <span class="p">[</span><span class="n">pH_dict</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;pH&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">]</span>
+
+<span class="n">temperature_map</span> <span class="o">=</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;coolwarm&#39;</span><span class="p">)</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="n">temperature_map</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">)]</span>
+<span class="n">color_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">([</span><span class="mi">25</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">40</span> <span class="p">,</span><span class="mi">45</span><span class="p">],</span> <span class="n">colors</span><span class="p">))</span>
+<span class="n">color_tuples</span> <span class="o">=</span> <span class="p">[</span><span class="n">color_dict</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;temperature&quot;</span><span class="p">]]</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">km</span><span class="p">,</span> <span class="n">kcat</span><span class="p">,</span> <span class="n">km_error</span><span class="p">,</span> <span class="n">kcat_error</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Km [uM]&quot;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;kcat [1/s]&quot;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Km stderr&quot;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;kcat stderr&quot;</span><span class="p">],</span> <span class="n">pH_tuples</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;pH&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)):</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">km</span><span class="p">,</span> <span class="n">kcat</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="n">color</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="n">label</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">5</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">km</span><span class="p">,</span> <span class="n">kcat</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">kcat_error</span><span class="p">,</span><span class="n">xerr</span><span class="o">=</span><span class="n">km_error</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="n">ecolor</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;pH&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;kcat [1/s]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Km [uM]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">200</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">subset_enzymeml</span> <span class="o">=</span> <span class="p">[</span><span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">enzmldoc_absorption_dict</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">getReaction</span><span class="p">(</span><span class="s2">&quot;r0&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">temperature</span> <span class="o">==</span> <span class="mi">45</span><span class="p">]</span>
+<span class="n">models</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;Linear&quot;</span><span class="p">]</span>
+<span class="n">calibration_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">standard_curve_dict</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">calibration_data</span><span class="o">.</span><span class="n">temperature</span> <span class="o">==</span> <span class="mi">45</span> <span class="ow">and</span> <span class="n">x</span><span class="o">.</span><span class="n">calibration_data</span><span class="o">.</span><span class="n">pH</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="p">]</span>
+<span class="n">applied_model</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;best model&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;Linear&quot;</span><span class="p">:</span> <span class="s2">&quot;Linear&quot;</span><span class="p">}</span>
+
+<span class="n">kinetics</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">model_names</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">doc</span><span class="p">,</span> <span class="n">standard</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">subset_enzymeml</span><span class="p">,</span> <span class="n">calibration_data</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">applied_model</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
+        <span class="n">standard</span><span class="o">.</span><span class="n">apply_to_EnzymeML</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">species_id</span><span class="o">=</span><span class="s2">&quot;s0&quot;</span><span class="p">,</span> <span class="n">ommit_nan_measurements</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">model_name</span><span class="o">=</span><span class="n">value</span><span class="p">)</span>
+        <span class="n">kinetic</span> <span class="o">=</span> <span class="p">(</span><span class="n">ParameterEstimator</span><span class="o">.</span><span class="n">from_EnzymeML</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">reactant_id</span><span class="o">=</span><span class="s2">&quot;s0&quot;</span><span class="p">,</span> <span class="n">measured_species</span><span class="o">=</span><span class="s2">&quot;substrate&quot;</span><span class="p">))</span>
+        <span class="n">kinetic</span><span class="o">.</span><span class="n">fit_models</span><span class="p">(</span><span class="n">enzyme_inactivation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">only_irrev_MM</span><span class="o">=</span><span class="kc">True</span><span class="p">);</span>
+        <span class="n">kinetics</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">kinetic</span><span class="p">)</span>
+        <span class="n">kinetic</span><span class="o">.</span><span class="n">visualize</span><span class="p">()</span>
+        <span class="n">model_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+
+
+<span class="n">model_names</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">kcat</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">kcat_std</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">Km</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">Km_std</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">ki</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">ki_std</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">temp</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">calibration_model</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s2">&quot;best model&quot;</span><span class="p">,</span> <span class="s2">&quot;linear calibration&quot;</span><span class="p">]),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="n">pH</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mf">3.5</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mf">4.5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mf">5.5</span><span class="p">]),</span> <span class="mi">2</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">kinetics</span><span class="p">:</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get_parameter_dict</span><span class="p">()</span>
+    <span class="n">temp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">temperature</span><span class="p">)</span>
+
+    <span class="n">kcat</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;k_cat&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+    <span class="n">kcat_std</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;k_cat&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+
+    <span class="n">Km</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;Km&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+    <span class="n">Km_std</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;Km&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+
+    <span class="n">ki</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;K_ie&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+    <span class="n">ki_std</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;K_ie&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">({</span>
+    <span class="s1">&#39;pH&#39;</span><span class="p">:</span><span class="n">pH</span><span class="p">,</span> 
+    <span class="s2">&quot;calibration model&quot;</span><span class="p">:</span><span class="n">calibration_model</span><span class="p">,</span> 
+    <span class="s1">&#39;kcat [1/s]&#39;</span><span class="p">:</span><span class="n">kcat</span><span class="p">,</span> 
+    <span class="s1">&#39;kcat stderr&#39;</span><span class="p">:</span><span class="n">kcat_std</span><span class="p">,</span> 
+    <span class="s1">&#39;Km [uM]&#39;</span><span class="p">:</span><span class="n">Km</span><span class="p">,</span> 
+    <span class="s1">&#39;Km stderr&#39;</span><span class="p">:</span><span class="n">Km_std</span><span class="p">,</span> 
+    <span class="s2">&quot;Enzyme inactivation [1/s]&quot;</span><span class="p">:</span><span class="n">ki</span><span class="p">,</span>
+    <span class="s2">&quot;temperature&quot;</span><span class="p">:</span> <span class="n">temp</span><span class="p">,</span>
+    <span class="s2">&quot;Enzyme inactivation std&quot;</span><span class="p">:</span><span class="n">ki_std</span><span class="p">})</span>
+
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;kcat/Km&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;kcat [1/s]&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Km [uM]&quot;</span><span class="p">]</span>
+<span class="n">kcat_km_stderr</span> <span class="o">=</span><span class="p">((</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;kcat stderr&quot;</span><span class="p">]</span><span class="o">/</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;kcat [1/s]&quot;</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Km stderr&quot;</span><span class="p">]</span><span class="o">/</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Km [uM]&quot;</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;kcat/Km&quot;</span><span class="p">]</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;kcat/Km stderr&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kcat_km_stderr</span>
+
+<span class="n">df</span>
+        
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ph_map</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s2">&quot;husl&quot;</span><span class="p">)</span>
+<span class="n">ph_colors</span> <span class="o">=</span> <span class="p">[</span><span class="n">ph_map</span><span class="p">[(</span><span class="n">x</span><span class="p">)]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)]</span>
+<span class="n">pH_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">([</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">],</span> <span class="n">ph_colors</span><span class="p">))</span>
+<span class="n">pH_tuples</span> <span class="o">=</span> <span class="p">[</span><span class="n">pH_dict</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;pH&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">]</span>
+
+<span class="n">temperature_map</span> <span class="o">=</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;coolwarm&#39;</span><span class="p">)</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="n">temperature_map</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">)]</span>
+<span class="n">color_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">([</span><span class="mi">25</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">40</span> <span class="p">,</span><span class="mi">45</span><span class="p">],</span> <span class="n">colors</span><span class="p">))</span>
+<span class="n">color_tuples</span> <span class="o">=</span> <span class="p">[</span><span class="n">color_dict</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;temperature&quot;</span><span class="p">]]</span>
+
+<span class="n">cools</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;orange&quot;</span><span class="p">,</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;orange&quot;</span><span class="p">,</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;orange&quot;</span><span class="p">,</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;orange&quot;</span><span class="p">,</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;orange&quot;</span><span class="p">]</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">kcatkm</span><span class="p">,</span> <span class="n">kcatkm_error</span><span class="p">,</span> <span class="n">temp</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;kcat [1/s]&quot;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;kcat stderr&quot;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;pH&quot;</span><span class="p">]</span> <span class="p">,</span> <span class="n">cools</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;calibration model&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)):</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span> <span class="n">kcatkm</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="n">color</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="n">label</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span> <span class="n">kcatkm</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">kcatkm_error</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span> <span class="n">color</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;calibration model&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;kcat/Km [1/s * uM]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;pH&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Datasets of various pHs and 45°C calibrated with different standard curve fits&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">enzmldoc</span> <span class="o">=</span> <span class="n">concentration_enzymemldocs</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+
+<span class="n">kinetics</span> <span class="o">=</span> <span class="n">ParameterEstimator</span><span class="o">.</span><span class="n">from_EnzymeML</span><span class="p">(</span><span class="n">enzmldoc</span><span class="p">,</span> <span class="s2">&quot;s0&quot;</span><span class="p">,</span> <span class="s2">&quot;substrate&quot;</span><span class="p">)</span>
+<span class="n">kinetics</span><span class="o">.</span><span class="n">fit_models</span><span class="p">(</span><span class="n">only_irrev_MM</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">enzyme_inactivation</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">kinetics</span><span class="o">.</span><span class="n">visualize</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 
@@ -483,11 +730,11 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="SLAC_kinetic_characterization.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="enzyme_inactivation.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><strong>Scenario C:</strong><br>SLAC characterization</p>
+            <p class="prev-next-title"><strong>Scenario D:</strong><br>Time-dependent enzyme inactivation</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="../discussion.html" title="next page">

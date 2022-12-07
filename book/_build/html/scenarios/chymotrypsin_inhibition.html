@@ -182,8 +182,17 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="enzyme_inactivation.html">
+     <strong>
+      Scenario D:
+     </strong>
+     <br/>
+     Time-dependent enzyme inactivation
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="effect_calibration_model.html">
-     Effect of absorption - concentration model on kinetic parameters
+     Effect of calibration equation on kinetic parameters
     </a>
    </li>
   </ul>
@@ -573,33 +582,33 @@ Since</p>
 </div>
 <div class="output text_html"><style type="text/css">
 </style>
-<table id="T_f762d" style="font-size: 12px">
+<table id="T_730ea" style="font-size: 12px">
   <thead>
     <tr>
       <th class="blank level0" >&nbsp;</th>
-      <th id="T_f762d_level0_col0" class="col_heading level0 col0" >AIC</th>
+      <th id="T_730ea_level0_col0" class="col_heading level0 col0" >AIC</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th id="T_f762d_level0_row0" class="row_heading level0 row0" >Quadratic</th>
-      <td id="T_f762d_row0_col0" class="data row0 col0" >-161</td>
+      <th id="T_730ea_level0_row0" class="row_heading level0 row0" >Quadratic</th>
+      <td id="T_730ea_row0_col0" class="data row0 col0" >-161</td>
     </tr>
     <tr>
-      <th id="T_f762d_level0_row1" class="row_heading level0 row1" >3rd polynominal</th>
-      <td id="T_f762d_row1_col0" class="data row1 col0" >-161</td>
+      <th id="T_730ea_level0_row1" class="row_heading level0 row1" >3rd polynominal</th>
+      <td id="T_730ea_row1_col0" class="data row1 col0" >-161</td>
     </tr>
     <tr>
-      <th id="T_f762d_level0_row2" class="row_heading level0 row2" >Linear</th>
-      <td id="T_f762d_row2_col0" class="data row2 col0" >-143</td>
+      <th id="T_730ea_level0_row2" class="row_heading level0 row2" >Linear</th>
+      <td id="T_730ea_row2_col0" class="data row2 col0" >-143</td>
     </tr>
     <tr>
-      <th id="T_f762d_level0_row3" class="row_heading level0 row3" >Rational</th>
-      <td id="T_f762d_row3_col0" class="data row3 col0" >-141</td>
+      <th id="T_730ea_level0_row3" class="row_heading level0 row3" >Rational</th>
+      <td id="T_730ea_row3_col0" class="data row3 col0" >-141</td>
     </tr>
     <tr>
-      <th id="T_f762d_level0_row4" class="row_heading level0 row4" >Exponential</th>
-      <td id="T_f762d_row4_col0" class="data row4 col0" >-17</td>
+      <th id="T_730ea_level0_row4" class="row_heading level0 row4" >Exponential</th>
+      <td id="T_730ea_row4_col0" class="data row4 col0" >-17</td>
     </tr>
   </tbody>
 </table>
@@ -848,7 +857,7 @@ The tables below show the parameter estimastes for all applied kinetic models.</
 
 <span class="c1"># Visualize experimental data and fitted models</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">12.8</span><span class="p">,</span><span class="mf">4.8</span><span class="p">),</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">e</span><span class="p">,</span> <span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">title</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">([</span><span class="n">kinetics_HSAwt</span> <span class="p">,</span><span class="n">kinetics_HSAM3</span><span class="p">],</span> <span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="p">[</span><span class="s2">&quot;chymotrypsin inhibition by HSA(wt)&quot;</span><span class="p">,</span> <span class="s2">&quot;chymotrypsin inhibition by HSA(M3)&quot;</span><span class="p">])):</span>
+<span class="k">for</span> <span class="n">e</span><span class="p">,</span> <span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">title</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">([</span><span class="n">kinetics_HSAwt</span> <span class="p">,</span><span class="n">kinetics_HSAM3</span><span class="p">],</span> <span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="p">[</span><span class="s2">&quot;chymotrypsin inhibition by HSA(WT)-huFc&quot;</span><span class="p">,</span> <span class="s2">&quot;chymotrypsin inhibition by HSA(Chymo-M3)-huFc&quot;</span><span class="p">])):</span>
     <span class="n">doc</span><span class="o">.</span><span class="n">visualize</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;4-nitroanilin [mM]&quot;</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;time after reaction start [min]&quot;</span><span class="p">)</span>
@@ -996,7 +1005,66 @@ The tables below show the parameter estimastes for all applied kinetic models.</
 </div>
 </div>
 <p><em>Fig. 1: Measurement data and fitted product inhibition model for chymotrypsin reactions with respective HSA inhibitior.</em></p>
-<p>Both reaction systems are best described by the competitive inhibition model, which is indicated by the lowest AIC and standard deviation on the estimated parameters. Thereby, a <span class="math notranslate nohighlight">\(K_{i}\)</span> of 0.460 mM ± 27.24% was estimated for HSA(wt) and 0.059 mM ± 8.51% for HSA(M3). This resembles a roughly 7-fold increase in affinity of HSA(M3) to the enzyme compared to the HSA(wt). Since the competitive inhibition model describes the data the best, HSA(M3) presumably interactis with the enzyme in the active site region.</p>
+<p>Both reaction systems are best described by the competitive inhibition model, which is indicated by the lowest AIC and standard deviation on the estimated parameters. Thereby, a <span class="math notranslate nohighlight">\(K_{i}\)</span> of 0.460 mM ± 27.24% was estimated for HSA(wt) and 0.059 mM ± 8.51% for HSA(M3). This resembles a roughly 7-fold increase in affinity of HSA(M3) to the enzyme compared to the HSA(wt). Since the competitive inhibition model describes the data the best, HSA(M3) presumably interacts with the enzyme in the active site region.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kinetics_HSAwt</span><span class="o">.</span><span class="n">visualize</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;chymotrypsin inhibition by HSA(WT)-huFc&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fit report for competitive inhibition model
+[[Fit Statistics]]
+    # fitting method   = leastsq
+    # function evals   = 36
+    # data points      = 256
+    # variables        = 3
+    chi-square         = 0.00137490
+    reduced chi-square = 5.4344e-06
+    Akaike info crit   = -3100.44585
+    Bayesian info crit = -3089.81032
+[[Variables]]
+    k_cat:  68.6263364 +/- 2.69078924 (3.92%) (init = 32.216)
+    Km:     3.08387875 +/- 0.17764014 (5.76%) (init = 0.32216)
+    K_ic:   0.45950740 +/- 0.12515388 (27.24%) (init = 0.1)
+[[Correlations]] (unreported correlations are &lt; 0.100)
+    C(k_cat, Km) = 0.983
+    C(Km, K_ic)  = 0.152
+</pre></div>
+</div>
+<img alt="../_images/chymotrypsin_inhibition_12_1.png" src="../_images/chymotrypsin_inhibition_12_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kinetics_HSAM3</span><span class="o">.</span><span class="n">visualize</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;chymotrypsin inhibition by HSA(Chymo-M3)-huFc&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fit report for competitive inhibition model
+[[Fit Statistics]]
+    # fitting method   = leastsq
+    # function evals   = 59
+    # data points      = 64
+    # variables        = 3
+    chi-square         = 1.9077e-04
+    reduced chi-square = 3.1274e-06
+    Akaike info crit   = -808.292970
+    Bayesian info crit = -801.816321
+[[Variables]]
+    k_cat:  56.8160006 +/- 3.20785889 (5.65%) (init = 25.93928)
+    Km:     2.46689202 +/- 0.21789814 (8.83%) (init = 0.2593928)
+    K_ic:   0.05940519 +/- 0.00505739 (8.51%) (init = 0.1)
+[[Correlations]] (unreported correlations are &lt; 0.100)
+    C(k_cat, Km)   = 0.982
+    C(Km, K_ic)    = 0.388
+    C(k_cat, K_ic) = 0.273
+</pre></div>
+</div>
+<img alt="../_images/chymotrypsin_inhibition_13_1.png" src="../_images/chymotrypsin_inhibition_13_1.png" />
+</div>
+</div>
 </section>
 </section>
 

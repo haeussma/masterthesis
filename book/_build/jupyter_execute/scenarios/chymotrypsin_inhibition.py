@@ -22,7 +22,7 @@
 # 
 # ### Imports
 
-# In[1]:
+# In[2]:
 
 
 import numpy as np
@@ -42,7 +42,7 @@ warnings.filterwarnings('ignore')
 # 
 # Product standard data was imported directly from an Excel file. Then, a standard curve was created.
 
-# In[2]:
+# In[3]:
 
 
 product_standard = StandardCurve.from_excel(
@@ -63,7 +63,7 @@ product_standard.visualize()
 # 
 # The EnzymeML documents were loaded and the standard curve was applied to the absorption data for concentration calculation.
 
-# In[3]:
+# In[4]:
 
 
 # Load data from 
@@ -79,7 +79,7 @@ chymo_HSAM3 = product_standard.apply_to_EnzymeML(chymo_HSAM3, "s1")
 # 
 # Since the experimental data from the HSA wild-type and the HSA(M3) variant originate from independent experiments, the control reactions without the respective inhibitor were compared by performing a parameter estimation. Thereby, $k_{cat}$ and $K_{m}$ were highly correlated (corr > 0.98). Hence, catalytic efficiency $\frac{k_{cat}}{K_{m}}$ was used to assess comparability between the data sets. High correlation indicates, that the highest initial substrate concentration is too low, compared to the true $K_{m}$ of the enzyme under the given experimental conditions. In this case, higher substrate concentration were not applied for multiple reasons. On the one hand dimethyl sulfoxide (DMSO) was used as a co-solvent of the substrate, which inhibits enzyme activity {cite:t}`busby1999effect`. Hence, higher initial substrate concentrations would have led to higher enzyme inhibition. On the other hand, high substrate viscosity denied the application of higher concentrations without sacrificing pipetting percision.
 
-# In[4]:
+# In[5]:
 
 
 # Create copys of the data sets and delete measuremnts with inhibitor.
@@ -132,7 +132,7 @@ plt.tight_layout()
 # The data set of chymotrypsin inhibition by HSA(M3) contained negative absorption values for the first measurement point. Presumably from an incorrect blank measurement. Therefore, only measurement data from the second data point (minute 5 and onward) was considered for parameter estimation. Additionally, measuremet
 # The tables below show the parameter estimastes for all applied kinetic models.
 
-# In[5]:
+# In[6]:
 
 
 # Parameter estimation for HSA(wt) data set
@@ -149,7 +149,7 @@ display(kinetics_HSAM3.result_dict.drop(columns=["kcat [1/min]", "Km [mmole / l]
 
 # Visualize experimental data and fitted models
 fig, axes = plt.subplots(1,2, figsize=(12.8,4.8), sharey=True, sharex=True)
-for e, (doc, ax, title) in enumerate(zip([kinetics_HSAwt ,kinetics_HSAM3], axes.flatten(), ["chymotrypsin inhibition by HSA(wt)", "chymotrypsin inhibition by HSA(M3)"])):
+for e, (doc, ax, title) in enumerate(zip([kinetics_HSAwt ,kinetics_HSAM3], axes.flatten(), ["chymotrypsin inhibition by HSA(WT)-huFc", "chymotrypsin inhibition by HSA(Chymo-M3)-huFc"])):
     doc.visualize(ax=ax, title=title)
     ax.set_ylabel("4-nitroanilin [mM]")
     ax.set_xlabel("time after reaction start [min]")
@@ -163,4 +163,16 @@ plt.tight_layout()
 
 # _Fig. 1: Measurement data and fitted product inhibition model for chymotrypsin reactions with respective HSA inhibitior._
 # 
-# Both reaction systems are best described by the competitive inhibition model, which is indicated by the lowest AIC and standard deviation on the estimated parameters. Thereby, a $K_{i}$ of 0.460 mM ± 27.24% was estimated for HSA(wt) and 0.059 mM ± 8.51% for HSA(M3). This resembles a roughly 7-fold increase in affinity of HSA(M3) to the enzyme compared to the HSA(wt). Since the competitive inhibition model describes the data the best, HSA(M3) presumably interactis with the enzyme in the active site region.  
+# Both reaction systems are best described by the competitive inhibition model, which is indicated by the lowest AIC and standard deviation on the estimated parameters. Thereby, a $K_{i}$ of 0.460 mM ± 27.24% was estimated for HSA(wt) and 0.059 mM ± 8.51% for HSA(M3). This resembles a roughly 7-fold increase in affinity of HSA(M3) to the enzyme compared to the HSA(wt). Since the competitive inhibition model describes the data the best, HSA(M3) presumably interacts with the enzyme in the active site region.  
+
+# In[8]:
+
+
+kinetics_HSAwt.visualize(title="chymotrypsin inhibition by HSA(WT)-huFc")
+
+
+# In[9]:
+
+
+kinetics_HSAM3.visualize(title="chymotrypsin inhibition by HSA(Chymo-M3)-huFc")
+

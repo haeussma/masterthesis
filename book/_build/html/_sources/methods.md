@@ -8,19 +8,23 @@ Within the measurements section of the data model, measurement data of one or mu
 
 The data model consists of descriptions for the reaction vessel,
 
-## 2. CaliPytion
+(method:calipytion)=
 
-### 2.1 Data model for calibration data
+## CaliPytion
 
-### 2.2 Linear and non-linear fitting of calibration equations
+### Data model for calibration data
 
-## 3. EnzymePynetics
+### Linear and non-linear fitting of calibration equations
 
-### 3.1 Overview
+(method:enzymepynetics)=
+
+## EnzymePynetics
+
+### Overview
 
 EnzymePynetics is a a python package, for kinetic parameter estimation of single-substrate enzyme reactions, which was developed during this thesis. The `ParameterEstimator` of EnzymePynetics estimates the kinetic parameters $k_{cat}$ and $K_{m}$ by fitting time-course measurement data of enzyme reactions to different Michaelis-Menten models. Thereby, the residuals between measurement data and integrated Michaelis-Menten rate equations are minimized through a non-linear least-squares algorithm. Additionally, the inhibition constant $K_{i}$ can be assessed for potential substrate or product inhibition. Furthermore, the inhibition constant of an enzyme inhibitor can be determined.
 
-### 3.2 Data model
+### Data model
 
 Data models build the backbone of applications, by defining the relations between informations in an hierarchical manner.
 EnzymePynetics is based on a data model, resembling the experimental design of an enzyme kinetics assay. Thereby, all relevant data and meta data of an kinetic experiment are ordered in the base object `EnzymeKineticsExperiment`. On the metadata side, the base object consists of the attributes temperature with its respective unit, pH, and the name of the measured substance. Additionally, it can be specified whether the measurement data originates from substrate or product measurements. On the data side, `EnzymeKineticsExperiment` contains one or multiple `Measurements`. Each measurement stores the information of an experimental condition, to which the enzyme was subjected. Therefore, each `Measurement` contains information on the initial substrate concentration, enzyme concentration, and inhibitor concentration, if present, along with the respective concentration units. Each `Measurement` contains the measured data, which itself consist of one or multiple replicates of the respective experimental condition.  

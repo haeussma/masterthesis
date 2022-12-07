@@ -182,8 +182,17 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="scenarios/enzyme_inactivation.html">
+     <strong>
+      Scenario D:
+     </strong>
+     <br/>
+     Time-dependent enzyme inactivation
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="scenarios/effect_calibration_model.html">
-     Effect of absorption - concentration model on kinetic parameters
+     Effect of calibration equation on kinetic parameters
     </a>
    </li>
   </ul>
@@ -355,34 +364,34 @@ title="Print to PDF"
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#calipytion">
-   2. CaliPytion
+   CaliPytion
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#data-model-for-calibration-data">
-     2.1 Data model for calibration data
+     Data model for calibration data
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#linear-and-non-linear-fitting-of-calibration-equations">
-     2.2 Linear and non-linear fitting of calibration equations
+     Linear and non-linear fitting of calibration equations
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#enzymepynetics">
-   3. EnzymePynetics
+   EnzymePynetics
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#overview">
-     3.1 Overview
+     Overview
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#data-model">
-     3.2 Data model
+     Data model
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -433,34 +442,34 @@ title="Print to PDF"
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#calipytion">
-   2. CaliPytion
+   CaliPytion
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#data-model-for-calibration-data">
-     2.1 Data model for calibration data
+     Data model for calibration data
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#linear-and-non-linear-fitting-of-calibration-equations">
-     2.2 Linear and non-linear fitting of calibration equations
+     Linear and non-linear fitting of calibration equations
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#enzymepynetics">
-   3. EnzymePynetics
+   EnzymePynetics
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#overview">
-     3.1 Overview
+     Overview
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#data-model">
-     3.2 Data model
+     Data model
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -504,22 +513,22 @@ title="Print to PDF"
 <p>The data model consists of descriptions for the reaction vessel,</p>
 </section>
 <section id="calipytion">
-<h2>2. CaliPytion<a class="headerlink" href="#calipytion" title="Permalink to this headline">#</a></h2>
+<span id="method-calipytion"></span><h2>CaliPytion<a class="headerlink" href="#calipytion" title="Permalink to this headline">#</a></h2>
 <section id="data-model-for-calibration-data">
-<h3>2.1 Data model for calibration data<a class="headerlink" href="#data-model-for-calibration-data" title="Permalink to this headline">#</a></h3>
+<h3>Data model for calibration data<a class="headerlink" href="#data-model-for-calibration-data" title="Permalink to this headline">#</a></h3>
 </section>
 <section id="linear-and-non-linear-fitting-of-calibration-equations">
-<h3>2.2 Linear and non-linear fitting of calibration equations<a class="headerlink" href="#linear-and-non-linear-fitting-of-calibration-equations" title="Permalink to this headline">#</a></h3>
+<h3>Linear and non-linear fitting of calibration equations<a class="headerlink" href="#linear-and-non-linear-fitting-of-calibration-equations" title="Permalink to this headline">#</a></h3>
 </section>
 </section>
 <section id="enzymepynetics">
-<h2>3. EnzymePynetics<a class="headerlink" href="#enzymepynetics" title="Permalink to this headline">#</a></h2>
+<span id="method-enzymepynetics"></span><h2>EnzymePynetics<a class="headerlink" href="#enzymepynetics" title="Permalink to this headline">#</a></h2>
 <section id="overview">
-<h3>3.1 Overview<a class="headerlink" href="#overview" title="Permalink to this headline">#</a></h3>
+<h3>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">#</a></h3>
 <p>EnzymePynetics is a a python package, for kinetic parameter estimation of single-substrate enzyme reactions, which was developed during this thesis. The <code class="docutils literal notranslate"><span class="pre">ParameterEstimator</span></code> of EnzymePynetics estimates the kinetic parameters <span class="math notranslate nohighlight">\(k_{cat}\)</span> and <span class="math notranslate nohighlight">\(K_{m}\)</span> by fitting time-course measurement data of enzyme reactions to different Michaelis-Menten models. Thereby, the residuals between measurement data and integrated Michaelis-Menten rate equations are minimized through a non-linear least-squares algorithm. Additionally, the inhibition constant <span class="math notranslate nohighlight">\(K_{i}\)</span> can be assessed for potential substrate or product inhibition. Furthermore, the inhibition constant of an enzyme inhibitor can be determined.</p>
 </section>
 <section id="data-model">
-<h3>3.2 Data model<a class="headerlink" href="#data-model" title="Permalink to this headline">#</a></h3>
+<h3>Data model<a class="headerlink" href="#data-model" title="Permalink to this headline">#</a></h3>
 <p>Data models build the backbone of applications, by defining the relations between informations in an hierarchical manner.
 EnzymePynetics is based on a data model, resembling the experimental design of an enzyme kinetics assay. Thereby, all relevant data and meta data of an kinetic experiment are ordered in the base object <code class="docutils literal notranslate"><span class="pre">EnzymeKineticsExperiment</span></code>. On the metadata side, the base object consists of the attributes temperature with its respective unit, pH, and the name of the measured substance. Additionally, it can be specified whether the measurement data originates from substrate or product measurements. On the data side, <code class="docutils literal notranslate"><span class="pre">EnzymeKineticsExperiment</span></code> contains one or multiple <code class="docutils literal notranslate"><span class="pre">Measurements</span></code>. Each measurement stores the information of an experimental condition, to which the enzyme was subjected. Therefore, each <code class="docutils literal notranslate"><span class="pre">Measurement</span></code> contains information on the initial substrate concentration, enzyme concentration, and inhibitor concentration, if present, along with the respective concentration units. Each <code class="docutils literal notranslate"><span class="pre">Measurement</span></code> contains the measured data, which itself consist of one or multiple replicates of the respective experimental condition.<br />
 The data model was was generated using <a class="reference external" href="https://github.com/JR-1991/software-driven-rdm">sdRDM</a>, a python tool allowing the creation and versioning of data models.</p>

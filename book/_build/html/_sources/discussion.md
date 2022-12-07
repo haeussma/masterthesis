@@ -2,6 +2,10 @@
 
 Discuss both viewpoints: biologist and RSE.
 
+## Jupyter notebooks for documentation of scientific analysis
+
+Jupyter notebooks enable enable
+
 ## Reproducibility in enzyme kinetics
 
 - Need for documentation without limiting experimental possibilities
