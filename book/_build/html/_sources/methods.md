@@ -2,7 +2,14 @@
 
 ## 1. EnzymeML
 
-In its core, EnzymeML is a data model, structuring data and meta data of biocatalytic reactions. Thereby, properties of the reaction vessel, molecules involved in the reaction, as well as reaction properties like stoichiometry, pH, and temperature can be documented. Furthermore, properties of the protein catalyst like sequence, EC-number, UniProt ID can be stored alongside of potential reaction modifiers like inhibitory molecules. {cite}`pleiss2021standardized`
+In its core, EnzymeML is a data model, structuring data and metadata of biocatalytic reactions.
+
+An EnzymeML document stores information on the reaction conditions like pH, temperature,
+Thereby relevant information on the reaction condition like pH
+Therein information on
+substrates, and products of enzyme reactions and
+THereby information on molecules
+Thereby, properties of the reaction vessel, molecules involved in the reaction, as well as reaction properties like stoichiometry, pH, and temperature can be documented. Furthermore, properties of the protein catalyst like sequence, EC-number, UniProt ID can be stored alongside of potential reaction modifiers like inhibitory molecules. {cite}`pleiss2021standardized`
 
 Within the measurements section of the data model, measurement data of one or multiple measurements is stored. Each measurement contains data of identical measurement conditions as well as information about these conditions. Thus, data and meta data from experiments with differing conditions can be stored in a structured way.
 
@@ -12,9 +19,29 @@ The data model consists of descriptions for the reaction vessel,
 
 ## CaliPytion
 
+CaliPytion was developed to provide an easy way to use linear and non linear calibration equations to calculate concentrations of analytical raw data based on a standard measurements. Thereby,
+
 ### Data model for calibration data
 
+The standard curve functionality of CaliPythion is based on a data model, structuring data and metadata of calibration measurements. Thereby, calibration conditions like temperature and pH, and information of the analytical device can be provided. Furthermore, the name as well as an ID can be specified for the analyzed substance. All of this information is stored in the `Calibration` root object. Additionally, the root object can contain a `Standard` and a `Spectrum`. A standard contains measurements of multiple predefined concentrations and a wavelength at which the measurement was conducted, in the case of spectrophotometry. A `Spectrum` can be defined by providing measurement data as well as the respectuve wavelengths at which the data was measured.
+
 ### Linear and non-linear fitting of calibration equations
+
+Finds optimal model parameters through non-linear least squares fitting of experimental data to models
+Since no true model from the relation between ..., and calibrations ar known to not always be linear
+
+the following equations were implemented
+When a `StandardCurve` is created, the measurement data, which is defined in `Calibration` is used to fit the listed calibration model equations to the data. The model, which represents the relation between analytical signal and concentration the best, is determined based on the lowest Akaike information criterion (AIC). Concentrations are calculated by calculating the root of the fitted calibration model.  
+After `StandardCurve` initialization, concentrations can be calculated by calling the `get_concentration()` method. Alternatively, a `StandardCurve` can be directly applied to an `EnzymeMLDocument` by calling the `apply_to_EnzymeML()` method
+
+```python
+product_standard = StandardCurve()
+enzmldoc_absorption = EnzymeMLDocument()
+
+enzmldoc_concentration = product_standard.apply_to_EnzymeML(
+    enzmldoc=enzmldoc_absorption,
+    species_id="s1")
+```
 
 (method:enzymepynetics)=
 

@@ -6,8 +6,10 @@
 # Data provided by Paulo Durão (Microbial & Enzyme Technology, Instituto de Tecnologia Química e Biológica, Oeiras, Portugal)
 # 
 # ## Project background
-# All investigated enzyme reaction without inhibitor showed progress curves behavior, which was not explainable by irreversible Michaelis-Menten kinetics. SUBSTRATE PRODUCT INHIBITION. All experiments had in commmon, that enzyme reactions were carried out in 96-well polystyrene micro titer plates (MTP), whereas the change in substrate and or product absorption was monitored photometrically. 
-# One hypothesis for the observed time-dependent decrease of enzyme activity is potential hydrophobic interaction between the enzyme and the MTP suface. Thereby, hydrophobic regions of the enzyme's surface might interact with the hydrophobic reaction vessle, ultimately preventing substrate access to the active site of the enzyme.  
+# All investigated enzyme reaction without inhibitor showed progress curves behavior, which was not explainable by irreversible Michaelis-Menten kinetics. SUBSTRATE PRODUCT INHIBITION. All experiments had in common, that enzyme reactions were carried out in 96-well polystyrene micro titer plates (MTP), whereas the change in substrate and or product absorption was monitored photometrically. 
+# In theory, the observed time-dependent decrease in enzyme activity can either be explained through enzyme inactivation or product inhibition. In case of time-dependent enzyme inactivation, the amount of active enzyme is decreased by time. Since less catalyst is available, the observed reaction rate decreases. In case of product inhibition, the formed product reduces the reaction rate. Both phenomena can reflect themselves in an apparent decrease of reaction rate in a time-dependent fashion. 
+# 
+# One hypothesis for the observed time-dependent decrease of enzyme activity is potential hydrophobic interaction between the enzyme and the MTP surface. Thereby, hydrophobic regions of the enzyme's surface might interact with the hydrophobic reaction vessel, ultimately preventing substrate access to the active site of the enzyme.  
 # In order to test the hypothesis, an absorption experiment in which enzyme was incubated in MTP wells prior to reaction start was performed. Thereby, the enzyme activity should decrease with regard to the prior incubation time. If the hypothesis is correct, the calculated half life from the adsorption experiment 
 # should match with the half life of an enzyme kinetics experiment which was conducted in parallel.
 # 
@@ -26,16 +28,16 @@
 # Both experiments wer conducted with CotA from 
 # 
 # __Determination of enzyme inactivation trough adsorption__  
-# In order to test the hypothesis of time-dependent enzyme inactivation through adsorption to the MTP surface, the following experiment was conducted. Thereby, enzyme solution was incubated in individual MTP wells up to 1 h, prior to reaction start.  Then, individual enzyme reactions were started in triplicates by transferring 2 µL of incubated enzyme in 10 min increments. Each proceeding enzyme reaction contained 256 nM CotA, 1 mM ABTS and was buffered in acetate buffer at pH 4. Product formation was followed photometrically at 420 nm and 25°C for 5 min, whereas concentrations were calculated assuming an extincion coefficient of ε = 36000 M<sup>-1</sup>cm<sup>-1</sup> for the ABTS radical product.
+# In order to test the hypothesis of time-dependent enzyme inactivation through adsorption to the MTP surface, the following experiment was conducted. Thereby, enzyme solution was incubated in individual MTP wells up to 1 h, prior to reaction start.  Then, individual enzyme reactions were started in triplicates by transferring 2 µL of incubated enzyme in 10 min increments. Each proceeding enzyme reaction contained 256 nM CotA, 1 mM ABTS and was buffered in acetate buffer at pH 4. Product formation was followed photometrically at 420 nm and 25°C for 5 min, whereas concentrations were calculated assuming an extinction coefficient of ε = 36000 M<sup>-1</sup>cm<sup>-1</sup> for the ABTS radical product.
 # 
 # __Enzyme kinetics experiment__  
 # Enzymatic oxidation of ABTS to its radical form was followed photometrically at 420 nm at 25°C for 70 min. 
 # Thereby, ABTS was applied in a range from 0.01 mM - 2 mM. Each proceeding enzyme reaction contained 256 nM CotA, and was buffered in acetate buffer at pH 4.
 # Repeats of 4.
 # 
-# ### Experimantal data
+# ### Experimental data
 # 
-# Experimantal data was provided as an Excel file, containing time-course absorption data. Meta data was written into the EnzymeML Excel template. Then, the experimantal data was written to an EnzymeML document by a parser function. Concentrations were calculated via the provided extinction coefficient of the ABTS radical (ε = 36000 M<sup>-1</sup>cm<sup>-1</sup>). 
+# Experimental data was provided as an Excel file, containing time-course absorption data. Meta data was written into the EnzymeML Excel template. Then, the experimental data was written to an EnzymeML document by a parser function. Concentrations were calculated via the provided extinction coefficient of the ABTS radical (ε = 36000 M<sup>-1</sup>cm<sup>-1</sup>). 
 # 
 # ## Adsorption of enzyme to micro titer plate surface
 # 
@@ -138,8 +140,8 @@ print(f"Calculated enzyme half life based on regression slope: {t12:.2f} h")
 
 # _Fig. XXX: Experimental data and regression results of CotA reaction with different enzyme incubation periods._
 # 
-# The left plot of figure XXX the change in product concentration is shown over the first 5 minutes of the enzyme reaction. Therein, different enzyme incubation times prior to reaction start are color-coded. The first reaction without prior incubation shows large standard deviations between the experimental repeats. This might be the result of insufficient mixing or inconsistent ammount of enzyme between the repeats. All other slopes showed a gradually decreasing slope for increasing incubation times.  
-# The plot on the right of figure XXX shows the initial rates of the enzyme reactions in relation to prior enzyme incubation time. Based on the calculated rate of deactivation, the half life of the enzyme is approximately 28 day. Due to the high standard deviation between the repeats of the reaction withour prior incubation. The experiments were not considered for the calculation of the inactivation rate.
+# The left plot of figure XXX the change in product concentration is shown over the first 5 minutes of the enzyme reaction. Therein, different enzyme incubation times prior to reaction start are color-coded. The first reaction without prior incubation shows large standard deviations between the experimental repeats. This might be the result of insufficient mixing or inconsistent amount of enzyme between the repeats. All other slopes showed a gradually decreasing slope for increasing incubation times.  
+# The plot on the right of figure XXX shows the initial rates of the enzyme reactions in relation to prior enzyme incubation time. Based on the calculated rate of deactivation, the half life of the enzyme is approximately 28 day. Due to the high standard deviation between the repeats of the reaction without prior incubation. The experiments were not considered for the calculation of the inactivation rate.
 # 
 # ## Enzyme kinetics experiment
 # 
@@ -225,7 +227,7 @@ fig.show()
 
 # _Fig XXX. ABTS radical concentration over the time-course of CotA reaction._
 # 
-# The provided reaction data showed large deviations between individual repeats of reactions with identical initial ABTS concentrations. Expecially for initial ABTS concentrations above 0.1 mM (Fig. XXX, left). Additionally, measurement data was not blanked, since the first measured data points at 0 min have too high concentration values in relation to their respective slopes.
+# The provided reaction data showed large deviations between individual repeats of reactions with identical initial ABTS concentrations. Especially for initial ABTS concentrations above 0.1 mM (Fig. XXX, left). Additionally, measurement data was not blanked, since the first measured data points at 0 min have too high concentration values in relation to their respective slopes.
 # Furthermore, the order of initial measurement points is expected to reflect the initial substrate concentrations (Fig. XXX right). Thereby, higher initial substrate concentrations should also show a slightly increased product concentration, since ABTS marginally absorbs at the product detection wavelength.  
 # 
 # ### Kinetic parameter estimation
@@ -251,14 +253,14 @@ results = df.append(df_inactivation).sort_values("AIC")
 display(results.style.set_table_attributes('style="font-size: 12px"'))
 
 
-# Kinetic parameteres were estimated with and without considering time-dependent enzyme inactivation. 
-# Modeling results are listed in table XXX. All models with an additional parameter for enzyme inactivation resulted in lower AIC values, indicating a better fit of the experimantal data to the respective models.
+# Kinetic parameters were estimated with and without considering time-dependent enzyme inactivation. 
+# Modeling results are listed in table XXX. All models with an additional parameter for enzyme inactivation resulted in lower AIC values, indicating a better fit of the experimental data to the respective models.
 # Estimates for $k_{cat}$ ranged from 2.58 min<sup>-1</sup> to 3.41 min<sup>-1</sup>, where $K_{m}$ estimates ranged from 23 µM to 62 µM depending on the kinetic model.
 # Based on the resulting $k_{inact}$, the enzyme's half life was estimated to 95 min, using equation xxx. 
-# Since AIC does not consider uncertanties of parameteres, they need to be assessed for model evaluaton.
+# Since AIC does not consider uncertainties of parameteres, they need to be assessed for model evaluation.
 # 
 # #### Kinetic models with enzyme inactivation
-# For models with enzyme inactivation, the substrate inhibiton model showed the lowest AIC and low standard deviations on the estimated parameters. The irreversible Michaelis-Menten model had the least ammount of parameters and showed even lower standard deviations on the parameter estimates, compared to the substrate inhibition model. Product inhibition models showed generally higher standard deviation on the estimated inhibition parameters. Thus, the two models shown in figure xxx describe the data the best in therms of kinetic parameter standard deviations.
+# For models with enzyme inactivation, the substrate inhibition model showed the lowest AIC and low standard deviations on the estimated parameters. The irreversible Michaelis-Menten model had the least amount of parameters and showed even lower standard deviations on the parameter estimates, compared to the substrate inhibition model. Product inhibition models showed generally higher standard deviation on the estimated inhibition parameters. Thus, the two models shown in figure xxx describe the data the best in therms of kinetic parameter standard deviations.
 
 # In[190]:
 
@@ -279,18 +281,12 @@ plt.tight_layout()
 
 # _Fig. XXX: Substrate inhibition and irreversible Michealis-Menten model fitted to CotA reaction data_
 # 
-# Visually, both models in figure xxx describe the observed concentration time-course of ABTS radical formation. For both models, measurement data from enzyme reactions with intial substrate concentrations below 0.1 mM deviate more strongly from the model compared to higher concentrations. Since the measured absorption values were not blanked, all calculated concentrations are falsely increased. This effect is more pronounced for low initial substrate concentrations, since the absoprtion contribution from buffer is lager compared to the accumulating product for low concentrations.  
-# For reactions with initial substrate concentrations above 0.1 mM, both models describe the progress curve of the reaction. Due to high standard deviation between the prepeat, the true reaction rate at high substrate concentrations is unknown. Therefore, neighter substrate inhibition nor irreversible Michaelis-Menten model were able to clearly represent the experimental data.
+# Visually, both models in figure xxx describe the observed concentration time-course of ABTS radical formation. For both models, measurement data from enzyme reactions with initial substrate concentrations below 0.1 mM deviate more strongly from the model compared to higher concentrations. Since the measured absorption values were not blanked, all calculated concentrations are falsely increased. This effect is more severe for low initial substrate concentrations, since the absorption contribution from buffer is lager compared to the accumulating product for low concentrations. Measurement data from reactions with an initial substrate concentration of 0.05 mM was lower  compared to all fitted model throughout the reaction. Therefore, less substrate or enzyme than specified was applied to the reaction.  
+# For reactions with initial substrate concentrations above 0.1 mM, both models describe the progress curve of the reaction. Due to high standard deviation between the repeats, the true reaction rate at high substrate concentrations is unknown. Therefore, neither substrate inhibition nor irreversible Michaelis-Menten model were able to clearly represent the experimental data.
 # 
 # #### Kinetic models without enzyme inactivation
-# In therms of AIC, product inhibition models without considering enzyme inactivation described the data the best, whereas substrate inhibition and irreversible Michaelis-Menten model showed resulted in the highest AIC of all models. In therms of parameter standard deviation, irreversible Michaelis-Menten model showed the lowest relative errors
-# Non-competitive product inhibition
-# and irreversible Michaelis-Menten model both showed low standerd deviations on the estimated parameters, whereas product inhibition models showed higher uncertanties on the inhibition parameters. 
-# Visualizations of the fitted 
+# In therms of AIC, product inhibition models without considering enzyme inactivation described the data the best, whereas substrate inhibition and irreversible Michaelis-Menten model resulted in the highest AIC of all models. In therms of estimated parameters, irreversible Michaelis-Menten model showed the lowest standard deviation for the parameter estimates.  
 # 
-# 
-# 
-# All models, except for non-competitive and uncompetitice product inhibition with enzyme inactivation resulted in parameter uncertanties of more than 100 % of the estimated value. 
 
 # In[189]:
 
@@ -309,6 +305,8 @@ axes[1].legend(title="initial ABTS [mM]")
 plt.tight_layout()
 
 
+# Visually, the best AIC model and the best model in regard to parameter standard deviation (Fig. XXX, left and right respectively), both underestimate the reaction velocity of the first 50 min. After 50 min the uncompetitive product inhibition model 
+# 
 # ## Conclusion
 # 
 # __Low data quality__
@@ -316,5 +314,8 @@ plt.tight_layout()
 # Experimental data of the data set for parameter estimation showed low quality. This was indicated by high deviations between experimental repeats as well as 
 # 
 # __Enzyme inactivation__
+# Models considering time-dependent enzyme inactivation describe reaction progress curves better compared to models without enzyme inactivation. Product inhibition models 
+# 
+# 
 # Parameter estimation with kinetic models considering enzyme inactivation leads to opposing conclusion of the kinetic mechanism. 
-# Not considerin enzyme inactivation would lead to the assumption of product inhibition
+# Not considering enzyme inactivation would lead to the assumption of product inhibition

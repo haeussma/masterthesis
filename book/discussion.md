@@ -1,6 +1,7 @@
 # Discussion
 
 Discuss both viewpoints: biologist and RSE.
+Documentation of experiments stops after measurement. Treatment of measurement data
 
 ## Jupyter notebooks for documentation of scientific analysis
 
@@ -14,7 +15,7 @@ Jupyter notebooks enable enable
 
 - temperature in MTPs
 
-## Jupyter notebooks
+## Jupyter notebooks and book
 
 - great documentation (FAIR)
 
