@@ -31,6 +31,7 @@
 # __Enzyme kinetics experiment__  
 # Enzymatic oxidation of ABTS to its radical form was followed photometrically at 420 nm at 25°C for 70 min. 
 # Thereby, ABTS was applied in a range from 0.01 mM - 2 mM. Each proceeding enzyme reaction contained 256 nM CotA, and was buffered in acetate buffer at pH 4.
+# Repeats of 4.
 # 
 # ### Experimantal data
 # 
@@ -40,7 +41,7 @@
 # 
 # ### Imports
 
-# In[90]:
+# In[128]:
 
 
 import numpy as np
@@ -61,9 +62,9 @@ warnings.filterwarnings('ignore')
 
 # ### Experimantal data
 # 
-# Experimental data was provided as an Excel file. Data was loaded into an pandas DataFrame and the slopes of each incubation condition were calculated through linear regression. The resulting initial rates were used to calculate by which the enzyme activity decreases in regard to the incubation time tin the reaction vessel. Lastly the half life of the enzyme was calculated with equation {eq}`enzyme_halflife`
+# Experimental data was provided as an Excel file. Data was loaded into an pandas DataFrame and the slopes of each incubation condition were calculated through linear regression. The resulting initial rates were used to calculate by which the enzyme activity decreases in regard to the incubation time tin the reaction vessel. Lastly the half life of the enzyme was calculated with equation {eq}`enzyme_halflife`.
 
-# In[114]:
+# In[129]:
 
 
 # Load excel
@@ -104,7 +105,7 @@ for time_set in concentration:
     intercepts.append(intercept)
     stderrs.append(stderr)
 
-# Regression for the slopes between 10 and 60 mincolumns
+# Regression of the slopes between 10 and 60 mincolumns
 slope_of_slopes, intercept_of_slopes,_,_,_ = linregress(columns[1:], slopes[1:])
 
 # Half life in hours
@@ -125,24 +126,30 @@ for mean, std, label, slope, intercept, color in zip(concentration_mean, concent
 
 axes[1].errorbar(columns, slopes, stderrs, fmt='o', label="initial rates within the first 5 min")
 axes[1].set_xlabel("CotA incubation time\nin MTP-well [min]")
-axes[1].set_ylabel('rate [absorption / min]')
+axes[1].set_ylabel('initial rate [mM / min]')
 axes[1].plot(np.array(columns[1:]), slope_of_slopes*np.array(columns[1:])+intercept_of_slopes, "--", color=colors[0], label=f"regression")
 axes[1].legend()
 axes[1].set_title('Initial rates of CotA reaction')
 
 plt.show()
 
-print(f"Calculated half life based on regression slope: {t12:.2f} h")
+print(f"Calculated enzyme half life based on regression slope: {t12:.2f} h")
 
 
-# _Fig. XXX: Experimental data regression results of CotA experiment with different enzyme incubation times._
+# _Fig. XXX: Experimental data and regression results of CotA reaction with different enzyme incubation periods._
 # 
-# The left plot of figure XXX shows the change in product concentration over the first 5 minutes of the enzyme reaction. Therein, different enzyme incubation times prior to reaction start are color-coded. The first reaction without prior incubation shows large standard deviations between the experimental repeats. This might be the result of insufficient mixing or inconsisten ammount of enzyme between the repeats. All other slopes showed a gradually decreasing slope for increased incubation times.  
-# The plot on the right of figure XXX shows the initial rates of the enzyme reactions in relation to prior enzyme incubation time. Based on the calculated initial rates, the decrease
-# Due to the high standard deviation between 
+# The left plot of figure XXX the change in product concentration is shown over the first 5 minutes of the enzyme reaction. Therein, different enzyme incubation times prior to reaction start are color-coded. The first reaction without prior incubation shows large standard deviations between the experimental repeats. This might be the result of insufficient mixing or inconsistent ammount of enzyme between the repeats. All other slopes showed a gradually decreasing slope for increasing incubation times.  
+# The plot on the right of figure XXX shows the initial rates of the enzyme reactions in relation to prior enzyme incubation time. Based on the calculated rate of deactivation, the half life of the enzyme is approximately 28 day. Due to the high standard deviation between the repeats of the reaction withour prior incubation. The experiments were not considered for the calculation of the inactivation rate.
+# 
+# ## Enzyme kinetics experiment
+# 
+# ### Experimental data 
+# 
+# Experimental data was provided as excel files, whereas meta data of the experiment was filled in to an EnzymeML Excel spreadsheet. Measurement data was written to the EnzymeML document by a parser function, whereas concentrations were calculated via the provided extinction coefficient.  
+# Kinetic parameters were estimated with and without considering enzyme inactivation.
 # 
 
-# In[92]:
+# In[169]:
 
 
 # Load experimental data from excel file
@@ -158,6 +165,7 @@ def absorption_to_concentration(abso):
     return abso / (extinction_coefficient*optical_length)
 
 concentration_data = absorption_to_concentration(data)
+
 
 # Parser function
 def data_to_EnzymeML(
@@ -189,10 +197,42 @@ enzmldoc = data_to_EnzymeML(
     data_unit="mmole / l",
     time_unit="min")
 
+# Visualize experimantal data
+fig, axes = plt.subplots(1,2, figsize=(12.8, 4.8), sharey=False, sharex=False)
+for measurement in enzmldoc.measurement_dict.values():
+    concentration = []
+    product = measurement.getReactant("s1")
+    init_substrate=measurement.getReactant("s0").init_conc
+    for replicate in product.replicates:
+        concentration.append(replicate.data)
+    axes[0].errorbar(time, np.mean(concentration, axis=0), np.std(concentration, axis=0), label=init_substrate,\
+        fmt=".", alpha=0.5)
+    axes[1].errorbar(time, np.mean(concentration, axis=0), np.std(concentration, axis=0), label=init_substrate,\
+        fmt="o")
 
+axes[0].legend(title="Initial ABTS [mM]")
+axes[1].legend(title="Initial ABTS [mM]")
+axes[0].set_ylabel("ABTS radical [mM]")
+axes[0].set_title("ABTS radical concentration over CotA reaction time-course ")
+axes[1].set_title("ABTS radical concentration within the first 5 min")
+axes[1].set_ylabel("ABTS radical [mM]")
+axes[0].set_xlabel("time [min]")
+axes[1].set_xlabel("time [min]")
+axes[1].set_xlim([-0.2,5.2])
+axes[1].set_ylim([0,0.01])
+fig.show()
+
+
+# _Fig XXX. ABTS radical concentration over the time-course of CotA reaction._
 # 
+# The provided reaction data showed large deviations between individual repeats of reactions with identical initial ABTS concentrations. Expecially for initial ABTS concentrations above 0.1 mM (Fig. XXX, left). Additionally, measurement data was not blanked, since the first measured data points at 0 min have too high concentration values in relation to their respective slopes.
+# Furthermore, the order of initial measurement points is expected to reflect the initial substrate concentrations (Fig. XXX right). Thereby, higher initial substrate concentrations should also show a slightly increased product concentration, since ABTS marginally absorbs at the product detection wavelength.  
+# 
+# ### Kinetic parameter estimation
+# 
+# Kinetic parameters were estimated for all models with and without considering enzyme inactivation.
 
-# In[82]:
+# In[170]:
 
 
 # Parameter estimation without time-dependent enzyme inactivation
@@ -211,30 +251,70 @@ results = df.append(df_inactivation).sort_values("AIC")
 display(results.style.set_table_attributes('style="font-size: 12px"'))
 
 
-# - Paulo
-#     - Long measurement over 70 min. 
-#     - enzyme inacitivation model better fit with less parameters.
-#     - 
+# Kinetic parameteres were estimated with and without considering time-dependent enzyme inactivation. 
+# Modeling results are listed in table XXX. All models with an additional parameter for enzyme inactivation resulted in lower AIC values, indicating a better fit of the experimantal data to the respective models.
+# Estimates for $k_{cat}$ ranged from 2.58 min<sup>-1</sup> to 3.41 min<sup>-1</sup>, where $K_{m}$ estimates ranged from 23 µM to 62 µM depending on the kinetic model.
+# Based on the resulting $k_{inact}$, the enzyme's half life was estimated to 95 min, using equation xxx. 
+# Since AIC does not consider uncertanties of parameteres, they need to be assessed for model evaluaton.
+# 
+# #### Kinetic models with enzyme inactivation
+# For models with enzyme inactivation, the substrate inhibiton model showed the lowest AIC and low standard deviations on the estimated parameters. The irreversible Michaelis-Menten model had the least ammount of parameters and showed even lower standard deviations on the parameter estimates, compared to the substrate inhibition model. Product inhibition models showed generally higher standard deviation on the estimated inhibition parameters. Thus, the two models shown in figure xxx describe the data the best in therms of kinetic parameter standard deviations.
 
-# In[89]:
-
-
-# Parameter estimation without time-dependent enzyme inactivation
-CotA_kinetics = ParameterEstimator.from_EnzymeML(enzmldoc, "s1", "product")
-CotA_kinetics.fit_models(enzyme_inactivation=False, display_output=False, stop_time_index=-1)
-df = CotA_kinetics.result_dict.drop(columns=["kcat / Km [1/min * 1/mmole / l]"])
-df.insert(1, "Enzyme inactivation model", "False")
-
-# Parameter estimation considering time-dependent enzyme inactivation
-CotA_kinetics_with_inactivation = ParameterEstimator.from_EnzymeML(enzmldoc, "s1", "product")
-CotA_kinetics_with_inactivation.fit_models(enzyme_inactivation=True, display_output=False, stop_time_index=-1)
-df_inactivation = CotA_kinetics_with_inactivation.result_dict.drop(columns=["kcat / Km [1/min * 1/mmole / l]"])
-df_inactivation.insert(1, "Enzyme inactivation model", "True")
-
-results = df.append(df_inactivation).sort_values("AIC")
-display(results.style.set_table_attributes('style="font-size: 12px"'))
-
-CotA_kinetics_with_inactivation.visualize("irreversible Michaelis Menten",alpha=0.2)
+# In[190]:
 
 
-# ## Discussion
+fig, axes = plt.subplots(1,2, figsize=(12.8,4.8), sharey=True, sharex=True)
+CotA_kinetics_with_inactivation.visualize("substrate inhibition",ax=axes[0], alpha =.2,\
+    title="Substrate inhibition model with enzyme inactivation")
+CotA_kinetics_with_inactivation.visualize("irreversible Michaelis Menten",ax=axes[1], alpha =.2,\
+    title="irreversible Michaelis-Menten model with enzyme inactivation")
+
+axes[0].set_ylabel("ABTS radical [mM]")
+axes[0].set_xlabel("time [min]")
+axes[1].set_xlabel("time [min]")
+axes[0].legend(title="initial ABTS [mM]")
+axes[1].legend(title="initial ABTS [mM]")
+plt.tight_layout()
+
+
+# _Fig. XXX: Substrate inhibition and irreversible Michealis-Menten model fitted to CotA reaction data_
+# 
+# Visually, both models in figure xxx describe the observed concentration time-course of ABTS radical formation. For both models, measurement data from enzyme reactions with intial substrate concentrations below 0.1 mM deviate more strongly from the model compared to higher concentrations. Since the measured absorption values were not blanked, all calculated concentrations are falsely increased. This effect is more pronounced for low initial substrate concentrations, since the absoprtion contribution from buffer is lager compared to the accumulating product for low concentrations.  
+# For reactions with initial substrate concentrations above 0.1 mM, both models describe the progress curve of the reaction. Due to high standard deviation between the prepeat, the true reaction rate at high substrate concentrations is unknown. Therefore, neighter substrate inhibition nor irreversible Michaelis-Menten model were able to clearly represent the experimental data.
+# 
+# #### Kinetic models without enzyme inactivation
+# In therms of AIC, product inhibition models without considering enzyme inactivation described the data the best, whereas substrate inhibition and irreversible Michaelis-Menten model showed resulted in the highest AIC of all models. In therms of parameter standard deviation, irreversible Michaelis-Menten model showed the lowest relative errors
+# Non-competitive product inhibition
+# and irreversible Michaelis-Menten model both showed low standerd deviations on the estimated parameters, whereas product inhibition models showed higher uncertanties on the inhibition parameters. 
+# Visualizations of the fitted 
+# 
+# 
+# 
+# All models, except for non-competitive and uncompetitice product inhibition with enzyme inactivation resulted in parameter uncertanties of more than 100 % of the estimated value. 
+
+# In[189]:
+
+
+fig, axes = plt.subplots(1,2, figsize=(12.8,4.8), sharey=True, sharex=True)
+CotA_kinetics.visualize("uncompetitive product inhibition",ax=axes[0], alpha =.2,\
+    title="uncompetitive product inhibition model")
+CotA_kinetics.visualize("irreversible Michaelis Menten",ax=axes[1], alpha =.2,\
+    title="irreversible Michaelis-Menten model")
+
+axes[0].set_ylabel("ABTS radical [mM]")
+axes[0].set_xlabel("time [min]")
+axes[1].set_xlabel("time [min]")
+axes[0].legend(title="initial ABTS [mM]")
+axes[1].legend(title="initial ABTS [mM]")
+plt.tight_layout()
+
+
+# ## Conclusion
+# 
+# __Low data quality__
+# 
+# Experimental data of the data set for parameter estimation showed low quality. This was indicated by high deviations between experimental repeats as well as 
+# 
+# __Enzyme inactivation__
+# Parameter estimation with kinetic models considering enzyme inactivation leads to opposing conclusion of the kinetic mechanism. 
+# Not considerin enzyme inactivation would lead to the assumption of product inhibition
