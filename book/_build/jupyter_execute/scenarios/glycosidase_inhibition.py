@@ -6,7 +6,7 @@
 # Data provided by Chantal Daub (Biochemistry, Rhodes University, Makhanda, South Africa)
 # 
 # ## Project background
-# In this scenario, the inhibitory properties of fucoidan on $\alpha$-glucosidase from *Saccharomyces cerevisiae* was investigated. Fucoidan is a sulfated polysaccharide found in various brown algae. Furthermore, the polysaccaride is investigated as an potential active compound in the fields of anit-cancer, anti-inflammation, and anti-coagulate research, among others ({cite:t}`li2008fucoidan`). Recently, {cite:t}`daub2020fucoidan` proposed the application of fucoidan as a drug for the treatment of diabetes mellitus, since fucoidan effectively inhibit $\alpha$-glucosidase. In the corresponding study, fucoidan from *E. maxima* showed an almost 2-fold lower IC<sub>50</sub> value, compared to established diabetes drug acarbose.  
+# In this scenario, the inhibitory properties of fucoidan on $\alpha$-glucosidase from *Saccharomyces cerevisiae* was investigated. Fucoidan is a sulfated polysaccharide found in various brown algae. The polysaccaride is investigated as a potential active compound in the fields of anit-cancer, anti-inflammation, and anti-coagulate research, among others ({cite:t}`li2008fucoidan`). Recently, {cite:t}`daub2020fucoidan` proposed the application of fucoidan as a drug for the treatment of diabetes mellitus, since fucoidan effectively inhibit $\alpha$-glucosidase. In the corresponding study, fucoidan from *E. maxima* showed an almost 2-fold lower IC<sub>50</sub> value, compared to established diabetes drug acarbose.  
 # In the following analysis, $\alpha$-glucosidase was exposed to fucoidan from *Ecklonia maxima*, *Ecklonia radiata*, *Fucus vesiculosus*, and *Schimmelmannia elegans* to test their respective inhibition abilities.
 # 
 # ### Experimental design 
@@ -18,7 +18,7 @@
 # 
 # ### Imports and parser function
 
-# In[2]:
+# In[66]:
 
 
 from typing import Dict
@@ -29,6 +29,7 @@ import matplotlib.colors as mcolors
 import re
 import os
 import pyenzyme as pe
+from IPython.display import display
 from CaliPytion.tools.standardcurve import StandardCurve
 from EnzymePynetics.tools.parameterestimator import ParameterEstimator
 
@@ -72,7 +73,7 @@ def listdir_nohidden(path):
 
 # Measurement data was provided as an excel file, whereas metadata was filled in EnzymeML Excel templates for each fucoidan seaweed species and acarbose respectively. In preliminary experiments, p-NPG showed to  absorb at the product detection wavelength slightly. Therefore, the absorbance contribution of substrate at the product absorption wavelength was subtracted as well as the the contributions of enzyme, buffer and inhibitor. Then, the blanked absorbance data was written to the EnzymeML documents by a parser function.
 
-# In[3]:
+# In[67]:
 
 
 dataset_path = "../../data/glucosidase_inhibition/experimental_data_real.xlsx"
@@ -130,7 +131,7 @@ for inhibitor, template in zip(sorted(inhibitors), sorted(listdir_nohidden(templ
 # 
 # In the next cell, the blanked absorption data of each EnzymeML document is visualized with the ```.visualize()```-method of PyEnzyme for quality control.
 
-# In[4]:
+# In[68]:
 
 
 for doc in enzml_docs:
@@ -139,14 +140,26 @@ for doc in enzml_docs:
     plt.show()
 
 
+# In[69]:
+
+
+del enzml_docs[0].measurement_dict["m8"].getReactant("s1").replicates[0]
+
+
 # The technical output of the cell above visualizes the blanked product absorbance data of each dataset. Therein, the individual measurements are labeled from m0 - m17, which represent individual experimental conditions. Thereby, measurements m0 - m5 are from reactions without inhibitor, m6 - m11 reactions with the lower inhibitor concentration, and m12 - m17 originate from reactions with the higher inhibitor concentration. Each subplot contains the data of two experimental repeats.  
-# In most reactions a local maximum around minute 5 occurs, which presumably sources from the analytic device. Furthermore, the repeats of m8 of the 'a-glucosidase inhibition by acarbose' dataset diverged. Therefore, this particular measurement was excluded for kinetic parameter estimation.
+# In most reactions a decrease followed by an increase of reaction rate is visible around minute 5. Since each dataset originates from a continuous photometric measurement carried out on a single MTP, the observed behavior likely sources from an analytical device malfunction.
 # 
 # ### Concentration calculation
 # 
 # Standard data of p-NP was loaded from an excel file, and a standard curve was created. Then, the standard curve was applied to the EnzymeML documents.
 
-# In[5]:
+# In[ ]:
+
+
+
+
+
+# In[70]:
 
 
 path_calibration_data = "../../data/glucosidase_inhibition/p-NP_standard.xlsx"
@@ -169,25 +182,86 @@ for enzmldoc in enzml_docs:
 
 # ### Parameter estimation
 # 
-# Parameter estimation was perfomed with EnzymePynetics. Thereby, each data set was fitted to competitive, uncompetitive, and non-competitive inhibition models.
+# Due to the mentioned issue with the measurement data after minute 5, only data of the initial 2 minutes was used for parameter estimation. Additionally, the faulty measurement with an initial substrate concentration of 0.5 mM from the 'a-glucosidase inhibition by acarbose' data set was excluded from parameter estimation. All data sets were fitted against all inhibition models of EnzmePynetics.
 
-# In[7]:
+# In[77]:
 
 
-kinetics = []
+# Run parameter estimation for all data sets
+results=[]
 for enzmldoc in enzml_docs:
     result = ParameterEstimator.from_EnzymeML(enzmldoc=enzmldoc, reactant_id="s1", inhibitor_id="s2", measured_species="product")
-    result.fit_models(enzyme_inactivation=False, stop_time_index=4)
-    kinetics.append(result)
-    result.visualize(plot_means=True)
-    plt.show()
+    result.fit_models(enzyme_inactivation=False, display_output=False, stop_time_index=3)
+    results.append(result)
+    print(f" Result overview for {result.data.title}")
+    display(result.result_dict)
+    
 
 
-# ## $k_{cat}$ and $K_{m}$
+# The output above displays all estimated kinetic parameters for all data sets. Based on AIC, three data sets were best described by the competitive inhibition model, whereas two were best described by non-competitive inhibition model. In therms of parameter certainty, parameter estimates of the competitive inhibition model showed lower uncertainties for the parameter estimates. Therefore, competitive inhibition model was chosen, to compare the inhibition constants.
+
+# In[113]:
+
+
+# Visualize fitted competitive inhibition models with measurement data
+fig, axes = plt.subplots(3,2, figsize=(12.8, 14.4), sharey=True, sharex=False)
+for i, (ax, result) in enumerate(zip(axes.flatten(), results)):
+    result.visualize(ax=ax)
+    ax.set_xticks([0,1,2])
+
+    if not i%2:
+        ax.set_ylabel("p-NP [mM]")
+handles, labels = ax.get_legend_handles_labels()
+fig.legend(handles, labels, loc="lower center", ncol=3, title="initial p-NPG [mM]", bbox_to_anchor=(0.76,0.08))
+fig.delaxes(axes[2][1])
+axes[1][1].set_xlabel("time [min]")
+axes[2][0].set_xlabel("time [min]")
+plt.tight_layout()
+
+
+# _Fig. XXX: Fitted competitive inhibition models to the measurement data of the $\alpha$-glucosidase data set_
 # 
+# Fitted competitive inhibition models and the respective measurement data is visualized in figure xxx. Therein, the initial substrate concentration of the reaction is color coded, whereas the applied inhibitor concentration are denoted with different markers (●: without inhibitor, __×__: lower inhibitor concentration, ◆: higher inhibitor concentration). 
 # 
 
-# In[8]:
+# In[80]:
+
+
+def get_parameters(result, model_name: str):
+    values = []
+    for parameter, value in result.models[model_name].result.params.items():
+        values.append(value.value)
+    return values
+
+data = {}
+for result in results:
+    data[result.data.title] = get_parameters(result, "competitive inhibition")
+
+df = pd.DataFrame.from_dict(data).T
+df.columns = ["k_cat", "K_m", "K_i"]
+df
+
+
+# In[119]:
+
+
+for Km, kcat, label in zip(df["K_m"].values, df["k_cat"].values, df.index):
+    plt.scatter(Km, kcat, label=label)
+plt.legend()
+
+
+# In[81]:
+
+
+fig = plt.figure()
+ax = fig.add_axes([0,0,1,1])
+langs = [x.split(" ")[-1] for x in list(df.index)]
+students = list(df["K_i"].values)
+ax.bar(langs,students)
+plt.show()
+
+
+# In[76]:
 
 
 # Get kinetic parameters of all datasets
@@ -196,7 +270,7 @@ kcat_std = []
 Km = []
 Km_std = []
 corr_kcat_km = []
-for result in kinetics:
+for result in results:
     params = result.get_parameter_dict()
 
     kcat.append(params["k_cat"].value)
@@ -223,47 +297,23 @@ df = pd.DataFrame.from_dict({
 df
 
 
-# In[9]:
+# In[83]:
 
 
-enzmldoc = enzml_docs[0]
-
-del enzmldoc.measurement_dict["m6"]
-del enzmldoc.measurement_dict["m7"]
-del enzmldoc.measurement_dict["m8"]
-del enzmldoc.measurement_dict["m9"]
-del enzmldoc.measurement_dict["m10"]
-del enzmldoc.measurement_dict["m11"]
-del enzmldoc.measurement_dict["m12"]
-del enzmldoc.measurement_dict["m13"]
-del enzmldoc.measurement_dict["m14"]
-del enzmldoc.measurement_dict["m15"]
-del enzmldoc.measurement_dict["m16"]
-del enzmldoc.measurement_dict["m17"]
-
-
-# In[10]:
-
-
-kinetics = ParameterEstimator.from_EnzymeML(
-    enzmldoc=enzmldoc,
-    reactant_id="s1",
-    measured_species="product")
-
-kinetics.fit_models(enzyme_inactivation=True)
-
-
-# In[11]:
-
-
-kinetics.fit_models(
-    enzyme_inactivation=True, 
-    start_time_index=8,
-    initial_substrate_concs=[0.1, 0.25, 0.5, 1, 5])
-
-
-# In[12]:
-
-
-kinetics.visualize(model_name="irreversible Michaelis Menten", title="a-glucosidase reaction")
+turn_off=False
+if turn_off:
+    results = []
+    for enzmldoc in enzml_docs:
+        del enzmldoc.measurement_dict["m6"]
+        del enzmldoc.measurement_dict["m7"]
+        del enzmldoc.measurement_dict["m8"]
+        del enzmldoc.measurement_dict["m9"]
+        del enzmldoc.measurement_dict["m10"]
+        del enzmldoc.measurement_dict["m11"]
+        del enzmldoc.measurement_dict["m12"]
+        del enzmldoc.measurement_dict["m13"]
+        del enzmldoc.measurement_dict["m14"]
+        del enzmldoc.measurement_dict["m15"]
+        del enzmldoc.measurement_dict["m16"]
+        del enzmldoc.measurement_dict["m17"]
 
