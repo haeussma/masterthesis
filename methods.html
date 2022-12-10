@@ -166,10 +166,7 @@ const thebe_selector_output = ".output, .cell_output"
       Scenario B:
      </strong>
      <br/>
-     <span class="math notranslate nohighlight">
-      \(\alpha\)
-     </span>
-     -glucosidase inhibition by fucoidan
+     α-glucosidase inhibition by fucoidan
     </a>
    </li>
    <li class="toctree-l2">
@@ -179,6 +176,15 @@ const thebe_selector_output = ".output, .cell_output"
      </strong>
      <br/>
      SLAC characterization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="scenarios/enzyme_inactivation.html">
+     <strong>
+      Scenario D:
+     </strong>
+     <br/>
+     Time-dependent enzyme inactivation
     </a>
    </li>
    <li class="toctree-l2">
@@ -499,17 +505,38 @@ title="Print to PDF"
 <h1>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">#</a></h1>
 <section id="enzymeml">
 <h2>1. EnzymeML<a class="headerlink" href="#enzymeml" title="Permalink to this headline">#</a></h2>
-<p>In its core, EnzymeML is a data model, structuring data and meta data of biocatalytic reactions. Thereby, properties of the reaction vessel, molecules involved in the reaction, as well as reaction properties like stoichiometry, pH, and temperature can be documented. Furthermore, properties of the protein catalyst like sequence, EC-number, UniProt ID can be stored alongside of potential reaction modifiers like inhibitory molecules. <span id="id1">[<a class="reference internal" href="references.html#id5" title="Jürgen Pleiss. Standardized data, scalable documentation, sustainable storage–enzymeml as a basis for fair data management in biocatalysis. ChemCatChem, 13(18):3909–3913, 2021.">Pleiss, 2021</a>]</span></p>
+<p>In its core, EnzymeML is a data model, structuring data and metadata of biocatalytic reactions.</p>
+<p>An EnzymeML document stores information on the reaction conditions like pH, temperature,
+Thereby relevant information on the reaction condition like pH
+Therein information on
+substrates, and products of enzyme reactions and
+THereby information on molecules
+Thereby, properties of the reaction vessel, molecules involved in the reaction, as well as reaction properties like stoichiometry, pH, and temperature can be documented. Furthermore, properties of the protein catalyst like sequence, EC-number, UniProt ID can be stored alongside of potential reaction modifiers like inhibitory molecules. <span id="id1">[<a class="reference internal" href="references.html#id5" title="Jürgen Pleiss. Standardized data, scalable documentation, sustainable storage–enzymeml as a basis for fair data management in biocatalysis. ChemCatChem, 13(18):3909–3913, 2021.">Pleiss, 2021</a>]</span></p>
 <p>Within the measurements section of the data model, measurement data of one or multiple measurements is stored. Each measurement contains data of identical measurement conditions as well as information about these conditions. Thus, data and meta data from experiments with differing conditions can be stored in a structured way.</p>
 <p>The data model consists of descriptions for the reaction vessel,</p>
 </section>
 <section id="calipytion">
 <span id="method-calipytion"></span><h2>CaliPytion<a class="headerlink" href="#calipytion" title="Permalink to this headline">#</a></h2>
+<p>CaliPytion was developed to provide an easy way to use linear and non linear calibration equations to calculate concentrations of analytical raw data based on a standard measurements. Thereby,</p>
 <section id="data-model-for-calibration-data">
 <h3>Data model for calibration data<a class="headerlink" href="#data-model-for-calibration-data" title="Permalink to this headline">#</a></h3>
+<p>The standard curve functionality of CaliPythion is based on a data model, structuring data and metadata of calibration measurements. Thereby, calibration conditions like temperature and pH, and information of the analytical device can be provided. Furthermore, the name as well as an ID can be specified for the analyzed substance. All of this information is stored in the <code class="docutils literal notranslate"><span class="pre">Calibration</span></code> root object. Additionally, the root object can contain a <code class="docutils literal notranslate"><span class="pre">Standard</span></code> and a <code class="docutils literal notranslate"><span class="pre">Spectrum</span></code>. A standard contains measurements of multiple predefined concentrations and a wavelength at which the measurement was conducted, in the case of spectrophotometry. A <code class="docutils literal notranslate"><span class="pre">Spectrum</span></code> can be defined by providing measurement data as well as the respectuve wavelengths at which the data was measured.</p>
 </section>
 <section id="linear-and-non-linear-fitting-of-calibration-equations">
 <h3>Linear and non-linear fitting of calibration equations<a class="headerlink" href="#linear-and-non-linear-fitting-of-calibration-equations" title="Permalink to this headline">#</a></h3>
+<p>Finds optimal model parameters through non-linear least squares fitting of experimental data to models
+Since no true model from the relation between …, and calibrations ar known to not always be linear</p>
+<p>the following equations were implemented
+When a <code class="docutils literal notranslate"><span class="pre">StandardCurve</span></code> is created, the measurement data, which is defined in <code class="docutils literal notranslate"><span class="pre">Calibration</span></code> is used to fit the listed calibration model equations to the data. The model, which represents the relation between analytical signal and concentration the best, is determined based on the lowest Akaike information criterion (AIC). Concentrations are calculated by calculating the root of the fitted calibration model.<br />
+After <code class="docutils literal notranslate"><span class="pre">StandardCurve</span></code> initialization, concentrations can be calculated by calling the <code class="docutils literal notranslate"><span class="pre">get_concentration()</span></code> method. Alternatively, a <code class="docutils literal notranslate"><span class="pre">StandardCurve</span></code> can be directly applied to an <code class="docutils literal notranslate"><span class="pre">EnzymeMLDocument</span></code> by calling the <code class="docutils literal notranslate"><span class="pre">apply_to_EnzymeML()</span></code> method</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">product_standard</span> <span class="o">=</span> <span class="n">StandardCurve</span><span class="p">()</span>
+<span class="n">enzmldoc_absorption</span> <span class="o">=</span> <span class="n">EnzymeMLDocument</span><span class="p">()</span>
+
+<span class="n">enzmldoc_concentration</span> <span class="o">=</span> <span class="n">product_standard</span><span class="o">.</span><span class="n">apply_to_EnzymeML</span><span class="p">(</span>
+    <span class="n">enzmldoc</span><span class="o">=</span><span class="n">enzmldoc_absorption</span><span class="p">,</span>
+    <span class="n">species_id</span><span class="o">=</span><span class="s2">&quot;s1&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
 </section>
 </section>
 <section id="enzymepynetics">

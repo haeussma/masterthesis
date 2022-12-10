@@ -164,10 +164,7 @@ const thebe_selector_output = ".output, .cell_output"
       Scenario B:
      </strong>
      <br/>
-     <span class="math notranslate nohighlight">
-      \(\alpha\)
-     </span>
-     -glucosidase inhibition by fucoidan
+     α-glucosidase inhibition by fucoidan
     </a>
    </li>
    <li class="toctree-l2">
@@ -356,8 +353,8 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#project-driven-workflow-development">
-   Project-driven workflow development
+  <a class="reference internal nav-link" href="#scenario-driven-workflow-development">
+   Scenario-driven workflow development
   </a>
  </li>
 </ul>
@@ -380,8 +377,8 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#project-driven-workflow-development">
-   Project-driven workflow development
+  <a class="reference internal nav-link" href="#scenario-driven-workflow-development">
+   Scenario-driven workflow development
   </a>
  </li>
 </ul>
@@ -396,13 +393,19 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="results">
 <h1>Results<a class="headerlink" href="#results" title="Permalink to this headline">#</a></h1>
-<section id="project-driven-workflow-development">
-<h2>Project-driven workflow development<a class="headerlink" href="#project-driven-workflow-development" title="Permalink to this headline">#</a></h2>
+<section id="scenario-driven-workflow-development">
+<h2>Scenario-driven workflow development<a class="headerlink" href="#scenario-driven-workflow-development" title="Permalink to this headline">#</a></h2>
 <p>The development of the workflow was driven by different research scenarios of EnzymeML project partners. The goal of all project was to reliably estimate kinetic parameters of enzyme reactions. The collaboration consisted of multiple rounds of lab experiments and kinetic modeling of the respective data. Each round consisted of (i) wet lab experiments, (ii) kinetic modeling, (iii) design of follow-up experiments, and (iv) discussion of results with project partners. Hence, a short feedback loop between lab experiments and modeling-based experimental suggestions was established.<br />
-In parallel, the python packages <a class="reference internal" href="methods.html#method-calipytion"><span class="std std-ref">CaliPytion</span></a> and <a class="reference internal" href="methods.html#method-enzymepynetics"><span class="std std-ref">EnzymePynetics</span></a> were developed to provide a workflow from analytical raw data to kinetic parameter estimates. Thereby, the individual requirements of each research scenario, fostered the implementation of different features. Hence, a generic workflow for parameter estimation of enzyme kinetics was established. The developed workflow is schematically visualized in figure 1.</p>
+In parallel, the python modules <a class="reference internal" href="methods.html#method-calipytion"><span class="std std-ref">CaliPytion</span></a> and <a class="reference internal" href="methods.html#method-enzymepynetics"><span class="std std-ref">EnzymePynetics</span></a> were developed to provide a workflow from analytical raw data to kinetic parameter estimates. Thereby, the individual requirements of each research scenario, fostered the implementation of different features. Hence, a generic workflow for parameter estimation of enzyme kinetics was established. The developed workflow is schematically visualized in figure 1.</p>
 <p><img alt="Fig. 1" src="_images/concept_workflow.png" />
 <em>Fig. 1: Workflow for kinetic parameter estimation of enzyme reactions.</em></p>
 <p>The workflow was designed around EnzymeML, whereas it’s data model serves</p>
+<ul class="simple">
+<li><p>Data model vs. format</p></li>
+<li><p>FAIR</p></li>
+</ul>
+<p>The following chapters show the developed workflow applied in different research scenarios. Each each of the following sections is an executable JupyterNotebook. Hence all figures for data visualization were generated at runtime of the analysis.
+Each notebook consists of a short description of the project’s background and methodology carried out by the project partners in the wet lab. Additionally kinetic modeling steps as well as the results are shown. Lastly, project specific results are discussed.</p>
 </section>
 <div class="toctree-wrapper compound">
 </div>

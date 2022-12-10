@@ -28,6 +28,8 @@ Despite the easy applicability of the workflow, after the data is initialized,
 
 ## Model selection in enzyme kinetics: calibration and kinetic model
 
+### pre-requires high data quality. If not, modeling can lead to wrong conclusions
+
 - Best-practices kinetic modeling
   - initial rates vs progress-curve analysis
     - initial rates not suited to estimate conversion after 24 h.
