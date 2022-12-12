@@ -2,8 +2,12 @@
 
 ## 1. EnzymeML
 
-In its core, EnzymeML is a data model, structuring data and metadata of biocatalytic reactions. Thereby, information on reaction conditions, substrate and product measurement data, as well as estimated kinetic parameters are documented {cite}`pleiss2021standardized`. Additionally, the enzyme and the reactants are specified by protein sequence or InChI respectively, enabling clear description of all involved species in an enzyme reaction. EnzymeML is conceptualized as an exchange format based on the Systems Biology Markup Language {cite}`hucka2003systems` and adheres to STRENDA guidelines {cite}`tipton2014standards`, which define minimal experimental reporting standards. Hence, EnzymeML serves as an exchange format for biocatalytic data between experimentalist, modelers and database providers, which is compliant with FAIR data principles {cite}`wilkinson2016fair`.  
+In its core, EnzymeML is a data model, structuring data and metadata of biocatalytic reactions. Thereby, information on reaction conditions, substrate and product measurement data, as well as estimated kinetic parameters are documented {cite}`pleiss2021standardized`. Additionally, the enzyme and the reactants are specified by protein sequence or InChI respectively, enabling clear description of all involved species in an enzyme reaction. EnzymeML is based on the ontology of Systems Biology Markup Language {cite}`hucka2003systems` and adheres to STRENDA guidelines {cite}`tipton2014standards`, which define minimal reporting standards for enzymatic experiments. Hence, EnzymeML serves as an exchange format for biocatalytic data between experimentalist, modelers and database providers, which is compliant with FAIR data principles {cite}`wilkinson2016fair`.  
 EnzymeML documents can be read, edited, and written via the Python API PyEnzyme, providing the possibility to integrate PyEnzyme in Python data analysis workflows.
+
+### 1.1 Creation of EnzymeML documents
+
+EnzymeML documents were created using the EnzymeML Excel template, in combination with the `.fromTemplate()` method of PyEnzyme. Within the spreadsheet, data and metadata of an experiment can be be filled in the respective sheets. Alternatively, only metadata was entered to the spreadsheet, whereas measurement data was parsed by a custom Python function from the output file of the analytical device to the measurement data section of the EnzymeML document.
 
 (method:calipytion)=
 

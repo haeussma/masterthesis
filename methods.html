@@ -357,6 +357,13 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#enzymeml">
    1. EnzymeML
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creation-of-enzymeml-documents">
+     1.1 Creation of EnzymeML documents
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#calipytion">
@@ -435,6 +442,13 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#enzymeml">
    1. EnzymeML
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creation-of-enzymeml-documents">
+     1.1 Creation of EnzymeML documents
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#calipytion">
@@ -504,8 +518,12 @@ title="Print to PDF"
 <h1>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">#</a></h1>
 <section id="enzymeml">
 <h2>1. EnzymeML<a class="headerlink" href="#enzymeml" title="Permalink to this headline">#</a></h2>
-<p>In its core, EnzymeML is a data model, structuring data and metadata of biocatalytic reactions. Thereby, information on reaction conditions, substrate and product measurement data, as well as estimated kinetic parameters are documented <span id="id1">[<a class="reference internal" href="references.html#id5" title="Jürgen Pleiss. Standardized data, scalable documentation, sustainable storage–enzymeml as a basis for fair data management in biocatalysis. ChemCatChem, 13(18):3909–3913, 2021.">Pleiss, 2021</a>]</span>. Additionally, the enzyme and the reactants are specified by protein sequence or InChI respectively, enabling clear description of all involved species in an enzyme reaction. EnzymeML is conceptualized as an exchange format based on the Systems Biology Markup Language <span id="id2">[<a class="reference internal" href="references.html#id10" title="Michael Hucka, Andrew Finney, Herbert M Sauro, Hamid Bolouri, John C Doyle, Hiroaki Kitano, Adam P Arkin, Benjamin J Bornstein, Dennis Bray, Athel Cornish-Bowden, and others. The systems biology markup language (sbml): a medium for representation and exchange of biochemical network models. Bioinformatics, 19(4):524–531, 2003.">Hucka <em>et al.</em>, 2003</a>]</span> and adheres to STRENDA guidelines <span id="id3">[<a class="reference internal" href="references.html#id11" title="Keith F Tipton, Richard N Armstrong, Barbara M Bakker, Amos Bairoch, Athel Cornish-Bowden, Peter J Halling, Jan-Hendrik Hofmeyr, Thomas S Leyh, Carsten Kettner, Frank M Raushel, and others. Standards for reporting enzyme data: the strenda consortium: what it aims to do and why it should be helpful. Perspectives in Science, 1(1-6):131–137, 2014.">Tipton <em>et al.</em>, 2014</a>]</span>, which define minimal experimental reporting standards. Hence, EnzymeML serves as an exchange format for biocatalytic data between experimentalist, modelers and database providers, which is compliant with FAIR data principles <span id="id4">[<a class="reference internal" href="references.html#id12" title="Mark D Wilkinson, Michel Dumontier, Ij J Aalbersberg, G Appleton, M Axton, A Baak, N Blomberg, JW Boiten, LB da Silva Santos, PE Bourne, and others. The fair guiding principles for scientific data management and stewardship. sci data 3: 160018. 2016.">Wilkinson <em>et al.</em>, 2016</a>]</span>.<br />
+<p>In its core, EnzymeML is a data model, structuring data and metadata of biocatalytic reactions. Thereby, information on reaction conditions, substrate and product measurement data, as well as estimated kinetic parameters are documented <span id="id1">[<a class="reference internal" href="references.html#id5" title="Jürgen Pleiss. Standardized data, scalable documentation, sustainable storage–enzymeml as a basis for fair data management in biocatalysis. ChemCatChem, 13(18):3909–3913, 2021.">Pleiss, 2021</a>]</span>. Additionally, the enzyme and the reactants are specified by protein sequence or InChI respectively, enabling clear description of all involved species in an enzyme reaction. EnzymeML is based on the ontology of Systems Biology Markup Language <span id="id2">[<a class="reference internal" href="references.html#id10" title="Michael Hucka, Andrew Finney, Herbert M Sauro, Hamid Bolouri, John C Doyle, Hiroaki Kitano, Adam P Arkin, Benjamin J Bornstein, Dennis Bray, Athel Cornish-Bowden, and others. The systems biology markup language (sbml): a medium for representation and exchange of biochemical network models. Bioinformatics, 19(4):524–531, 2003.">Hucka <em>et al.</em>, 2003</a>]</span> and adheres to STRENDA guidelines <span id="id3">[<a class="reference internal" href="references.html#id11" title="Keith F Tipton, Richard N Armstrong, Barbara M Bakker, Amos Bairoch, Athel Cornish-Bowden, Peter J Halling, Jan-Hendrik Hofmeyr, Thomas S Leyh, Carsten Kettner, Frank M Raushel, and others. Standards for reporting enzyme data: the strenda consortium: what it aims to do and why it should be helpful. Perspectives in Science, 1(1-6):131–137, 2014.">Tipton <em>et al.</em>, 2014</a>]</span>, which define minimal reporting standards for enzymatic experiments. Hence, EnzymeML serves as an exchange format for biocatalytic data between experimentalist, modelers and database providers, which is compliant with FAIR data principles <span id="id4">[<a class="reference internal" href="references.html#id12" title="Mark D Wilkinson, Michel Dumontier, Ij J Aalbersberg, G Appleton, M Axton, A Baak, N Blomberg, JW Boiten, LB da Silva Santos, PE Bourne, and others. The fair guiding principles for scientific data management and stewardship. sci data 3: 160018. 2016.">Wilkinson <em>et al.</em>, 2016</a>]</span>.<br />
 EnzymeML documents can be read, edited, and written via the Python API PyEnzyme, providing the possibility to integrate PyEnzyme in Python data analysis workflows.</p>
+<section id="creation-of-enzymeml-documents">
+<h3>1.1 Creation of EnzymeML documents<a class="headerlink" href="#creation-of-enzymeml-documents" title="Permalink to this headline">#</a></h3>
+<p>EnzymeML documents were created using the EnzymeML Excel template, in combination with the <code class="docutils literal notranslate"><span class="pre">.fromTemplate()</span></code> method of PyEnzyme. Within the spreadsheet, data and metadata of an experiment can be be filled in the respective sheets. Alternatively, only metadata was entered to the spreadsheet, whereas measurement data was parsed by a custom Python function from the output file of the analytical device to the measurement data section of the EnzymeML document.</p>
+</section>
 </section>
 <section id="calipytion">
 <span id="method-calipytion"></span><h2>CaliPytion<a class="headerlink" href="#calipytion" title="Permalink to this headline">#</a></h2>
