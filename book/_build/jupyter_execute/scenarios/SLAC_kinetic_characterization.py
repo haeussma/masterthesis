@@ -24,7 +24,7 @@
 # 
 # ### Imports
 
-# In[1]:
+# In[8]:
 
 
 from typing import Dict, List
@@ -36,6 +36,7 @@ import matplotlib
 import matplotlib.pyplot as plt
 import seaborn as sns
 import copy
+import string
 from lmfit import Parameters, minimize
 from scipy.stats import linregress, pearsonr
 from joblib import Parallel, delayed
@@ -54,7 +55,7 @@ warnings.filterwarnings('ignore')
 # 
 # Data from the enzyme reactions was loaded from the output files of the photometer and written to individual EnzymeML documents. Then infromation of the control reactions was used to subtract the absorption, contributed from enzyme and buffer from the substrate and product signal.
 
-# In[2]:
+# In[9]:
 
 
 # Specify the location of the data sets
@@ -131,7 +132,7 @@ for enzmldoc in absortion_enzymemldocs:
 # Calibration data was loaded and converted into individual instances of the calibration data model. Some meta data of the calibration needed to be provided to the custom ```read_calibration_data``` function, since the output of the used spectro photometer contained a minimum of information only. Thereafter, a StandardCurve was created for each calibration data set. Thereby, only absoption values below 3 were considered, since higher absorption values could not be converted into concentration accurately. 
 # Lastly, the fit of each standard curves was visualized.
 
-# In[3]:
+# In[10]:
 
 
 # Load calibration raw data
@@ -183,7 +184,7 @@ plt.tight_layout()
 # 
 # Nextup, the generate standard curves were used to convert the absorption measurement data into concentration data. Thereby, the respective concentration values were only calculated, if the measured absorption was within the respective calibration bounds.
 
-# In[4]:
+# In[11]:
 
 
 # Calculate concentrations by applying standard curves to 'EnzymeMLDocuments'.
@@ -218,7 +219,7 @@ for standard_curve, abso_enzmldoc in zip(standard_curves, absortion_enzymemldocs
 # $k$ was determined for each data set individually by a minimization algorithm. The minimization objective was to find the optimal $k$, which minimizes all slopes of a given reaction condition. Thereafter, the mass balances of all measurements were visualized.
 # 
 
-# In[5]:
+# In[12]:
 
 
 # Defenition of parameter 'k'
@@ -305,11 +306,13 @@ plt.tight_layout()
 # Secondly, substrate inhibition models were excluded, since the model was not able to describe the observed reaction kinetics. This was evident from a higher Akaike information criterion as well as more than 100 % standard deviation on the estimated parameters.  
 # Lastly, the irreversible Michaelis-Menten model with and without time-dependent enzyme inactivation was compared, since enzyme inactivation was observed in previous experiments. Estimated parameters and the fitted models are shown for the experimental data at pH 3 and 25°C. Once without enzyme inactivation and once with.
 
-# In[6]:
+# In[14]:
 
 
 fig, axes = plt.subplots(1,2, figsize=(10,5), sharey=True, sharex=True)
 for i, ax in enumerate(axes.flatten()):
+    ax.text(0, 1.1, string.ascii_uppercase[i], transform=ax.transAxes, 
+            size=20, weight='bold')
     if i == 0:
         print("Estimated parameters without time-dependent enzyme inactivation:")
         kinetics = ParameterEstimator.from_EnzymeML(concentration_enzymemldocs[0], "s0", "substrate")
@@ -333,7 +336,7 @@ plt.tight_layout()
 # 
 # Thus, irreversible Michaelis-Menten model with time-dependent enzyme inactivation was selected for the parameter estimation for all data sets.
 
-# In[7]:
+# In[15]:
 
 
 # Run parameter estimator for all datasets, utilizing multi-processing.
@@ -360,10 +363,10 @@ for i, (doc, ax) in enumerate(zip(results, axes.flatten())):
 plt.tight_layout()
 
 
-# The above plot shows all kinetic experiments, fitted to the irreversible Michaelis-Menten model with time-dependent enzyme inactivation. Based on the reaction slopes, no catalytic avtivity is observable for reactions at pH 5 or higher.
-# In the following cells, the resulting kinetic parameters were extracted and visualized. As in the mass balance analysis, the reactions at pH 4, 45°C and pH 4.5, 35°C differ from other experiments of the respective pH. In both cases, every applied substrate concentration is higher than intended in the design of the experiment. Furthermore, the resulting parameter estimates have a high uncertanty. Therefore, the respective measurements are excluded from further analysis. Additionaly, the results from pH 5.5, 35°C were excluded, since the uncertainty of the parameters could not be estimated.
+# The above plot shows all kinetic experiments, fitted to the irreversible Michaelis-Menten model with time-dependent enzyme inactivation. Based on the reaction slopes, no catalytic activity was observed for reactions at pH 5 or higher.
+# In the following cells, the resulting kinetic parameters were extracted and visualized. As in the mass balance analysis, the reactions at pH 4, 45°C and pH 4.5, 35°C differed from other experiments of the respective pH. In both cases, every applied substrate concentration is higher than intended in the design of the experiment. Furthermore, the resulting parameter estimates have a high uncertainty. Therefore, the respective measurements were excluded from further analysis. Additionally, the results from pH 5.5, 35°C were excluded, since the uncertainty of the parameters could not be estimated.
 
-# In[8]:
+# In[16]:
 
 
 # Extract kinetic parameters of all datasets
@@ -445,12 +448,14 @@ df
 # 
 # ### Parameter estimates for $k_{cat}$ and $K_{m}$
 
-# In[9]:
+# In[17]:
 
 
 # Visualize estimated parameters
 fig, axes = plt.subplots(1,2, figsize=(12.8, 4.8), sharey=False, sharex=False)
 for i, ax in enumerate(axes.flatten()):
+    ax.text(0, 1.1, string.ascii_uppercase[i], transform=ax.transAxes, 
+            size=20, weight='bold')
     if i==1:
         plot(df, xdata="Km [uM]", ydata="kcat [1/s]", xerror="Km stderr", yerror="kcat stderr", colors="pH", ax=ax)
     else:
@@ -469,7 +474,7 @@ for i, ax in enumerate(axes.flatten()):
 # t_{\frac{1}{2}} = \frac{ln(2)}{k_{inact}}
 # ```
 
-# In[10]:
+# In[ ]:
 
 
 # Exclued inactive enzyme reactions above pH 4.5 and discard measurements with more than 100 % standard deviation on enzyme inactivation parameter
@@ -485,7 +490,7 @@ plt.show()
 # The enzyme's calculated half life was between 8 - 18 min for reactions at pH 3 and pH 3.5, whereas enzyme at higher pH values showed a half life between 15 - 35 min. Therefore, enzyme at reaction conditions with higher catalytic efficieny showed generally a shorter half life compared to enzyme at reaction conditions with lower catalytic efficiency.  
 # In order to check for corrections between $k_{inact}$, $k_{cat}$, $K_{m}$, $\frac{k_{cat}}{K_{m}}$, as well as the reaction temperature and pH, a correlation analysis was conducted.
 
-# In[12]:
+# In[ ]:
 
 
 # Calculate correlations

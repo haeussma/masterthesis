@@ -157,7 +157,11 @@ const thebe_selector_output = ".output, .cell_output"
       Scenario A:
      </strong>
      <br/>
-     Chymotrypsin inhibiton by a designed albumin fusion protein
+     Chymotrypsin inhibiton by a
+     <em>
+      in silico
+     </em>
+     designed albumin fusion protein
     </a>
    </li>
    <li class="toctree-l2">
@@ -185,11 +189,6 @@ const thebe_selector_output = ".output, .cell_output"
      </strong>
      <br/>
      Time-dependent enzyme inactivation
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="effect_calibration_model.html">
-     Effect of calibration equation on kinetic parameters
     </a>
    </li>
   </ul>
@@ -624,6 +623,7 @@ For each pH - temperature condition a seperate ABTS standard curve and absorptio
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 <span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">import</span> <span class="nn">string</span>
 <span class="kn">from</span> <span class="nn">lmfit</span> <span class="kn">import</span> <span class="n">Parameters</span><span class="p">,</span> <span class="n">minimize</span>
 <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">linregress</span><span class="p">,</span> <span class="n">pearsonr</span>
 <span class="kn">from</span> <span class="nn">joblib</span> <span class="kn">import</span> <span class="n">Parallel</span><span class="p">,</span> <span class="n">delayed</span>
@@ -840,10 +840,10 @@ Measurements &#39;[&#39;m9&#39;]&#39; removed from document, since respective me
 <h2>Quality control through mass balance analysis<a class="headerlink" href="#quality-control-through-mass-balance-analysis" title="Permalink to this headline">#</a></h2>
 <p>Since product and substrate of the SLAC reaction were simultaneously recorded, mass balance analysis was conductas as a control of quality. By assuming mass conservation, the following concentration balance can be established:</p>
 <div class="math notranslate nohighlight" id="equation-mass-balance">
-<span class="eqno">(6)<a class="headerlink" href="#equation-mass-balance" title="Permalink to this equation">#</a></span>\[0 = S_{(t)} + P_{(t)} - S_{0}\]</div>
+<span class="eqno">(11)<a class="headerlink" href="#equation-mass-balance" title="Permalink to this equation">#</a></span>\[0 = S_{(t)} + P_{(t)} - S_{0}\]</div>
 <p>Thereby, <span class="math notranslate nohighlight">\(S_{0}\)</span> denotes the initial substrate concentration, whereas <span class="math notranslate nohighlight">\(S_{(t)}\)</span> and <span class="math notranslate nohighlight">\(P_{(t)}\)</span> describe the substrate and product concentration for each time point <span class="math notranslate nohighlight">\(t\)</span>. <span class="math notranslate nohighlight">\(S_{t}\)</span> and <span class="math notranslate nohighlight">\(S_{0}\)</span> were individually measured. Thus each enzyme reaction with a given initial substrate concentration had a control reaction with identical substrate concentration. In contrast to the substrate, no calibration standard is available for the product. Therefore, an additional parameter §k§ was introdiced to the mass balance equation, assuming linear relationship between the product concentration and its signal:</p>
 <div class="math notranslate nohighlight" id="equation-mass-balance-with-k">
-<span class="eqno">(7)<a class="headerlink" href="#equation-mass-balance-with-k" title="Permalink to this equation">#</a></span>\[0 = S_{(t)} + P_{(t)}k - S_{0}\]</div>
+<span class="eqno">(12)<a class="headerlink" href="#equation-mass-balance-with-k" title="Permalink to this equation">#</a></span>\[0 = S_{(t)} + P_{(t)}k - S_{0}\]</div>
 <p><span class="math notranslate nohighlight">\(k\)</span> was determined for each data set individually by a minimization algorithm. The minimization objective was to find the optimal <span class="math notranslate nohighlight">\(k\)</span>, which minimizes all slopes of a given reaction condition. Thereafter, the mass balances of all measurements were visualized.</p>
 <div class="cell tag_hide_input docutils container">
 <div class="cell_input docutils container">
@@ -938,6 +938,8 @@ Lastly, the irreversible Michaelis-Menten model with and without time-dependent 
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="n">string</span><span class="o">.</span><span class="n">ascii_uppercase</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span> 
+            <span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Estimated parameters without time-dependent enzyme inactivation:&quot;</span><span class="p">)</span>
         <span class="n">kinetics</span> <span class="o">=</span> <span class="n">ParameterEstimator</span><span class="o">.</span><span class="n">from_EnzymeML</span><span class="p">(</span><span class="n">concentration_enzymemldocs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;s0&quot;</span><span class="p">,</span> <span class="s2">&quot;substrate&quot;</span><span class="p">)</span>
@@ -1075,8 +1077,8 @@ In absolute therms, the estimated <span class="math notranslate nohighlight">\(K
 <img alt="../_images/SLAC_kinetic_characterization_15_0.png" src="../_images/SLAC_kinetic_characterization_15_0.png" />
 </div>
 </div>
-<p>The above plot shows all kinetic experiments, fitted to the irreversible Michaelis-Menten model with time-dependent enzyme inactivation. Based on the reaction slopes, no catalytic avtivity is observable for reactions at pH 5 or higher.
-In the following cells, the resulting kinetic parameters were extracted and visualized. As in the mass balance analysis, the reactions at pH 4, 45°C and pH 4.5, 35°C differ from other experiments of the respective pH. In both cases, every applied substrate concentration is higher than intended in the design of the experiment. Furthermore, the resulting parameter estimates have a high uncertanty. Therefore, the respective measurements are excluded from further analysis. Additionaly, the results from pH 5.5, 35°C were excluded, since the uncertainty of the parameters could not be estimated.</p>
+<p>The above plot shows all kinetic experiments, fitted to the irreversible Michaelis-Menten model with time-dependent enzyme inactivation. Based on the reaction slopes, no catalytic activity was observed for reactions at pH 5 or higher.
+In the following cells, the resulting kinetic parameters were extracted and visualized. As in the mass balance analysis, the reactions at pH 4, 45°C and pH 4.5, 35°C differed from other experiments of the respective pH. In both cases, every applied substrate concentration is higher than intended in the design of the experiment. Furthermore, the resulting parameter estimates have a high uncertainty. Therefore, the respective measurements were excluded from further analysis. Additionally, the results from pH 5.5, 35°C were excluded, since the uncertainty of the parameters could not be estimated.</p>
 <div class="cell tag_hide_cell tag_output_croll docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Extract kinetic parameters of all datasets</span>
@@ -1606,6 +1608,8 @@ Low and also negative correlations were observed for reactions with pH values at
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Visualize estimated parameters</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">12.8</span><span class="p">,</span> <span class="mf">4.8</span><span class="p">),</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="n">string</span><span class="o">.</span><span class="n">ascii_uppercase</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span> 
+            <span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
         <span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">xdata</span><span class="o">=</span><span class="s2">&quot;Km [uM]&quot;</span><span class="p">,</span> <span class="n">ydata</span><span class="o">=</span><span class="s2">&quot;kcat [1/s]&quot;</span><span class="p">,</span> <span class="n">xerror</span><span class="o">=</span><span class="s2">&quot;Km stderr&quot;</span><span class="p">,</span> <span class="n">yerror</span><span class="o">=</span><span class="s2">&quot;kcat stderr&quot;</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="s2">&quot;pH&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
@@ -1623,9 +1627,9 @@ In terms of temperature, higher <span class="math notranslate nohighlight">\(\fr
 </section>
 <section id="time-dependent-enzyme-inactivation">
 <h3>Time-dependent enzyme inactivation<a class="headerlink" href="#time-dependent-enzyme-inactivation" title="Permalink to this headline">#</a></h3>
-<p>The time-dependent enzyme inactivaten rate <span class="math notranslate nohighlight">\(k_{inact}\)</span>, was estimated for each experiment, since the irreversible Michaels-Menten model did not describe the observed time-course data accurately. The halfife of the enzyme was calculated as shown in equation <a class="reference internal" href="#equation-enzyme-halflife">(8)</a> <span id="id1">[<a class="reference internal" href="../references.html#id8" title="Engelbert Buxbaum. Enzyme Kinetics: Special Cases, pages 185–191. Springer International Publishing, Cham, 2015. URL: https://doi.org/10.1007/978-3-319-19920-7_8, doi:10.1007/978-3-319-19920-7_8.">Buxbaum, 2015</a>]</span>.</p>
+<p>The time-dependent enzyme inactivaten rate <span class="math notranslate nohighlight">\(k_{inact}\)</span>, was estimated for each experiment, since the irreversible Michaels-Menten model did not describe the observed time-course data accurately. The halfife of the enzyme was calculated as shown in equation <a class="reference internal" href="#equation-enzyme-halflife">(13)</a> <span id="id1">[<a class="reference internal" href="../references.html#id8" title="Engelbert Buxbaum. Enzyme Kinetics: Special Cases, pages 185–191. Springer International Publishing, Cham, 2015. URL: https://doi.org/10.1007/978-3-319-19920-7_8, doi:10.1007/978-3-319-19920-7_8.">Buxbaum, 2015</a>]</span>.</p>
 <div class="math notranslate nohighlight" id="equation-enzyme-halflife">
-<span class="eqno">(8)<a class="headerlink" href="#equation-enzyme-halflife" title="Permalink to this equation">#</a></span>\[t_{\frac{1}{2}} = \frac{ln(2)}{k_{inact}}\]</div>
+<span class="eqno">(13)<a class="headerlink" href="#equation-enzyme-halflife" title="Permalink to this equation">#</a></span>\[t_{\frac{1}{2}} = \frac{ln(2)}{k_{inact}}\]</div>
 <div class="cell tag_hide_input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Exclued inactive enzyme reactions above pH 4.5 and discard measurements with more than 100 % standard deviation on enzyme inactivation parameter</span>

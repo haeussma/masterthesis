@@ -16,7 +16,6 @@ chapters:
       - file: scenarios/glycosidase_inhibition
       - file: scenarios/SLAC_kinetic_characterization
       - file: scenarios/enzyme_inactivation
-      - file: scenarios/effect_calibration_model
   - file: discussion
   - file: conclusion
   - file: references

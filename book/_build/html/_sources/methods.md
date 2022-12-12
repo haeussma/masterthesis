@@ -2,24 +2,14 @@
 
 ## 1. EnzymeML
 
-In its core, EnzymeML is a data model, structuring data and metadata of biocatalytic reactions.
-
-An EnzymeML document stores information on the reaction conditions like pH, temperature,
-Thereby relevant information on the reaction condition like pH
-Therein information on
-substrates, and products of enzyme reactions and
-THereby information on molecules
-Thereby, properties of the reaction vessel, molecules involved in the reaction, as well as reaction properties like stoichiometry, pH, and temperature can be documented. Furthermore, properties of the protein catalyst like sequence, EC-number, UniProt ID can be stored alongside of potential reaction modifiers like inhibitory molecules. {cite}`pleiss2021standardized`
-
-Within the measurements section of the data model, measurement data of one or multiple measurements is stored. Each measurement contains data of identical measurement conditions as well as information about these conditions. Thus, data and meta data from experiments with differing conditions can be stored in a structured way.
-
-The data model consists of descriptions for the reaction vessel,
+In its core, EnzymeML is a data model, structuring data and metadata of biocatalytic reactions. Thereby, information on reaction conditions, substrate and product measurement data, as well as estimated kinetic parameters are documented {cite}`pleiss2021standardized`. Additionally, the enzyme and the reactants are specified by protein sequence or InChI respectively, enabling clear description of all involved species in an enzyme reaction. EnzymeML is conceptualized as an exchange format based on the Systems Biology Markup Language {cite}`hucka2003systems` and adheres to STRENDA guidelines {cite}`tipton2014standards`, which define minimal experimental reporting standards. Hence, EnzymeML serves as an exchange format for biocatalytic data between experimentalist, modelers and database providers, which is compliant with FAIR data principles {cite}`wilkinson2016fair`.  
+EnzymeML documents can be read, edited, and written via the Python API PyEnzyme, providing the possibility to integrate PyEnzyme in Python data analysis workflows.
 
 (method:calipytion)=
 
 ## CaliPytion
 
-CaliPytion was developed to provide an easy way to use linear and non linear calibration equations to calculate concentrations of analytical raw data based on a standard measurements. Thereby,
+CaliPytion was developed to provide an easy way to use linear and non linear calibration equations to calculate concentrations of analytical raw data based on a standard measurements.
 
 ### Data model for calibration data
 
@@ -31,6 +21,32 @@ Finds optimal model parameters through non-linear least squares fitting of exper
 Since no true model from the relation between ..., and calibrations ar known to not always be linear
 
 the following equations were implemented
+
+```{math}
+:label: linear
+A = ax
+```
+
+```{math}
+:label: quadratic
+A = ax^2 + bx
+```
+
+```{math}
+:label: 3rd_polynominal
+A = ax^3 + bx^2 + cx
+```
+
+```{math}
+:label: poly_e
+A = ae^{\frac{b}{x}}
+```
+
+```{math}
+:label: fractional
+A = \frac{ax}{b+x}
+```
+
 When a `StandardCurve` is created, the measurement data, which is defined in `Calibration` is used to fit the listed calibration model equations to the data. The model, which represents the relation between analytical signal and concentration the best, is determined based on the lowest Akaike information criterion (AIC). Concentrations are calculated by calculating the root of the fitted calibration model.  
 After `StandardCurve` initialization, concentrations can be calculated by calling the `get_concentration()` method. Alternatively, a `StandardCurve` can be directly applied to an `EnzymeMLDocument` by calling the `apply_to_EnzymeML()` method
 
@@ -127,8 +143,8 @@ estimator.fit_models()
 estimator.visualize()
 ```
 
-### 3.5 Visualization
+### 3.5 Model selection
 
-## 4. Model selection
+### 3.6 Visualization
 
 Akaike information criterion
