@@ -10,6 +10,7 @@ Jupyter notebooks enable enable
 ## Reproducibility in enzyme kinetics
 
 - Need for documentation without limiting experimental possibilities
+- Strenda guidelines are insufficient??
 
 ## Data management / lab digitalization
 
@@ -28,6 +29,11 @@ Despite the easy applicability of the workflow, after the data is initialized,
 ## Current state in kinetic modeling of enzyme kinetics
 
 ## Model selection in enzyme kinetics: calibration and kinetic model
+
+- correlation between parameters:
+- short experimental time
+- low initial substrate concenration
+- unpercise data --> systematic deviations between mesaurements
 
 ### pre-requires high data quality. If not, modeling can lead to wrong conclusions
 
