@@ -1,56 +1,55 @@
 # Discussion
 
-Discuss both viewpoints: biologist and RSE.
-Documentation of experiments stops after measurement. Treatment of measurement data
+Analysis of the four scenarios proved the applicability and advantages of the developed workflow.
 
-## Jupyter notebooks for documentation of scientific analysis
+- Currently: unfair initial rates, lineweaver burk
+- Besides the methodology documentation is bad
 
-Jupyter notebooks enable enable
+## FAIR workflow for enzyme kinetics
 
-## Reproducibility in enzyme kinetics
+**Findable**
 
-- Need for documentation without limiting experimental possibilities
+**Accessible**
+
+**Interoperable**
+
+**Reusable**
+
+### Reproducible enzyme kinetics
+
 - Strenda guidelines are insufficient??
+- Precision of parameters
 
-## Data management / lab digitalization
+**errors in data sets and detection of them**
 
-- temperature in MTPs
+- General problems in datasets and experimental preparation
+  - systematic errors, temperature (gradients and incubation)
+  - outliers (pipetting errors,)
+  - experimental problems (viscosity)
+- generals problems in modelling
+  - error sources
+    - wrong concentration calculation calibration equation and extincition coefficient
+    - initial rates
 
-## Jupyter notebooks and book
+**model selection and miss selection**
 
-- great documentation (FAIR)
-
-In this project, a robust and FAIR workflow from analytical raw-data to kinetic parameters was established. Thereby, the output of a analytical device was used directly as the input of the modeling pipeline.
-
-Despite the robust workflow, after the data is written to an EnzymeML document, manual copying of data into the EnzymeML spreadsheet is prone to human error. Especially, for large datasets with many time points and reactants. Hence, manufacturers should enable direct access to the measurement device, for instance via an API. (Control and laer experiments)
-
-Despite the easy applicability of the workflow, after the data is initialized,
-
-## Current state in kinetic modeling of enzyme kinetics
-
-## Model selection in enzyme kinetics: calibration and kinetic model
-
+- kinetic and calibration
 - correlation between parameters:
 - short experimental time
 - low initial substrate concenration
 - unpercise data --> systematic deviations between mesaurements
 
-### pre-requires high data quality. If not, modeling can lead to wrong conclusions
-
-- Best-practices kinetic modeling
-  - initial rates vs progress-curve analysis
-    - initial rates not suited to estimate conversion after 24 h.
-- Cost of additional parameters
-- Model selection criteria
-- How to assess the quality of a model
-  - what does the model represent (not newtonian mechanics)
-
-## Inactivation
-
-- deterioration during catalysis
-- adsorption to MTP surface (hydrophobic interaction)
-
-## Percision of kinetic parameters
-
-- how percise should parameters be
+- how precise should parameters be
+- initial rates vs progress-curve analysis
 - randomized order in MTPs
+- ENZYME INACTIVATION
+  - initial rates not suited to estimate conversion after 24 h.
+
+**Jupyter Notebook and Book**
+
+- Need for documentation without limiting experimental possibilities -> Jupyter notebooks
+- great documentation (FAIR)
+
+In this project, a robust and FAIR workflow from analytical raw-data to kinetic parameters was established. Thereby, the output of a analytical device was used directly as the input of the modeling pipeline.
+
+Despite the robust workflow, after the data is written to an EnzymeML document, manual copying of data into the EnzymeML spreadsheet is prone to human error. Especially, for large datasets with many time points and reactants. Hence, manufacturers should enable direct access to the measurement device, for instance via an API. (Control and laer experiments)

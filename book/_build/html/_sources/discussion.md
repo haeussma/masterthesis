@@ -3,6 +3,14 @@
 Discuss both viewpoints: biologist and RSE.
 Documentation of experiments stops after measurement. Treatment of measurement data
 
+## Error sources
+
+- experimental preperation
+- MODELLING
+  - calibration equation
+  - don't use extincition coefficient
+  - analysis window --> progresscurve-beste
+
 ## Jupyter notebooks for documentation of scientific analysis
 
 Jupyter notebooks enable enable

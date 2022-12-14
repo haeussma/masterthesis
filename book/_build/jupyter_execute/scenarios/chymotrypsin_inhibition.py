@@ -7,7 +7,7 @@
 # 
 # ## Project background
 # In this scenario, the binding of an *in silico* designed protein to an enzyme was assessed by determining the  inhibitory constant $K_{i}$. Thereby, the efficiency of the newly developed approach for computational design of protein binders to deliberately chosen targets was demonstrated. 
-# This was done, by comparing $K_{i}$ of the designed human serum albumin variant (HSA(M3)) to the wild-type (HSA(M3)) by respectively applying the proteins to chymotrypsin enzyme reactions. Both designed proteins were Both HSAs were individually dimerized into fusion proteins through a huFc.
+# This was done by comparing $K_{i}$ of the designed human serum albumin variant (HSA(M3)) to the wild-type (HSA(WT)) by respectively applying the proteins to chymotrypsin enzyme reactions. Both designed proteins were individually dimerized into fusion proteins through a huFc.
 # 
 # ### Experimental design
 # 
@@ -21,7 +21,7 @@
 # 
 # ### Imports
 
-# In[1]:
+# In[7]:
 
 
 import numpy as np
@@ -29,6 +29,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import pyenzyme as pe
 import copy
+import string
 from IPython.display import display
 from EnzymePynetics.tools.parameterestimator import ParameterEstimator
 from CaliPytion.tools.standardcurve import StandardCurve
@@ -41,7 +42,7 @@ warnings.filterwarnings('ignore')
 # 
 # Product standard data was imported directly from an Excel file. Then, a standard curve was created.
 
-# In[2]:
+# In[8]:
 
 
 product_standard = StandardCurve.from_excel(
@@ -60,11 +61,11 @@ product_standard.visualize()
 # 
 # Based on the Akaike information criterion (AIC), the relation between concentration and absorption is best described by a quadratic function. The calibration measurements and the fitted calibration model are shown in Fig. XXX.
 
-# ### Experimantal data
+# ### Experimental data
 # 
 # The EnzymeML documents of each experiment were loaded and the standard curve was applied to the absorption data to calculate concentrations.
 
-# In[3]:
+# In[9]:
 
 
 # Load data from 
@@ -78,10 +79,10 @@ chymo_HSAM3 = product_standard.apply_to_EnzymeML(chymo_HSAM3, "s1")
 
 # ## Comparability of the experiments
 # 
-# Since experimental data with HSA(WT)-huFc and HSA(M3)-huFc originate from independent experiments, the control reactions without the respective inhibitor were compared by performing a parameter estimation. Thereby, catalytic efficiency $\frac{k_{cat}}{K_{m}}$ was used to assess comparability between the data sets, since $k_{cat}$ and $K_{m}$ were highly correlated (corr > 0.98). High correlations between parameters, indicate that the parameters cannot be determined independently with certainty. In this case, the highest initial substrate concentration is presumably too low, compared to the true $K_{m}$ of the enzyme under the given experimental conditions. However, higher substrate concentration were not applied for multiple reasons. On the one hand dimethyl sulfoxide (DMSO) was used as a co-solvent of the substrate, which inhibits enzyme activity {cite:t}`busby1999effect`. Hence, higher initial substrate concentrations would have led to higher enzyme inhibition, which would have distorted the assessment of $K_{i}$.
+# Since experimental data with HSA(WT)-huFc and HSA(M3)-huFc originate from independent experiments, the control reactions without the respective inhibitor were compared by performing a parameter estimation. Thereby, catalytic efficiency $\frac{k_{cat}}{K_{m}}$ was used to assess comparability between the data sets, since $k_{cat}$ and $K_{m}$ were highly correlated (corr > 0.98). High correlations between parameters indicate that the parameters cannot be determined independently with certainty. In this case, the highest initial substrate concentration is presumably too low, compared to the true $K_{m}$ of the enzyme under the given experimental conditions. However, higher substrate concentration were not applied for multiple reasons. On the one hand dimethyl sulfoxide (DMSO) was used as a co-solvent of the substrate, which inhibits enzyme activity {cite:t}`busby1999effect`. Hence, higher initial substrate concentrations would have led to higher enzyme inhibition, which would have distorted the assessment of $K_{i}$.
 # On the other hand, high substrate viscosity denied the application of higher concentrations without sacrificing pipetting precision.
 
-# In[4]:
+# In[12]:
 
 
 # Create copys of the data sets and delete measuremnts with inhibitor.
@@ -119,6 +120,8 @@ for e, (doc, ax, title) in enumerate(zip([kinetics_wt_control ,kinetics_m3_contr
     ax.set_ylabel("4-nitroanilin [mM]")
     ax.set_xlabel("time after reaction start [min]")
     ax.set_xticks([5, 10, 15, 20])
+    ax.text(0, 1.1, string.ascii_uppercase[e], transform=ax.transAxes, 
+            size=20, weight='bold')
 
 handles, labels = ax.get_legend_handles_labels()
 
@@ -136,7 +139,7 @@ plt.tight_layout()
 # Experimental data of chymotrypsin inhibition by HSA(M3)-huFc contained negative absorption values for the first measurement point. Presumably sourcing from an incorrect blank measurement. Therefore, only measurement data from the second data point (minute 5 and onward) was considered for parameter estimation.
 # Parameter estimates for all applied kinetic models are displayed in the output below.
 
-# In[5]:
+# In[13]:
 
 
 # Parameter estimation for HSA(wt) data set
@@ -160,6 +163,8 @@ for e, (doc, ax, title) in enumerate(zip([kinetics_HSAwt ,kinetics_HSAM3], axes.
     ax.set_ylabel("4-nitroanilin [mM]")
     ax.set_xlabel("time after reaction start [min]")
     ax.set_xticks([5, 10, 15, 20])
+    ax.text(0, 1.1, string.ascii_uppercase[e], transform=ax.transAxes, 
+            size=20, weight='bold')
 
 handles, labels = ax.get_legend_handles_labels()
 

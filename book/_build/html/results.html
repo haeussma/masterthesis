@@ -352,6 +352,11 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#python-packages">
+   Python packages
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#scenario-driven-workflow-development">
    Scenario-driven workflow development
   </a>
@@ -376,6 +381,11 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#python-packages">
+   Python packages
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#scenario-driven-workflow-development">
    Scenario-driven workflow development
   </a>
@@ -392,10 +402,16 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="results">
 <h1>Results<a class="headerlink" href="#results" title="Permalink to this headline">#</a></h1>
+<section id="python-packages">
+<h2>Python packages<a class="headerlink" href="#python-packages" title="Permalink to this headline">#</a></h2>
+<p>In this work, two Python modules were developed, which form the components of an analysis workflow from raw data to kinetic parameter estimates for enzyme reactions. Thereby, measurement data was initially stored in an EnzymeML document, whereupon the raw data was converted into concentration data with CaliPytion. Thereafter, kinetic parameters were estimated with EnzymePynetics. Finally, the parameter estimates were written back to the EnzymeML document together with information on the respective kinetic model.<br />
+CaliPytion was developed to facilitate robust conversion of raw measurement data to concentration data. Based on a standard of the analyte a calibration curve is created, describing the respective signal to concentration relationship. Since the relation can be linear or non-liner, depending on the utilized detection range of the instrument as well as solvent properties <span id="id1">[<a class="reference internal" href="references.html#id3" title="Kang-Hung Hsu and Chiachung Chen. The effect of calibration equations on the uncertainty of uv–vis spectrophotometric measurements. Measurement, 43(10):1525–1531, 2010.">Hsu and Chen, 2010</a>]</span>, <span id="id2">[]</span>, linear, polynomial, exponential, and rational calibration equations were implemented. Model selection was based on Akaike information criterion <span id="id3">[]</span>, offering a metric to compare models with different number of parameters.</p>
+<p>Beginning from measurement data of an analytical device, an EnzymeML domument</p>
+</section>
 <section id="scenario-driven-workflow-development">
 <h2>Scenario-driven workflow development<a class="headerlink" href="#scenario-driven-workflow-development" title="Permalink to this headline">#</a></h2>
 <p>The development of the workflow was driven by different research scenarios of EnzymeML project partners. The goal of all project was to reliably estimate kinetic parameters of enzyme reactions. The collaboration consisted of multiple rounds of lab experiments and kinetic modeling of the respective data. Each round consisted of (i) wet lab experiments, (ii) kinetic modeling, (iii) design of follow-up experiments, and (iv) discussion of results with project partners. Hence, a short feedback loop between lab experiments and modeling-based experimental suggestions was established.<br />
-In parallel, the python modules <a class="reference internal" href="methods.html#method-calipytion"><span class="std std-ref">CaliPytion</span></a> and <a class="reference internal" href="methods.html#method-enzymepynetics"><span class="std std-ref">EnzymePynetics</span></a> were developed to provide a workflow from analytical raw data to kinetic parameter estimates. Thereby, the individual requirements of each research scenario, fostered the implementation of different features. Hence, a generic workflow for parameter estimation of enzyme kinetics was established. The developed workflow is schematically visualized in figure 1.</p>
+In parallel, the python modules <a class="reference internal" href="methods.html#method-calipytion"><span class="std std-ref">CaliPytion</span></a> and <a class="reference internal" href="methods.html#method-enzymepynetics"><span class="std std-ref">EnzymePynetics</span></a> were developed to provide a workflow from analytical raw data to kinetic parameter estimates. Thereby, the individual requirements of each research scenario fostered the implementation of different features. Hence, a generic workflow for parameter estimation of enzyme kinetics was established. The developed workflow is schematically visualized in figure 1.</p>
 <p><img alt="Fig. 1" src="_images/concept_workflow.png" />
 <em>Fig. 1: Workflow for kinetic parameter estimation of enzyme reactions.</em></p>
 <p>The workflow was designed around EnzymeML, whereas it’s data model serves</p>
@@ -404,7 +420,8 @@ In parallel, the python modules <a class="reference internal" href="methods.html
 <li><p>FAIR</p></li>
 </ul>
 <p>The following chapters show the developed workflow applied in different research scenarios. Each each of the following sections is an executable JupyterNotebook. Hence all figures for data visualization were generated at runtime of the analysis.
-Each notebook consists of a short description of the project’s background and methodology carried out by the project partners in the wet lab. Additionally kinetic modeling steps as well as the results are shown. Lastly, project specific results are discussed.</p>
+Each notebook consists of a short description of the project’s background and methodology carried out by the project partners in the wet lab. Additionally kinetic modeling steps as well as the results are shown. Lastly, project specific results are discussed.
+hg</p>
 </section>
 <div class="toctree-wrapper compound">
 </div>

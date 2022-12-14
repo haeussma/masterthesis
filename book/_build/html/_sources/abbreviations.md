@@ -6,3 +6,5 @@
 
 :Alignment 2:
 If the field body starts on a subsequent line...
+
+Standards for Reporting Enzyme Data STRENDA

@@ -8,8 +8,8 @@
 # ## Project background
 # All investigated enzyme reaction without inhibitor applied to the reaction showed progress curve behavior, which were not explainable by irreversible Michaelis-Menten kinetics. All experiments had in common, that enzyme reactions were carried out in 96-well polystyrene micro titer plates (MTP), whereas the change in substrate or product absorption was monitored photometrically. 
 # In theory, the observed time-dependent decrease in enzyme activity can either be explained through enzyme inactivation or product inhibition. In case of time-dependent enzyme inactivation, the catalytic activity decreases, since the catalyst becomes inactive. Thereby, the decrease in relative reaction rate is independent from product concentration.
-# In case of product inhibition, the formed product reduces the reaction rate. Hence, apparent enzyme inactivation is dependent on product concentration.
-# Since both phenomena express themselves in an apparent decrease of reaction rate, they bare the potential to be confused
+# In case of product inhibition, the formed product reduces the reaction rate. Hence, the observed enzyme inactivation is dependent on product concentration.
+# Since both phenomena express themselves in an apparent decrease of reaction rate, they bare the potential to be confused.
 # 
 # One hypothesis for the suspected enzyme inactivation is hydrophobic interaction between the enzyme and the MTP surface. Thereby, hydrophobic regions of the enzyme's surface might interact with the polystyrene reaction vessel, potentially preventing substrate access to the active site of the enzyme. In order to test the hypothesis, adsorption experiments in which enzyme was incubated in MTP wells prior to reaction start was performed. Thereby, the enzyme activity should decrease depending on prior incubation time. If the hypothesis is correct, the calculated half life from the adsorption experiment 
 # should match with the half life of an enzyme kinetics experiment which was conducted in parallel.
@@ -144,7 +144,7 @@ plt.show()
 # 
 # ### Experimental data 
 # 
-# Experimental data was provided as an Excel file, whereas meta data of the experiment was filled in to an EnzymeML Excel spreadsheet. Measurement data was written to the EnzymeML document by a parser function 
+# Experimental data was provided as an Excel file, whereas meta data of the experiment was filled in to an EnzymeML Excel spreadsheet. Measurement data was written to the EnzymeML document by a parser function.
 # Kinetic parameters were estimated with and without considering enzyme inactivation.
 # 
 
@@ -271,7 +271,7 @@ plt.tight_layout()
 
 # _Fig XXX: Identification of systematic deviations through kinetic modeling._
 # 
-# By excluding the mentioned measurements, the model fit was improved (Fig xxxB). Additionally, the correlation between parameter estimates for $k_{cat}$ and $K_{m}$ was reduced from 0.518 to 0.204
+# By excluding the mentioned measurements, the model fit was improved (Fig xxxB). Additionally, the correlation between parameter estimates for $k_{cat}$ and $K_{m}$ was reduced from r<sup>2</sup> = 0.518 to 0.204.
 # ### Parameter estimation with and without considering enzyme inactivation
 # 
 
@@ -288,10 +288,12 @@ results = df.append(df_inactivation).sort_values("AIC")
 display(results.style.set_table_attributes('style="font-size: 12px"'))
 
 
+# '''#TODO AIC no more informatiove value goodness of fit is attributed to addtional paramteres --> additional variable is uninformative {cite}`arnold2010uninformative`
+# 
 # Kinetic parameters were estimated with and without considering time-dependent enzyme inactivation. 
 # Modeling results are listed in the table above. All models with an additional parameter for enzyme inactivation resulted in lower AIC values, indicating a better fit of the experimental data to inactivation models. Irreversible Michaelis-Menten model resulted in the highest AIC together with competitive product inhibition as well as substrate inhibition. Nevertheless, all inhibition models considering enzyme inactivation showed high standard deviations above 80% for the respective $K_{i}$ estimates. Therefore irreversible Michaelis-Menten model with time-dependent enzyme inactivation described the measurement data the best (Fig XXXA). Thereby, $k_{cat}$ was estimated to 3.003 min<sup>-1</sup> ± 0.77% whereas 30 µM ± 1.99%  was estimated for $K_{m}$. The respective half life of CotA was estimated at 95 min ± 4 min using equation [](enzyme_halflife), whereas $k_{cat}$ and $k_{inact}$ were highly correlated (corr > 0.95). Irreversible Michelis-Menten model without enzyme concentration did not fit the measurement data, since the reaction rate is initially underestimated, and overestimated in later stages of the reaction (Fig xxxB).  
 
-# In[41]:
+# In[6]:
 
 
 fig, axes = plt.subplots(2,2, figsize=(12.8,9.2), sharey=True, sharex=True)
@@ -323,7 +325,7 @@ plt.tight_layout()
 # Out of the models without enzyme inactivation, product inhibition models showed the lowest AIC. Qualitatively, the inhibition models  described the the progress curve of the reaction (Fig. xxxC and D)
 # 
 # ## Discussion
-# 
+# #TODO intro
 # __Low data quality__
 # Both datasets, for the absorption experiment and the enzyme kinetics experiment, showed low data quality, since repeats of identical experimental conditions showed large deviations. Additionally, enzyme concentration was systematically applied in too low concentration for individual reaction conditions. Ultimately, 
 # 
