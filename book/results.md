@@ -44,9 +44,7 @@ In result, Jupyter Notebooks, which are executable through Binder, form a user-f
 
 The following chapters of this work demonstrate the capabilities of Jupyter Notebooks as well as those of the developed workflow. All shown research scenarios are executed Jupyter Notebooks with the implemented workflow for enzyme kinetics. Hence all figures and tables for data visualization were generated at runtime of the analysis.
 Every notebook consists of a short description of the project's background and methodology carried out by the project partners in the wet lab. Additionally, data preparation, kinetic modeling steps, as well as the results are shown and project specific results are discussed.
-All notebooks can be launched interactively by clicking on the rocket icon in the upper section of each scenario page.
+All notebooks can be launched interactively by clicking on the {fa}`rocket`-icon in the upper section of each scenario page.
 In result, FAIR data compliant data analysis was established.
 
 Besides the data analysis, this entire thesis was conceptualized adhering to FAIR data principles. In consequence, this thesis was written was a Jupyter Book, which allow to combine multiple Jupyter Notebooks with text chapters in a structured document. Ultimately, this thesis is findable and accessible on GitHub, interoperable through Binder and the Jupyter Notebook format itself. Hence, making the work of this thesis reusable.
-
-{fa}`rocket`
