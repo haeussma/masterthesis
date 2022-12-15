@@ -1,3 +1,4 @@
+git+https://github.com/JR-1991/software-driven-rdm.git@e3a5199
 PyEnzyme==1.1.4
 CaliPytion==0.0.3
 EnzymePynetics==0.0.2
