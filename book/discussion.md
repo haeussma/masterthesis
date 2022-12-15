@@ -1,5 +1,26 @@
 # Discussion
 
+Availability of raw data is the prerequisite for reproducible data analysis {cite}`miyakawa2020no`. Hence, the analysis workflow was conceptualized starting from photometric measurement data. For that purpose, discussing the output format of the analytical device with the experimental partners proved to be valuable to plan the data acquisition process. Hence, a project specific parser function was established, which transferred the measurement data to the respective EnzymeML document with information on the measurement conditions. Thereby, error-prone and tedious manual copying between files was avoided, ensuring raw data integrity.  
+Since modeling was based on concentration data, thoroughly raw data preparation was crucial not to influence the modeling results by wrong concentration calculations. Besides blanking of the absorption signal, correct concentration calculation is important for accurate parameter estimates. Therefore, in three of the four scenarios standard curves of the analyte under assay conditions were recorded, whereas in scenario D concentrations were calculated via an extinction coefficient. All of the analyzed standard curves, except for scenario C ABTS at pH 5, were best described by non-linear calibration equations based on their fit quality determined by AIC.
+Since, experiments were design to take advantage of the full measurement range of the photometer, which includes the non-linear detection range below the upper detection limit, non-linear relations between analyte and instrument response were expected.
+This was expected, since
+
+Concentration calculation by extinction coefficient is discouraged, if it is not specifically determined
+as well as concentration calculation
+
+Transferring the measurement signal into concentration values constitutes the second step of the workflow.
+
+Cumulative error, which ultimately leads to unreproducible kinetic parameters
+
+initial rates by linear regressin are highly sensitive to the chosen observaation window
+
+- Lab vs computer documentation
+
+sharing the raw data and comprehensive description of individual data treatment steps,
+In biocatalysis
+
+Raw data liked to executable code is the gold standard in computational science {cite}`peng2011reproducible`
+
 Analysis of the four scenarios proved the applicability and advantages of the developed workflow.
 
 - Currently: unfair initial rates, lineweaver burk

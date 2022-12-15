@@ -1,5 +1,9 @@
 # Results
 
+## Workflow for enzyme kinetics parameter estimation
+
+In this work, a Python-based analysis workflow for kinetic parameter estimation of enzyme reactions was developed.
+
 In this work, two Python modules were developed, which build the components of an analysis workflow for kinetic parameter estimation. The workflow facilitates kinetic parameter estimation for enzyme reactions, which are based on time-course measurements. Starting from raw data of photometric measurements, which are stored in a EnzymeML document, concentration values were calculated by CaliPytion, whereupon kinetic parameters were determined by EnzymePynetics. A key aspect of the workflow design was to enable reproducible analysis. Therefore, documentation of raw data treatment prior to modeling is vital. As a result, Jupyter Notebooks were used as a platform, since they allow to write text and code within the same document. In consequence, data analysis as well as documentation of data analysis are unified within the same document. Ultimately, each data treatment step from raw data to kinetic parameters is comprehensively documented.  
 The developed workflow is build around the EnzymeML data model, which structures measurement data, reaction conditions, reaction components, as well as kinetic parameters of a biocatalytic experiment. Together with the associated Python library PyEnzyme, the final modeling results are integrated in the EnzymeML document, whereupon the document is saved as a valid EnzymeML file. The developed workflow is schematically visualized in figure 1.
 
@@ -8,11 +12,18 @@ _Fig. 1: Workflow for kinetic parameter estimation of enzyme reactions._
 
 #TODO uptade figure
 
-## CaliPytion
+1. Data acquisition
+2. Raw data cleaning
+3. Concentration calculation
+4. Quality control through visualization
+5. Modeling
+6. Save modeling results
+
+### CaliPytion
 
 CaliPytion was developed to facilitate robust conversion of measurement data to concentration data. Based on an analyte standard, a calibration curve is created. Since linear and non-linear relations between analyte concentration and analytic signal may occur, {cite}`hsu2010effect`, {cite}`martin2017fitting`, linear, polynomial, exponential, and rational calibration equations were implemented. After fitting, the best model is preselected based on Akaike information criterion {cite}`akaike1998information`, offering a metric to compare models with different number of parameters. Thereby, AIC describes the information loss relative to alternative models, while penalizing the use of additional parameters. CaliPytion was designed to work with PyEnzyme. Hence, a `StandardCurve` of CaliPytion can natively by applied to an `EnzymeMLDocument` of PyEnzyme. As a result, absorption data of an EnzymeML document can be converted into concentration data based on the previously generated standard curve.
 
-## EnzymePynetics
+### EnzymePynetics
 
 EnzymePynetics was developed to enable easy applicable parameter estimation of single substrate enzyme reaction directly from EnzymeML documents. In it's core, the `ParameterEstimator` of EnzymePynetics fits experimental data to different Michaels-Menten type models. Besides the irreversible Michaelis-Menten model, competitive, non-competitive, uncompetitive, and partially competitive inhibition models were implemented. Hence, the inhibition constant of potentially inhibiting substrate or product can be estimated. Furthermore, the inhibition constant of an applied inhibitor can be quantified. Since, the experimental data is fitted against multiple kinetic models, the best fitting model is suggested based on AIC. Hence, a proposal of the enzyme's kinetic mechanism is given based on the best fitting model.
 For quality control, visualization of experimental data as well as the fitted kinetic model was a priority during development. Thereby, detection of systematic deviation between model and measurement data is possible. In consequence, potential experimental errors can be identified. Furthermore, the `ParameterEstimator` allows to subset the measurement data by time as well as initial substrate concentration without deleting data. Hence, identified systematic deviations (e.g. lag-phases or measurements with incorrect enzyme concentrations) can be excluded from parameter estimation.  
@@ -37,3 +48,5 @@ All notebooks can be launched interactively by clicking on the rocket icon in th
 In result, FAIR data compliant data analysis was established.
 
 Besides the data analysis, this entire thesis was conceptualized adhering to FAIR data principles. In consequence, this thesis was written was a Jupyter Book, which allow to combine multiple Jupyter Notebooks with text chapters in a structured document. Ultimately, this thesis is findable and accessible on GitHub, interoperable through Binder and the Jupyter Notebook format itself. Hence, making the work of this thesis reusable.
+
+{fa}`rocket`

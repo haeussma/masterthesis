@@ -352,56 +352,16 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#error-sources">
-   Error sources
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#jupyter-notebooks-for-documentation-of-scientific-analysis">
-   Jupyter notebooks for documentation of scientific analysis
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#reproducibility-in-enzyme-kinetics">
-   Reproducibility in enzyme kinetics
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#data-management-lab-digitalization">
-   Data management / lab digitalization
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#jupyter-notebooks-and-book">
-   Jupyter notebooks and book
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#current-state-in-kinetic-modeling-of-enzyme-kinetics">
-   Current state in kinetic modeling of enzyme kinetics
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#model-selection-in-enzyme-kinetics-calibration-and-kinetic-model">
-   Model selection in enzyme kinetics: calibration and kinetic model
+  <a class="reference internal nav-link" href="#fair-workflow-for-enzyme-kinetics">
+   FAIR workflow for enzyme kinetics
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#pre-requires-high-data-quality-if-not-modeling-can-lead-to-wrong-conclusions">
-     pre-requires high data quality. If not, modeling can lead to wrong conclusions
+    <a class="reference internal nav-link" href="#reproducible-enzyme-kinetics">
+     Reproducible enzyme kinetics
     </a>
    </li>
   </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#inactivation">
-   Inactivation
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#percision-of-kinetic-parameters">
-   Percision of kinetic parameters
-  </a>
  </li>
 </ul>
 
@@ -423,56 +383,16 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#error-sources">
-   Error sources
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#jupyter-notebooks-for-documentation-of-scientific-analysis">
-   Jupyter notebooks for documentation of scientific analysis
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#reproducibility-in-enzyme-kinetics">
-   Reproducibility in enzyme kinetics
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#data-management-lab-digitalization">
-   Data management / lab digitalization
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#jupyter-notebooks-and-book">
-   Jupyter notebooks and book
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#current-state-in-kinetic-modeling-of-enzyme-kinetics">
-   Current state in kinetic modeling of enzyme kinetics
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#model-selection-in-enzyme-kinetics-calibration-and-kinetic-model">
-   Model selection in enzyme kinetics: calibration and kinetic model
+  <a class="reference internal nav-link" href="#fair-workflow-for-enzyme-kinetics">
+   FAIR workflow for enzyme kinetics
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#pre-requires-high-data-quality-if-not-modeling-can-lead-to-wrong-conclusions">
-     pre-requires high data quality. If not, modeling can lead to wrong conclusions
+    <a class="reference internal nav-link" href="#reproducible-enzyme-kinetics">
+     Reproducible enzyme kinetics
     </a>
    </li>
   </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#inactivation">
-   Inactivation
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#percision-of-kinetic-parameters">
-   Percision of kinetic parameters
-  </a>
  </li>
 </ul>
 
@@ -486,93 +406,82 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="discussion">
 <h1>Discussion<a class="headerlink" href="#discussion" title="Permalink to this headline">#</a></h1>
-<p>Discuss both viewpoints: biologist and RSE.
-Documentation of experiments stops after measurement. Treatment of measurement data</p>
-<section id="error-sources">
-<h2>Error sources<a class="headerlink" href="#error-sources" title="Permalink to this headline">#</a></h2>
+<p>Availability of raw data is the prerequisite for reproducible data analysis <span id="id1">[]</span>. Hence, the analysis workflow was conceptualized starting from photometric measurement data. For that purpose, discussing the output format of the analytical device with the experimental partners proved to be valuable to plan the data acquisition process. Hence, a project specific parser function was established, which transferred the measurement data to the respective EnzymeML document with information on the measurement conditions. Thereby, error-prone and tedious manual copying between files was avoided, ensuring raw data integrity.<br />
+Since modeling was based on concentration data, thoroughly raw data preparation was crucial not to influence the modeling results by wrong concentration calculations. Besides blanking of the absorption signal, correct concentration calculation is important for accurate parameter estimates. Therefore, in three of the four scenarios standard curves of the analyte under assay conditions were recorded, whereas in scenario D concentrations were calculated via an extinction coefficient. All of the analyzed standard curves, except for scenario C ABTS at pH 5, were best described by non-linear calibration equations based on their fit quality determined by AIC.
+Since, experiments were design to take advantage of the full measurement range of the photometer, which includes the non-linear detection range below the upper detection limit, non-linear relations between analyte and instrument response were expected.
+This was expected, since</p>
+<p>Concentration calculation by extinction coefficient is discouraged, if it is not specifically determined
+as well as concentration calculation</p>
+<p>Transferring the measurement signal into concentration values constitutes the second step of the workflow.</p>
+<p>Cumulative error, which ultimately leads to unreproducible kinetic parameters</p>
+<p>initial rates by linear regressin are highly sensitive to the chosen observaation window</p>
 <ul class="simple">
-<li><p>experimental preperation</p></li>
-<li><p>MODELLING</p>
+<li><p>Lab vs computer documentation</p></li>
+</ul>
+<p>sharing the raw data and comprehensive description of individual data treatment steps,
+In biocatalysis</p>
+<p>Raw data liked to executable code is the gold standard in computational science <span id="id2">[]</span></p>
+<p>Analysis of the four scenarios proved the applicability and advantages of the developed workflow.</p>
+<ul class="simple">
+<li><p>Currently: unfair initial rates, lineweaver burk</p></li>
+<li><p>Besides the methodology documentation is bad</p></li>
+</ul>
+<section id="fair-workflow-for-enzyme-kinetics">
+<h2>FAIR workflow for enzyme kinetics<a class="headerlink" href="#fair-workflow-for-enzyme-kinetics" title="Permalink to this headline">#</a></h2>
+<p><strong>Findable</strong></p>
+<p><strong>Accessible</strong></p>
+<p><strong>Interoperable</strong></p>
+<p><strong>Reusable</strong></p>
+<section id="reproducible-enzyme-kinetics">
+<h3>Reproducible enzyme kinetics<a class="headerlink" href="#reproducible-enzyme-kinetics" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>Strenda guidelines are insufficient??</p></li>
+<li><p>Precision of parameters</p></li>
+</ul>
+<p><strong>errors in data sets and detection of them</strong></p>
+<ul class="simple">
+<li><p>General problems in datasets and experimental preparation</p>
 <ul>
-<li><p>calibration equation</p></li>
-<li><p>don’t use extincition coefficient</p></li>
-<li><p>analysis window –&gt; progresscurve-beste</p></li>
+<li><p>systematic errors, temperature (gradients and incubation)</p></li>
+<li><p>outliers (pipetting errors,)</p></li>
+<li><p>experimental problems (viscosity)</p></li>
+</ul>
+</li>
+<li><p>generals problems in modelling</p>
+<ul>
+<li><p>error sources</p>
+<ul>
+<li><p>wrong concentration calculation calibration equation and extincition coefficient</p></li>
+<li><p>initial rates</p></li>
 </ul>
 </li>
 </ul>
-</section>
-<section id="jupyter-notebooks-for-documentation-of-scientific-analysis">
-<h2>Jupyter notebooks for documentation of scientific analysis<a class="headerlink" href="#jupyter-notebooks-for-documentation-of-scientific-analysis" title="Permalink to this headline">#</a></h2>
-<p>Jupyter notebooks enable enable</p>
-</section>
-<section id="reproducibility-in-enzyme-kinetics">
-<h2>Reproducibility in enzyme kinetics<a class="headerlink" href="#reproducibility-in-enzyme-kinetics" title="Permalink to this headline">#</a></h2>
-<ul class="simple">
-<li><p>Need for documentation without limiting experimental possibilities</p></li>
-<li><p>Strenda guidelines are insufficient??</p></li>
+</li>
 </ul>
-</section>
-<section id="data-management-lab-digitalization">
-<h2>Data management / lab digitalization<a class="headerlink" href="#data-management-lab-digitalization" title="Permalink to this headline">#</a></h2>
+<p><strong>model selection and miss selection</strong></p>
 <ul class="simple">
-<li><p>temperature in MTPs</p></li>
-</ul>
-</section>
-<section id="jupyter-notebooks-and-book">
-<h2>Jupyter notebooks and book<a class="headerlink" href="#jupyter-notebooks-and-book" title="Permalink to this headline">#</a></h2>
-<ul class="simple">
-<li><p>great documentation (FAIR)</p></li>
-</ul>
-<p>In this project, a robust and FAIR workflow from analytical raw-data to kinetic parameters was established. Thereby, the output of a analytical device was used directly as the input of the modeling pipeline.</p>
-<p>Despite the robust workflow, after the data is written to an EnzymeML document, manual copying of data into the EnzymeML spreadsheet is prone to human error. Especially, for large datasets with many time points and reactants. Hence, manufacturers should enable direct access to the measurement device, for instance via an API. (Control and laer experiments)</p>
-<p>Despite the easy applicability of the workflow, after the data is initialized,</p>
-</section>
-<section id="current-state-in-kinetic-modeling-of-enzyme-kinetics">
-<h2>Current state in kinetic modeling of enzyme kinetics<a class="headerlink" href="#current-state-in-kinetic-modeling-of-enzyme-kinetics" title="Permalink to this headline">#</a></h2>
-</section>
-<section id="model-selection-in-enzyme-kinetics-calibration-and-kinetic-model">
-<h2>Model selection in enzyme kinetics: calibration and kinetic model<a class="headerlink" href="#model-selection-in-enzyme-kinetics-calibration-and-kinetic-model" title="Permalink to this headline">#</a></h2>
-<ul class="simple">
+<li><p>kinetic and calibration</p></li>
 <li><p>correlation between parameters:</p></li>
 <li><p>short experimental time</p></li>
 <li><p>low initial substrate concenration</p></li>
 <li><p>unpercise data –&gt; systematic deviations between mesaurements</p></li>
-</ul>
-<section id="pre-requires-high-data-quality-if-not-modeling-can-lead-to-wrong-conclusions">
-<h3>pre-requires high data quality. If not, modeling can lead to wrong conclusions<a class="headerlink" href="#pre-requires-high-data-quality-if-not-modeling-can-lead-to-wrong-conclusions" title="Permalink to this headline">#</a></h3>
-<ul class="simple">
-<li><p>Best-practices kinetic modeling</p>
-<ul>
-<li><p>initial rates vs progress-curve analysis</p>
+<li><p>how precise should parameters be</p></li>
+<li><p>initial rates vs progress-curve analysis</p></li>
+<li><p>randomized order in MTPs</p></li>
+<li><p>ENZYME INACTIVATION</p>
 <ul>
 <li><p>initial rates not suited to estimate conversion after 24 h.</p></li>
 </ul>
 </li>
 </ul>
-</li>
-<li><p>Cost of additional parameters</p></li>
-<li><p>Model selection criteria</p></li>
-<li><p>How to assess the quality of a model</p>
-<ul>
-<li><p>what does the model represent (not newtonian mechanics)</p></li>
-</ul>
-</li>
-</ul>
-</section>
-</section>
-<section id="inactivation">
-<h2>Inactivation<a class="headerlink" href="#inactivation" title="Permalink to this headline">#</a></h2>
+<p><strong>Jupyter Notebook and Book</strong></p>
 <ul class="simple">
-<li><p>deterioration during catalysis</p></li>
-<li><p>adsorption to MTP surface (hydrophobic interaction)</p></li>
+<li><p>Need for documentation without limiting experimental possibilities -&gt; Jupyter notebooks</p></li>
+<li><p>great documentation (FAIR)</p></li>
 </ul>
+<p>In this project, a robust and FAIR workflow from analytical raw-data to kinetic parameters was established. Thereby, the output of a analytical device was used directly as the input of the modeling pipeline.</p>
+<p>Despite the robust workflow, after the data is written to an EnzymeML document, manual copying of data into the EnzymeML spreadsheet is prone to human error. Especially, for large datasets with many time points and reactants. Hence, manufacturers should enable direct access to the measurement device, for instance via an API. (Control and laer experiments)</p>
 </section>
-<section id="percision-of-kinetic-parameters">
-<h2>Percision of kinetic parameters<a class="headerlink" href="#percision-of-kinetic-parameters" title="Permalink to this headline">#</a></h2>
-<ul class="simple">
-<li><p>how percise should parameters be</p></li>
-<li><p>randomized order in MTPs</p></li>
-</ul>
 </section>
 </section>
 

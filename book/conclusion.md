@@ -1,7 +1,3 @@
 # Conclusion
 
-Nice.  
-:::{figure-md} markdown-fig
-<img src="../images/workflow_SLAC.png" alt="fishy" class="bg-primary mb-1" width="800px">
-
-This is a caption in **Markdown**!
+In combination with jupyternotebook the developed workflow is fair. The EnzymeMLdoument istselfe is not

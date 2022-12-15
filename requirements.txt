@@ -1,0 +1,11 @@
+CaliPytion==0.0.1
+EnzymePynetics==0.0.1
+ipython==8.7.0
+joblib==1.2.0
+lmfit==1.0.3
+matplotlib==3.6.2
+numpy==1.22.3
+pandas==1.4.2
+PyEnzyme==1.1.4
+scipy==1.8.1
+seaborn==0.12.1

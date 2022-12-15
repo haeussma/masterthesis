@@ -13,7 +13,7 @@ EnzymeML documents were created using the EnzymeML Excel template, in combinatio
 
 ## CaliPytion
 
-CaliPytion was developed to provide an easy way to fit linear and non linear calibration equations to estimate concentrations of analytical raw data based on standard measurements. #describe the
+CaliPytion was developed to provide an easy way to fit linear and non linear calibration equations to estimate concentrations of analytical raw data based on standard measurements.
 
 ### Data model for calibration data
 
@@ -157,3 +157,7 @@ The fit quality between kinetic models was compared using Akaike information cri
 ### 3.6 Visualization
 
 Akaike information criterion
+
+## 4. Jupyter Notebook
+
+### 5. Jupyter Book

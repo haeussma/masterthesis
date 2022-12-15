@@ -25,7 +25,7 @@
 # 
 # ### Imports
 
-# In[8]:
+# In[1]:
 
 
 from typing import Dict, List
@@ -56,7 +56,7 @@ warnings.filterwarnings('ignore')
 # 
 # Data from SLAC reactions was loaded from the output files of the photometer and written to individual EnzymeML documents. Then, information of the control reactions was used to subtract the absorption contribution from enzyme and buffer from the substrate and product signal.
 
-# In[9]:
+# In[2]:
 
 
 # Specify the location of the data sets
@@ -133,7 +133,7 @@ for enzmldoc in absortion_enzymemldocs:
 # Calibration data was loaded and converted into individual instances of the calibration data model. Some meta data of the calibration needed to be provided to the custom ```read_calibration_data``` function, since the output of the used spectrophotometer only contained a minimum of information. Thereafter, a StandardCurve was created for each calibration data set. Thereby, only absorption values below 3.2 were considered, since higher absorption values could not be converted into concentration accurately. 
 # Lastly, the fit of each standard curves was visualized.
 
-# In[10]:
+# In[3]:
 
 
 # Load calibration raw data
@@ -187,7 +187,7 @@ plt.tight_layout()
 # 
 # The generate standard curves were used to convert the absorption measurement data into concentration data. Thereby, the respective concentration values were only calculated, if the measured absorption was within the respective calibration bounds to avoid extrapolation.
 
-# In[11]:
+# In[4]:
 
 
 # Calculate concentrations by applying standard curves to 'EnzymeMLDocuments'.
@@ -222,7 +222,7 @@ for standard_curve, abso_enzmldoc in zip(standard_curves, absortion_enzymemldocs
 # $k$ was determined for each data set individually by a minimization algorithm. The minimization objective was to find the optimal $k$, which minimizes all slopes of an experiment. If the slopes are zero, mass conservation is given over the observed time-course. Mass balances of all measurements are visualized in Fig. XXX.
 # 
 
-# In[12]:
+# In[5]:
 
 
 # Defenition of parameter 'k'
@@ -311,7 +311,7 @@ plt.tight_layout()
 # Secondly, substrate inhibition models were excluded, since the model was not able to describe the observed reaction kinetics. This was evident from a higher AIC as well as more than 100 % standard deviation on the estimated parameters.  
 # Lastly, the irreversible Michaelis-Menten model with and without time-dependent enzyme inactivation was compared, since enzyme inactivation was observed in previous experiments. Estimated parameters and the fitted models are shown for the experimental data at pH 3 and 25°C. Once without enzyme inactivation and once with.
 
-# In[14]:
+# In[6]:
 
 
 fig, axes = plt.subplots(1,2, figsize=(10,5), sharey=True, sharex=True)
@@ -341,7 +341,7 @@ plt.tight_layout()
 # The model with enzyme inactivation describes the data better (Fig. XXX). This is characterized through a lower AIC, as well as lower standard deviations on the estimated parameters. 
 # In absolute therms, the estimated $K_{m}$ of both models is approximately identical, whereas the $k_{cat}$ estimate is approximately 33% lower for the model without enzyme inactivation. Hence, the model without enzyme inactivation underestimates the turnover number of the enzyme. As a result, irreversible Michaelis-Menten model with time-dependent enzyme inactivation was selected for the parameter estimation for all data sets.
 
-# In[15]:
+# In[7]:
 
 
 # Run parameter estimator for all datasets, utilizing multi-processing.
@@ -373,7 +373,7 @@ plt.tight_layout()
 # Experimental data as well as the fitted model are visualized in Fig XXX. Based on the reaction slopes, no catalytic activity was observed for reactions at pH 5 or higher.
 # As in the mass balance analysis, the reactions at pH 4, 45°C and pH 4.5, 35°C differed from other experiments with identical pH. In both cases, all applied substrate concentration were higher than intended in the design of the experiment. Furthermore, the resulting parameter estimates have a high uncertainty. Therefore, the respective measurements were excluded from further analysis. Additionally, the results from pH 5.5, 35°C were excluded, since the uncertainty of the parameters could not be estimated. All calculated kinetic parameters are listed in the table below.
 
-# In[16]:
+# In[8]:
 
 
 # Extract kinetic parameters of all datasets
@@ -453,7 +453,7 @@ df
 # 
 # ### Parameter estimates for $k_{cat}$ and $K_{m}$
 
-# In[17]:
+# In[9]:
 
 
 # Visualize estimated parameters
@@ -479,7 +479,7 @@ for i, ax in enumerate(axes.flatten()):
 # t_{\frac{1}{2}} = \frac{ln(2)}{k_{inact}}
 # ```
 
-# In[ ]:
+# In[10]:
 
 
 # Exclued inactive enzyme reactions above pH 4.5 and discard measurements with more than 100 % standard deviation on enzyme inactivation parameter
@@ -495,7 +495,7 @@ plt.show()
 # The enzyme's calculated half life was between 8 - 18 min for reactions at pH 3 and pH 3.5, whereas enzyme reactions at higher pH values showed a half life between 15 - 35 min. Generally, reactions with higher catalytic efficiency showed a shorter half life compared to reactions with lower catalytic efficiency.
 # In order to check for corrections between $k_{inact}$, $k_{cat}$, $K_{m}$, $\frac{k_{cat}}{K_{m}}$, as well as the reaction temperature and pH, a correlation analysis was conducted across all datasets.
 
-# In[ ]:
+# In[11]:
 
 
 # Calculate correlations
@@ -526,4 +526,4 @@ rho.round(2).astype(str) + p
 # The highest catalytic efficiency of SLAC was observed at pH 3 at 45°C and therefore on the edge of the investigated parameter space. Optimal reaction conditions might therefore be at an even lower pH and higher temperature. $k_{cat}$ and $K_{m}$ were correlated, which is likely the result of a too low initial substrate concentration in relation to the true $K_{m}$ of the enzyme at a given experimental condition. Hence, in adjoining experiments the product signal could be used for parameter estimation, since the concentration to absorbance ratio is lower compared to the one of the product. However, a reliable method for product quantification would need to be established first.
 # 
 # __Enzyme inactivation__  
-# SLAC showed a short half life of approximately 10 min at reaction conditions with the highest catalytic efficiency, which was correlated to the catalytic efficiency. Further experiments are required to investigate the observed inactivation. This might be done by compare the half life of SLAC for different substrates as well as higher substrate concentrations.
+# SLAC showed a short half life of approximately 10 min at reaction conditions with the highest catalytic efficiency, which was correlated to the catalytic efficiency. Further experiments are required to investigate the observed inactivation. This might be done by comparing the half life of SLAC with different substrates as well as higher enzyme concentrations.
