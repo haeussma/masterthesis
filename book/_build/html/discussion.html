@@ -50,6 +50,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Conclusion" href="conclusion.html" />
@@ -104,7 +106,7 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="welcome.html">
-                    Welcome
+                    Welcome to my master thesis
                 </a>
             </li>
         </ul>
@@ -352,6 +354,16 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-integrity-through-accurate-concentration-calculation">
+   Data integrity through accurate concentration calculation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#quality-control-of-experimental-data-through-kinetic-modeling">
+   Quality control of experimental data through kinetic modeling
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#fair-workflow-for-enzyme-kinetics">
    FAIR workflow for enzyme kinetics
   </a>
@@ -383,6 +395,16 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-integrity-through-accurate-concentration-calculation">
+   Data integrity through accurate concentration calculation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#quality-control-of-experimental-data-through-kinetic-modeling">
+   Quality control of experimental data through kinetic modeling
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#fair-workflow-for-enzyme-kinetics">
    FAIR workflow for enzyme kinetics
   </a>
@@ -406,26 +428,42 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="discussion">
 <h1>Discussion<a class="headerlink" href="#discussion" title="Permalink to this headline">#</a></h1>
-<p>Availability of raw data is the prerequisite for reproducible data analysis <span id="id1">[]</span>. Hence, the analysis workflow was conceptualized starting from photometric measurement data. For that purpose, discussing the output format of the analytical device with the experimental partners proved to be valuable to plan the data acquisition process. Hence, a project specific parser function was established, which transferred the measurement data to the respective EnzymeML document with information on the measurement conditions. Thereby, error-prone and tedious manual copying between files was avoided, ensuring raw data integrity.<br />
-Since modeling was based on concentration data, thoroughly raw data preparation was crucial not to influence the modeling results by wrong concentration calculations. Besides blanking of the absorption signal, correct concentration calculation is important for accurate parameter estimates. Therefore, in three of the four scenarios standard curves of the analyte under assay conditions were recorded, whereas in scenario D concentrations were calculated via an extinction coefficient. All of the analyzed standard curves, except for scenario C ABTS at pH 5, were best described by non-linear calibration equations based on their fit quality determined by AIC.
-Since, experiments were design to take advantage of the full measurement range of the photometer, which includes the non-linear detection range below the upper detection limit, non-linear relations between analyte and instrument response were expected.
-This was expected, since</p>
-<p>Concentration calculation by extinction coefficient is discouraged, if it is not specifically determined
-as well as concentration calculation</p>
-<p>Transferring the measurement signal into concentration values constitutes the second step of the workflow.</p>
+<p>reproducibility:</p>
+<ul class="simple">
+<li><p>Data integrity</p></li>
+<li><p>Modeling documentation</p></li>
+</ul>
+<p>Availability of raw data is the prerequisite for reproducible data analysis. The lack of raw data is therefore one of the reasons for the reproducibility crisis <span id="id1">Miyakawa [<a class="reference internal" href="references.html#id20" title="Tsuyoshi Miyakawa. No raw data, no science: another possible source of the reproducibility crisis. 2020.">2020</a>]</span>. Hence, the analysis workflow was conceptualized starting from photometric measurement data. For that purpose, discussing the output format of the analytical device with the experimental partners proved to be valuable to plan the data acquisition process. Hence, a project specific parser function was established, which transferred the measurement data to the respective EnzymeML containing information on the measurement conditions. Thereby, error-prone and tedious manual copying between files was avoided, ensuring raw data integrity.</p>
+<section id="data-integrity-through-accurate-concentration-calculation">
+<h2>Data integrity through accurate concentration calculation<a class="headerlink" href="#data-integrity-through-accurate-concentration-calculation" title="Permalink to this headline">#</a></h2>
+<p>Another aspect of data integrity in the developed workflow is the accurate concentration calculation based on the measured absorption signal. The relation between concentration to absorption signal of an analyte can be linear as well as non-liner. Therefore, wrong assumption of a linear relationship albeit the relation is better described non-linearly, leads to avoidable inaccuracy in concentration calculation <span id="id2">[<a class="reference internal" href="references.html#id14" title="Kang-Hung Hsu and Chiachung Chen. The effect of calibration equations on the uncertainty of uv–vis spectrophotometric measurements. Measurement, 43(10):1525–1531, 2010.">Hsu and Chen, 2010</a>]</span> <span id="id3">[<a class="reference internal" href="references.html#id15" title="Julia Martin, Alberto Romero Gracia, Agustín G Asuero, and others. Fitting nonlinear calibration curves: no models perfect. Journal of Analytical Sciences, Methods and Instrumentation, 7(01):1, 2017.">Martin <em>et al.</em>, 2017</a>]</span> and thus imprecise kinetic parameter estimates.
+Hence, concentration calculation based on extinction coefficients was discouraged, if the underlying relation between absorption and concentration of an analyte was not self-determined for the respective reaction system.
+To enable precise concentration calculation of linear and non-linear absorption to concentration relationships, CaliPytion was applied with analyte standards provided by the experimental partners.
+All of the analyzed standard curves, except for scenario C ABTS at pH 5, were best described by non-linear calibration equations based on their fit quality determined by AIC. Hence, uncertainties from concentration calculation were reduced and therefore their impact on the kinetic parameters reduced.</p>
+</section>
+<section id="quality-control-of-experimental-data-through-kinetic-modeling">
+<h2>Quality control of experimental data through kinetic modeling<a class="headerlink" href="#quality-control-of-experimental-data-through-kinetic-modeling" title="Permalink to this headline">#</a></h2>
+<p>Besides data integrity, high quality data is required for accurate parameter estimates, whereas unnoticed experimental errors unintentionally distort the resulting kinetic parameters. Therefore, quality control of the measurement data is an important aspect of every data analysis process. EnzymePynetics allows visualization of measurement data together with the fitted kinetic model. Ultimately, systematic deviations of single measurements were identified by simultaneously visualizing measurement data and the fitted model.
+By this method, systematic errors with pipetting, mixing, and temperature equilibration during experimental preparation as well as issues with the experimental design itself were identified in different scenarios.<br />
+Systematic pipetting errors were disclosed by systematic deviations between the measurement data and the fitted model.
+In scenario D individual enzyme reactions showed to have deviating substrate concentrations from the assay protocol, whereas modeling without the presumably erroneous measurements resulted in a good fit between data and model as well as low standard deviation on the parameter estimates. Hence the experimental partners were advised to repeat the deviating measurement.<br />
+In two projects the progress-curve of the reactions indicate a lag phase after reaction start. In one case, small pipetting volumes of enzyme to start the reaction led to inhomogeneous mixing and thus increasing reaction rates until the enzyme was distributed evenly. In result, the project partners were advised to increase the pipetting volume of the enzyme solution.
+In another case, temperature incubation effects in MTP caused by prolonged assay preparation times resulted in an initial lag phase. Due to small reaction volumes and low mass, MTPs have a low heat capacity and thus high susceptibility to temperature change. Hence, project partners were advised to pre-incubate the MTP within the photometer at reaction temperature for 5 min and then start the reaction by adding enzyme as quick as possible.
+In another project, modeling predictions of the estimated <span class="math notranslate nohighlight">\(k_{cat}\)</span> and <span class="math notranslate nohighlight">\(K_{m}\)</span> together with their correlation were used to iteratively improve the design of the enzyme assay. Thereby, appropriate enzyme concentration and substrate concentration range were identified through multiple round of lab experimental with subsequent kinetic modeling.</p>
+<p>All of the mentioned experimental issues were disclosed by visualizing measurement data together with fitted rate equations. This emphasizes the advantages of progress curve analysis, which was implemented in EnzymePynetics over the commonly used initial rates method.</p>
+<p>This is because of both the method and the data which is required for the method.</p>
+<p>Kinetic parameters are mostly determined by initial rates method, whereas initial rates of reactions with varying substrate concentration are determined and either . Thereby, rates from a subjectively chosen linear time period of the reaction are chosen</p>
 <p>Cumulative error, which ultimately leads to unreproducible kinetic parameters</p>
-<p>initial rates by linear regressin are highly sensitive to the chosen observaation window</p>
 <ul class="simple">
 <li><p>Lab vs computer documentation</p></li>
 </ul>
-<p>sharing the raw data and comprehensive description of individual data treatment steps,
-In biocatalysis</p>
-<p>Raw data liked to executable code is the gold standard in computational science <span id="id2">[]</span></p>
-<p>Analysis of the four scenarios proved the applicability and advantages of the developed workflow.</p>
+<p>sharing the raw data and comprehensive description of individual data treatment steps,</p>
+<p>Raw data liked to executable code is the gold standard in computational science <span id="id4">[<a class="reference internal" href="references.html#id21" title="Roger D Peng. Reproducible research in computational science. Science, 334(6060):1226–1227, 2011.">Peng, 2011</a>]</span></p>
 <ul class="simple">
 <li><p>Currently: unfair initial rates, lineweaver burk</p></li>
 <li><p>Besides the methodology documentation is bad</p></li>
 </ul>
+</section>
 <section id="fair-workflow-for-enzyme-kinetics">
 <h2>FAIR workflow for enzyme kinetics<a class="headerlink" href="#fair-workflow-for-enzyme-kinetics" title="Permalink to this headline">#</a></h2>
 <p><strong>Findable</strong></p>
@@ -440,18 +478,11 @@ In biocatalysis</p>
 </ul>
 <p><strong>errors in data sets and detection of them</strong></p>
 <ul class="simple">
-<li><p>General problems in datasets and experimental preparation</p>
-<ul>
-<li><p>systematic errors, temperature (gradients and incubation)</p></li>
-<li><p>outliers (pipetting errors,)</p></li>
-<li><p>experimental problems (viscosity)</p></li>
-</ul>
-</li>
 <li><p>generals problems in modelling</p>
 <ul>
 <li><p>error sources</p>
 <ul>
-<li><p>wrong concentration calculation calibration equation and extincition coefficient</p></li>
+<li><p>wrong concentration</p></li>
 <li><p>initial rates</p></li>
 </ul>
 </li>

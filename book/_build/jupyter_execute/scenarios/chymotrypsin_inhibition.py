@@ -21,7 +21,7 @@
 # 
 # ### Imports
 
-# In[1]:
+# In[43]:
 
 
 import numpy as np
@@ -32,7 +32,7 @@ import copy
 import string
 from IPython.display import display
 from EnzymePynetics.tools.parameterestimator import ParameterEstimator
-from CaliPytion.tools.standardcurve import StandardCurve
+from CaliPytion .tools.standardcurve import StandardCurve
 
 import warnings
 warnings.filterwarnings('ignore')
@@ -42,7 +42,7 @@ warnings.filterwarnings('ignore')
 # 
 # Product standard data was imported directly from an Excel file. Then, a standard curve was created.
 
-# In[2]:
+# In[44]:
 
 
 product_standard = StandardCurve.from_excel(
@@ -65,7 +65,7 @@ product_standard.visualize()
 # 
 # The EnzymeML documents of each experiment were loaded and the standard curve was applied to the absorption data to calculate concentrations.
 
-# In[3]:
+# In[45]:
 
 
 # Load data from 
@@ -82,7 +82,7 @@ chymo_HSAM3 = product_standard.apply_to_EnzymeML(chymo_HSAM3, "s1")
 # Since experimental data with HSA(WT)-huFc and HSA(M3)-huFc originate from independent experiments, the control reactions without the respective inhibitor were compared by performing a parameter estimation. Thereby, catalytic efficiency $\frac{k_{cat}}{K_{m}}$ was used to assess comparability between the data sets, since $k_{cat}$ and $K_{m}$ were highly correlated (corr > 0.98). High correlations between parameters indicate that the parameters cannot be determined independently with certainty. In this case, the highest initial substrate concentration is presumably too low, compared to the true $K_{m}$ of the enzyme under the given experimental conditions. However, higher substrate concentration were not applied for multiple reasons. On the one hand dimethyl sulfoxide (DMSO) was used as a co-solvent of the substrate, which inhibits enzyme activity {cite:t}`busby1999effect`. Hence, higher initial substrate concentrations would have led to higher enzyme inhibition, which would have distorted the assessment of $K_{i}$.
 # On the other hand, high substrate viscosity denied the application of higher concentrations without sacrificing pipetting precision.
 
-# In[4]:
+# In[46]:
 
 
 # Create copys of the data sets and delete measuremnts with inhibitor.
@@ -139,7 +139,7 @@ plt.tight_layout()
 # Experimental data of chymotrypsin inhibition by HSA(M3)-huFc contained negative absorption values for the first measurement point. Presumably sourcing from an incorrect blank measurement. Therefore, only measurement data from the second data point (minute 5 and onward) was considered for parameter estimation.
 # Parameter estimates for all applied kinetic models are displayed in the output below.
 
-# In[5]:
+# In[47]:
 
 
 # Parameter estimation for HSA(wt) data set
@@ -174,84 +174,45 @@ plt.tight_layout()
 
 # _Fig. XXX: Measurement data and fitted product inhibition model for chymotrypsin reactions with respective HSA inhibitior._
 # 
-# Both reaction systems are best described by the competitive inhibition model, which is indicated by the lowest AIC and standard deviation on the estimated parameters. Thereby, a $K_{i}$ of 0.460 mM ± 27.24% was estimated for HSA(WT)-huFc and 0.059 mM ± 8.51% for HSA(M3)-huFc. This resembles a roughly 7-fold increase in affinity of HSA(M3) to the enzyme compared to the HSA(wt). In order to confirm the 
+# Both reaction systems are best described by the competitive inhibition model, which is indicated by the lowest AIC and standard deviation on the estimated parameters. Thereby, a $K_{i}$ of 0.460 mM ± 27.24% was estimated for HSA(WT)-huFc and 0.059 mM ± 8.51% for HSA(M3)-huFc. This resembles a roughly 7-fold increase in affinity of HSA(M3) to the enzyme compared to the HSA(wt). 
 # 
 # Since the competitive inhibition model describes the data the best, HSA(M3)-huFc presumably interacts with the enzyme in the active site region.  
 
 # ## Save modeling results
+# 
+# Lastly, the modeling results are written to the EnzymeML documents and the files are exported.
 
-# In[6]:
-
-
-enzmldocs = [chymo_HSAwt, chymo_HSAM3]
-results = [kinetics_HSAwt, kinetics_HSAM3]
-
-for enzmldoc, reuslt in zip(enzmldocs, results):
-    pass
+# In[52]:
 
 
-# In[7]:
+for result, enzmldoc in zip([kinetics_HSAwt, kinetics_HSAM3], [chymo_HSAwt, chymo_HSAM3]):
 
+    # Write modeling results to kinetic parameters
+    k_cat = pe.enzymeml.models.KineticParameter(
+        name="k_cat",
+        value=result.get_model_results()["k_cat"].value,
+        unit=f"1 / {result.data.time_unit}")
 
-enzmldocs[0].getReaction('r0').dict()
+    K_m = pe.enzymeml.models.KineticParameter(
+        name="K_m",
+        value=result.get_model_results()["Km"].value,
+        unit=result.data.data_conc_unit)
 
+    K_ic = pe.enzymeml.models.KineticParameter(
+        name="K_ic",
+        value=result.get_model_results()["K_ic"].value,
+        unit=result.data.data_conc_unit)
 
+    # Define kinetic model
+    model = pe.KineticModel(
+        name="competitive inhibition",
+        equation="-k_cat * p0 * s0 / (K_m*(1+(s2 / K_ic))+s0)",
+        parameters=[k_cat, K_m, K_ic])
 
-#protein2_id = enzmlDoc.addProtein(protein2)
+    enzmldoc.getReaction("r0").model = model
 
-
-# In[8]:
-
-
-def add_enzyme_inactivation_model(result: ParameterEstimator, enzmldoc: pe.EnzymeMLDocument, protein_id: str = "p0", reaction_id: str = "r0", mode_name: str = None):
-
-    # define inactive enzyme species
-    params = enzmldoc.getProtein('p0').dict()
-    inactive_protein = pe.Protein(**params)
-    inactive_protein.name += " inactive"
-    inactive_protein.init_conc = 0.0
-    inactive_protein.constant = False
-    inactive_protein_id = enzmldoc.addProtein(inactive_protein)
-
-    # define inactivation reaction
-    # Get reaction parameters
-    reaction_parameters = enzmldoc.getReaction(reaction_id).dict()
-
-    # Create new reaction
-    enzyme_inactivation = pe.EnzymeReaction(**params)
-    enzyme_inactivation.name = "Time-dependent enzyme inactivation"
-    enzyme_inactivation.reversible = True
-
-    # Add reaction species
-    enzyme_inactivation.addEduct(protein_id, 1.0, enzmldoc)
-    enzyme_inactivation.addProduct(inactive_protein_id, 1.0, enzmldoc)
-
-    # Add reaction to document
-    enzyme_inactivation_id = enzmldoc.addReaction(enzyme_inactivation)
-
-    # Get k_inact parameter value
-    time_unit = result.data.time_unit
-    k_inact = pe.KineticParameter(
-        name="k_inact", 
-        value=result.get_model_result(mode_name)["K_ie"].value, 
-        unit=f"1 / {time_unit}")
-
-    # Add model result to EnzymeML document
-    inactivation_model = pe.KineticModel(
-        name="Time-dependent enzyme inactivation",
-        equation="- k_i * p0", 
-        parameters=[k_inact],
-        enzmldoc=enzmldoc)
-
-
-# In[ ]:
-
-
-
-
-
-# In[19]:
-
-
-results[0].get_model_results(None)["K_ic"].value
+    # Export EnzymeML documents
+    export = False
+    if export:
+        enzmldoc.toFile()
 

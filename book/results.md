@@ -10,8 +10,6 @@ The developed workflow is build around the EnzymeML data model, which structures
 ![Fig. 1](images/concept_workflow.png)
 _Fig. 1: Workflow for kinetic parameter estimation of enzyme reactions._
 
-#TODO uptade figure
-
 1. Data acquisition
 2. Raw data cleaning
 3. Concentration calculation
@@ -47,4 +45,4 @@ Every notebook consists of a short description of the project's background and m
 All notebooks can be launched interactively by clicking on the {fa}`rocket`-icon in the upper section of each scenario page.
 In result, FAIR data compliant data analysis was established.
 
-Besides the data analysis, this entire thesis was conceptualized adhering to FAIR data principles. In consequence, this thesis was written was a Jupyter Book, which allow to combine multiple Jupyter Notebooks with text chapters in a structured document. Ultimately, this thesis is findable and accessible on GitHub, interoperable through Binder and the Jupyter Notebook format itself. Hence, making the work of this thesis reusable.
+Besides the data analysis, this entire thesis was conceptualized adhering to FAIR data principles . In consequence, this thesis was written was a Jupyter Book, which allow to combine multiple Jupyter Notebooks with text chapters in a structured document. Ultimately, this thesis is findable and accessible on GitHub, interoperable through Binder and the Jupyter Notebook format itself. Hence, making the work of this thesis reusable in a state of the art manner.

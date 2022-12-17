@@ -1,12 +1,7 @@
-# Welcome
+# Welcome to my master thesis
 
-This is the root of the book.
+This JupyterBook contains my master thesis. It contains multiple JupyterNotebooks in which I applied the workflow for kinetic parameter estimation of enzyme reactions on research scenarios of the EnzymeML project.
 
-Here is a list:
+Except for this page and the capability to execute the JupyterNotebooks, the printed version is identical to this JupyterBook.
 
-- A
-- B
-- C
-  1. 1
-  2. 2
-- D
+![cover](../book/images/cover_master_thesis.jpg)

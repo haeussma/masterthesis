@@ -106,7 +106,7 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../welcome.html">
-                    Welcome
+                    Welcome to my master thesis
                 </a>
             </li>
         </ul>
@@ -472,6 +472,11 @@ title="Print to PDF"
    Conclusion
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#save-modeling-results">
+   Save modeling results
+  </a>
+ </li>
 </ul>
 
     </nav>
@@ -581,6 +586,11 @@ title="Print to PDF"
    Conclusion
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#save-modeling-results">
+   Save modeling results
+  </a>
+ </li>
 </ul>
 
                         </nav>
@@ -606,7 +616,7 @@ For each pH - temperature condition an individual ABTS standard curve and absorp
 <h3>Data management<a class="headerlink" href="#data-management" title="Permalink to this headline">#</a></h3>
 <p>Overall, the dataset consists of more than 100 000 individual absorbance reads. Thus, data preparation was automated by custom parser functions, which were tailored to the output of the used spectrophotometer. Consequently, the tedious and error-prone manual copying of raw data was avoided. Information on the involved reactants, and the enzyme was filled in an EnzymeML Excel spreadsheet, which served as a meta data container. All other information was parsed from the output of the spectrophotometer. Figure 1 illustrates the schematic data flow of this project.</p>
 <p><img alt="Fig. 1" src="../_images/workflow_SLAC.png" />
-<em>Fig. 1: Schematic data pipeline of the SLAC characterization.</em></p>
+<em>Fig. 1: Schematic data pipeline of the SLAC project.</em></p>
 </section>
 </section>
 <section id="data-preparation">
@@ -634,6 +644,7 @@ For each pH - temperature condition an individual ABTS standard curve and absorp
 <span class="c1"># Custom functions for data mapping</span>
 <span class="kn">from</span> <span class="nn">parser_functions</span> <span class="kn">import</span> <span class="n">measurement_data_to_EnzymeML</span><span class="p">,</span> <span class="n">plot</span>
 <span class="kn">from</span> <span class="nn">parser_functions</span> <span class="kn">import</span> <span class="n">read_measurement_data</span><span class="p">,</span> <span class="n">read_calibration_data</span>
+<span class="kn">from</span> <span class="nn">parser_functions</span> <span class="kn">import</span> <span class="n">add_enzyme_inactivation_model</span>
 
 <span class="kn">import</span> <span class="nn">warnings</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
@@ -1768,6 +1779,47 @@ The established data pipeline allows scalable data preparation and analysis of e
 The highest catalytic efficiency of SLAC was observed at pH 3 at 45°C and therefore on the edge of the investigated parameter space. Optimal reaction conditions might therefore be at an even lower pH and higher temperature. <span class="math notranslate nohighlight">\(k_{cat}\)</span> and <span class="math notranslate nohighlight">\(K_{m}\)</span> were correlated, which is likely the result of a too low initial substrate concentration in relation to the true <span class="math notranslate nohighlight">\(K_{m}\)</span> of the enzyme at a given experimental condition. Hence, in adjoining experiments the product signal could be used for parameter estimation, since the concentration to absorbance ratio is lower compared to the one of the product. However, a reliable method for product quantification would need to be established first.</p>
 <p><strong>Enzyme inactivation</strong><br />
 SLAC showed a short half life of approximately 10 min at reaction conditions with the highest catalytic efficiency, which was correlated to the catalytic efficiency. Further experiments are required to investigate the observed inactivation. This might be done by comparing the half life of SLAC with different substrates as well as higher enzyme concentrations.</p>
+</section>
+<section id="save-modeling-results">
+<h2>Save modeling results<a class="headerlink" href="#save-modeling-results" title="Permalink to this headline">#</a></h2>
+<p>Lastly, the modeling results are written to the EnzymeML documents and the files are exported.</p>
+<div class="cell tag_hide_input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">result</span><span class="p">,</span> <span class="n">enzmldoc</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">concentration_enzymemldocs</span><span class="p">):</span>
+
+    <span class="c1"># Write modeling results to kinetic parameters</span>
+    <span class="n">k_cat</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">enzymeml</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">KineticParameter</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;k_cat&quot;</span><span class="p">,</span>
+        <span class="n">value</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">get_model_results</span><span class="p">()[</span><span class="s2">&quot;k_cat&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+        <span class="n">unit</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;1 / </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">time_unit</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">K_m</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">enzymeml</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">KineticParameter</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;K_m&quot;</span><span class="p">,</span>
+        <span class="n">value</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">get_model_results</span><span class="p">()[</span><span class="s2">&quot;Km&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+        <span class="n">unit</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">data_conc_unit</span><span class="p">)</span>
+
+    <span class="c1"># Define kinetic model</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">KineticModel</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;irreversible Michaelis-Menten&quot;</span><span class="p">,</span>
+        <span class="n">equation</span><span class="o">=</span><span class="s2">&quot;-k_cat * p0 * s0 / (K_m + s0)&quot;</span><span class="p">,</span>
+        <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="n">k_cat</span><span class="p">,</span> <span class="n">K_m</span><span class="p">])</span>
+
+    <span class="n">enzmldoc</span><span class="o">.</span><span class="n">getReaction</span><span class="p">(</span><span class="s2">&quot;r0&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
+
+    <span class="n">add_enzyme_inactivation_model</span><span class="p">(</span>
+        <span class="n">result</span><span class="o">=</span><span class="n">result</span><span class="p">,</span>
+        <span class="n">enzmldoc</span><span class="o">=</span><span class="n">enzmldoc</span><span class="p">)</span>
+    
+
+
+    <span class="c1"># Export EnzymeML documents</span>
+    <span class="n">export</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">if</span> <span class="n">export</span><span class="p">:</span>
+        <span class="n">enzmldoc</span><span class="o">.</span><span class="n">toFile</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 

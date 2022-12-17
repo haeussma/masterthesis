@@ -35,7 +35,7 @@
 # 
 # ### Imports
 
-# In[1]:
+# In[2]:
 
 
 import numpy as np
@@ -47,6 +47,8 @@ import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 from IPython.display import display
 import string
+from parser_functions import add_enzyme_inactivation_model
+
 
 
 #TODO warning in EnzymePynetics
@@ -58,7 +60,7 @@ warnings.filterwarnings('ignore')
 # ### Calculation of inactivation rate
 # Experimental data was loaded into a Pandas DataFrame and the slopes of each incubation condition were calculated through linear regression. The resulting initial rates were then used to calculate the rate by which the enzyme activity decreases. Lastly the half life of the enzyme was calculated with equation {eq}`enzyme_halflife`.
 
-# In[2]:
+# In[3]:
 
 
 # Load excel
@@ -148,7 +150,7 @@ plt.show()
 # Kinetic parameters were estimated with and without considering enzyme inactivation.
 # 
 
-# In[3]:
+# In[4]:
 
 
 # Load experimental data from excel file
@@ -237,7 +239,7 @@ fig.show()
 # ### Quality control through modeling
 # An initial parameter estimation considering enzyme inactivation was conducted in order to check further systematic deviations. As a result, reactions with an initial ABTS concentration of 0.05 mM showed to deviate from all other reactions, since the respective product concentrations is lower than the model predicted. The mentioned measurements were the only measurements where the measured concentration was distinctly and systematically below that of the model (Fig. xxxA). Hence indicating that either less substrate or enzyme than defined in the protocol was applied to the respective reactions. In consequence, data from reactions with an initial substrate concentration of 0.05 and 0.1 mM were excluded from parameter estimation, because the identified systematic deviations in reaction conditions would distort the results.
 
-# In[4]:
+# In[5]:
 
 
 # Parameter estimation considering time-dependent enzyme inactivation
@@ -275,7 +277,7 @@ plt.tight_layout()
 # ### Parameter estimation with and without considering enzyme inactivation
 # 
 
-# In[5]:
+# In[6]:
 
 
 # Parameter estimation without time-dependent enzyme inactivation
@@ -293,7 +295,7 @@ display(results.style.set_table_attributes('style="font-size: 12px"'))
 # Kinetic parameters were estimated with and without considering time-dependent enzyme inactivation. 
 # Modeling results are listed in the table above. All models with an additional parameter for enzyme inactivation resulted in lower AIC values, indicating a better fit of the experimental data to inactivation models. Irreversible Michaelis-Menten model resulted in the highest AIC together with competitive product inhibition as well as substrate inhibition. Nevertheless, all inhibition models considering enzyme inactivation showed high standard deviations above 80% for the respective $K_{i}$ estimates. Therefore irreversible Michaelis-Menten model with time-dependent enzyme inactivation described the measurement data the best (Fig XXXA). Thereby, $k_{cat}$ was estimated to 3.003 min<sup>-1</sup> ± 0.77% whereas 30 µM ± 1.99%  was estimated for $K_{m}$. The respective half life of CotA was estimated at 95 min ± 4 min using equation [](enzyme_halflife), whereas $k_{cat}$ and $k_{inact}$ were highly correlated (corr > 0.95). Irreversible Michelis-Menten model without enzyme concentration did not fit the measurement data, since the reaction rate is initially underestimated, and overestimated in later stages of the reaction (Fig xxxB).  
 
-# In[6]:
+# In[7]:
 
 
 fig, axes = plt.subplots(2,2, figsize=(12.8,9.2), sharey=True, sharex=True)
@@ -335,76 +337,40 @@ plt.tight_layout()
 # Based on kinetic modeling, time-dependent enzyme inactivation described the measured reaction progress-curve. Thereby, the estimated inactivation rate was highly correlated to the turnover number of CotA. As in the previous chapter, the correlation might be technical or causal. Nevertheless, product inhibition models were able to describe the measured progress-curves qualitatively. Due to data quality issues product inhibition cannot be completely ruled out. 
 # 
 # Further kinetic assays with higher enzyme concentration or prolonged measurement times should be conducted to confirm or exclude product inhibition as an potential source of the apparent decrease of reaction rate. Furthermore, the pipetting volume of enzyme should be increased, to reduce variation between experimental repeats.
-
 # 
-
-# In[7]:
-
-
-CotA_kinetics_with_inactivation.get_model_results()
-
-
-# In[8]:
-
-
-def add_enzyme_inactivation_model(
-    result: ParameterEstimator, 
-    enzmldoc: pe.EnzymeMLDocument, 
-    protein_id: str = "p0", 
-    reaction_id: str = "r0", 
-    mode_name: str = None):
-
-    # define inactive enzyme species
-    params = enzmldoc.getProtein('p0').dict()
-    inactive_protein = pe.Protein(**params)
-    inactive_protein.name += " inactive"
-    inactive_protein.init_conc = 0.0
-    inactive_protein.constant = False
-    inactive_protein.id = "p1"
-    enzmldoc.addProtein(inactive_protein)
-
-    # define inactivation reaction
-    # Get reaction parameters
-    reaction_parameters = enzmldoc.getReaction(reaction_id)
-    # Create new reaction
-    enzyme_inactivation = pe.EnzymeReaction(
-        name="Time-dependent enzyme inactivation",
-        reversible=True,
-        temperature=reaction_parameters.temperature,
-        temperature_unit=reaction_parameters.temperature_unit,
-        ph=reaction_parameters.ph)
-
-    # Add reaction species
-    enzyme_inactivation.addEduct(protein_id, 1.0, enzmldoc)
-    enzyme_inactivation.addProduct("p1", 1.0, enzmldoc)
-    enzyme_inactivation_id = enzmldoc.addReaction(enzyme_inactivation)
-
-    # Get k_inact parameter value
-    time_unit = result.data.time_unit
-    k_inact = pe.enzymeml.models.KineticParameter(
-        name="k_inact", 
-        value=result.get_model_results(mode_name)["K_ie"].value, 
-        unit=f"1 / {time_unit}")
-
-    # Add model result to EnzymeML document
-    inactivation_model = pe.KineticModel(
-        name="Time-dependent enzyme inactivation",
-        equation="- k_inact * p0", 
-        parameters=[k_inact],
-        enzmldoc=enzmldoc)
-
-    enzyme_inactivation.model = inactivation_model
-
-
-# In[9]:
-
-
-add_enzyme_inactivation_model(CotA_kinetics_with_inactivation, enzmldoc)
-
-
+# ## Save modeling results
+# Lastly, the modeling results are written to the EnzymeML documents and the files are exported.
 
 # In[10]:
 
 
-enzmldoc.getReaction("r1")
+# Write modeling results to kinetic parameters
+k_cat = pe.enzymeml.models.KineticParameter(
+    name="k_cat",
+    value=CotA_kinetics_with_inactivation.get_model_results()["k_cat"].value,
+    unit=f"1 / {CotA_kinetics_with_inactivation.data.time_unit}")
+
+K_m = pe.enzymeml.models.KineticParameter(
+    name="K_m",
+    value=CotA_kinetics_with_inactivation.get_model_results()["Km"].value,
+    unit=CotA_kinetics_with_inactivation.data.data_conc_unit)
+
+# Define kinetic model
+model = pe.KineticModel(
+    name="irreversible Michaelis-Menten",
+    equation="-k_cat * p0 * s0 / (K_m + s0)",
+    parameters=[k_cat, K_m])
+
+enzmldoc.getReaction("r0").model = model
+
+add_enzyme_inactivation_model(
+    result=CotA_kinetics_with_inactivation,
+    enzmldoc=enzmldoc)
+
+
+
+# Export EnzymeML documents
+export = False
+if export:
+    enzmldoc.toFile()
 

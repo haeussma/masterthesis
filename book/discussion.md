@@ -1,27 +1,42 @@
 # Discussion
 
-Availability of raw data is the prerequisite for reproducible data analysis {cite}`miyakawa2020no`. Hence, the analysis workflow was conceptualized starting from photometric measurement data. For that purpose, discussing the output format of the analytical device with the experimental partners proved to be valuable to plan the data acquisition process. Hence, a project specific parser function was established, which transferred the measurement data to the respective EnzymeML document with information on the measurement conditions. Thereby, error-prone and tedious manual copying between files was avoided, ensuring raw data integrity.  
-Since modeling was based on concentration data, thoroughly raw data preparation was crucial not to influence the modeling results by wrong concentration calculations. Besides blanking of the absorption signal, correct concentration calculation is important for accurate parameter estimates. Therefore, in three of the four scenarios standard curves of the analyte under assay conditions were recorded, whereas in scenario D concentrations were calculated via an extinction coefficient. All of the analyzed standard curves, except for scenario C ABTS at pH 5, were best described by non-linear calibration equations based on their fit quality determined by AIC.
-Since, experiments were design to take advantage of the full measurement range of the photometer, which includes the non-linear detection range below the upper detection limit, non-linear relations between analyte and instrument response were expected.
-This was expected, since
+reproducibility:
 
-Concentration calculation by extinction coefficient is discouraged, if it is not specifically determined
-as well as concentration calculation
+- Data integrity
+- Modeling documentation
 
-Transferring the measurement signal into concentration values constitutes the second step of the workflow.
+Availability of raw data is the prerequisite for reproducible data analysis. The lack of raw data is therefore one of the reasons for the reproducibility crisis {cite}`miyakawa2020no`. Hence, the analysis workflow was conceptualized starting from photometric measurement data. For that purpose, discussing the output format of the analytical device with the experimental partners proved to be valuable to plan the data acquisition process. Hence, a project specific parser function was established, which transferred the measurement data to the respective EnzymeML containing information on the measurement conditions. Thereby, error-prone and tedious manual copying between files was avoided, ensuring raw data integrity.
+
+## Data integrity through accurate concentration calculation
+
+Another aspect of data integrity in the developed workflow is the accurate concentration calculation based on the measured absorption signal. The relation between concentration to absorption signal of an analyte can be linear as well as non-liner. Therefore, wrong assumption of a linear relationship albeit the relation is better described non-linearly, leads to avoidable inaccuracy in concentration calculation {cite}`hsu2010effect` {cite}`martin2017fitting` and thus imprecise kinetic parameter estimates.
+Hence, concentration calculation based on extinction coefficients was discouraged, if the underlying relation between absorption and concentration of an analyte was not self-determined for the respective reaction system.
+To enable precise concentration calculation of linear and non-linear absorption to concentration relationships, CaliPytion was applied with analyte standards provided by the experimental partners.
+All of the analyzed standard curves, except for scenario C ABTS at pH 5, were best described by non-linear calibration equations based on their fit quality determined by AIC. Hence, uncertainties from concentration calculation were reduced and therefore their impact on the kinetic parameters reduced.
+
+## Quality control of experimental data through kinetic modeling
+
+Besides data integrity, high quality data is required for accurate parameter estimates, whereas unnoticed experimental errors unintentionally distort the resulting kinetic parameters. Therefore, quality control of the measurement data is an important aspect of every data analysis process. EnzymePynetics allows visualization of measurement data together with the fitted kinetic model. Ultimately, systematic deviations of single measurements were identified by simultaneously visualizing measurement data and the fitted model.
+By this method, systematic errors with pipetting, mixing, and temperature equilibration during experimental preparation as well as issues with the experimental design itself were identified in different scenarios.  
+Systematic pipetting errors were disclosed by systematic deviations between the measurement data and the fitted model.
+In scenario D individual enzyme reactions showed to have deviating substrate concentrations from the assay protocol, whereas modeling without the presumably erroneous measurements resulted in a good fit between data and model as well as low standard deviation on the parameter estimates. Hence the experimental partners were advised to repeat the deviating measurement.  
+In two projects the progress-curve of the reactions indicate a lag phase after reaction start. In one case, small pipetting volumes of enzyme to start the reaction led to inhomogeneous mixing and thus increasing reaction rates until the enzyme was distributed evenly. In result, the project partners were advised to increase the pipetting volume of the enzyme solution.
+In another case, temperature incubation effects in MTP caused by prolonged assay preparation times resulted in an initial lag phase. Due to small reaction volumes and low mass, MTPs have a low heat capacity and thus high susceptibility to temperature change. Hence, project partners were advised to pre-incubate the MTP within the photometer at reaction temperature for 5 min and then start the reaction by adding enzyme as quick as possible.
+In another project, modeling predictions of the estimated $k_{cat}$ and $K_{m}$ together with their correlation were used to iteratively improve the design of the enzyme assay. Thereby, appropriate enzyme concentration and substrate concentration range were identified through multiple round of lab experimental with subsequent kinetic modeling.
+
+All of the mentioned experimental issues were disclosed by visualizing measurement data together with fitted rate equations. This emphasizes the advantages of progress curve analysis, which was implemented in EnzymePynetics over the commonly used initial rates method.
+
+This is because of both the method and the data which is required for the method.
+
+Kinetic parameters are mostly determined by initial rates method, whereas initial rates of reactions with varying substrate concentration are determined and either . Thereby, rates from a subjectively chosen linear time period of the reaction are chosen
 
 Cumulative error, which ultimately leads to unreproducible kinetic parameters
-
-initial rates by linear regressin are highly sensitive to the chosen observaation window
 
 - Lab vs computer documentation
 
 sharing the raw data and comprehensive description of individual data treatment steps,
-In biocatalysis
 
 Raw data liked to executable code is the gold standard in computational science {cite}`peng2011reproducible`
-
-Analysis of the four scenarios proved the applicability and advantages of the developed workflow.
 
 - Currently: unfair initial rates, lineweaver burk
 - Besides the methodology documentation is bad
@@ -43,13 +58,9 @@ Analysis of the four scenarios proved the applicability and advantages of the de
 
 **errors in data sets and detection of them**
 
-- General problems in datasets and experimental preparation
-  - systematic errors, temperature (gradients and incubation)
-  - outliers (pipetting errors,)
-  - experimental problems (viscosity)
 - generals problems in modelling
   - error sources
-    - wrong concentration calculation calibration equation and extincition coefficient
+    - wrong concentration
     - initial rates
 
 **model selection and miss selection**
