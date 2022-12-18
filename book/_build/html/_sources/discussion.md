@@ -5,7 +5,7 @@ reproducibility:
 - Data integrity
 - Modeling documentation
 
-Availability of raw data is the prerequisite for reproducible data analysis. The lack of raw data is therefore one of the reasons for the reproducibility crisis {cite:cts}`miyakawa2020no`. Hence, the analysis workflow was conceptualized starting from photometric measurement data. For that purpose, discussing the output format of the analytical device with the experimental partners proved to be valuable to plan the data acquisition process. Hence, a project specific parser function was established, which transferred the measurement data to the respective EnzymeML containing information on the measurement conditions. Thereby, error-prone and tedious manual copying between files was avoided, ensuring raw data integrity.
+Availability of raw data is the prerequisite for reproducible data analysis. The lack of raw data is therefore one of the reasons for the reproducibility crisis {cite}`miyakawa2020no`. Hence, the analysis workflow was conceptualized starting from photometric measurement data. For that purpose, discussing the output format of the analytical device with the experimental partners proved to be valuable to plan the data acquisition process. Hence, a project specific parser function was established, which transferred the measurement data to the respective EnzymeML containing information on the measurement conditions. Thereby, error-prone and tedious manual copying between files was avoided, ensuring raw data integrity.
 
 ## Data integrity through accurate concentration calculation
 
