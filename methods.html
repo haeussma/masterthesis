@@ -106,7 +106,7 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="welcome.html">
-                    Welcome
+                    Welcome to my master thesis
                 </a>
             </li>
         </ul>
@@ -388,11 +388,6 @@ title="Print to PDF"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#overview">
-     Overview
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#data-model">
      Data model
     </a>
@@ -415,6 +410,18 @@ title="Print to PDF"
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#visualization">
      3.6 Visualization
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#jupyter-notebook">
+   4. Jupyter Notebook
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#jupyter-book">
+     5. Jupyter Book
     </a>
    </li>
   </ul>
@@ -473,11 +480,6 @@ title="Print to PDF"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#overview">
-     Overview
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#data-model">
      Data model
     </a>
@@ -500,6 +502,18 @@ title="Print to PDF"
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#visualization">
      3.6 Visualization
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#jupyter-notebook">
+   4. Jupyter Notebook
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#jupyter-book">
+     5. Jupyter Book
     </a>
    </li>
   </ul>
@@ -527,10 +541,10 @@ EnzymeML documents can be read, edited, and written via the Python API PyEnzyme,
 </section>
 <section id="calipytion">
 <span id="method-calipytion"></span><h2>CaliPytion<a class="headerlink" href="#calipytion" title="Permalink to this headline">#</a></h2>
-<p>CaliPytion was developed to provide an easy way to use linear and non linear calibration equations to calculate concentrations of analytical raw data based on a standard measurements.</p>
+<p>CaliPytion was developed to provide an easy way to fit linear and non linear calibration equations to estimate concentrations of analytical raw data based on standard measurements.</p>
 <section id="data-model-for-calibration-data">
 <h3>Data model for calibration data<a class="headerlink" href="#data-model-for-calibration-data" title="Permalink to this headline">#</a></h3>
-<p>The standard curve functionality of CaliPythion is based on a data model, structuring data and metadata of calibration measurements. Thereby, calibration conditions like temperature and pH, and information of the analytical device can be provided. Furthermore, the name as well as an ID can be specified for the analyzed substance. All of this information is stored in the <code class="docutils literal notranslate"><span class="pre">Calibration</span></code> root object. Additionally, the root object can contain a <code class="docutils literal notranslate"><span class="pre">Standard</span></code> and a <code class="docutils literal notranslate"><span class="pre">Spectrum</span></code>. A standard contains measurements of multiple predefined concentrations and a wavelength at which the measurement was conducted, in the case of spectrophotometry. A <code class="docutils literal notranslate"><span class="pre">Spectrum</span></code> can be defined by providing measurement data as well as the respectuve wavelengths at which the data was measured.</p>
+<p>The standard curve functionality of CaliPythion is based on a data model, structuring data and metadata of calibration measurements. Thereby, calibration conditions like temperature and pH, and information of the analytical device can be provided. Furthermore, the name as well as an ID can be specified for the analyzed substance. All of this information is stored in the <code class="docutils literal notranslate"><span class="pre">Calibration</span></code> root object. Additionally, the root object can contain a <code class="docutils literal notranslate"><span class="pre">Standard</span></code> and a <code class="docutils literal notranslate"><span class="pre">Spectrum</span></code>. A <code class="docutils literal notranslate"><span class="pre">Standard</span></code> contains measurements of multiple predefined concentrations and a wavelength at which the measurement was conducted in case of spectrophotometry. A <code class="docutils literal notranslate"><span class="pre">Spectrum</span></code> can be defined by providing measurement data as well as the respective wavelengths at which the data was measured.</p>
 </section>
 <section id="linear-and-non-linear-fitting-of-calibration-equations">
 <h3>Linear and non-linear fitting of calibration equations<a class="headerlink" href="#linear-and-non-linear-fitting-of-calibration-equations" title="Permalink to this headline">#</a></h3>
@@ -561,20 +575,19 @@ After <code class="docutils literal notranslate"><span class="pre">StandardCurve
 </section>
 <section id="enzymepynetics">
 <span id="method-enzymepynetics"></span><h2>EnzymePynetics<a class="headerlink" href="#enzymepynetics" title="Permalink to this headline">#</a></h2>
-<section id="overview">
-<h3>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">#</a></h3>
-<p>EnzymePynetics is a a python package, for kinetic parameter estimation of single-substrate enzyme reactions, which was developed during this thesis. The <code class="docutils literal notranslate"><span class="pre">ParameterEstimator</span></code> of EnzymePynetics estimates the kinetic parameters <span class="math notranslate nohighlight">\(k_{cat}\)</span> and <span class="math notranslate nohighlight">\(K_{m}\)</span> by fitting time-course measurement data of enzyme reactions to different Michaelis-Menten models. Thereby, the residuals between measurement data and integrated Michaelis-Menten rate equations are minimized through a non-linear least-squares algorithm. Additionally, the inhibition constant <span class="math notranslate nohighlight">\(K_{i}\)</span> can be assessed for potential substrate or product inhibition. Furthermore, the inhibition constant of an enzyme inhibitor can be determined.</p>
-</section>
+<p>EnzymePynetics is a a python package, for kinetic parameter estimation of single-substrate enzyme reactions, which was developed during this thesis. The <code class="docutils literal notranslate"><span class="pre">ParameterEstimator</span></code> of EnzymePynetics estimates the turnover rate <span class="math notranslate nohighlight">\(k_{cat}\)</span> and Michaelis-Menten constant <span class="math notranslate nohighlight">\(K_{m}\)</span> by fitting time-course measurement data of enzyme reactions to different Michaelis-Menten models. Thereby, the residuals between measurement data and integrated Michaelis-Menten rate equations are minimized through a non-linear least-squares algorithm. Additionally, the inhibition constant <span class="math notranslate nohighlight">\(K_{i}\)</span> can be assessed for potential substrate or product inhibition. Furthermore, <span class="math notranslate nohighlight">\(K_{i}\)</span> of an enzyme inhibitor apart from substrate or product can be determined.</p>
 <section id="data-model">
 <h3>Data model<a class="headerlink" href="#data-model" title="Permalink to this headline">#</a></h3>
-<p>Data models build the backbone of applications, by defining the relations between informations in an hierarchical manner.
-EnzymePynetics is based on a data model, resembling the experimental design of an enzyme kinetics assay. Thereby, all relevant data and meta data of an kinetic experiment are ordered in the base object <code class="docutils literal notranslate"><span class="pre">EnzymeKineticsExperiment</span></code>. On the metadata side, the base object consists of the attributes temperature with its respective unit, pH, and the name of the measured substance. Additionally, it can be specified whether the measurement data originates from substrate or product measurements. On the data side, <code class="docutils literal notranslate"><span class="pre">EnzymeKineticsExperiment</span></code> contains one or multiple <code class="docutils literal notranslate"><span class="pre">Measurements</span></code>. Each measurement stores the information of an experimental condition, to which the enzyme was subjected. Therefore, each <code class="docutils literal notranslate"><span class="pre">Measurement</span></code> contains information on the initial substrate concentration, enzyme concentration, and inhibitor concentration, if present, along with the respective concentration units. Each <code class="docutils literal notranslate"><span class="pre">Measurement</span></code> contains the measured data, which itself consist of one or multiple replicates of the respective experimental condition.<br />
-The data model was was generated using <a class="reference external" href="https://github.com/JR-1991/software-driven-rdm">sdRDM</a>, a python tool allowing the creation and versioning of data models.</p>
+<p>#TODO algorithm
+EnzymePynetics is based on a data model, resembling the experimental design of an enzyme kinetics assay. Thereby, all relevant data and metadata of an kinetic experiment are structured in the base object <code class="docutils literal notranslate"><span class="pre">EnzymeKineticsExperiment</span></code>.
+Reaction conditionas and data</p>
+<p>#TODO On the metadata side, the base object consists of the attributes temperature with its respective unit, pH, and the name of the measured substance. Additionally, it can be specified whether the measurement data originates from substrate or product measurements. On the data side, <code class="docutils literal notranslate"><span class="pre">EnzymeKineticsExperiment</span></code> contains one or multiple <code class="docutils literal notranslate"><span class="pre">Measurements</span></code>. Each measurement stores the information of an experimental conditions oth the enzyme reaction. Therefore, each <code class="docutils literal notranslate"><span class="pre">Measurement</span></code> contains information on the initial substrate concentration, enzyme concentration, and inhibitor concentration, along with the respective concentration units. Each <code class="docutils literal notranslate"><span class="pre">Measurement</span></code> contains measured data, which itself consist of one or multiple replicates of the respective experimental condition.<br />
+The data model was generated using <a class="reference external" href="https://github.com/JR-1991/software-driven-rdm">sdRDM</a>, a python tool allowing the creation and versioning of data models.</p>
 <p>An extensive documentation of the data model can be accessed in the <a class="reference external" href="https://github.com/haeussma/EnzymePynetics/blob/main/specifications/EnzymeKinetics.md">specifications</a> of the the software package.</p>
 </section>
 <section id="kinetic-models">
 <h3>3.3 Kinetic models<a class="headerlink" href="#kinetic-models" title="Permalink to this headline">#</a></h3>
-<p>Besides the irreversible Michaelis-Menten rate equation (Eq. 1) inhibition models for competitive (Eq. 2), uncompetitive (Eq. 3), and non-competitive) inhibition (Eq. 4) were implemented. Thereby, <span class="math notranslate nohighlight">\(S\)</span>, <span class="math notranslate nohighlight">\(E\)</span>, and <span class="math notranslate nohighlight">\(I\)</span> denote the concentration of substrate, enzyme, and inhibitor, respectively. In therms of kinetic parameters, <span class="math notranslate nohighlight">\(k_{cat}\)</span> denotes the turnover number, <span class="math notranslate nohighlight">\(K_{m}\)</span> the Michaelis-Menten constant of the substrate, whereas <span class="math notranslate nohighlight">\(K_{ic}\)</span> and <span class="math notranslate nohighlight">\(K_{iu}\)</span> describe the competitive and uncompetitive inhibition constant, respectively.</p>
+<p>Besides the irreversible Michaelis-Menten rate equation (Eq. 1) inhibition models for competitive (Eq. 2), uncompetitive (Eq. 3), and non-competitive inhibition (Eq. 4) were implemented. Thereby, <span class="math notranslate nohighlight">\(S\)</span>, <span class="math notranslate nohighlight">\(E\)</span>, and <span class="math notranslate nohighlight">\(I\)</span> respectively denote the concentration of substrate, enzyme, and inhibitor. In terms of kinetic parameters, <span class="math notranslate nohighlight">\(k_{cat}\)</span> denotes the turnover number, <span class="math notranslate nohighlight">\(K_{m}\)</span> the Michaelis-Menten constant of the substrate, whereas <span class="math notranslate nohighlight">\(K_{ic}\)</span> and <span class="math notranslate nohighlight">\(K_{iu}\)</span> respectively describe the competitive and uncompetitive inhibition constant.</p>
 <div class="math notranslate nohighlight" id="equation-irreversible-mm">
 <span class="eqno">(6)<a class="headerlink" href="#equation-irreversible-mm" title="Permalink to this equation">#</a></span>\[\frac{dS}{dt} = -\frac{k_{cat} * E * S}{K_{m} + S}\]</div>
 <div class="math notranslate nohighlight" id="equation-competitive-inhibition">
@@ -583,16 +596,17 @@ The data model was was generated using <a class="reference external" href="https
 <span class="eqno">(8)<a class="headerlink" href="#equation-uncompetitive-inhibition" title="Permalink to this equation">#</a></span>\[\frac{dS}{dt} = -\frac{k_{cat} * E * S}{K_{m} * (1+\frac{I}{K_{iu}}) * S}\]</div>
 <div class="math notranslate nohighlight" id="equation-noncompetitive-inhibition">
 <span class="eqno">(9)<a class="headerlink" href="#equation-noncompetitive-inhibition" title="Permalink to this equation">#</a></span>\[\frac{dS}{dt} = -\frac{k_{cat} * E * S}{K_{m} * (1+\frac{I}{K_{ic}}) + (1+\frac{I}{K_{iu}}) + S}\]</div>
-<p>By default, <span class="math notranslate nohighlight">\(E\)</span> is assumed to be constant throughout the reaction. If required, the kinetic models can be extended by the parameter <span class="math notranslate nohighlight">\(K_{inact}\)</span>, which describes the time-dependent inactivation rate of the enzyme. The decrease in active enzyme is modeled by Eq. 5:</p>
+<p>By default, <span class="math notranslate nohighlight">\(E\)</span> is assumed to be constant throughout the reaction. If required, the kinetic models can be extended by the parameter <span class="math notranslate nohighlight">\(k_{inact}\)</span>, which describes the time-dependent inactivation rate of the enzyme. The decrease in active enzyme is modeled by Eq. 5:</p>
 <div class="math notranslate nohighlight" id="equation-enzyme-inactivation">
-<span class="eqno">(10)<a class="headerlink" href="#equation-enzyme-inactivation" title="Permalink to this equation">#</a></span>\[\frac{dE}{dt} = -K_{inact} * E\]</div>
+<span class="eqno">(10)<a class="headerlink" href="#equation-enzyme-inactivation" title="Permalink to this equation">#</a></span>\[\frac{dE}{dt} = -k_{inact} * E\]</div>
 </section>
 <section id="initialization">
 <h3>3.4 Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">#</a></h3>
-<p>Whereas the <code class="docutils literal notranslate"><span class="pre">EnzymeKineticsExperiment</span></code> object solely serves a
-The <code class="docutils literal notranslate"><span class="pre">ParameterEstimator</span></code> harbors the functionalities for parameter estimation. Data can be provided by passing data as an <code class="docutils literal notranslate"><span class="pre">EnzymeKineticsExperiment</span></code> object. Alternatively, an EnzymeML documents can be provided as the data source via <a class="reference external" href="https://github.com/EnzymeML/PyEnzyme">PyEnzyme</a> software.<br />
-Initially, product concentration is calculated, if the input data is from substrate measurements. Substrate is calculated, if product data was provided. The calculation is based on the initial substrate concentration, which needs to be provided for all measurements. The parameter estimation is then based on substrate data.<br />
-In the background, rough estimates for <span class="math notranslate nohighlight">\(k_{cat}\)</span>, <span class="math notranslate nohighlight">\(K_{m}\)</span>, and <span class="math notranslate nohighlight">\(K_{i}\)</span> are calculated based on the fastest reaction rate in the provided dataset. Initial parameter estimates are needed as a starting point for the solver, whereas the parameter space is limited to ±1000-fold its estimated value for each parameter.</p>
+<p>Whereas the <code class="docutils literal notranslate"><span class="pre">EnzymeKineticsExperiment</span></code> object solely serves as data container,
+the <code class="docutils literal notranslate"><span class="pre">ParameterEstimator</span></code> harbors the functionalities for parameter estimation. Data can be provided by passing data as an <code class="docutils literal notranslate"><span class="pre">EnzymeKineticsExperiment</span></code> object. Alternatively, an EnzymeML documents can be provided as the data source via PyEnzyme. #TODO conservation of mass
+Initially, product concentration is calculated, if the input data originates from substrate measurements and substrate concentrations are calculated, if product data is provided. The calculation of the missing species is based on the initial substrate concentration, which needs to be provided for all measurements.
+The parameter estimation is based on substrate data.<br />
+In the background, rough estimates for <span class="math notranslate nohighlight">\(k_{cat}\)</span>, <span class="math notranslate nohighlight">\(K_{m}\)</span>, and <span class="math notranslate nohighlight">\(K_{i}\)</span> are calculated based on the highest reaction rate in the dataset. Initial parameter estimates are needed as a starting point for the solver, whereas the parameter space is limited to ±1000-fold of the initial parameter estimates.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">EnzymePynetics.tools.parameterestimator</span> <span class="kn">import</span> <span class="n">ParameterEstimator</span>
 <span class="kn">from</span> <span class="nn">EnzymePynetics.core.enzymekineticsexperiment</span> <span class="kn">import</span> <span class="n">EnzymeKineticsExperiment</span>
 <span class="kn">import</span> <span class="nn">pyenzyme</span>
@@ -625,10 +639,18 @@ In the background, rough estimates for <span class="math notranslate nohighlight
 </section>
 <section id="model-selection">
 <h3>3.5 Model selection<a class="headerlink" href="#model-selection" title="Permalink to this headline">#</a></h3>
+<p>since the implemented models have a different number of parameters, Akaike information criterion (AIC) was used to compare the quality of fit between models. AIC is a statistical metric for qualitative model comparison for a given dataset, penalizes which for ag
+The fit quality between kinetic models was compared using Akaike information criterion (AIC). The</p>
 </section>
 <section id="visualization">
 <h3>3.6 Visualization<a class="headerlink" href="#visualization" title="Permalink to this headline">#</a></h3>
 <p>Akaike information criterion</p>
+</section>
+</section>
+<section id="jupyter-notebook">
+<h2>4. Jupyter Notebook<a class="headerlink" href="#jupyter-notebook" title="Permalink to this headline">#</a></h2>
+<section id="jupyter-book">
+<h3>5. Jupyter Book<a class="headerlink" href="#jupyter-book" title="Permalink to this headline">#</a></h3>
 </section>
 </section>
 </section>

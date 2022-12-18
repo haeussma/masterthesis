@@ -106,7 +106,7 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../welcome.html">
-                    Welcome
+                    Welcome to my master thesis
                 </a>
             </li>
         </ul>
@@ -415,8 +415,8 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#experimantal-data">
-     Experimantal data
+    <a class="reference internal nav-link" href="#experimental-data">
+     Experimental data
     </a>
    </li>
   </ul>
@@ -432,6 +432,11 @@ title="Print to PDF"
    <span class="math notranslate nohighlight">
     \(K_{i}\)
    </span>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#save-modeling-results">
+   Save modeling results
   </a>
  </li>
 </ul>
@@ -486,8 +491,8 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#experimantal-data">
-     Experimantal data
+    <a class="reference internal nav-link" href="#experimental-data">
+     Experimental data
     </a>
    </li>
   </ul>
@@ -503,6 +508,11 @@ title="Print to PDF"
    <span class="math notranslate nohighlight">
     \(K_{i}\)
    </span>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#save-modeling-results">
+   Save modeling results
   </a>
  </li>
 </ul>
@@ -521,7 +531,7 @@ title="Print to PDF"
 <section id="project-background">
 <h2>Project background<a class="headerlink" href="#project-background" title="Permalink to this headline">#</a></h2>
 <p>In this scenario, the binding of an <em>in silico</em> designed protein to an enzyme was assessed by determining the  inhibitory constant <span class="math notranslate nohighlight">\(K_{i}\)</span>. Thereby, the efficiency of the newly developed approach for computational design of protein binders to deliberately chosen targets was demonstrated.
-This was done, by comparing <span class="math notranslate nohighlight">\(K_{i}\)</span> of the designed human serum albumin variant (HSA(M3)) to the wild-type (HSA(M3)) by respectively applying the proteins to chymotrypsin enzyme reactions. Both designed proteins were Both HSAs were individually dimerized into fusion proteins through a huFc.</p>
+This was done by comparing <span class="math notranslate nohighlight">\(K_{i}\)</span> of the designed human serum albumin variant (HSA(M3)) to the wild-type (HSA(WT)) by respectively applying the proteins to chymotrypsin enzyme reactions. Both designed proteins were individually dimerized into fusion proteins through a huFc.</p>
 <section id="experimental-design">
 <h3>Experimental design<a class="headerlink" href="#experimental-design" title="Permalink to this headline">#</a></h3>
 <p>Enzyme activity was monitored by measuring the product formation of p-Nitroanilin (p-NA) photometrically at 410 nm for 30 min at 30°C. Therefore, Succinyl-gly-gly-phe-p-nitroanilide (SGGPpNA) was applied as substrate in a concentration range of 0.25 - 2 mM. For concentration calculations, p-NA standard was prepared in the range of 0 - 0.3 mM in duplicates. <span class="math notranslate nohighlight">\(K_{i}\)</span> of HSA(WT)-huFc and HSA(M3)-huFc on chymotrypsin were investigated in independent experiments. Each experiment consisted of enzyme reactions with and without the respective HSA variant. Each enzyme reaction contained 0.2 µM of enzyme and 26.88 µM of the respective HSA variant, if inhibitor was applied. All enzyme reactions were prepared in duplicates.</p>
@@ -545,7 +555,7 @@ This was done, by comparing <span class="math notranslate nohighlight">\(K_{i}\)
 <span class="kn">import</span> <span class="nn">string</span>
 <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span>
 <span class="kn">from</span> <span class="nn">EnzymePynetics.tools.parameterestimator</span> <span class="kn">import</span> <span class="n">ParameterEstimator</span>
-<span class="kn">from</span> <span class="nn">CaliPytion.tools.standardcurve</span> <span class="kn">import</span> <span class="n">StandardCurve</span>
+<span class="kn">from</span> <span class="nn">CaliPytion</span> <span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">standardcurve</span> <span class="kn">import</span> <span class="nn">StandardCurve</span>
 
 <span class="kn">import</span> <span class="nn">warnings</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
@@ -578,33 +588,33 @@ This was done, by comparing <span class="math notranslate nohighlight">\(K_{i}\)
 </div>
 <div class="output text_html"><style type="text/css">
 </style>
-<table id="T_50ab9" style="font-size: 12px">
+<table id="T_cc6b8" style="font-size: 12px">
   <thead>
     <tr>
       <th class="blank level0" >&nbsp;</th>
-      <th id="T_50ab9_level0_col0" class="col_heading level0 col0" >AIC</th>
+      <th id="T_cc6b8_level0_col0" class="col_heading level0 col0" >AIC</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th id="T_50ab9_level0_row0" class="row_heading level0 row0" >Quadratic</th>
-      <td id="T_50ab9_row0_col0" class="data row0 col0" >-161</td>
+      <th id="T_cc6b8_level0_row0" class="row_heading level0 row0" >Quadratic</th>
+      <td id="T_cc6b8_row0_col0" class="data row0 col0" >-161</td>
     </tr>
     <tr>
-      <th id="T_50ab9_level0_row1" class="row_heading level0 row1" >3rd polynominal</th>
-      <td id="T_50ab9_row1_col0" class="data row1 col0" >-161</td>
+      <th id="T_cc6b8_level0_row1" class="row_heading level0 row1" >3rd polynominal</th>
+      <td id="T_cc6b8_row1_col0" class="data row1 col0" >-161</td>
     </tr>
     <tr>
-      <th id="T_50ab9_level0_row2" class="row_heading level0 row2" >Linear</th>
-      <td id="T_50ab9_row2_col0" class="data row2 col0" >-143</td>
+      <th id="T_cc6b8_level0_row2" class="row_heading level0 row2" >Linear</th>
+      <td id="T_cc6b8_row2_col0" class="data row2 col0" >-143</td>
     </tr>
     <tr>
-      <th id="T_50ab9_level0_row3" class="row_heading level0 row3" >Rational</th>
-      <td id="T_50ab9_row3_col0" class="data row3 col0" >-141</td>
+      <th id="T_cc6b8_level0_row3" class="row_heading level0 row3" >Rational</th>
+      <td id="T_cc6b8_row3_col0" class="data row3 col0" >-141</td>
     </tr>
     <tr>
-      <th id="T_50ab9_level0_row4" class="row_heading level0 row4" >Exponential</th>
-      <td id="T_50ab9_row4_col0" class="data row4 col0" >-17</td>
+      <th id="T_cc6b8_level0_row4" class="row_heading level0 row4" >Exponential</th>
+      <td id="T_cc6b8_row4_col0" class="data row4 col0" >-17</td>
     </tr>
   </tbody>
 </table>
@@ -614,8 +624,8 @@ This was done, by comparing <span class="math notranslate nohighlight">\(K_{i}\)
 <p><em>Fig. XXX: Fitted quadratic calibration model to standard data of p-NA.</em></p>
 <p>Based on the Akaike information criterion (AIC), the relation between concentration and absorption is best described by a quadratic function. The calibration measurements and the fitted calibration model are shown in Fig. XXX.</p>
 </section>
-<section id="experimantal-data">
-<h3>Experimantal data<a class="headerlink" href="#experimantal-data" title="Permalink to this headline">#</a></h3>
+<section id="experimental-data">
+<h3>Experimental data<a class="headerlink" href="#experimental-data" title="Permalink to this headline">#</a></h3>
 <p>The EnzymeML documents of each experiment were loaded and the standard curve was applied to the absorption data to calculate concentrations.</p>
 <div class="cell tag_hide_input docutils container">
 <div class="cell_input docutils container">
@@ -634,7 +644,7 @@ This was done, by comparing <span class="math notranslate nohighlight">\(K_{i}\)
 </section>
 <section id="comparability-of-the-experiments">
 <h2>Comparability of the experiments<a class="headerlink" href="#comparability-of-the-experiments" title="Permalink to this headline">#</a></h2>
-<p>Since experimental data with HSA(WT)-huFc and HSA(M3)-huFc originate from independent experiments, the control reactions without the respective inhibitor were compared by performing a parameter estimation. Thereby, catalytic efficiency <span class="math notranslate nohighlight">\(\frac{k_{cat}}{K_{m}}\)</span> was used to assess comparability between the data sets, since <span class="math notranslate nohighlight">\(k_{cat}\)</span> and <span class="math notranslate nohighlight">\(K_{m}\)</span> were highly correlated (corr &gt; 0.98). High correlations between parameters, indicate that the parameters cannot be determined independently with certainty. In this case, the highest initial substrate concentration is presumably too low, compared to the true <span class="math notranslate nohighlight">\(K_{m}\)</span> of the enzyme under the given experimental conditions. However, higher substrate concentration were not applied for multiple reasons. On the one hand dimethyl sulfoxide (DMSO) was used as a co-solvent of the substrate, which inhibits enzyme activity <span id="id1">Busby <em>et al.</em> [<a class="reference internal" href="../references.html#id9" title="William F Busby, Joseph M Ackermann, and Charles L Crespi. Effect of methanol, ethanol, dimethyl sulfoxide, and acetonitrile on in vitro activities of cdna-expressed human cytochromes p-450. Drug Metabolism and Disposition, 27(2):246–249, 1999.">1999</a>]</span>. Hence, higher initial substrate concentrations would have led to higher enzyme inhibition, which would have distorted the assessment of <span class="math notranslate nohighlight">\(K_{i}\)</span>.
+<p>Since experimental data with HSA(WT)-huFc and HSA(M3)-huFc originate from independent experiments, the control reactions without the respective inhibitor were compared by performing a parameter estimation. Thereby, catalytic efficiency <span class="math notranslate nohighlight">\(\frac{k_{cat}}{K_{m}}\)</span> was used to assess comparability between the data sets, since <span class="math notranslate nohighlight">\(k_{cat}\)</span> and <span class="math notranslate nohighlight">\(K_{m}\)</span> were highly correlated (corr &gt; 0.98). High correlations between parameters indicate that the parameters cannot be determined independently with certainty. In this case, the highest initial substrate concentration is presumably too low, compared to the true <span class="math notranslate nohighlight">\(K_{m}\)</span> of the enzyme under the given experimental conditions. However, higher substrate concentration were not applied for multiple reasons. On the one hand dimethyl sulfoxide (DMSO) was used as a co-solvent of the substrate, which inhibits enzyme activity <span id="id1">Busby <em>et al.</em> [<a class="reference internal" href="../references.html#id9" title="William F Busby, Joseph M Ackermann, and Charles L Crespi. Effect of methanol, ethanol, dimethyl sulfoxide, and acetonitrile on in vitro activities of cdna-expressed human cytochromes p-450. Drug Metabolism and Disposition, 27(2):246–249, 1999.">1999</a>]</span>. Hence, higher initial substrate concentrations would have led to higher enzyme inhibition, which would have distorted the assessment of <span class="math notranslate nohighlight">\(K_{i}\)</span>.
 On the other hand, high substrate viscosity denied the application of higher concentrations without sacrificing pipetting precision.</p>
 <div class="cell tag_hide_input docutils container">
 <div class="cell_input docutils container">
@@ -689,63 +699,63 @@ On the other hand, high substrate viscosity denied the application of higher con
 </div>
 <div class="output text_html"><style type="text/css">
 </style>
-<table id="T_032f7" style="font-size: 12px">
+<table id="T_81976" style="font-size: 12px">
   <thead>
     <tr>
       <th class="blank level0" >&nbsp;</th>
-      <th id="T_032f7_level0_col0" class="col_heading level0 col0" >AIC</th>
-      <th id="T_032f7_level0_col1" class="col_heading level0 col1" >kcat [1/min]</th>
-      <th id="T_032f7_level0_col2" class="col_heading level0 col2" >Km [mmole / l]</th>
-      <th id="T_032f7_level0_col3" class="col_heading level0 col3" >kcat / Km [1/min * 1/mmole / l]</th>
-      <th id="T_032f7_level0_col4" class="col_heading level0 col4" >Ki competitive [mmole / l]</th>
-      <th id="T_032f7_level0_col5" class="col_heading level0 col5" >Ki uncompetitive [mmole / l]</th>
+      <th id="T_81976_level0_col0" class="col_heading level0 col0" >AIC</th>
+      <th id="T_81976_level0_col1" class="col_heading level0 col1" >kcat [1/min]</th>
+      <th id="T_81976_level0_col2" class="col_heading level0 col2" >Km [mmole / l]</th>
+      <th id="T_81976_level0_col3" class="col_heading level0 col3" >kcat / Km [1/min * 1/mmole / l]</th>
+      <th id="T_81976_level0_col4" class="col_heading level0 col4" >Ki competitive [mmole / l]</th>
+      <th id="T_81976_level0_col5" class="col_heading level0 col5" >Ki uncompetitive [mmole / l]</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th id="T_032f7_level0_row0" class="row_heading level0 row0" >irreversible Michaelis Menten</th>
-      <td id="T_032f7_row0_col0" class="data row0 col0" >-1857</td>
-      <td id="T_032f7_row0_col1" class="data row0 col1" >56.440 +/- 4.52%</td>
-      <td id="T_032f7_row0_col2" class="data row0 col2" >2.226 +/- 7.28%</td>
-      <td id="T_032f7_row0_col3" class="data row0 col3" >25.353 +/- 8.57%</td>
-      <td id="T_032f7_row0_col4" class="data row0 col4" >-</td>
-      <td id="T_032f7_row0_col5" class="data row0 col5" >-</td>
+      <th id="T_81976_level0_row0" class="row_heading level0 row0" >irreversible Michaelis Menten</th>
+      <td id="T_81976_row0_col0" class="data row0 col0" >-1857</td>
+      <td id="T_81976_row0_col1" class="data row0 col1" >56.440 +/- 4.52%</td>
+      <td id="T_81976_row0_col2" class="data row0 col2" >2.226 +/- 7.28%</td>
+      <td id="T_81976_row0_col3" class="data row0 col3" >25.353 +/- 8.57%</td>
+      <td id="T_81976_row0_col4" class="data row0 col4" >-</td>
+      <td id="T_81976_row0_col5" class="data row0 col5" >-</td>
     </tr>
     <tr>
-      <th id="T_032f7_level0_row1" class="row_heading level0 row1" >competitive product inhibition</th>
-      <td id="T_032f7_row1_col0" class="data row1 col0" >-1856</td>
-      <td id="T_032f7_row1_col1" class="data row1 col1" >60.225 +/- 9.01%</td>
-      <td id="T_032f7_row1_col2" class="data row1 col2" >2.342 +/- 9.88%</td>
-      <td id="T_032f7_row1_col3" class="data row1 col3" >25.714 +/- 13.37%</td>
-      <td id="T_032f7_row1_col4" class="data row1 col4" >0.725 +/- 112.65%</td>
-      <td id="T_032f7_row1_col5" class="data row1 col5" >-</td>
+      <th id="T_81976_level0_row1" class="row_heading level0 row1" >competitive product inhibition</th>
+      <td id="T_81976_row1_col0" class="data row1 col0" >-1856</td>
+      <td id="T_81976_row1_col1" class="data row1 col1" >60.225 +/- 9.01%</td>
+      <td id="T_81976_row1_col2" class="data row1 col2" >2.342 +/- 9.88%</td>
+      <td id="T_81976_row1_col3" class="data row1 col3" >25.714 +/- 13.37%</td>
+      <td id="T_81976_row1_col4" class="data row1 col4" >0.725 +/- 112.65%</td>
+      <td id="T_81976_row1_col5" class="data row1 col5" >-</td>
     </tr>
     <tr>
-      <th id="T_032f7_level0_row2" class="row_heading level0 row2" >uncompetitive product inhibition</th>
-      <td id="T_032f7_row2_col0" class="data row2 col0" >-1855</td>
-      <td id="T_032f7_row2_col1" class="data row2 col1" >57.529 +/- 8.30%</td>
-      <td id="T_032f7_row2_col2" class="data row2 col2" >2.276 +/- 10.65%</td>
-      <td id="T_032f7_row2_col3" class="data row2 col3" >25.272 +/- 13.50%</td>
-      <td id="T_032f7_row2_col4" class="data row2 col4" >-</td>
-      <td id="T_032f7_row2_col5" class="data row2 col5" >3.175 +/- 428.92%</td>
+      <th id="T_81976_level0_row2" class="row_heading level0 row2" >uncompetitive product inhibition</th>
+      <td id="T_81976_row2_col0" class="data row2 col0" >-1855</td>
+      <td id="T_81976_row2_col1" class="data row2 col1" >57.529 +/- 8.30%</td>
+      <td id="T_81976_row2_col2" class="data row2 col2" >2.276 +/- 10.65%</td>
+      <td id="T_81976_row2_col3" class="data row2 col3" >25.272 +/- 13.50%</td>
+      <td id="T_81976_row2_col4" class="data row2 col4" >-</td>
+      <td id="T_81976_row2_col5" class="data row2 col5" >3.175 +/- 428.92%</td>
     </tr>
     <tr>
-      <th id="T_032f7_level0_row3" class="row_heading level0 row3" >substrate inhibition</th>
-      <td id="T_032f7_row3_col0" class="data row3 col0" >-1855</td>
-      <td id="T_032f7_row3_col1" class="data row3 col1" >56.585 +/- 29.14%</td>
-      <td id="T_032f7_row3_col2" class="data row3 col2" >2.233 +/- 35.51%</td>
-      <td id="T_032f7_row3_col3" class="data row3 col3" >25.339 +/- 45.93%</td>
-      <td id="T_032f7_row3_col4" class="data row3 col4" >-</td>
-      <td id="T_032f7_row3_col5" class="data row3 col5" >997.715 +/- 12275.11%</td>
+      <th id="T_81976_level0_row3" class="row_heading level0 row3" >substrate inhibition</th>
+      <td id="T_81976_row3_col0" class="data row3 col0" >-1855</td>
+      <td id="T_81976_row3_col1" class="data row3 col1" >56.585 +/- 29.14%</td>
+      <td id="T_81976_row3_col2" class="data row3 col2" >2.233 +/- 35.51%</td>
+      <td id="T_81976_row3_col3" class="data row3 col3" >25.339 +/- 45.93%</td>
+      <td id="T_81976_row3_col4" class="data row3 col4" >-</td>
+      <td id="T_81976_row3_col5" class="data row3 col5" >997.715 +/- 12275.11%</td>
     </tr>
     <tr>
-      <th id="T_032f7_level0_row4" class="row_heading level0 row4" >non-competitive product inhibition</th>
-      <td id="T_032f7_row4_col0" class="data row4 col0" >-1854</td>
-      <td id="T_032f7_row4_col1" class="data row4 col1" >60.110 +/- 9.50%</td>
-      <td id="T_032f7_row4_col2" class="data row4 col2" >2.331 +/- 10.00%</td>
-      <td id="T_032f7_row4_col3" class="data row4 col3" >25.787 +/- 13.79%</td>
-      <td id="T_032f7_row4_col4" class="data row4 col4" >0.702 +/- 117.81%</td>
-      <td id="T_032f7_row4_col5" class="data row4 col5" >179.118 +/- 358.38%</td>
+      <th id="T_81976_level0_row4" class="row_heading level0 row4" >non-competitive product inhibition</th>
+      <td id="T_81976_row4_col0" class="data row4 col0" >-1854</td>
+      <td id="T_81976_row4_col1" class="data row4 col1" >60.110 +/- 9.50%</td>
+      <td id="T_81976_row4_col2" class="data row4 col2" >2.331 +/- 10.00%</td>
+      <td id="T_81976_row4_col3" class="data row4 col3" >25.787 +/- 13.79%</td>
+      <td id="T_81976_row4_col4" class="data row4 col4" >0.702 +/- 117.81%</td>
+      <td id="T_81976_row4_col5" class="data row4 col5" >179.118 +/- 358.38%</td>
     </tr>
   </tbody>
 </table>
@@ -754,63 +764,63 @@ On the other hand, high substrate viscosity denied the application of higher con
 </div>
 <div class="output text_html"><style type="text/css">
 </style>
-<table id="T_02c19" style="font-size: 12px">
+<table id="T_ee5d4" style="font-size: 12px">
   <thead>
     <tr>
       <th class="blank level0" >&nbsp;</th>
-      <th id="T_02c19_level0_col0" class="col_heading level0 col0" >AIC</th>
-      <th id="T_02c19_level0_col1" class="col_heading level0 col1" >kcat [1/min]</th>
-      <th id="T_02c19_level0_col2" class="col_heading level0 col2" >Km [mmole / l]</th>
-      <th id="T_02c19_level0_col3" class="col_heading level0 col3" >kcat / Km [1/min * 1/mmole / l]</th>
-      <th id="T_02c19_level0_col4" class="col_heading level0 col4" >Ki competitive [mmole / l]</th>
-      <th id="T_02c19_level0_col5" class="col_heading level0 col5" >Ki uncompetitive [mmole / l]</th>
+      <th id="T_ee5d4_level0_col0" class="col_heading level0 col0" >AIC</th>
+      <th id="T_ee5d4_level0_col1" class="col_heading level0 col1" >kcat [1/min]</th>
+      <th id="T_ee5d4_level0_col2" class="col_heading level0 col2" >Km [mmole / l]</th>
+      <th id="T_ee5d4_level0_col3" class="col_heading level0 col3" >kcat / Km [1/min * 1/mmole / l]</th>
+      <th id="T_ee5d4_level0_col4" class="col_heading level0 col4" >Ki competitive [mmole / l]</th>
+      <th id="T_ee5d4_level0_col5" class="col_heading level0 col5" >Ki uncompetitive [mmole / l]</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th id="T_02c19_level0_row0" class="row_heading level0 row0" >irreversible Michaelis Menten</th>
-      <td id="T_02c19_row0_col0" class="data row0 col0" >-549</td>
-      <td id="T_02c19_row0_col1" class="data row0 col1" >48.996 +/- 2.23%</td>
-      <td id="T_02c19_row0_col2" class="data row0 col2" >1.978 +/- 3.74%</td>
-      <td id="T_02c19_row0_col3" class="data row0 col3" >24.776 +/- 4.35%</td>
-      <td id="T_02c19_row0_col4" class="data row0 col4" >-</td>
-      <td id="T_02c19_row0_col5" class="data row0 col5" >-</td>
+      <th id="T_ee5d4_level0_row0" class="row_heading level0 row0" >irreversible Michaelis Menten</th>
+      <td id="T_ee5d4_row0_col0" class="data row0 col0" >-549</td>
+      <td id="T_ee5d4_row0_col1" class="data row0 col1" >48.996 +/- 2.23%</td>
+      <td id="T_ee5d4_row0_col2" class="data row0 col2" >1.978 +/- 3.74%</td>
+      <td id="T_ee5d4_row0_col3" class="data row0 col3" >24.776 +/- 4.35%</td>
+      <td id="T_ee5d4_row0_col4" class="data row0 col4" >-</td>
+      <td id="T_ee5d4_row0_col5" class="data row0 col5" >-</td>
     </tr>
     <tr>
-      <th id="T_02c19_level0_row1" class="row_heading level0 row1" >competitive product inhibition</th>
-      <td id="T_02c19_row1_col0" class="data row1 col0" >-549</td>
-      <td id="T_02c19_row1_col1" class="data row1 col1" >51.227 +/- 4.39%</td>
-      <td id="T_02c19_row1_col2" class="data row1 col2" >2.043 +/- 4.76%</td>
-      <td id="T_02c19_row1_col3" class="data row1 col3" >25.077 +/- 6.47%</td>
-      <td id="T_02c19_row1_col4" class="data row1 col4" >0.908 +/- 81.63%</td>
-      <td id="T_02c19_row1_col5" class="data row1 col5" >-</td>
+      <th id="T_ee5d4_level0_row1" class="row_heading level0 row1" >competitive product inhibition</th>
+      <td id="T_ee5d4_row1_col0" class="data row1 col0" >-549</td>
+      <td id="T_ee5d4_row1_col1" class="data row1 col1" >51.227 +/- 4.39%</td>
+      <td id="T_ee5d4_row1_col2" class="data row1 col2" >2.043 +/- 4.76%</td>
+      <td id="T_ee5d4_row1_col3" class="data row1 col3" >25.077 +/- 6.47%</td>
+      <td id="T_ee5d4_row1_col4" class="data row1 col4" >0.908 +/- 81.63%</td>
+      <td id="T_ee5d4_row1_col5" class="data row1 col5" >-</td>
     </tr>
     <tr>
-      <th id="T_02c19_level0_row2" class="row_heading level0 row2" >uncompetitive product inhibition</th>
-      <td id="T_02c19_row2_col0" class="data row2 col0" >-547</td>
-      <td id="T_02c19_row2_col1" class="data row2 col1" >49.384 +/- 5.33%</td>
-      <td id="T_02c19_row2_col2" class="data row2 col2" >1.996 +/- 6.71%</td>
-      <td id="T_02c19_row2_col3" class="data row2 col3" >24.743 +/- 8.57%</td>
-      <td id="T_02c19_row2_col4" class="data row2 col4" >-</td>
-      <td id="T_02c19_row2_col5" class="data row2 col5" >7.445 +/- 631.41%</td>
+      <th id="T_ee5d4_level0_row2" class="row_heading level0 row2" >uncompetitive product inhibition</th>
+      <td id="T_ee5d4_row2_col0" class="data row2 col0" >-547</td>
+      <td id="T_ee5d4_row2_col1" class="data row2 col1" >49.384 +/- 5.33%</td>
+      <td id="T_ee5d4_row2_col2" class="data row2 col2" >1.996 +/- 6.71%</td>
+      <td id="T_ee5d4_row2_col3" class="data row2 col3" >24.743 +/- 8.57%</td>
+      <td id="T_ee5d4_row2_col4" class="data row2 col4" >-</td>
+      <td id="T_ee5d4_row2_col5" class="data row2 col5" >7.445 +/- 631.41%</td>
     </tr>
     <tr>
-      <th id="T_02c19_level0_row3" class="row_heading level0 row3" >non-competitive product inhibition</th>
-      <td id="T_02c19_row3_col0" class="data row3 col0" >-547</td>
-      <td id="T_02c19_row3_col1" class="data row3 col1" >51.241 +/- 5.62%</td>
-      <td id="T_02c19_row3_col2" class="data row3 col2" >2.044 +/- 6.62%</td>
-      <td id="T_02c19_row3_col3" class="data row3 col3" >25.073 +/- 8.69%</td>
-      <td id="T_02c19_row3_col4" class="data row3 col4" >0.914 +/- 83.56%</td>
-      <td id="T_02c19_row3_col5" class="data row3 col5" >121.556 +/- 2156.85%</td>
+      <th id="T_ee5d4_level0_row3" class="row_heading level0 row3" >non-competitive product inhibition</th>
+      <td id="T_ee5d4_row3_col0" class="data row3 col0" >-547</td>
+      <td id="T_ee5d4_row3_col1" class="data row3 col1" >51.241 +/- 5.62%</td>
+      <td id="T_ee5d4_row3_col2" class="data row3 col2" >2.044 +/- 6.62%</td>
+      <td id="T_ee5d4_row3_col3" class="data row3 col3" >25.073 +/- 8.69%</td>
+      <td id="T_ee5d4_row3_col4" class="data row3 col4" >0.914 +/- 83.56%</td>
+      <td id="T_ee5d4_row3_col5" class="data row3 col5" >121.556 +/- 2156.85%</td>
     </tr>
     <tr>
-      <th id="T_02c19_level0_row4" class="row_heading level0 row4" >substrate inhibition</th>
-      <td id="T_02c19_row4_col0" class="data row4 col0" >-545</td>
-      <td id="T_02c19_row4_col1" class="data row4 col1" >50.368 +/- 3.78%</td>
-      <td id="T_02c19_row4_col2" class="data row4 col2" >2.046 +/- 5.12%</td>
-      <td id="T_02c19_row4_col3" class="data row4 col3" >24.623 +/- 6.36%</td>
-      <td id="T_02c19_row4_col4" class="data row4 col4" >-</td>
-      <td id="T_02c19_row4_col5" class="data row4 col5" >87.549 +/- 121.66%</td>
+      <th id="T_ee5d4_level0_row4" class="row_heading level0 row4" >substrate inhibition</th>
+      <td id="T_ee5d4_row4_col0" class="data row4 col0" >-545</td>
+      <td id="T_ee5d4_row4_col1" class="data row4 col1" >50.368 +/- 3.78%</td>
+      <td id="T_ee5d4_row4_col2" class="data row4 col2" >2.046 +/- 5.12%</td>
+      <td id="T_ee5d4_row4_col3" class="data row4 col3" >24.623 +/- 6.36%</td>
+      <td id="T_ee5d4_row4_col4" class="data row4 col4" >-</td>
+      <td id="T_ee5d4_row4_col5" class="data row4 col5" >87.549 +/- 121.66%</td>
     </tr>
   </tbody>
 </table>
@@ -864,51 +874,51 @@ Parameter estimates for all applied kinetic models are displayed in the output b
 </div>
 <div class="output text_html"><style type="text/css">
 </style>
-<table id="T_d1c76" style="font-size: 12px">
+<table id="T_53461" style="font-size: 12px">
   <thead>
     <tr>
       <th class="blank level0" >&nbsp;</th>
-      <th id="T_d1c76_level0_col0" class="col_heading level0 col0" >AIC</th>
-      <th id="T_d1c76_level0_col1" class="col_heading level0 col1" >kcat / Km [1/min * 1/mmole / l]</th>
-      <th id="T_d1c76_level0_col2" class="col_heading level0 col2" >Ki competitive [mmole / l]</th>
-      <th id="T_d1c76_level0_col3" class="col_heading level0 col3" >Ki uncompetitive [mmole / l]</th>
+      <th id="T_53461_level0_col0" class="col_heading level0 col0" >AIC</th>
+      <th id="T_53461_level0_col1" class="col_heading level0 col1" >kcat / Km [1/min * 1/mmole / l]</th>
+      <th id="T_53461_level0_col2" class="col_heading level0 col2" >Ki competitive [mmole / l]</th>
+      <th id="T_53461_level0_col3" class="col_heading level0 col3" >Ki uncompetitive [mmole / l]</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th id="T_d1c76_level0_row0" class="row_heading level0 row0" >competitive inhibition</th>
-      <td id="T_d1c76_row0_col0" class="data row0 col0" >-3100</td>
-      <td id="T_d1c76_row0_col1" class="data row0 col1" >22.253 +/- 6.97%</td>
-      <td id="T_d1c76_row0_col2" class="data row0 col2" >0.460 +/- 27.24%</td>
-      <td id="T_d1c76_row0_col3" class="data row0 col3" >-</td>
+      <th id="T_53461_level0_row0" class="row_heading level0 row0" >competitive inhibition</th>
+      <td id="T_53461_row0_col0" class="data row0 col0" >-3100</td>
+      <td id="T_53461_row0_col1" class="data row0 col1" >22.253 +/- 6.97%</td>
+      <td id="T_53461_row0_col2" class="data row0 col2" >0.460 +/- 27.24%</td>
+      <td id="T_53461_row0_col3" class="data row0 col3" >-</td>
     </tr>
     <tr>
-      <th id="T_d1c76_level0_row1" class="row_heading level0 row1" >non-competitive inhibition</th>
-      <td id="T_d1c76_row1_col0" class="data row1 col0" >-3098</td>
-      <td id="T_d1c76_row1_col1" class="data row1 col1" >22.403 +/- 7.00%</td>
-      <td id="T_d1c76_row1_col2" class="data row1 col2" >0.449 +/- 27.64%</td>
-      <td id="T_d1c76_row1_col3" class="data row1 col3" >79.193 +/- 516.52%</td>
+      <th id="T_53461_level0_row1" class="row_heading level0 row1" >non-competitive inhibition</th>
+      <td id="T_53461_row1_col0" class="data row1 col0" >-3098</td>
+      <td id="T_53461_row1_col1" class="data row1 col1" >22.403 +/- 7.00%</td>
+      <td id="T_53461_row1_col2" class="data row1 col2" >0.449 +/- 27.64%</td>
+      <td id="T_53461_row1_col3" class="data row1 col3" >79.193 +/- 516.52%</td>
     </tr>
     <tr>
-      <th id="T_d1c76_level0_row2" class="row_heading level0 row2" >irreversible Michaelis Menten</th>
-      <td id="T_d1c76_row2_col0" class="data row2 col0" >-3088</td>
-      <td id="T_d1c76_row2_col1" class="data row2 col1" >21.622 +/- 7.15%</td>
-      <td id="T_d1c76_row2_col2" class="data row2 col2" >-</td>
-      <td id="T_d1c76_row2_col3" class="data row2 col3" >-</td>
+      <th id="T_53461_level0_row2" class="row_heading level0 row2" >irreversible Michaelis Menten</th>
+      <td id="T_53461_row2_col0" class="data row2 col0" >-3088</td>
+      <td id="T_53461_row2_col1" class="data row2 col1" >21.622 +/- 7.15%</td>
+      <td id="T_53461_row2_col2" class="data row2 col2" >-</td>
+      <td id="T_53461_row2_col3" class="data row2 col3" >-</td>
     </tr>
     <tr>
-      <th id="T_d1c76_level0_row3" class="row_heading level0 row3" >uncompetitive inhibition</th>
-      <td id="T_d1c76_row3_col0" class="data row3 col0" >-3087</td>
-      <td id="T_d1c76_row3_col1" class="data row3 col1" >21.631 +/- 7.63%</td>
-      <td id="T_d1c76_row3_col2" class="data row3 col2" >-</td>
-      <td id="T_d1c76_row3_col3" class="data row3 col3" >0.696 +/- 88.99%</td>
+      <th id="T_53461_level0_row3" class="row_heading level0 row3" >uncompetitive inhibition</th>
+      <td id="T_53461_row3_col0" class="data row3 col0" >-3087</td>
+      <td id="T_53461_row3_col1" class="data row3 col1" >21.631 +/- 7.63%</td>
+      <td id="T_53461_row3_col2" class="data row3 col2" >-</td>
+      <td id="T_53461_row3_col3" class="data row3 col3" >0.696 +/- 88.99%</td>
     </tr>
     <tr>
-      <th id="T_d1c76_level0_row4" class="row_heading level0 row4" >partially competitive inhibition</th>
-      <td id="T_d1c76_row4_col0" class="data row4 col0" >-3084</td>
-      <td id="T_d1c76_row4_col1" class="data row4 col1" >21.643 +/- 8.23%</td>
-      <td id="T_d1c76_row4_col2" class="data row4 col2" >796.196 +/- 1075.02%</td>
-      <td id="T_d1c76_row4_col3" class="data row4 col3" >992.685 +/- 48.74%</td>
+      <th id="T_53461_level0_row4" class="row_heading level0 row4" >partially competitive inhibition</th>
+      <td id="T_53461_row4_col0" class="data row4 col0" >-3084</td>
+      <td id="T_53461_row4_col1" class="data row4 col1" >21.643 +/- 8.23%</td>
+      <td id="T_53461_row4_col2" class="data row4 col2" >796.196 +/- 1075.02%</td>
+      <td id="T_53461_row4_col3" class="data row4 col3" >992.685 +/- 48.74%</td>
     </tr>
   </tbody>
 </table>
@@ -917,51 +927,51 @@ Parameter estimates for all applied kinetic models are displayed in the output b
 </div>
 <div class="output text_html"><style type="text/css">
 </style>
-<table id="T_f7c7d" style="font-size: 12px">
+<table id="T_4d548" style="font-size: 12px">
   <thead>
     <tr>
       <th class="blank level0" >&nbsp;</th>
-      <th id="T_f7c7d_level0_col0" class="col_heading level0 col0" >AIC</th>
-      <th id="T_f7c7d_level0_col1" class="col_heading level0 col1" >kcat / Km [1/min * 1/mmole / l]</th>
-      <th id="T_f7c7d_level0_col2" class="col_heading level0 col2" >Ki competitive [mmole / l]</th>
-      <th id="T_f7c7d_level0_col3" class="col_heading level0 col3" >Ki uncompetitive [mmole / l]</th>
+      <th id="T_4d548_level0_col0" class="col_heading level0 col0" >AIC</th>
+      <th id="T_4d548_level0_col1" class="col_heading level0 col1" >kcat / Km [1/min * 1/mmole / l]</th>
+      <th id="T_4d548_level0_col2" class="col_heading level0 col2" >Ki competitive [mmole / l]</th>
+      <th id="T_4d548_level0_col3" class="col_heading level0 col3" >Ki uncompetitive [mmole / l]</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th id="T_f7c7d_level0_row0" class="row_heading level0 row0" >competitive inhibition</th>
-      <td id="T_f7c7d_row0_col0" class="data row0 col0" >-808</td>
-      <td id="T_f7c7d_row0_col1" class="data row0 col1" >23.031 +/- 10.48%</td>
-      <td id="T_f7c7d_row0_col2" class="data row0 col2" >0.059 +/- 8.51%</td>
-      <td id="T_f7c7d_row0_col3" class="data row0 col3" >-</td>
+      <th id="T_4d548_level0_row0" class="row_heading level0 row0" >competitive inhibition</th>
+      <td id="T_4d548_row0_col0" class="data row0 col0" >-808</td>
+      <td id="T_4d548_row0_col1" class="data row0 col1" >23.031 +/- 10.48%</td>
+      <td id="T_4d548_row0_col2" class="data row0 col2" >0.059 +/- 8.51%</td>
+      <td id="T_4d548_row0_col3" class="data row0 col3" >-</td>
     </tr>
     <tr>
-      <th id="T_f7c7d_level0_row1" class="row_heading level0 row1" >non-competitive inhibition</th>
-      <td id="T_f7c7d_row1_col0" class="data row1 col0" >-806</td>
-      <td id="T_f7c7d_row1_col1" class="data row1 col1" >23.002 +/- 10.89%</td>
-      <td id="T_f7c7d_row1_col2" class="data row1 col2" >0.060 +/- 9.04%</td>
-      <td id="T_f7c7d_row1_col3" class="data row1 col3" >44.965 +/- 302.77%</td>
+      <th id="T_4d548_level0_row1" class="row_heading level0 row1" >non-competitive inhibition</th>
+      <td id="T_4d548_row1_col0" class="data row1 col0" >-806</td>
+      <td id="T_4d548_row1_col1" class="data row1 col1" >23.002 +/- 10.89%</td>
+      <td id="T_4d548_row1_col2" class="data row1 col2" >0.060 +/- 9.04%</td>
+      <td id="T_4d548_row1_col3" class="data row1 col3" >44.965 +/- 302.77%</td>
     </tr>
     <tr>
-      <th id="T_f7c7d_level0_row2" class="row_heading level0 row2" >uncompetitive inhibition</th>
-      <td id="T_f7c7d_row2_col0" class="data row2 col0" >-751</td>
-      <td id="T_f7c7d_row2_col1" class="data row2 col1" >19.297 +/- 21.77%</td>
-      <td id="T_f7c7d_row2_col2" class="data row2 col2" >-</td>
-      <td id="T_f7c7d_row2_col3" class="data row2 col3" >0.035 +/- 21.33%</td>
+      <th id="T_4d548_level0_row2" class="row_heading level0 row2" >uncompetitive inhibition</th>
+      <td id="T_4d548_row2_col0" class="data row2 col0" >-751</td>
+      <td id="T_4d548_row2_col1" class="data row2 col1" >19.297 +/- 21.77%</td>
+      <td id="T_4d548_row2_col2" class="data row2 col2" >-</td>
+      <td id="T_4d548_row2_col3" class="data row2 col3" >0.035 +/- 21.33%</td>
     </tr>
     <tr>
-      <th id="T_f7c7d_level0_row3" class="row_heading level0 row3" >irreversible Michaelis Menten</th>
-      <td id="T_f7c7d_row3_col0" class="data row3 col0" >-713</td>
-      <td id="T_f7c7d_row3_col1" class="data row3 col1" >18.512 +/- 24.41%</td>
-      <td id="T_f7c7d_row3_col2" class="data row3 col2" >-</td>
-      <td id="T_f7c7d_row3_col3" class="data row3 col3" >-</td>
+      <th id="T_4d548_level0_row3" class="row_heading level0 row3" >irreversible Michaelis Menten</th>
+      <td id="T_4d548_row3_col0" class="data row3 col0" >-713</td>
+      <td id="T_4d548_row3_col1" class="data row3 col1" >18.512 +/- 24.41%</td>
+      <td id="T_4d548_row3_col2" class="data row3 col2" >-</td>
+      <td id="T_4d548_row3_col3" class="data row3 col3" >-</td>
     </tr>
     <tr>
-      <th id="T_f7c7d_level0_row4" class="row_heading level0 row4" >partially competitive inhibition</th>
-      <td id="T_f7c7d_row4_col0" class="data row4 col0" >-709</td>
-      <td id="T_f7c7d_row4_col1" class="data row4 col1" >18.544 +/- 27.64%</td>
-      <td id="T_f7c7d_row4_col2" class="data row4 col2" >569.354 +/- 57.96%</td>
-      <td id="T_f7c7d_row4_col3" class="data row4 col3" >925.096 +/- 11733.22%</td>
+      <th id="T_4d548_level0_row4" class="row_heading level0 row4" >partially competitive inhibition</th>
+      <td id="T_4d548_row4_col0" class="data row4 col0" >-709</td>
+      <td id="T_4d548_row4_col1" class="data row4 col1" >18.544 +/- 27.64%</td>
+      <td id="T_4d548_row4_col2" class="data row4 col2" >569.354 +/- 57.96%</td>
+      <td id="T_4d548_row4_col3" class="data row4 col3" >925.096 +/- 11733.22%</td>
     </tr>
   </tbody>
 </table>
@@ -969,7 +979,48 @@ Parameter estimates for all applied kinetic models are displayed in the output b
 </div>
 </div>
 <p><em>Fig. XXX: Measurement data and fitted product inhibition model for chymotrypsin reactions with respective HSA inhibitior.</em></p>
-<p>Both reaction systems are best described by the competitive inhibition model, which is indicated by the lowest AIC and standard deviation on the estimated parameters. Thereby, a <span class="math notranslate nohighlight">\(K_{i}\)</span> of 0.460 mM ± 27.24% was estimated for HSA(WT)-huFc and 0.059 mM ± 8.51% for HSA(M3)-huFc. This resembles a roughly 7-fold increase in affinity of HSA(M3) to the enzyme compared to the HSA(wt). Since the competitive inhibition model describes the data the best, HSA(M3)-huFc presumably interacts with the enzyme in the active site region.</p>
+<p>Both reaction systems are best described by the competitive inhibition model, which is indicated by the lowest AIC and standard deviation on the estimated parameters. Thereby, a <span class="math notranslate nohighlight">\(K_{i}\)</span> of 0.460 mM ± 27.24% was estimated for HSA(WT)-huFc and 0.059 mM ± 8.51% for HSA(M3)-huFc. This resembles a roughly 7-fold increase in affinity of HSA(M3) to the enzyme compared to the HSA(wt).</p>
+<p>Since the competitive inhibition model describes the data the best, HSA(M3)-huFc presumably interacts with the enzyme in the active site region.</p>
+</section>
+<section id="save-modeling-results">
+<h2>Save modeling results<a class="headerlink" href="#save-modeling-results" title="Permalink to this headline">#</a></h2>
+<p>Lastly, the modeling results are written to the EnzymeML documents and the files are exported.</p>
+<div class="cell tag_hide_input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">result</span><span class="p">,</span> <span class="n">enzmldoc</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">([</span><span class="n">kinetics_HSAwt</span><span class="p">,</span> <span class="n">kinetics_HSAM3</span><span class="p">],</span> <span class="p">[</span><span class="n">chymo_HSAwt</span><span class="p">,</span> <span class="n">chymo_HSAM3</span><span class="p">]):</span>
+
+    <span class="c1"># Write modeling results to kinetic parameters</span>
+    <span class="n">k_cat</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">enzymeml</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">KineticParameter</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;k_cat&quot;</span><span class="p">,</span>
+        <span class="n">value</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">get_model_results</span><span class="p">()[</span><span class="s2">&quot;k_cat&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+        <span class="n">unit</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;1 / </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">time_unit</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">K_m</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">enzymeml</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">KineticParameter</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;K_m&quot;</span><span class="p">,</span>
+        <span class="n">value</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">get_model_results</span><span class="p">()[</span><span class="s2">&quot;Km&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+        <span class="n">unit</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">data_conc_unit</span><span class="p">)</span>
+
+    <span class="n">K_ic</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">enzymeml</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">KineticParameter</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;K_ic&quot;</span><span class="p">,</span>
+        <span class="n">value</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">get_model_results</span><span class="p">()[</span><span class="s2">&quot;K_ic&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+        <span class="n">unit</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">data_conc_unit</span><span class="p">)</span>
+
+    <span class="c1"># Define kinetic model</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">KineticModel</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;competitive inhibition&quot;</span><span class="p">,</span>
+        <span class="n">equation</span><span class="o">=</span><span class="s2">&quot;-k_cat * p0 * s0 / (K_m*(1+(s2 / K_ic))+s0)&quot;</span><span class="p">,</span>
+        <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="n">k_cat</span><span class="p">,</span> <span class="n">K_m</span><span class="p">,</span> <span class="n">K_ic</span><span class="p">])</span>
+
+    <span class="n">enzmldoc</span><span class="o">.</span><span class="n">getReaction</span><span class="p">(</span><span class="s2">&quot;r0&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
+
+    <span class="c1"># Export EnzymeML documents</span>
+    <span class="n">export</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">if</span> <span class="n">export</span><span class="p">:</span>
+        <span class="n">enzmldoc</span><span class="o">.</span><span class="n">toFile</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 

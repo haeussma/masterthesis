@@ -106,7 +106,7 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../welcome.html">
-                    Welcome
+                    Welcome to my master thesis
                 </a>
             </li>
         </ul>
@@ -446,8 +446,25 @@ title="Print to PDF"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#discussion">
-   Discussion
+  <a class="reference internal nav-link" href="#project-discussion">
+   Project discussion
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-quality">
+     Data quality
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#enzyme-inactivation">
+     Enzyme inactivation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#save-modeling-results">
+   Save modeling results
   </a>
  </li>
 </ul>
@@ -533,8 +550,25 @@ title="Print to PDF"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#discussion">
-   Discussion
+  <a class="reference internal nav-link" href="#project-discussion">
+   Project discussion
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-quality">
+     Data quality
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#enzyme-inactivation">
+     Enzyme inactivation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#save-modeling-results">
+   Save modeling results
   </a>
  </li>
 </ul>
@@ -552,18 +586,14 @@ title="Print to PDF"
 <p>Data provided by Paulo Durão (Microbial &amp; Enzyme Technology, Instituto de Tecnologia Química e Biológica, Oeiras, Portugal)</p>
 <section id="project-background">
 <h2>Project background<a class="headerlink" href="#project-background" title="Permalink to this headline">#</a></h2>
-<p>All investigated enzyme reaction without inhibitor applied to the reaction showed progress curve behavior, which were not explainable by irreversible Michaelis-Menten kinetics. All experiments had in common, that enzyme reactions were carried out in 96-well polystyrene micro titer plates (MTP), whereas the change in substrate or product absorption was monitored photometrically.
-In theory, the observed time-dependent decrease in enzyme activity can either be explained through enzyme inactivation or product inhibition. In case of time-dependent enzyme inactivation, the catalytic activity decreases, since the catalyst becomes inactive. Thereby, the decrease in relative reaction rate is independent from product concentration.
-In case of product inhibition, the formed product reduces the reaction rate. Hence, apparent enzyme inactivation is dependent on product concentration.
-Since both phenomena express themselves in an apparent decrease of reaction rate, they bare the potential to be confused</p>
-<p>One hypothesis for the suspected enzyme inactivation is hydrophobic interaction between the enzyme and the MTP surface. Thereby, hydrophobic regions of the enzyme’s surface might interact with the polystyrene reaction vessel, potentially preventing substrate access to the active site of the enzyme. In order to test the hypothesis, adsorption experiments in which enzyme was incubated in MTP wells prior to reaction start was performed. Thereby, the enzyme activity should decrease depending on prior incubation time. If the hypothesis is correct, the calculated half life from the adsorption experiment
-should match with the half life of an enzyme kinetics experiment which was conducted in parallel.</p>
-<p><strong>Show results of enzyme inactication across projects</strong> #TODO</p>
-<p>All investigated enzyme reactions in this thesis showed a time-dependent decrease in catalytic activity, which was not explainable with the irreversible Michaelis-Menten model.</p>
+<p>All investigated enzyme reaction without inhibitor applied to the reaction showed progress curve behavior, which were not explainable by irreversible Michaelis-Menten kinetics. All experiments had in common, that enzyme reactions were carried out in 96-well polystyrene micro titer plates (MTP), whereas the change in substrate or product absorption was monitored photometrically.<br />
+One hypothesis for the suspected enzyme inactivation was hydrophobic interaction between the enzyme and the MTP surface. Thereby, hydrophobic regions of the enzyme’s surface might interact with the polystyrene reaction vessel, potentially preventing substrate access to the active site of the enzyme. Another hypothesis for the observed gradual activity decrease was inactivation which is linked to the catalytic activity, as observed in the precious scenario.</p>
+<p>In order to test the hypothesis, an experiment was designed in order to detach enzyme inactivation from enzyme activity. Therefore, enzyme was incubated in MTP wells prior to reaction start for different periods. Thereby, the enzyme activity should decrease depending on prior incubation time. If the hypothesis is correct, the calculated half life from the adsorption experiment
+should match the half life of an enzyme kinetics experiment which was conducted in parallel and also considered an inactivation term.</p>
 <section id="experimental-design">
 <h3>Experimental design<a class="headerlink" href="#experimental-design" title="Permalink to this headline">#</a></h3>
 <p><strong>Determination of enzyme inactivation trough adsorption</strong><br />
-The inactivation experiment was conducted by incubating CotA laccase from <em>Bacillus subtilis</em> in individual MTP wells up to 1 h prior to reaction start.  Then, enzyme reactions were started in 10 min intervals by transferring 2 µL of incubated enzyme in individual MTP wells. Each proceeding enzyme reaction contained 256 nM CotA, 1 mM ABTS and was buffered in acetate buffer at pH 4. Product formation was followed photometrically at 420 nm and 25°C for 5 min, whereas concentrations were calculated assuming an extinction coefficient of ε = 36000 M<sup>-1</sup>cm<sup>-1</sup> for the ABTS radical product. Each experiment was performed in technical triplicates.</p>
+The inactivation experiment was conducted by incubating CotA laccase from <em>Bacillus subtilis</em> in individual MTP wells up to 1 h prior to reaction start. Then, enzyme reactions were started in 10 min intervals by transferring 2 µL of incubated enzyme in individual MTP wells. Each proceeding enzyme reaction contained 256 nM CotA, 1 mM ABTS and was buffered in acetate buffer at pH 4. Product formation was followed photometrically at 420 nm and 25°C for 5 min, whereas concentrations were calculated assuming an extinction coefficient of ε = 36000 M<sup>-1</sup>cm<sup>-1</sup> for the ABTS radical product. Each experiment was performed as technical triplicates.</p>
 <p><strong>Enzyme kinetics experiment</strong><br />
 Enzymatic oxidation of ABTS to its radical form was followed photometrically at 420 nm at 25°C for 70 min.
 Thereby, ABTS was applied in a range from 0.01 mM - 2 mM. Each proceeding enzyme reaction contained 256 nM CotA, and was buffered in acetate buffer at pH 4. Each experimental condition was repeated as technical quadruplicates. Concentrations were calculated via the provided extinction coefficient of the ABTS radical (ε = 36000 M<sup>-1</sup>cm<sup>-1</sup>).</p>
@@ -588,9 +618,7 @@ Thereby, ABTS was applied in a range from 0.01 mM - 2 mM. Each proceeding enzyme
 <span class="kn">import</span> <span class="nn">matplotlib.cm</span> <span class="k">as</span> <span class="nn">cm</span>
 <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span>
 <span class="kn">import</span> <span class="nn">string</span>
-
-
-<span class="c1">#TODO warning in EnzymePynetics</span>
+<span class="kn">from</span> <span class="nn">parser_functions</span> <span class="kn">import</span> <span class="n">add_enzyme_inactivation_model</span>
 
 <span class="kn">import</span> <span class="nn">warnings</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
@@ -610,8 +638,6 @@ Thereby, ABTS was applied in a range from 0.01 mM - 2 mM. Each proceeding enzyme
 
 <span class="c1"># replace values of &#39;0**&#39; with nan-values, since the measurement is incorrect</span>
 <span class="n">df</span><span class="p">[</span><span class="s1">&#39;0**&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
-
-
 
 <span class="c1"># Get data from Excel file</span>
 <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span> <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;0&quot;</span><span class="p">)]</span>
@@ -642,14 +668,14 @@ Thereby, ABTS was applied in a range from 0.01 mM - 2 mM. Each proceeding enzyme
     <span class="n">intercepts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">intercept</span><span class="p">)</span>
     <span class="n">stderrs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">stderr</span><span class="p">)</span>
 
-<span class="c1"># Regression of the slopes between 10 and 60 mincolumns</span>
+<span class="c1"># Regression of the slopes between 10 and 60 min</span>
 <span class="n">slope_of_slopes</span><span class="p">,</span> <span class="n">intercept_of_slopes</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">_</span> <span class="o">=</span> <span class="n">linregress</span><span class="p">(</span><span class="n">columns</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">slopes</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
 
-<span class="c1"># Half life in hours</span>
-<span class="n">t12</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">/-</span><span class="n">slope_of_slopes</span><span class="p">)</span><span class="o">/</span><span class="mi">60</span>
+<span class="c1"># Calculate time at which enzyme activity is reduced by half</span>
+<span class="n">half_activity</span> <span class="o">=</span> <span class="p">((</span><span class="n">slopes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="mi">2</span> <span class="o">-</span> <span class="n">slopes</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="n">slope_of_slopes</span><span class="p">)</span>
 
 <span class="c1"># Plot results</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Calculated enzyme half life based on regression slope: </span><span class="si">{</span><span class="n">t12</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> h&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Calculated time after enzyme activity is halved based on linear regression: </span><span class="si">{</span><span class="n">half_activity</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> min&quot;</span><span class="p">)</span>
 
 <span class="n">colors</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">tab10</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">absorption</span><span class="p">)))</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">12.8</span><span class="p">,</span><span class="mf">4.8</span><span class="p">),</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -679,7 +705,7 @@ Thereby, ABTS was applied in a range from 0.01 mM - 2 mM. Each proceeding enzyme
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calculated enzyme half life based on regression slope: 693.73 h
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calculated time after enzyme activity is halved based on linear regression: 105.09 min
 </pre></div>
 </div>
 <img alt="../_images/enzyme_inactivation_3_1.png" src="../_images/enzyme_inactivation_3_1.png" />
@@ -688,14 +714,14 @@ Thereby, ABTS was applied in a range from 0.01 mM - 2 mM. Each proceeding enzyme
 <p><em>Fig. XXX: Experimental data and regression results of CotA reaction with different enzyme incubation times.</em></p>
 <p>Enzyme reactions without prior incubation showed the fastest reaction rate, whereas all reactions with prior incubation showed an approximately halved reaction rate (Fig. XXXA). Thereby, reactions with longer incubation time showed gradually reduced reaction rates with increased incubation time. Enzyme reactions, especially reactions without incubation, showed large deviations across replicates. This presumably resulted from inhomogeneous mixing or deviating enzyme concentration due to the small volume of enzyme solution, which was used to start the reactions.<br />
 Since the true reaction rate of reactions without prior incubation was highly uncertain and showed mixing issued, the respective data was not used to estimate the enzyme’s time-dependent inactivation rate.
-Based on the remaining initial reaction rates the enzymes, the half life was estimated at approximately 28 days (Fig. XXXB).</p>
+Based on linear regression of the initial reaction rates, excluding the reaction without prior incubation, the enzyme activity is approximately halved after 105 min (Fig. XXXB). This assumes validity of extrapolation.</p>
 </section>
 </section>
 <section id="enzyme-kinetics-experiment">
 <h2>Enzyme kinetics experiment<a class="headerlink" href="#enzyme-kinetics-experiment" title="Permalink to this headline">#</a></h2>
 <section id="id1">
 <h3>Experimental data<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
-<p>Experimental data was provided as an Excel file, whereas meta data of the experiment was filled in to an EnzymeML Excel spreadsheet. Measurement data was written to the EnzymeML document by a parser function
+<p>Experimental data was provided as an Excel file, whereas meta data of the experiment was filled in to an EnzymeML Excel spreadsheet. Measurement data was written to the EnzymeML document by a parser function.
 Kinetic parameters were estimated with and without considering enzyme inactivation.</p>
 <div class="cell tag_hide_input docutils container">
 <div class="cell_input docutils container">
@@ -712,7 +738,6 @@ Kinetic parameters were estimated with and without considering enzyme inactivati
     <span class="k">return</span> <span class="n">abso</span> <span class="o">/</span> <span class="p">(</span><span class="n">extinction_coefficient</span><span class="o">*</span><span class="n">optical_length</span><span class="p">)</span>
 
 <span class="n">concentration_data</span> <span class="o">=</span> <span class="n">absorption_to_concentration</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-
 
 <span class="c1"># Parser function</span>
 <span class="k">def</span> <span class="nf">data_to_EnzymeML</span><span class="p">(</span>
@@ -782,14 +807,14 @@ Kinetic parameters were estimated with and without considering enzyme inactivati
 </div>
 <p><em>Fig XXX. ABTS radical concentration over the time-course of CotA reaction.</em></p>
 <p>The provided reaction data showed large deviations between individual repeats of reactions with identical initial ABTS concentrations. Especially for initial ABTS concentrations above 0.1 mM (Fig. XXXA).
-Furthermore, visual analysis of the initial measurement points indicated that reactions with an initial substrate concentration of 0.1 mM had an increased enzyme concentration compared to others. This is evident, because the mentioned reactions show the highest concentration at the initial measurement time (Fig. XXXB). The order of initial measurement points is expected to reflect the initial substrate concentrations and since the substrate slightly absorbs at the product detection wavelength. The substrate of the mentioned reaction was likely applied correctly, since the final concentration at 70 min is between reactions with the next lower and next higher initial substrate concentration.</p>
+Furthermore, visual analysis of the initial measurement points indicated that reactions with an initial substrate concentration of 0.1 mM had an increased enzyme concentration compared to others. This is evident, because the mentioned reactions show the highest concentration at the initial measurement time (Fig. XXXB). The order of initial measurement points is expected to reflect the initial substrate concentrations, since the substrate slightly absorbs at the product detection wavelength. The substrate of the mentioned reaction was likely applied correctly, since the final concentration at 70 min is between reactions with the next lower and next higher initial substrate concentration.</p>
 </section>
 </section>
 <section id="kinetic-parameter-estimation">
 <h2>Kinetic parameter estimation<a class="headerlink" href="#kinetic-parameter-estimation" title="Permalink to this headline">#</a></h2>
 <section id="quality-control-through-modeling">
 <h3>Quality control through modeling<a class="headerlink" href="#quality-control-through-modeling" title="Permalink to this headline">#</a></h3>
-<p>An initial parameter estimation considering enzyme inactivation was conducted in order to check further systematic deviations. As a result, reactions with an initial ABTS concentration of 0.05 mM showed to deviate from all other reactions, since the respective product concentrations is lower than the model predicted. The mentioned measurements were the only measurements where the measured concentration was distinctly and systematically below that of the model (Fig. xxxA). Hence indicating that either less substrate or enzyme than defined in the protocol was applied to the respective reactions. In consequence, data from reactions with an initial substrate concentration of 0.05 and 0.1 mM were excluded from parameter estimation, because the identified systematic deviations in reaction conditions would distort the results.</p>
+<p>An initial parameter estimation considering enzyme inactivation was conducted in order to check further systematic deviations. As a result, reactions with an initial ABTS concentration of 0.05 mM showed to deviate from all other reactions, since the respective product concentrations is lower than the model predicted. The mentioned measurements were the only ones where the measured concentration was distinctly and systematically below that of the model (Fig. xxxA). Hence indicating that either less substrate or enzyme than defined in the protocol was applied to the respective reactions. In consequence, data from reactions with an initial substrate concentration of 0.05 and 0.1 mM were excluded from parameter estimation, because the identified systematic deviations in reaction conditions would distort the results.</p>
 <div class="cell tag_hide_input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Parameter estimation considering time-dependent enzyme inactivation</span>
@@ -827,7 +852,7 @@ Furthermore, visual analysis of the initial measurement points indicated that re
 </div>
 </div>
 <p><em>Fig XXX: Identification of systematic deviations through kinetic modeling.</em></p>
-<p>By excluding the mentioned measurements, the model fit was improved (Fig xxxB). Additionally, the correlation between parameter estimates for <span class="math notranslate nohighlight">\(k_{cat}\)</span> and <span class="math notranslate nohighlight">\(K_{m}\)</span> was reduced from 0.518 to 0.204</p>
+<p>By excluding the mentioned measurements with systematic issues, the model fit was improved (Fig xxxB). Additionally, the correlation between parameter estimates for <span class="math notranslate nohighlight">\(k_{cat}\)</span> and <span class="math notranslate nohighlight">\(K_{m}\)</span> was reduced from <em>r<sup>2</sup></em> = 0.518 to 0.204.</p>
 </section>
 <section id="parameter-estimation-with-and-without-considering-enzyme-inactivation">
 <h3>Parameter estimation with and without considering enzyme inactivation<a class="headerlink" href="#parameter-estimation-with-and-without-considering-enzyme-inactivation" title="Permalink to this headline">#</a></h3>
@@ -847,126 +872,130 @@ Furthermore, visual analysis of the initial measurement points indicated that re
 <div class="cell_output docutils container">
 <div class="output text_html"><style type="text/css">
 </style>
-<table id="T_80337" style="font-size: 12px">
+<table id="T_43830" style="font-size: 12px">
   <thead>
     <tr>
       <th class="blank level0" >&nbsp;</th>
-      <th id="T_80337_level0_col0" class="col_heading level0 col0" >AIC</th>
-      <th id="T_80337_level0_col1" class="col_heading level0 col1" >Enzyme inactivation model</th>
-      <th id="T_80337_level0_col2" class="col_heading level0 col2" >kcat [1/min]</th>
-      <th id="T_80337_level0_col3" class="col_heading level0 col3" >Km [mmole / l]</th>
-      <th id="T_80337_level0_col4" class="col_heading level0 col4" >Ki competitive [mmole / l]</th>
-      <th id="T_80337_level0_col5" class="col_heading level0 col5" >Ki uncompetitive [mmole / l]</th>
-      <th id="T_80337_level0_col6" class="col_heading level0 col6" >ki time-dep enzyme-inactiv. [1/min]</th>
+      <th id="T_43830_level0_col0" class="col_heading level0 col0" >AIC</th>
+      <th id="T_43830_level0_col1" class="col_heading level0 col1" >Enzyme inactivation model</th>
+      <th id="T_43830_level0_col2" class="col_heading level0 col2" >kcat [1/min]</th>
+      <th id="T_43830_level0_col3" class="col_heading level0 col3" >Km [mmole / l]</th>
+      <th id="T_43830_level0_col4" class="col_heading level0 col4" >Ki competitive [mmole / l]</th>
+      <th id="T_43830_level0_col5" class="col_heading level0 col5" >Ki uncompetitive [mmole / l]</th>
+      <th id="T_43830_level0_col6" class="col_heading level0 col6" >ki time-dep enzyme-inactiv. [1/min]</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th id="T_80337_level0_row0" class="row_heading level0 row0" >irreversible Michaelis Menten</th>
-      <td id="T_80337_row0_col0" class="data row0 col0" >-22202</td>
-      <td id="T_80337_row0_col1" class="data row0 col1" >True</td>
-      <td id="T_80337_row0_col2" class="data row0 col2" >3.003 +/- 0.77%</td>
-      <td id="T_80337_row0_col3" class="data row0 col3" >0.030 +/- 1.99%</td>
-      <td id="T_80337_row0_col4" class="data row0 col4" >-</td>
-      <td id="T_80337_row0_col5" class="data row0 col5" >-</td>
-      <td id="T_80337_row0_col6" class="data row0 col6" >0.007 +/- 4.48%</td>
+      <th id="T_43830_level0_row0" class="row_heading level0 row0" >irreversible Michaelis Menten</th>
+      <td id="T_43830_row0_col0" class="data row0 col0" >-22202</td>
+      <td id="T_43830_row0_col1" class="data row0 col1" >True</td>
+      <td id="T_43830_row0_col2" class="data row0 col2" >3.003 +/- 0.77%</td>
+      <td id="T_43830_row0_col3" class="data row0 col3" >0.030 +/- 1.99%</td>
+      <td id="T_43830_row0_col4" class="data row0 col4" >-</td>
+      <td id="T_43830_row0_col5" class="data row0 col5" >-</td>
+      <td id="T_43830_row0_col6" class="data row0 col6" >0.007 +/- 4.48%</td>
     </tr>
     <tr>
-      <th id="T_80337_level0_row1" class="row_heading level0 row1" >competitive product inhibition</th>
-      <td id="T_80337_row1_col0" class="data row1 col0" >-22202</td>
-      <td id="T_80337_row1_col1" class="data row1 col1" >True</td>
-      <td id="T_80337_row1_col2" class="data row1 col2" >2.999 +/- 0.78%</td>
-      <td id="T_80337_row1_col3" class="data row1 col3" >0.029 +/- 3.85%</td>
-      <td id="T_80337_row1_col4" class="data row1 col4" >0.221 +/- 92.18%</td>
-      <td id="T_80337_row1_col5" class="data row1 col5" >-</td>
-      <td id="T_80337_row1_col6" class="data row1 col6" >0.007 +/- 5.06%</td>
+      <th id="T_43830_level0_row1" class="row_heading level0 row1" >competitive product inhibition</th>
+      <td id="T_43830_row1_col0" class="data row1 col0" >-22202</td>
+      <td id="T_43830_row1_col1" class="data row1 col1" >True</td>
+      <td id="T_43830_row1_col2" class="data row1 col2" >2.999 +/- 0.78%</td>
+      <td id="T_43830_row1_col3" class="data row1 col3" >0.029 +/- 3.85%</td>
+      <td id="T_43830_row1_col4" class="data row1 col4" >0.221 +/- 92.18%</td>
+      <td id="T_43830_row1_col5" class="data row1 col5" >-</td>
+      <td id="T_43830_row1_col6" class="data row1 col6" >0.007 +/- 5.06%</td>
     </tr>
     <tr>
-      <th id="T_80337_level0_row2" class="row_heading level0 row2" >substrate inhibition</th>
-      <td id="T_80337_row2_col0" class="data row2 col0" >-22202</td>
-      <td id="T_80337_row2_col1" class="data row2 col1" >True</td>
-      <td id="T_80337_row2_col2" class="data row2 col2" >3.021 +/- 0.86%</td>
-      <td id="T_80337_row2_col3" class="data row2 col3" >0.031 +/- 2.38%</td>
-      <td id="T_80337_row2_col4" class="data row2 col4" >-</td>
-      <td id="T_80337_row2_col5" class="data row2 col5" >208.577 +/- 67.12%</td>
-      <td id="T_80337_row2_col6" class="data row2 col6" >0.007 +/- 4.48%</td>
+      <th id="T_43830_level0_row2" class="row_heading level0 row2" >substrate inhibition</th>
+      <td id="T_43830_row2_col0" class="data row2 col0" >-22202</td>
+      <td id="T_43830_row2_col1" class="data row2 col1" >True</td>
+      <td id="T_43830_row2_col2" class="data row2 col2" >3.021 +/- 0.86%</td>
+      <td id="T_43830_row2_col3" class="data row2 col3" >0.031 +/- 2.38%</td>
+      <td id="T_43830_row2_col4" class="data row2 col4" >-</td>
+      <td id="T_43830_row2_col5" class="data row2 col5" >208.577 +/- 67.12%</td>
+      <td id="T_43830_row2_col6" class="data row2 col6" >0.007 +/- 4.48%</td>
     </tr>
     <tr>
-      <th id="T_80337_level0_row3" class="row_heading level0 row3" >uncompetitive product inhibition</th>
-      <td id="T_80337_row3_col0" class="data row3 col0" >-22199</td>
-      <td id="T_80337_row3_col1" class="data row3 col1" >True</td>
-      <td id="T_80337_row3_col2" class="data row3 col2" >3.012 +/- 1.23%</td>
-      <td id="T_80337_row3_col3" class="data row3 col3" >0.030 +/- 4.72%</td>
-      <td id="T_80337_row3_col4" class="data row3 col4" >-</td>
-      <td id="T_80337_row3_col5" class="data row3 col5" >2.096 +/- 361.49%</td>
-      <td id="T_80337_row3_col6" class="data row3 col6" >0.006 +/- 15.30%</td>
+      <th id="T_43830_level0_row3" class="row_heading level0 row3" >uncompetitive product inhibition</th>
+      <td id="T_43830_row3_col0" class="data row3 col0" >-22199</td>
+      <td id="T_43830_row3_col1" class="data row3 col1" >True</td>
+      <td id="T_43830_row3_col2" class="data row3 col2" >3.012 +/- 1.23%</td>
+      <td id="T_43830_row3_col3" class="data row3 col3" >0.030 +/- 4.72%</td>
+      <td id="T_43830_row3_col4" class="data row3 col4" >-</td>
+      <td id="T_43830_row3_col5" class="data row3 col5" >2.096 +/- 361.49%</td>
+      <td id="T_43830_row3_col6" class="data row3 col6" >0.006 +/- 15.30%</td>
     </tr>
     <tr>
-      <th id="T_80337_level0_row4" class="row_heading level0 row4" >non-competitive product inhibition</th>
-      <td id="T_80337_row4_col0" class="data row4 col0" >-22198</td>
-      <td id="T_80337_row4_col1" class="data row4 col1" >True</td>
-      <td id="T_80337_row4_col2" class="data row4 col2" >3.012 +/- 2.44%</td>
-      <td id="T_80337_row4_col3" class="data row4 col3" >0.029 +/- 6.56%</td>
-      <td id="T_80337_row4_col4" class="data row4 col4" >0.167 +/- 132.63%</td>
-      <td id="T_80337_row4_col5" class="data row4 col5" >1.113 +/- 466.95%</td>
-      <td id="T_80337_row4_col6" class="data row4 col6" >0.006 +/- 40.69%</td>
+      <th id="T_43830_level0_row4" class="row_heading level0 row4" >non-competitive product inhibition</th>
+      <td id="T_43830_row4_col0" class="data row4 col0" >-22198</td>
+      <td id="T_43830_row4_col1" class="data row4 col1" >True</td>
+      <td id="T_43830_row4_col2" class="data row4 col2" >3.012 +/- 2.44%</td>
+      <td id="T_43830_row4_col3" class="data row4 col3" >0.029 +/- 6.56%</td>
+      <td id="T_43830_row4_col4" class="data row4 col4" >0.167 +/- 132.63%</td>
+      <td id="T_43830_row4_col5" class="data row4 col5" >1.113 +/- 466.95%</td>
+      <td id="T_43830_row4_col6" class="data row4 col6" >0.006 +/- 40.69%</td>
     </tr>
     <tr>
-      <th id="T_80337_level0_row5" class="row_heading level0 row5" >non-competitive product inhibition</th>
-      <td id="T_80337_row5_col0" class="data row5 col0" >-22185</td>
-      <td id="T_80337_row5_col1" class="data row5 col1" >False</td>
-      <td id="T_80337_row5_col2" class="data row5 col2" >3.241 +/- 1.40%</td>
-      <td id="T_80337_row5_col3" class="data row5 col3" >0.033 +/- 5.05%</td>
-      <td id="T_80337_row5_col4" class="data row5 col4" >0.038 +/- 22.41%</td>
-      <td id="T_80337_row5_col5" class="data row5 col5" >0.073 +/- 6.86%</td>
-      <td id="T_80337_row5_col6" class="data row5 col6" >nan</td>
+      <th id="T_43830_level0_row5" class="row_heading level0 row5" >non-competitive product inhibition</th>
+      <td id="T_43830_row5_col0" class="data row5 col0" >-22185</td>
+      <td id="T_43830_row5_col1" class="data row5 col1" >False</td>
+      <td id="T_43830_row5_col2" class="data row5 col2" >3.241 +/- 1.40%</td>
+      <td id="T_43830_row5_col3" class="data row5 col3" >0.033 +/- 5.05%</td>
+      <td id="T_43830_row5_col4" class="data row5 col4" >0.038 +/- 22.41%</td>
+      <td id="T_43830_row5_col5" class="data row5 col5" >0.073 +/- 6.86%</td>
+      <td id="T_43830_row5_col6" class="data row5 col6" >nan</td>
     </tr>
     <tr>
-      <th id="T_80337_level0_row6" class="row_heading level0 row6" >uncompetitive product inhibition</th>
-      <td id="T_80337_row6_col0" class="data row6 col0" >-22156</td>
-      <td id="T_80337_row6_col1" class="data row6 col1" >False</td>
-      <td id="T_80337_row6_col2" class="data row6 col2" >3.268 +/- 1.43%</td>
-      <td id="T_80337_row6_col3" class="data row6 col3" >0.041 +/- 2.70%</td>
-      <td id="T_80337_row6_col4" class="data row6 col4" >-</td>
-      <td id="T_80337_row6_col5" class="data row6 col5" >0.066 +/- 6.35%</td>
-      <td id="T_80337_row6_col6" class="data row6 col6" >nan</td>
+      <th id="T_43830_level0_row6" class="row_heading level0 row6" >uncompetitive product inhibition</th>
+      <td id="T_43830_row6_col0" class="data row6 col0" >-22156</td>
+      <td id="T_43830_row6_col1" class="data row6 col1" >False</td>
+      <td id="T_43830_row6_col2" class="data row6 col2" >3.268 +/- 1.43%</td>
+      <td id="T_43830_row6_col3" class="data row6 col3" >0.041 +/- 2.70%</td>
+      <td id="T_43830_row6_col4" class="data row6 col4" >-</td>
+      <td id="T_43830_row6_col5" class="data row6 col5" >0.066 +/- 6.35%</td>
+      <td id="T_43830_row6_col6" class="data row6 col6" >nan</td>
     </tr>
     <tr>
-      <th id="T_80337_level0_row7" class="row_heading level0 row7" >competitive product inhibition</th>
-      <td id="T_80337_row7_col0" class="data row7 col0" >-21840</td>
-      <td id="T_80337_row7_col1" class="data row7 col1" >False</td>
-      <td id="T_80337_row7_col2" class="data row7 col2" >2.586 +/- 0.35%</td>
-      <td id="T_80337_row7_col3" class="data row7 col3" >0.020 +/- 6.10%</td>
-      <td id="T_80337_row7_col4" class="data row7 col4" >0.016 +/- 15.88%</td>
-      <td id="T_80337_row7_col5" class="data row7 col5" >-</td>
-      <td id="T_80337_row7_col6" class="data row7 col6" >nan</td>
+      <th id="T_43830_level0_row7" class="row_heading level0 row7" >competitive product inhibition</th>
+      <td id="T_43830_row7_col0" class="data row7 col0" >-21840</td>
+      <td id="T_43830_row7_col1" class="data row7 col1" >False</td>
+      <td id="T_43830_row7_col2" class="data row7 col2" >2.586 +/- 0.35%</td>
+      <td id="T_43830_row7_col3" class="data row7 col3" >0.020 +/- 6.10%</td>
+      <td id="T_43830_row7_col4" class="data row7 col4" >0.016 +/- 15.88%</td>
+      <td id="T_43830_row7_col5" class="data row7 col5" >-</td>
+      <td id="T_43830_row7_col6" class="data row7 col6" >nan</td>
     </tr>
     <tr>
-      <th id="T_80337_level0_row8" class="row_heading level0 row8" >irreversible Michaelis Menten</th>
-      <td id="T_80337_row8_col0" class="data row8 col0" >-21739</td>
-      <td id="T_80337_row8_col1" class="data row8 col1" >False</td>
-      <td id="T_80337_row8_col2" class="data row8 col2" >2.529 +/- 0.27%</td>
-      <td id="T_80337_row8_col3" class="data row8 col3" >0.030 +/- 2.30%</td>
-      <td id="T_80337_row8_col4" class="data row8 col4" >-</td>
-      <td id="T_80337_row8_col5" class="data row8 col5" >-</td>
-      <td id="T_80337_row8_col6" class="data row8 col6" >nan</td>
+      <th id="T_43830_level0_row8" class="row_heading level0 row8" >irreversible Michaelis Menten</th>
+      <td id="T_43830_row8_col0" class="data row8 col0" >-21739</td>
+      <td id="T_43830_row8_col1" class="data row8 col1" >False</td>
+      <td id="T_43830_row8_col2" class="data row8 col2" >2.529 +/- 0.27%</td>
+      <td id="T_43830_row8_col3" class="data row8 col3" >0.030 +/- 2.30%</td>
+      <td id="T_43830_row8_col4" class="data row8 col4" >-</td>
+      <td id="T_43830_row8_col5" class="data row8 col5" >-</td>
+      <td id="T_43830_row8_col6" class="data row8 col6" >nan</td>
     </tr>
     <tr>
-      <th id="T_80337_level0_row9" class="row_heading level0 row9" >substrate inhibition</th>
-      <td id="T_80337_row9_col0" class="data row9 col0" >-21737</td>
-      <td id="T_80337_row9_col1" class="data row9 col1" >False</td>
-      <td id="T_80337_row9_col2" class="data row9 col2" >2.537 +/- 0.52%</td>
-      <td id="T_80337_row9_col3" class="data row9 col3" >0.030 +/- 2.71%</td>
-      <td id="T_80337_row9_col4" class="data row9 col4" >-</td>
-      <td id="T_80337_row9_col5" class="data row9 col5" >352.069 +/- 134.63%</td>
-      <td id="T_80337_row9_col6" class="data row9 col6" >nan</td>
+      <th id="T_43830_level0_row9" class="row_heading level0 row9" >substrate inhibition</th>
+      <td id="T_43830_row9_col0" class="data row9 col0" >-21737</td>
+      <td id="T_43830_row9_col1" class="data row9 col1" >False</td>
+      <td id="T_43830_row9_col2" class="data row9 col2" >2.537 +/- 0.52%</td>
+      <td id="T_43830_row9_col3" class="data row9 col3" >0.030 +/- 2.71%</td>
+      <td id="T_43830_row9_col4" class="data row9 col4" >-</td>
+      <td id="T_43830_row9_col5" class="data row9 col5" >352.069 +/- 134.63%</td>
+      <td id="T_43830_row9_col6" class="data row9 col6" >nan</td>
     </tr>
   </tbody>
 </table>
 </div></div>
 </div>
+<p>‘’’#TODO AIC no more informatiove value goodness of fit is attributed to addtional paramteres –&gt; additional variable is uninformative <span id="id2">[<a class="reference internal" href="../references.html#id16" title="Todd W Arnold. Uninformative parameters and model selection using akaike's information criterion. The Journal of Wildlife Management, 74(6):1175–1178, 2010.">Arnold, 2010</a>]</span></p>
 <p>Kinetic parameters were estimated with and without considering time-dependent enzyme inactivation.
-Modeling results are listed in the table above. All models with an additional parameter for enzyme inactivation resulted in lower AIC values, indicating a better fit of the experimental data to inactivation models. Irreversible Michaelis-Menten model resulted in the highest AIC together with competitive product inhibition as well as substrate inhibition. Nevertheless, all inhibition models considering enzyme inactivation showed high standard deviations above 80% for the respective <span class="math notranslate nohighlight">\(K_{i}\)</span> estimates. Therefore irreversible Michaelis-Menten model with time-dependent enzyme inactivation described the measurement data the best (Fig XXXA). Thereby, <span class="math notranslate nohighlight">\(k_{cat}\)</span> was estimated to 3.003 min<sup>-1</sup> ± 0.77% whereas 30 µM ± 1.99%  was estimated for <span class="math notranslate nohighlight">\(K_{m}\)</span>. The respective half life of CotA was estimated at 95 min ± 4 min using equation <a class="reference internal" href="SLAC_kinetic_characterization.html#equation-enzyme-halflife">(13)</a>, whereas <span class="math notranslate nohighlight">\(k_{cat}\)</span> and <span class="math notranslate nohighlight">\(k_{inact}\)</span> were highly correlated (corr &gt; 0.95). Irreversible Michelis-Menten model without enzyme concentration did not fit the measurement data, since the reaction rate is initially underestimated, and overestimated in later stages of the reaction (Fig xxxB).</p>
+Modeling results are listed in the table above.
+All models with an additional parameter for enzyme inactivation resulted in lower AIC values, indicating a better fit of the experimental data to inactivation models. When comparing models, an additional parameter in an model is informative, if the difference in AIC between the two models is larger than 2 . Accordingly two additional parameters in an model compared to another model are informative, if the the difference in AIC is larger than 4 <span id="id3">[<a class="reference internal" href="../references.html#id16" title="Todd W Arnold. Uninformative parameters and model selection using akaike's information criterion. The Journal of Wildlife Management, 74(6):1175–1178, 2010.">Arnold, 2010</a>]</span>. Thus, the additional parameters in inhibition models considering enzyme activation were uninformative and did not enhance the fit quality. Additionally, the mentioned models showed high standard deviations above 80% for the respective <span class="math notranslate nohighlight">\(K_{i}\)</span> estimates.
+Without considering enzyme inactivation, product inhibition models were favoured over the irreversible Michaelis-Menten model,
+whereas irreversible Michaelis-Menten with enzyme inactivation showed the best fit statistic compared to all other models (Fig XXXA). Thereby, <span class="math notranslate nohighlight">\(k_{cat}\)</span> was estimated to 3.003 min<sup>-1</sup> ± 0.77% whereas 30 µM ± 1.99%  was estimated for <span class="math notranslate nohighlight">\(K_{m}\)</span>. The respective half life of CotA was estimated at 95 min ± 4 min using equation <a class="reference internal" href="SLAC_kinetic_characterization.html#equation-enzyme-halflife">(13)</a>, whereas <span class="math notranslate nohighlight">\(k_{cat}\)</span> and <span class="math notranslate nohighlight">\(k_{inact}\)</span> were highly correlated (corr &gt; 0.95). Irreversible Michelis-Menten model without enzyme concentration did not fit the measurement data, since the reaction rate is initially underestimated, and overestimated in later stages of the reaction (Fig xxxB).</p>
 <div class="cell tag_hide_input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">12.8</span><span class="p">,</span><span class="mf">9.2</span><span class="p">),</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -1002,14 +1031,61 @@ Modeling results are listed in the table above. All models with an additional pa
 <p>Out of the models without enzyme inactivation, product inhibition models showed the lowest AIC. Qualitatively, the inhibition models  described the the progress curve of the reaction (Fig. xxxC and D)</p>
 </section>
 </section>
-<section id="discussion">
-<h2>Discussion<a class="headerlink" href="#discussion" title="Permalink to this headline">#</a></h2>
-<p><strong>Low data quality</strong>
-Both datasets, for the absorption experiment and the enzyme kinetics experiment, showed low data quality, since repeats of identical experimental conditions showed large deviations. Additionally, enzyme concentration was systematically applied in too low concentration for individual reaction conditions. Ultimately,</p>
-<p><strong>Enzyme inactivation</strong>
-The adsorption experiment resulted in an CotA half life of approximately 28 days, whereas the enzyme kinetics experiment showed an half life of 95 min. As a result, the apparent decrease in enzyme activity is likely not caused by inactivation through adsorption of the enzyme to the reaction vessel. However, low experimental precision or the design of the adsorption experiment itself might be unsuited to confirm or reject the hypothesis.</p>
-<p>Based on kinetic modeling, time-dependent enzyme inactivation described the measured reaction progress-curve. Thereby, the estimated inactivation rate was highly correlated to the turnover number of CotA. As in the previous chapter, the correlation might be technical or causal. Nevertheless, product inhibition models were able to describe the measured progress-curves qualitatively. Due to data quality issues product inhibition cannot be completely ruled out.</p>
-<p>Further kinetic assays with higher enzyme concentration or prolonged measurement times should be conducted to confirm or exclude product inhibition as an potential source of the apparent decrease of reaction rate. Furthermore, the pipetting volume of enzyme should be increased, to reduce variation between experimental repeats.</p>
+<section id="project-discussion">
+<h2>Project discussion<a class="headerlink" href="#project-discussion" title="Permalink to this headline">#</a></h2>
+<section id="data-quality">
+<h3>Data quality<a class="headerlink" href="#data-quality" title="Permalink to this headline">#</a></h3>
+<p>Both datasets, for the absorption experiment and the enzyme kinetics experiment, showed quality issues. In the adsorption experiment the initial measurement showed large uncertainties as well as mixing issues, indicated by an apparent fluctuation in reaction rate. In the enzyme kinetics experiment, individual reactions showed to have from the assay protocol deviating substrate and enzyme concentrations. Furthermore, the measured product concentration showed large deviations among experimental repeats, indicating unequal enzyme concentrations. Hence, larger pipetting volume for the enzyme solution was suggested to reduce pipetting errors due to avoidable small pipetting volumes.
+Furthermore, the product partners were advised to repeat the problematic experiments.</p>
+</section>
+<section id="enzyme-inactivation">
+<h3>Enzyme inactivation<a class="headerlink" href="#enzyme-inactivation" title="Permalink to this headline">#</a></h3>
+<p>The observed time-dependent decrease in enzyme activity can be explained by enzyme inactivation and product inhibition. In case of time-dependent enzyme inactivation, the catalytic activity decreases, since the catalyst becomes inactive. Thereby, the decrease in relative reaction rate is independent from product concentration.
+In case of product inhibition, the formed product reduces the reaction rate. Hence, the observed enzyme inactivation is dependent on product concentration.
+Since both phenomena express themselves in an apparent decrease of reaction rate, they bare the potential to be confused, as the results of the enzyme kinetics experiment show. Visually, product inhibition models without enzyme inactivation and irreversible Michaelis-Menten model with enzyme inactivation are able to qualitatively describe the observed progress curve (Fig XXXc, XXXd).</p>
+<p>Both independent and methodologically different experiments resulted in an comparable time period, in which the enzyme’s activity is halved. Whereas in the inactivation experiment the enzyme’s activity was halved after approximately 105 min, half the activity was left in the enzyme kinetics experiment after 95 min. Due to the design of the incubation experiment, the loss of enzyme activity showed to be independent from the catalysis itself. In consequence, product inhibition is not a conclusive explanation for the observed behavior. Product inhibition if further disfavored based on the modeling results, since the AIC of all inhibition models was higher compared the irreversible Michaelis-Menten model with time-dependent enzyme inactivation.</p>
+<p>In conclusion, the observed inactivation in likely caused by hydrophobic interaction between the reaction vessel and the enzyme. Interactions between hydrophobic surfaces and enzymes leading to decreased enzymatic activity were already reported for ribonuclease A <span id="id4">[<a class="reference internal" href="../references.html#id28" title="Yang Wei, Aby A Thyparambil, Yonnie Wu, and Robert A Latour. Adsorption-induced changes in ribonuclease a structure and enzymatic activity on solid surfaces. Langmuir, 30(49):14849–14858, 2014.">Wei <em>et al.</em>, 2014</a>]</span>. In this work, enzyme inactivation was observed across multiple enzyme classes, whereas all reactions were carried out in MTPs. Therefore, MTPs might cause enzyme inactivation for a broad range of different enzymes.</p>
+<p>Misinterpretation of the apparent decrease in enzymatic activity might lead to wrong conclusions and therefore negatively impact the research process. As already mentioned the activity decrease might be wrongfully attributed to product inhibition. This attribution might lead to wrong design decisions if the enzyme in question should be applied to an enzymatic cascade reaction or make the enzyme entirely unfavorable for this particular application.<br />
+Furthermore, screening applications might be impacted by enzyme inactivation. If yields of an enzymatic reactions should be determined over the time course of multiple hours. All determined yield might be estimated too low.
+Therefore, enzyme inactivation in MTPs should be investigated in future experiments and the results should be reported on.</p>
+</section>
+</section>
+<section id="save-modeling-results">
+<h2>Save modeling results<a class="headerlink" href="#save-modeling-results" title="Permalink to this headline">#</a></h2>
+<p>Lastly, the modeling results were written to the EnzymeML documents and the files were exported.</p>
+<div class="cell tag_hide_input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Write modeling results to kinetic parameters</span>
+<span class="n">k_cat</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">enzymeml</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">KineticParameter</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;k_cat&quot;</span><span class="p">,</span>
+    <span class="n">value</span><span class="o">=</span><span class="n">CotA_kinetics_with_inactivation</span><span class="o">.</span><span class="n">get_model_results</span><span class="p">()[</span><span class="s2">&quot;k_cat&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+    <span class="n">unit</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;1 / </span><span class="si">{</span><span class="n">CotA_kinetics_with_inactivation</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">time_unit</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">K_m</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">enzymeml</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">KineticParameter</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;K_m&quot;</span><span class="p">,</span>
+    <span class="n">value</span><span class="o">=</span><span class="n">CotA_kinetics_with_inactivation</span><span class="o">.</span><span class="n">get_model_results</span><span class="p">()[</span><span class="s2">&quot;Km&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+    <span class="n">unit</span><span class="o">=</span><span class="n">CotA_kinetics_with_inactivation</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">data_conc_unit</span><span class="p">)</span>
+
+<span class="c1"># Define kinetic model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">KineticModel</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;irreversible Michaelis-Menten&quot;</span><span class="p">,</span>
+    <span class="n">equation</span><span class="o">=</span><span class="s2">&quot;-k_cat * p0 * s0 / (K_m + s0)&quot;</span><span class="p">,</span>
+    <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="n">k_cat</span><span class="p">,</span> <span class="n">K_m</span><span class="p">])</span>
+
+<span class="n">enzmldoc</span><span class="o">.</span><span class="n">getReaction</span><span class="p">(</span><span class="s2">&quot;r0&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
+
+<span class="n">add_enzyme_inactivation_model</span><span class="p">(</span>
+    <span class="n">result</span><span class="o">=</span><span class="n">CotA_kinetics_with_inactivation</span><span class="p">,</span>
+    <span class="n">enzmldoc</span><span class="o">=</span><span class="n">enzmldoc</span><span class="p">)</span>
+
+<span class="c1"># Export EnzymeML documents</span>
+<span class="n">export</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="k">if</span> <span class="n">export</span><span class="p">:</span>
+    <span class="n">enzmldoc</span><span class="o">.</span><span class="n">toFile</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 

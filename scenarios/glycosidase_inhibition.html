@@ -106,7 +106,7 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../welcome.html">
-                    Welcome
+                    Welcome to my master thesis
                 </a>
             </li>
         </ul>
@@ -421,6 +421,11 @@ title="Print to PDF"
    Parameter estimation
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#save-modeling-results">
+   Save modeling results
+  </a>
+ </li>
 </ul>
 
     </nav>
@@ -479,6 +484,11 @@ title="Print to PDF"
    Parameter estimation
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#save-modeling-results">
+   Save modeling results
+  </a>
+ </li>
 </ul>
 
                         </nav>
@@ -494,11 +504,11 @@ title="Print to PDF"
 <p>Data provided by Chantal Daub (Biochemistry, Rhodes University, Makhanda, South Africa)</p>
 <section id="project-background">
 <h2>Project background<a class="headerlink" href="#project-background" title="Permalink to this headline">#</a></h2>
-<p>In this scenario, the inhibitory properties of fucoidan on <span class="math notranslate nohighlight">\(\alpha\)</span>-glucosidase from <em>Saccharomyces cerevisiae</em> was investigated. Fucoidan is a sulfated polysaccharide found in various brown algae. The polysaccaride is investigated as a potential active compound in the fields of anit-cancer, anti-inflammation, and anti-coagulate research, among others (<span id="id1">Li <em>et al.</em> [<a class="reference internal" href="../references.html#id7" title="Bo Li, Fei Lu, Xinjun Wei, and Ruixiang Zhao. Fucoidan: structure and bioactivity. Molecules, 13(8):1671–1695, 2008.">2008</a>]</span>). Recently, <span id="id2">Daub <em>et al.</em> [<a class="reference internal" href="../references.html#id6" title="Chantal Désirée Daub, Blessing Mabate, Samkelo Malgas, and Brett Ivan Pletschke. Fucoidan from ecklonia maxima is a powerful inhibitor of the diabetes-related enzyme, α-glucosidase. International journal of biological macromolecules, 151:412–420, 2020.">2020</a>]</span> proposed the application of fucoidan as a drug for diabetes mellitus treatment, since fucoidan showed to effectively inhibit <span class="math notranslate nohighlight">\(\alpha\)</span>-glucosidase. In the corresponding study, fucoidan from <em>E. maxima</em> showed an almost 2-fold lower IC<sub>50</sub> value, compared to established diabetes drug acarbose.<br />
+<p>In this scenario, the inhibitory properties of fucoidan on <span class="math notranslate nohighlight">\(\alpha\)</span>-glucosidase from <em>Saccharomyces cerevisiae</em> were analyzed. Fucoidan is a sulfated polysaccharide found in various brown algae. The polysaccaride is investigated as a potential active compound in the fields of anti-cancer, anti-inflammation, and anti-coagulate research, among others (<span id="id1">Li <em>et al.</em> [<a class="reference internal" href="../references.html#id7" title="Bo Li, Fei Lu, Xinjun Wei, and Ruixiang Zhao. Fucoidan: structure and bioactivity. Molecules, 13(8):1671–1695, 2008.">2008</a>]</span>). Furthermore, fucoidan showed to be a promising drug for diabetes mellitus treatment, since it effectively inhibits <span class="math notranslate nohighlight">\(\alpha\)</span>-glucosidase. Recently, <span id="id2">Daub <em>et al.</em> [<a class="reference internal" href="../references.html#id6" title="Chantal Désirée Daub, Blessing Mabate, Samkelo Malgas, and Brett Ivan Pletschke. Fucoidan from ecklonia maxima is a powerful inhibitor of the diabetes-related enzyme, α-glucosidase. International journal of biological macromolecules, 151:412–420, 2020.">2020</a>]</span> showed that <span class="math notranslate nohighlight">\(\alpha\)</span>-glucosidase inhibition by fucoidan from <em>E. maxima</em> significantly stronger inhibition, compared to the established diabetes drug acarbose.<br />
 In the following analysis, <span class="math notranslate nohighlight">\(\alpha\)</span>-glucosidase was exposed to fucoidan from <em>Ecklonia maxima</em>, <em>Ecklonia radiata</em>, <em>Fucus vesiculosus</em>, and <em>Schimmelmannia elegans</em> to test their respective capability of <span class="math notranslate nohighlight">\(\alpha\)</span>-glucosidase inhibiton by assessing their respective <span class="math notranslate nohighlight">\(K_{i}\)</span> values.</p>
 <section id="experimental-design">
 <h3>Experimental design<a class="headerlink" href="#experimental-design" title="Permalink to this headline">#</a></h3>
-<p><span class="math notranslate nohighlight">\(\alpha\)</span>-glucosidase reactions, catalyzing the hydrolysis of p-nitrophenyl glucopyranoside (p-NPG) to p-nitrophenol were conducted with and without fucoidan from each seaweed species as well as acarbose. Thereby, fucoidan was applied in two different concentrations. p-NPG was applied in a range from 0.1 mM to 5 mM, to enzyme reactions containing 9.19 µM <span class="math notranslate nohighlight">\(\alpha\)</span>-glucosidase
+<p><span class="math notranslate nohighlight">\(\alpha\)</span>-glucosidase reactions, catalyzing the hydrolysis of p-nitrophenyl glucopyranoside (p-NPG) to p-nitrophenol (p-NP) were conducted with and without fucoidan from each seaweed species as well as acarbose. Thereby, fucoidan was applied in two different concentrations. p-NPG was applied in a range from 0.1 mM to 5 mM, to enzyme reactions containing 9.19 µM <span class="math notranslate nohighlight">\(\alpha\)</span>-glucosidase
 Product formation was recorded photometrically at 405 nm and 37°C for 20 min. Product concentrations were calculated utilizing a photometric p-NP standard. Additionally, control reaction without enzyme were prepared to subtract the absorption contribution of the respective inhibitor, buffer, enzyme and substrate from each measurement.</p>
 </section>
 </section>
@@ -681,7 +691,7 @@ In most reactions a decrease followed by an increase of reaction rate is visible
 
 <span class="c1"># Apply calibration curves to absorption EnzymeML documents</span>
 <span class="k">for</span> <span class="n">enzmldoc</span> <span class="ow">in</span> <span class="n">enzml_docs</span><span class="p">:</span>
-    <span class="n">product_standard</span><span class="o">.</span><span class="n">apply_to_EnzymeML</span><span class="p">(</span><span class="n">enzmldoc</span><span class="p">,</span> <span class="s2">&quot;s1&quot;</span><span class="p">)</span>
+    <span class="n">product_standard</span><span class="o">.</span><span class="n">apply_to_EnzymeML</span><span class="p">(</span><span class="n">enzmldoc</span><span class="p">,</span> <span class="s2">&quot;s1&quot;</span><span class="p">,</span> <span class="s2">&quot;Quadratic&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -691,33 +701,33 @@ In most reactions a decrease followed by an increase of reaction rate is visible
 </div>
 <div class="output text_html"><style type="text/css">
 </style>
-<table id="T_daed1" style="font-size: 12px">
+<table id="T_06e35" style="font-size: 12px">
   <thead>
     <tr>
       <th class="blank level0" >&nbsp;</th>
-      <th id="T_daed1_level0_col0" class="col_heading level0 col0" >AIC</th>
+      <th id="T_06e35_level0_col0" class="col_heading level0 col0" >AIC</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th id="T_daed1_level0_row0" class="row_heading level0 row0" >3rd polynominal</th>
-      <td id="T_daed1_row0_col0" class="data row0 col0" >-135</td>
+      <th id="T_06e35_level0_row0" class="row_heading level0 row0" >3rd polynominal</th>
+      <td id="T_06e35_row0_col0" class="data row0 col0" >-135</td>
     </tr>
     <tr>
-      <th id="T_daed1_level0_row1" class="row_heading level0 row1" >Quadratic</th>
-      <td id="T_daed1_row1_col0" class="data row1 col0" >-135</td>
+      <th id="T_06e35_level0_row1" class="row_heading level0 row1" >Quadratic</th>
+      <td id="T_06e35_row1_col0" class="data row1 col0" >-135</td>
     </tr>
     <tr>
-      <th id="T_daed1_level0_row2" class="row_heading level0 row2" >Rational</th>
-      <td id="T_daed1_row2_col0" class="data row2 col0" >-135</td>
+      <th id="T_06e35_level0_row2" class="row_heading level0 row2" >Rational</th>
+      <td id="T_06e35_row2_col0" class="data row2 col0" >-135</td>
     </tr>
     <tr>
-      <th id="T_daed1_level0_row3" class="row_heading level0 row3" >Linear</th>
-      <td id="T_daed1_row3_col0" class="data row3 col0" >-125</td>
+      <th id="T_06e35_level0_row3" class="row_heading level0 row3" >Linear</th>
+      <td id="T_06e35_row3_col0" class="data row3 col0" >-125</td>
     </tr>
     <tr>
-      <th id="T_daed1_level0_row4" class="row_heading level0 row4" >Exponential</th>
-      <td id="T_daed1_row4_col0" class="data row4 col0" >-11</td>
+      <th id="T_06e35_level0_row4" class="row_heading level0 row4" >Exponential</th>
+      <td id="T_06e35_row4_col0" class="data row4 col0" >-11</td>
     </tr>
   </tbody>
 </table>
@@ -725,12 +735,13 @@ In most reactions a decrease followed by an increase of reaction rate is visible
 </div>
 </div>
 <p><em>Fig. XXX: Fitted 3<sup>rd</sup>-degree polynomial calibration model to standard data of p-NP (s1).</em></p>
-<p>Based on AIC, 3<sup>rd</sup>-degree polynomial, quadratic and rational calibration models describe the relation between absorption to concentration ration of p-NP equally. 3<sup>rd</sup>-degree polynomial model was used to calculate p-NP concentrations.</p>
+<p>Based on AIC, 3<sup>rd</sup>-degree polynomial, quadratic and rational calibration models describe the relation between absorption to concentration ration of p-NP equally. Since the 3<sup>rd</sup>-degree polynomial model has one addition parameter compared to the quadratic model, the calibration model with less parameters is preferred, since the additional parameter did not give additional information.</p>
 </section>
 </section>
 <section id="parameter-estimation">
 <h2>Parameter estimation<a class="headerlink" href="#parameter-estimation" title="Permalink to this headline">#</a></h2>
-<p>Due to the mentioned issue with the measurement data after 5 minutes, kinetic parameters were estimated based on data of the initial 2 minutes only. Thus, different inhibition models cannot be compared, since information provided by the initial slopes is sufficient to distinguish kinetic inhibition mechanisms by modeling. In consequence, kinetic parameters were estimated based on initial rates, assuming competitive inhibition.<br />
+<p>Comparison between different inhibition models and thus determining the kinetic mechanism was not possible, as no model was consistently favored over the other based on AIC and standard deviations of the parameter estimates.</p>
+<p>Thus, different inhibition models cannot be compared, since information provided by the initial slopes is insufficient to distinguish kinetic inhibition mechanisms by modeling. In consequence, kinetic parameters were estimated based on initial rates, assuming competitive inhibition, since this kinetic mechanism has been proposed in literature <span id="id3">[]</span>.<br />
 Additionally, the faulty measurement with an initial substrate concentration of 0.5 mM from the ‘a-glucosidase inhibition by acarbose’ data set was excluded from parameter estimation.
 Based on an initial parameter estimation run with subsequent visual analysis, severals measurements from the <em>E. maxima</em> dataset were excluded. Thereby, measurements from both applied inhibitor concentrations and an initial substrate concentration of 2.5 mM and 5 mM showed similar activity compared to reactions without inhibitor. In contrast, the reactions with inhibitor present showed inhibition, according to the difference in slope.</p>
 <div class="cell tag_hide_input docutils container">
@@ -772,14 +783,14 @@ Based on an initial parameter estimation run with subsequent visual analysis, se
 </div>
 <div class="output text_html"><style type="text/css">
 </style>
-<table id="T_23970" style="font-size: 12px">
+<table id="T_be6b0" style="font-size: 12px">
   <thead>
     <tr>
       <th class="blank level0" >&nbsp;</th>
-      <th id="T_23970_level0_col0" class="col_heading level0 col0" >kcat [1/min]</th>
-      <th id="T_23970_level0_col1" class="col_heading level0 col1" >Km [mmole / l]</th>
-      <th id="T_23970_level0_col2" class="col_heading level0 col2" >kcat / Km [1/min * 1/mmole / l]</th>
-      <th id="T_23970_level0_col3" class="col_heading level0 col3" >Ki competitive [g / l]</th>
+      <th id="T_be6b0_level0_col0" class="col_heading level0 col0" >kcat [1/min]</th>
+      <th id="T_be6b0_level0_col1" class="col_heading level0 col1" >Km [mmole / l]</th>
+      <th id="T_be6b0_level0_col2" class="col_heading level0 col2" >kcat / Km [1/min * 1/mmole / l]</th>
+      <th id="T_be6b0_level0_col3" class="col_heading level0 col3" >Ki competitive [g / l]</th>
     </tr>
     <tr>
       <th class="index_name level0" >Inhibitor</th>
@@ -791,45 +802,45 @@ Based on an initial parameter estimation run with subsequent visual analysis, se
   </thead>
   <tbody>
     <tr>
-      <th id="T_23970_level0_row0" class="row_heading level0 row0" >Acarbose</th>
-      <td id="T_23970_row0_col0" class="data row0 col0" >1.886 +/- 2.71%</td>
-      <td id="T_23970_row0_col1" class="data row0 col1" >0.326 +/- 10.73%</td>
-      <td id="T_23970_row0_col2" class="data row0 col2" >5.779 +/- 11.06%</td>
-      <td id="T_23970_row0_col3" class="data row0 col3" >0.112 +/- 10.77%</td>
+      <th id="T_be6b0_level0_row0" class="row_heading level0 row0" >Acarbose</th>
+      <td id="T_be6b0_row0_col0" class="data row0 col0" >1.903 +/- 2.77%</td>
+      <td id="T_be6b0_row0_col1" class="data row0 col1" >0.341 +/- 10.79%</td>
+      <td id="T_be6b0_row0_col2" class="data row0 col2" >5.581 +/- 11.14%</td>
+      <td id="T_be6b0_row0_col3" class="data row0 col3" >0.112 +/- 10.80%</td>
     </tr>
     <tr>
-      <th id="T_23970_level0_row1" class="row_heading level0 row1" >Fucoidan (E. maxima)</th>
-      <td id="T_23970_row1_col0" class="data row1 col0" >2.305 +/- 2.09%</td>
-      <td id="T_23970_row1_col1" class="data row1 col1" >0.390 +/- 7.56%</td>
-      <td id="T_23970_row1_col2" class="data row1 col2" >5.910 +/- 7.84%</td>
-      <td id="T_23970_row1_col3" class="data row1 col3" >0.858 +/- 13.98%</td>
+      <th id="T_be6b0_level0_row1" class="row_heading level0 row1" >Fucoidan (E. maxima)</th>
+      <td id="T_be6b0_row1_col0" class="data row1 col0" >2.317 +/- 2.14%</td>
+      <td id="T_be6b0_row1_col1" class="data row1 col1" >0.406 +/- 7.64%</td>
+      <td id="T_be6b0_row1_col2" class="data row1 col2" >5.701 +/- 7.93%</td>
+      <td id="T_be6b0_row1_col3" class="data row1 col3" >0.874 +/- 14.25%</td>
     </tr>
     <tr>
-      <th id="T_23970_level0_row2" class="row_heading level0 row2" >Fucoidan (E. radiata)</th>
-      <td id="T_23970_row2_col0" class="data row2 col0" >1.347 +/- 2.69%</td>
-      <td id="T_23970_row2_col1" class="data row2 col1" >0.173 +/- 14.49%</td>
-      <td id="T_23970_row2_col2" class="data row2 col2" >7.765 +/- 14.74%</td>
-      <td id="T_23970_row2_col3" class="data row2 col3" >0.028 +/- 19.09%</td>
+      <th id="T_be6b0_level0_row2" class="row_heading level0 row2" >Fucoidan (E. radiata)</th>
+      <td id="T_be6b0_row2_col0" class="data row2 col0" >1.343 +/- 2.75%</td>
+      <td id="T_be6b0_row2_col1" class="data row2 col1" >0.180 +/- 14.57%</td>
+      <td id="T_be6b0_row2_col2" class="data row2 col2" >7.461 +/- 14.83%</td>
+      <td id="T_be6b0_row2_col3" class="data row2 col3" >0.028 +/- 19.29%</td>
     </tr>
     <tr>
-      <th id="T_23970_level0_row3" class="row_heading level0 row3" >Fucoidan (F. vesiculosus)</th>
-      <td id="T_23970_row3_col0" class="data row3 col0" >1.482 +/- 2.02%</td>
-      <td id="T_23970_row3_col1" class="data row3 col1" >0.405 +/- 7.28%</td>
-      <td id="T_23970_row3_col2" class="data row3 col2" >3.656 +/- 7.55%</td>
-      <td id="T_23970_row3_col3" class="data row3 col3" >0.003 +/- 7.75%</td>
+      <th id="T_be6b0_level0_row3" class="row_heading level0 row3" >Fucoidan (F. vesiculosus)</th>
+      <td id="T_be6b0_row3_col0" class="data row3 col0" >1.467 +/- 2.07%</td>
+      <td id="T_be6b0_row3_col1" class="data row3 col1" >0.415 +/- 7.37%</td>
+      <td id="T_be6b0_row3_col2" class="data row3 col2" >3.531 +/- 7.66%</td>
+      <td id="T_be6b0_row3_col3" class="data row3 col3" >0.003 +/- 7.80%</td>
     </tr>
     <tr>
-      <th id="T_23970_level0_row4" class="row_heading level0 row4" >Fucoidan (S. elegans)</th>
-      <td id="T_23970_row4_col0" class="data row4 col0" >1.487 +/- 2.39%</td>
-      <td id="T_23970_row4_col1" class="data row4 col1" >0.243 +/- 10.73%</td>
-      <td id="T_23970_row4_col2" class="data row4 col2" >6.115 +/- 10.99%</td>
-      <td id="T_23970_row4_col3" class="data row4 col3" >0.016 +/- 11.83%</td>
+      <th id="T_be6b0_level0_row4" class="row_heading level0 row4" >Fucoidan (S. elegans)</th>
+      <td id="T_be6b0_row4_col0" class="data row4 col0" >1.474 +/- 2.42%</td>
+      <td id="T_be6b0_row4_col1" class="data row4 col1" >0.251 +/- 10.79%</td>
+      <td id="T_be6b0_row4_col2" class="data row4 col2" >5.863 +/- 11.06%</td>
+      <td id="T_be6b0_row4_col3" class="data row4 col3" >0.016 +/- 11.88%</td>
     </tr>
   </tbody>
 </table>
 </div></div>
 </div>
-<p>The output above displays estimated kinetic parameters for all data sets, assuming competitive inhibition between enzyme and inhibitor. As a result <span class="math notranslate nohighlight">\(k_{cat}\)</span> was estimated between 2.305 min<sup>-1</sup> ± 2.09% and 1.347 min<sup>-1</sup> ± 2.69%, whereas <span class="math notranslate nohighlight">\(K_{m}\)</span> was estimated between 0.405 mM ± 7.28% and 0.173 mM ± 14.49%.
+<p>The output above displays estimated kinetic parameters for all data sets, assuming competitive inhibition between enzyme and inhibitor. As a result <span class="math notranslate nohighlight">\(k_{cat}\)</span> was estimated between 2.317 min<sup>-1</sup> ± 2.14% and 1.343 min<sup>-1</sup> ± 2.75%, whereas <span class="math notranslate nohighlight">\(K_{m}\)</span> was estimated between 0.415 mM ± 7.37% and 0.180 mM ± 14.57%.
 Since all measurements were conducted under equal conditions, <span class="math notranslate nohighlight">\(k_{cat}\)</span> and <span class="math notranslate nohighlight">\(K_{m}\)</span> should be similar across experiments. Deviations in parameter values might therefore result from pipetting or deviations in reaction temperature.</p>
 <div class="cell tag_hide_input docutils container">
 <div class="cell_input docutils container">
@@ -863,7 +874,47 @@ Since all measurements were conducted under equal conditions, <span class="math 
 </div>
 <p><em>Fig. XXX: Estimated inhibitory constants for <span class="math notranslate nohighlight">\(\alpha\)</span>-glucosidase inhibition by fucoidan from different algae species and acarbose</em></p>
 <p>Fucoidan from <em>E. radiata</em>, <em>F. vesiculosus</em>, and <em>S. elegans</em> all showed an lower <span class="math notranslate nohighlight">\(K_{i}\)</span> (28, 3, and 16 µg ml<sup>-1</sup> respectively) compared to the acarbose reference (112 µg ml<sup>-1</sup>). This resembles a 37-fold higher binding affinity of fucoidan from <em>F. vesiculosus</em> to <span class="math notranslate nohighlight">\(\alpha\)</span>-glucosidase compared to acarbose. Opposing to the previous study, fucoidan from <em>E. maxima</em> showed a more than 7-fold higher <span class="math notranslate nohighlight">\(K_{i}\)</span> (858 µg ml<sup>-1</sup>) compared to acarbose. This likely originates from inconsistencies during experimental preparation. Additionally, 4 of 10 measurements with applied inhibitor were excluded from parameter estimation, since they showed higher activity compared to the respective reactions without inhibitor. Therefore, this measurement should be repeated.</p>
-<p>In general, the estimated parameters are not reliable on a quantitative level, since the malfunction of the analytical device undermines the viability of the whole dataset. Therefore, it cannot be ruled out, that some of the calculated concentrations deviate from the real concentrations. Furthermore, all estimated parameters are only estimated based on three time points of measure. In addition each experimental condition was applied as duplicate repeats, which additionally showed deviations. In conclusion the estimated parameters qualitatively confirm that fucoidan from different host organism, inhibits <span class="math notranslate nohighlight">\(\alpha\)</span>-glucosidase more strongly, compared to acarbose.</p>
+<p>In general, the estimated parameters are not reliable on a quantitative level, since the malfunction of the analytical device undermines the validity of the whole dataset. Therefore, it cannot be ruled out, that some of the calculated concentrations deviate from the real concentrations. Furthermore, all estimated parameters are only estimated based on three time points of measure. In addition each experimental condition was applied as duplicate repeats, which additionally showed deviations. In conclusion the estimated parameters qualitatively confirm that fucoidan from different host organism, inhibits <span class="math notranslate nohighlight">\(\alpha\)</span>-glucosidase more strongly, compared to acarbose.</p>
+</section>
+<section id="save-modeling-results">
+<h2>Save modeling results<a class="headerlink" href="#save-modeling-results" title="Permalink to this headline">#</a></h2>
+<p>Lastly, the modeling results are written to the EnzymeML documents and the files are exported.</p>
+<div class="cell tag_hide_input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">result</span><span class="p">,</span> <span class="n">enzmldoc</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">enzml_docs</span><span class="p">):</span>
+
+    <span class="c1"># Write modeling results to kinetic parameters</span>
+    <span class="n">k_cat</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">enzymeml</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">KineticParameter</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;k_cat&quot;</span><span class="p">,</span>
+        <span class="n">value</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">get_model_results</span><span class="p">()[</span><span class="s2">&quot;k_cat&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+        <span class="n">unit</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;1 / </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">time_unit</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">K_m</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">enzymeml</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">KineticParameter</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;K_m&quot;</span><span class="p">,</span>
+        <span class="n">value</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">get_model_results</span><span class="p">()[</span><span class="s2">&quot;Km&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+        <span class="n">unit</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">data_conc_unit</span><span class="p">)</span>
+
+    <span class="n">K_ic</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">enzymeml</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">KineticParameter</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;K_ic&quot;</span><span class="p">,</span>
+        <span class="n">value</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">get_model_results</span><span class="p">()[</span><span class="s2">&quot;K_ic&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+        <span class="n">unit</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">data_conc_unit</span><span class="p">)</span>
+
+    <span class="c1"># Define kinetic model</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">KineticModel</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;competitive inhibition&quot;</span><span class="p">,</span>
+        <span class="n">equation</span><span class="o">=</span><span class="s2">&quot;-k_cat * p0 * s0 / (K_m*(1+(s2 / K_ic))+s0)&quot;</span><span class="p">,</span>
+        <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="n">k_cat</span><span class="p">,</span> <span class="n">K_m</span><span class="p">,</span> <span class="n">K_ic</span><span class="p">])</span>
+
+    <span class="n">enzmldoc</span><span class="o">.</span><span class="n">getReaction</span><span class="p">(</span><span class="s2">&quot;r0&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
+
+    <span class="c1"># Export EnzymeML documents</span>
+    <span class="n">export</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">if</span> <span class="n">export</span><span class="p">:</span>
+        <span class="n">enzmldoc</span><span class="o">.</span><span class="n">toFile</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 
