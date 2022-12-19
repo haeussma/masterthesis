@@ -5,9 +5,8 @@ format: jb-book
 root: welcome
 chapters:
   - file: declaration
-  - file: abstract
   - file: acknowledgements
-  - file: abbreviations
+  - file: abstract
   - file: introduction
   - file: methods
   - file: results
