@@ -24,13 +24,13 @@ In two projects the progress-curve of the reactions indicate a lag phase after r
 In another case, temperature incubation effects in MTP caused by prolonged assay preparation times resulted in an initial lag phase. Due to small reaction volumes and low mass, MTPs have a low heat capacity and thus high susceptibility to temperature change. Hence, project partners were advised to pre-incubate the MTP within the photometer at reaction temperature for 5 min and then start the reaction by adding enzyme as quick as possible.
 In another project, modeling predictions of the estimated $k_{cat}$ and $K_{m}$ together with their correlation were used to iteratively improve the design of the enzyme assay. Thereby, the appropriate enzyme concentration and substrate concentration range were identified through multiple round of lab experimental with subsequent kinetic modeling.
 
-Assessing the data quality through modeling proved to be a strength of fitting integrated rate equations to continuous assay data from photometric measurements. Besides quality control, the progress curve analysis method offer several advantages over the predominantly applied initial rates method {cite}`tang2010precise`, if more than two measurement points exist. A key advantage is reproducibility of the analysis. In initial rate kinetics no consensus on the linear reaction period exists. Hence, the linear period on which the kinetic parameters are estimated on is manually determined or assumed. Ultimately, the resulting parameters are influenced by the choice of linear period. By only evaluating the linear reaction period, only a subset of all available data is utilized for parameter estimation.
+Assessing the data quality through modeling proved to be a strength of fitting integrated rate equations to continuous assay data from photometric measurements and hence the workflow. Besides quality control, the progress curve analysis method offers several advantages over the predominantly applied initial rates method {cite}`tang2010precise`, if more than two measurement points exist. A key advantage is reproducibility of the analysis. In initial rate kinetics no consensus on the linear reaction period on which the kinetic parameters are estimated exists. Hence, the linear period is manually determined or only assumed. Ultimately, the resulting parameters are influenced by the choice of linear period. Additionally, only a subset of all available data is utilized for parameter estimation, making the parameter estimation less robust for individual measurement errors.
+In contrast, progress curve analysis allows the utilization of reaction data beyond the linear period.  
+Furthermore, progress curve analysis is more transparent about the underlying data compared
 
-This emphasizes the advantages of progress curve analysis over the predominately used initial rates method {cite}`tang2010precise`. Although results from initial rate kinetics can as well be visualized as a double-reciprocal (Lineweaver–Burk) diagram
+- relative absolute
 
-This is because of both the method and the data which is required for the method.
-
-Kinetic parameters are mostly determined by initial rates method, whereas initial rates of reactions with varying substrate concentration are determined and either . Thereby, rates from a subjectively chosen linear time period of the reaction are chosen
+- linearization
 
 Cumulative error, which ultimately leads to unreproducible kinetic parameters
 
@@ -38,7 +38,7 @@ Cumulative error, which ultimately leads to unreproducible kinetic parameters
 
 - initial rates vs progress-curve analysis
 
-## What makes this workflow experimental data for enzyme kinetics
+## What makes the workflow repeatable, reproducible, and FAIR?
 
 Availability of raw data is the prerequisite to reproduce the results of an data analysis process.
 
@@ -81,3 +81,7 @@ An secondary necessity for reproducibility is documentation. Thereby, both labor
 - great documentation (FAIR)
 
 In this project, a robust and FAIR workflow from analytical raw-data to kinetic parameters was established. Thereby, the output of a analytical device was used directly as the input of the modeling pipeline.
+
+## Importance of precise kinetic parameters for biocatalysis
+
+With upcoming big data technologies like

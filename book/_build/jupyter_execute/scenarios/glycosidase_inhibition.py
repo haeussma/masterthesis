@@ -17,7 +17,7 @@
 # 
 # ### Imports and parser function
 
-# In[15]:
+# In[1]:
 
 
 from typing import Dict
@@ -72,7 +72,7 @@ def listdir_nohidden(path):
 
 # Measurement data was provided as an Excel file, whereas metadata was filled in EnzymeML Excel templates for each fucoidan seaweed species and acarbose respectively. In preliminary experiments, p-NPG showed to slightly absorb at the product detection wavelength. Therefore, the absorbance contribution of substrate at the product detection wavelength was subtracted as well as the the contributions of enzyme, buffer and inhibitor. Then, the blanked absorbance data was written to the EnzymeML documents by a parser function.
 
-# In[16]:
+# In[2]:
 
 
 dataset_path = "../../data/glucosidase_inhibition/experimental_data_real.xlsx"
@@ -130,7 +130,7 @@ for inhibitor, template in zip(sorted(inhibitors), sorted(listdir_nohidden(templ
 # 
 # In the next cell, the blanked absorption data of each EnzymeML document is visualized with the ```.visualize()```-method of ```PyEnzyme``` for quality control.
 
-# In[17]:
+# In[3]:
 
 
 for doc in enzml_docs:
@@ -142,7 +142,7 @@ for doc in enzml_docs:
 # The technical output of the cell above visualizes the blanked product absorbance data of each dataset. Therein, the individual measurements are labeled from m0 - m17, which represent individual experimental conditions. Thereby, measurements m0 - m5 are from reactions without inhibitor, m6 - m11 reactions with the lower inhibitor concentration, and m12 - m17 originate from reactions with the higher inhibitor concentration. Each subplot contains the data of two experimental repeats.  
 # In most reactions a decrease followed by an increase of reaction rate is visible around minute 5. Since each dataset originates from a continuous photometric measurement carried out on a single MTP, the observed behavior likely sources from an analytical device malfunction. Additionally, one repeat of measurement 'm8' from the acarbose dataset shows low absorption, which is inconsistent with comparable measurements. Therefore, 'm8' was excluded from the dataset.
 
-# In[18]:
+# In[4]:
 
 
 del enzml_docs[0].measurement_dict["m8"].getReactant("s1").replicates[0]
@@ -153,7 +153,7 @@ del enzml_docs[0].measurement_dict["m8"].getReactant("s1").replicates[0]
 # 
 # Standard data of p-NP was loaded from an excel file, and a standard curve was created. Then, the standard curve was applied to the EnzymeML documents.
 
-# In[19]:
+# In[5]:
 
 
 path_calibration_data = "../../data/glucosidase_inhibition/p-NP_standard.xlsx"
@@ -166,16 +166,16 @@ product_standard = StandardCurve.from_excel(
     concentration_unit = "mmole / l", 
     cutoff_absorption=2)
 
-product_standard.visualize()
+product_standard.visualize("Quadratic")
 
 # Apply calibration curves to absorption EnzymeML documents
 for enzmldoc in enzml_docs:
     product_standard.apply_to_EnzymeML(enzmldoc, "s1", "Quadratic")
 
 
-# _Fig. XXX: Fitted 3<sup>rd</sup>-degree polynomial calibration model to standard data of p-NP (s1)._
+# _Fig. 5: Fitted quadratic calibration model to standard data of p-NP (s1)._
 # 
-# Based on AIC, 3<sup>rd</sup>-degree polynomial, quadratic and rational calibration models describe the relation between absorption to concentration ration of p-NP equally. Since the 3<sup>rd</sup>-degree polynomial model has one addition parameter compared to the quadratic model, the calibration model with less parameters is preferred, since the additional parameter did not give additional information.
+# Based on AIC, 3<sup>rd</sup>-degree polynomial, quadratic and rational calibration models describe the relation between absorption to concentration ration of p-NP equally. Since the 3<sup>rd</sup>-degree polynomial model has one addition parameter compared to the quadratic model, the calibration model with less parameters is preferred, since the additional parameter did not give additional information. The fit between quadratic calibration model and calibration standard is visualized in Fig. 5.
 # 
 # ## Parameter estimation
 # 
@@ -186,7 +186,7 @@ for enzmldoc in enzml_docs:
 # Additionally, the faulty measurement with an initial substrate concentration of 0.5 mM from the 'a-glucosidase inhibition by acarbose' data set was excluded from parameter estimation. 
 # Based on an initial parameter estimation run with subsequent visual analysis, severals measurements from the *E. maxima* dataset were excluded. Thereby, measurements from both applied inhibitor concentrations and an initial substrate concentration of 2.5 mM and 5 mM showed similar activity compared to reactions without inhibitor. In contrast, the reactions with inhibitor present showed inhibition, according to the difference in slope.
 
-# In[20]:
+# In[6]:
 
 
 # Discard measurement with 2.5 mM and 5 mM and lower inhibition concentration from E. maxima dataset
@@ -196,7 +196,7 @@ del enzml_docs[1].measurement_dict["m16"]
 del enzml_docs[1].measurement_dict["m17"]
 
 
-# In[21]:
+# In[7]:
 
 
 # Run parameter estimation for all data sets
@@ -221,7 +221,7 @@ display(df.style.set_table_attributes('style="font-size: 12px"'))
 # The output above displays estimated kinetic parameters for all data sets, assuming competitive inhibition between enzyme and inhibitor. As a result $k_{cat}$ was estimated between 2.317 min<sup>-1</sup> ± 2.14% and 1.343 min<sup>-1</sup> ± 2.75%, whereas $K_{m}$ was estimated between 0.415 mM ± 7.37% and 0.180 mM ± 14.57%. 
 # Since all measurements were conducted under equal conditions, $k_{cat}$ and $K_{m}$ should be similar across experiments. Deviations in parameter values might therefore result from pipetting or deviations in reaction temperature.
 
-# In[22]:
+# In[8]:
 
 
 # Get K_i parameter results
@@ -247,17 +247,20 @@ a0.set_ylabel("$K_{i}$ [$mg$ $ml^{-1}$]")
 plt.tight_layout()
 
 
-# _Fig. XXX: Estimated inhibitory constants for $\alpha$-glucosidase inhibition by fucoidan from different algae species and acarbose_
+# _Fig. 6: Estimated inhibitory constants for $\alpha$-glucosidase inhibition by fucoidan from different algae species and acarbose_
 # 
-# Fucoidan from *E. radiata*, *F. vesiculosus*, and *S. elegans* all showed an lower $K_{i}$ (28, 3, and 16 µg ml<sup>-1</sup> respectively) compared to the acarbose reference (112 µg ml<sup>-1</sup>). This resembles a 37-fold higher binding affinity of fucoidan from *F. vesiculosus* to $\alpha$-glucosidase compared to acarbose. Opposing to the previous study, fucoidan from *E. maxima* showed a more than 7-fold higher $K_{i}$ (858 µg ml<sup>-1</sup>) compared to acarbose. This likely originates from inconsistencies during experimental preparation. Additionally, 4 of 10 measurements with applied inhibitor were excluded from parameter estimation, since they showed higher activity compared to the respective reactions without inhibitor. Therefore, this measurement should be repeated.
+# Fucoidan from *E. radiata*, *F. vesiculosus*, and *S. elegans* all showed an lower $K_{i}$ (28, 3, and 16 µg ml<sup>-1</sup> respectively) compared to the acarbose reference (112 µg ml<sup>-1</sup>). This resembles a 37-fold higher binding affinity of fucoidan from *F. vesiculosus* to $\alpha$-glucosidase compared to acarbose. Opposing to the previous study, fucoidan from *E. maxima* showed a more than 7-fold higher $K_{i}$ (858 µg ml<sup>-1</sup>) compared to acarbose. This likely originates from inconsistencies during experimental preparation. Additionally, 4 of 10 measurements with applied inhibitor were excluded from parameter estimation, since they showed higher activity compared to the respective reactions without inhibitor. Therefore, this measurement should be repeated. Estimated inhibition konstants for each tested inhibitior are visualized in Fig. 6.
 # 
-# In general, the estimated parameters are not reliable on a quantitative level, since the malfunction of the analytical device undermines the validity of the whole dataset. Therefore, it cannot be ruled out, that some of the calculated concentrations deviate from the real concentrations. Furthermore, all estimated parameters are only estimated based on three time points of measure. In addition each experimental condition was applied as duplicate repeats, which additionally showed deviations. In conclusion the estimated parameters qualitatively confirm that fucoidan from different host organism, inhibits $\alpha$-glucosidase more strongly, compared to acarbose.
+# ## Project discussion
+# 
+# In general, the estimated parameters are not reliable on a quantitative level, since the malfunction of the analytical device undermines the validity of the whole dataset. Therefore, it cannot be ruled out, that some of the calculated concentrations deviate from the real concentrations. Furthermore, all estimated parameters are only estimated based on three time points of measure. In addition each experimental condition was applied as duplicate repeats, which additionally showed deviations.
+# In conclusion the estimated parameters qualitatively confirm that fucoidan from different host organism, inhibits $\alpha$-glucosidase more strongly, compared to acarbose.
 # 
 # ## Save modeling results
 # 
 # Lastly, the modeling results are written to the EnzymeML documents and the files are exported.
 
-# In[23]:
+# In[9]:
 
 
 for result, enzmldoc in zip(results, enzml_docs):

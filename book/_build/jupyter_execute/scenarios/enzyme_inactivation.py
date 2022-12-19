@@ -124,11 +124,11 @@ axes[1].text(1.1, 1.1, string.ascii_uppercase[1], transform=axes[0].transAxes,
 plt.show()
 
 
-# _Fig. XXX: Experimental data and regression results of CotA reaction with different enzyme incubation times._
+# _Fig. 13: Experimental data and regression results of CotA reaction with different enzyme incubation times._
 # 
-# Enzyme reactions without prior incubation showed the fastest reaction rate, whereas all reactions with prior incubation showed an approximately halved reaction rate (Fig. XXXA). Thereby, reactions with longer incubation time showed gradually reduced reaction rates with increased incubation time. Enzyme reactions, especially reactions without incubation, showed large deviations across replicates. This presumably resulted from inhomogeneous mixing or deviating enzyme concentration due to the small volume of enzyme solution, which was used to start the reactions.  
+# Enzyme reactions without prior incubation showed the fastest reaction rate, whereas all reactions with prior incubation showed an approximately halved reaction rate (Fig. 13A). Thereby, reactions with longer incubation time showed gradually reduced reaction rates with increased incubation time. Enzyme reactions, especially reactions without incubation, showed large deviations across replicates. This presumably resulted from inhomogeneous mixing or deviating enzyme concentration due to the small volume of enzyme solution, which was used to start the reactions.  
 # Since the true reaction rate of reactions without prior incubation was highly uncertain and showed mixing issued, the respective data was not used to estimate the enzyme's time-dependent inactivation rate.
-# Based on linear regression of the initial reaction rates, excluding the reaction without prior incubation, the enzyme activity is approximately halved after 105 min (Fig. XXXB). This assumes validity of extrapolation.
+# Based on linear regression of the initial reaction rates, excluding the reaction without prior incubation, the enzyme activity is approximately halved after 105 min (Fig. 13B). This assumes validity of extrapolation.
 # 
 # ## Enzyme kinetics experiment
 # 
@@ -216,15 +216,15 @@ axes[1].text(1.1, 1.1, string.ascii_uppercase[1], transform=axes[0].transAxes,
 fig.show()
 
 
-# _Fig XXX. ABTS radical concentration over the time-course of CotA reaction._
+# _Fig 14. ABTS radical concentration over the time-course of CotA reaction._
 # 
-# The provided reaction data showed large deviations between individual repeats of reactions with identical initial ABTS concentrations. Especially for initial ABTS concentrations above 0.1 mM (Fig. XXXA).
-# Furthermore, visual analysis of the initial measurement points indicated that reactions with an initial substrate concentration of 0.1 mM had an increased enzyme concentration compared to others. This is evident, because the mentioned reactions show the highest concentration at the initial measurement time (Fig. XXXB). The order of initial measurement points is expected to reflect the initial substrate concentrations, since the substrate slightly absorbs at the product detection wavelength. The substrate of the mentioned reaction was likely applied correctly, since the final concentration at 70 min is between reactions with the next lower and next higher initial substrate concentration.
+# The provided reaction data showed large deviations between individual repeats of reactions with identical initial ABTS concentrations. Especially for initial ABTS concentrations above 0.1 mM (Fig. 14A).
+# Furthermore, visual analysis of the initial measurement points indicated that reactions with an initial substrate concentration of 0.1 mM had an increased enzyme concentration compared to others. This is evident, because the mentioned reactions show the highest concentration at the initial measurement time (Fig. 14B). The order of initial measurement points is expected to reflect the initial substrate concentrations, since the substrate slightly absorbs at the product detection wavelength. The substrate of the mentioned reaction was likely applied correctly, since the final concentration at 70 min is between reactions with the next lower and next higher initial substrate concentration.
 # 
 # ## Kinetic parameter estimation
 # 
 # ### Quality control through modeling
-# An initial parameter estimation considering enzyme inactivation was conducted in order to check further systematic deviations. As a result, reactions with an initial ABTS concentration of 0.05 mM showed to deviate from all other reactions, since the respective product concentrations is lower than the model predicted. The mentioned measurements were the only ones where the measured concentration was distinctly and systematically below that of the model (Fig. xxxA). Hence indicating that either less substrate or enzyme than defined in the protocol was applied to the respective reactions. In consequence, data from reactions with an initial substrate concentration of 0.05 and 0.1 mM were excluded from parameter estimation, because the identified systematic deviations in reaction conditions would distort the results.
+# An initial parameter estimation considering enzyme inactivation was conducted in order to check further systematic deviations. As a result, reactions with an initial ABTS concentration of 0.05 mM showed to deviate from all other reactions, since the respective product concentrations is lower than the model predicted. The mentioned measurements were the only ones where the measured concentration was distinctly and systematically below that of the model (Fig. 15A). Hence indicating that either less substrate or enzyme than defined in the protocol was applied to the respective reactions. In consequence, data from reactions with an initial substrate concentration of 0.05 and 0.1 mM were excluded from parameter estimation, because the identified systematic deviations in reaction conditions would distort the results.
 
 # In[ ]:
 
@@ -258,9 +258,9 @@ axes[1].text(1.1, 1.1, string.ascii_uppercase[1], transform=axes[0].transAxes,
 plt.tight_layout()
 
 
-# _Fig XXX: Identification of systematic deviations through kinetic modeling._
+# _Fig 15: Identification of systematic deviations through kinetic modeling._
 # 
-# By excluding the mentioned measurements with systematic issues, the model fit was improved (Fig xxxB). Additionally, the correlation between parameter estimates for $k_{cat}$ and $K_{m}$ was reduced from *r<sup>2</sup>* = 0.518 to 0.204.
+# By excluding the mentioned measurements with systematic issues, the model fit was improved (Fig 15B). Additionally, the correlation between parameter estimates for $k_{cat}$ and $K_{m}$ was reduced from *r<sup>2</sup>* = 0.518 to 0.204.
 # ### Parameter estimation with and without considering enzyme inactivation
 # 
 
@@ -312,9 +312,9 @@ axes[1][1].set_xlabel("time [min]")
 plt.tight_layout()
 
 
-# _Fig. XXX: Different kinetic models fitted to CotA reaction data_
+# _Fig. 16: Different kinetic models fitted to CotA reaction data_
 # 
-# Out of the models without enzyme inactivation, product inhibition models showed the lowest AIC. Qualitatively, the inhibition models  described the the progress curve of the reaction (Fig. xxxC and D)
+# Out of the models without enzyme inactivation, product inhibition models showed the lowest AIC. Qualitatively, the inhibition models  described the the progress curve of the reaction (Fig. 16C and 16D) similarly to the best fitting model (Fig. 16A)
 # 
 # ## Project discussion
 # 
