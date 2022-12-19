@@ -189,11 +189,14 @@ So far, EnzymePynetics neither converts nor validates units of the measurement d
 
 EnzymePynetics was published on the Python packaging index ([PyPI](https://pypi.org/project/EnzymePynetics/)) whereas the source code is available on [GitHub](https://github.com/haeussma/EnzymePynetics)
 
-## Model assessment
+## Model comparison
 
 The kinetic model, which describes the experimental data the best, was selected based on AIC, standard deviation of parameter estimates, and visual fit between measurement data and fitted model. AIC served as a statistical metric for information loss, which allows to relatively compare different models with a different number of parameters for a given data set. Hence, AIC can be applied for model selection {cite}`arnold2010uninformative`, {cite}`akaike1998information`. Thereby, models with a lower AIC indicate less information loss.
 Since AIC is based on the chi-square statistic, it does not consider the standard deviation of the estimated parameters of a model. Therefore, standard deviation was additionally considered in model selection. Models with low standard deviation were therefore, preferred over models with a high standard deviation. Furthermore, fit quality was assessed visually by confirming that the model describes the progress curve of the experimental data.
 
 ## Jupyter Notebook
+
+All developed tools were deployed in Jupyter Notebooks {cite}`kluyver2016jupyter` for data analysis within an Python environment. A Jupyter Notebook is a digital document containing code cells and text cells. Thereby, executable code with its output can be supplemented with narrative text, figures, and equations. Hence, providing an entry level scientific programming environment. Due to the documentation capability the analysis is comprehensible even for non-programmers.  
+Jupyter notebooks
 
 ## Jupyter Book

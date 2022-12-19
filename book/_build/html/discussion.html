@@ -364,8 +364,13 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#what-makes-this-workflow-experimental-data-for-enzyme-kinetics">
-   What makes this workflow experimental data for enzyme kinetics
+  <a class="reference internal nav-link" href="#what-makes-the-workflow-repeatable-reproducible-and-fair">
+   What makes the workflow repeatable, reproducible, and FAIR?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#importance-of-precise-kinetic-parameters-for-biocatalysis">
+   Importance of precise kinetic parameters for biocatalysis
   </a>
  </li>
 </ul>
@@ -398,8 +403,13 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#what-makes-this-workflow-experimental-data-for-enzyme-kinetics">
-   What makes this workflow experimental data for enzyme kinetics
+  <a class="reference internal nav-link" href="#what-makes-the-workflow-repeatable-reproducible-and-fair">
+   What makes the workflow repeatable, reproducible, and FAIR?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#importance-of-precise-kinetic-parameters-for-biocatalysis">
+   Importance of precise kinetic parameters for biocatalysis
   </a>
  </li>
 </ul>
@@ -436,18 +446,21 @@ In scenario D individual enzyme reactions showed to have deviating substrate con
 In two projects the progress-curve of the reactions indicate a lag phase after reaction start. In one case, small pipetting volumes of enzyme to start the reaction led to inhomogeneous mixing and thus increasing reaction rates until the enzyme was distributed evenly. In result, the project partners were advised to increase the pipetting volume of the enzyme solution.
 In another case, temperature incubation effects in MTP caused by prolonged assay preparation times resulted in an initial lag phase. Due to small reaction volumes and low mass, MTPs have a low heat capacity and thus high susceptibility to temperature change. Hence, project partners were advised to pre-incubate the MTP within the photometer at reaction temperature for 5 min and then start the reaction by adding enzyme as quick as possible.
 In another project, modeling predictions of the estimated <span class="math notranslate nohighlight">\(k_{cat}\)</span> and <span class="math notranslate nohighlight">\(K_{m}\)</span> together with their correlation were used to iteratively improve the design of the enzyme assay. Thereby, the appropriate enzyme concentration and substrate concentration range were identified through multiple round of lab experimental with subsequent kinetic modeling.</p>
-<p>Assessing the data quality through modeling proved to be a strength of fitting integrated rate equations to continuous assay data from photometric measurements. Besides quality control, the progress curve analysis method offer several advantages over the predominantly applied initial rates method <span id="id3">[<a class="reference internal" href="references.html#id24" title="Qingxiu Tang and Thomas S Leyh. Precise, facile initial rate measurements. The Journal of Physical Chemistry B, 114(49):16131–16136, 2010.">Tang and Leyh, 2010</a>]</span>, if more than two measurement points exist. A key advantage is reproducibility of the analysis. In initial rate kinetics no consensus on the linear reaction period exists. Hence, the linear period on which the kinetic parameters are estimated on is manually determined or assumed. Ultimately, the resulting parameters are influenced by the choice of linear period. By only evaluating the linear reaction period, only a subset of all available data is utilized for parameter estimation.</p>
-<p>This emphasizes the advantages of progress curve analysis over the predominately used initial rates method <span id="id4">[<a class="reference internal" href="references.html#id24" title="Qingxiu Tang and Thomas S Leyh. Precise, facile initial rate measurements. The Journal of Physical Chemistry B, 114(49):16131–16136, 2010.">Tang and Leyh, 2010</a>]</span>. Although results from initial rate kinetics can as well be visualized as a double-reciprocal (Lineweaver–Burk) diagram</p>
-<p>This is because of both the method and the data which is required for the method.</p>
-<p>Kinetic parameters are mostly determined by initial rates method, whereas initial rates of reactions with varying substrate concentration are determined and either . Thereby, rates from a subjectively chosen linear time period of the reaction are chosen</p>
+<p>Assessing the data quality through modeling proved to be a strength of fitting integrated rate equations to continuous assay data from photometric measurements and hence the workflow. Besides quality control, the progress curve analysis method offers several advantages over the predominantly applied initial rates method <span id="id3">[<a class="reference internal" href="references.html#id24" title="Qingxiu Tang and Thomas S Leyh. Precise, facile initial rate measurements. The Journal of Physical Chemistry B, 114(49):16131–16136, 2010.">Tang and Leyh, 2010</a>]</span>, if more than two measurement points exist. A key advantage is reproducibility of the analysis. In initial rate kinetics no consensus on the linear reaction period on which the kinetic parameters are estimated exists. Hence, the linear period is manually determined or only assumed. Ultimately, the resulting parameters are influenced by the choice of linear period. Additionally, only a subset of all available data is utilized for parameter estimation, making the parameter estimation less robust for individual measurement errors.
+In contrast, progress curve analysis allows the utilization of reaction data beyond the linear period.<br />
+Furthermore, progress curve analysis is more transparent about the underlying data compared</p>
+<ul class="simple">
+<li><p>relative absolute</p></li>
+<li><p>linearization</p></li>
+</ul>
 <p>Cumulative error, which ultimately leads to unreproducible kinetic parameters</p>
 <ul class="simple">
 <li><p>Lab vs computer documentation</p></li>
 <li><p>initial rates vs progress-curve analysis</p></li>
 </ul>
 </section>
-<section id="what-makes-this-workflow-experimental-data-for-enzyme-kinetics">
-<h2>What makes this workflow experimental data for enzyme kinetics<a class="headerlink" href="#what-makes-this-workflow-experimental-data-for-enzyme-kinetics" title="Permalink to this headline">#</a></h2>
+<section id="what-makes-the-workflow-repeatable-reproducible-and-fair">
+<h2>What makes the workflow repeatable, reproducible, and FAIR?<a class="headerlink" href="#what-makes-the-workflow-repeatable-reproducible-and-fair" title="Permalink to this headline">#</a></h2>
 <p>Availability of raw data is the prerequisite to reproduce the results of an data analysis process.</p>
 <p>An secondary necessity for reproducibility is documentation. Thereby, both laboratory procedures as well as of data analytic procedures need to be documented sufficiently to make experimental</p>
 <ul class="simple">
@@ -484,6 +497,10 @@ sharing the raw data and comprehensive description of individual data treatment 
 <li><p>great documentation (FAIR)</p></li>
 </ul>
 <p>In this project, a robust and FAIR workflow from analytical raw-data to kinetic parameters was established. Thereby, the output of a analytical device was used directly as the input of the modeling pipeline.</p>
+</section>
+<section id="importance-of-precise-kinetic-parameters-for-biocatalysis">
+<h2>Importance of precise kinetic parameters for biocatalysis<a class="headerlink" href="#importance-of-precise-kinetic-parameters-for-biocatalysis" title="Permalink to this headline">#</a></h2>
+<p>With upcoming big data technologies like</p>
 </section>
 </section>
 

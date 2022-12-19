@@ -420,8 +420,8 @@ title="Print to PDF"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#model-assessment">
-   Model assessment
+  <a class="reference internal nav-link" href="#model-comparison">
+   Model comparison
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -520,8 +520,8 @@ title="Print to PDF"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#model-assessment">
-   Model assessment
+  <a class="reference internal nav-link" href="#model-comparison">
+   Model comparison
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -683,13 +683,15 @@ So far, EnzymePynetics neither converts nor validates units of the measurement d
 <p>EnzymePynetics was published on the Python packaging index (<a class="reference external" href="https://pypi.org/project/EnzymePynetics/">PyPI</a>) whereas the source code is available on <a class="reference external" href="https://github.com/haeussma/EnzymePynetics">GitHub</a></p>
 </section>
 </section>
-<section id="model-assessment">
-<h2>Model assessment<a class="headerlink" href="#model-assessment" title="Permalink to this headline">#</a></h2>
+<section id="model-comparison">
+<h2>Model comparison<a class="headerlink" href="#model-comparison" title="Permalink to this headline">#</a></h2>
 <p>The kinetic model, which describes the experimental data the best, was selected based on AIC, standard deviation of parameter estimates, and visual fit between measurement data and fitted model. AIC served as a statistical metric for information loss, which allows to relatively compare different models with a different number of parameters for a given data set. Hence, AIC can be applied for model selection <span id="id7">[<a class="reference internal" href="references.html#id16" title="Todd W Arnold. Uninformative parameters and model selection using akaike's information criterion. The Journal of Wildlife Management, 74(6):1175–1178, 2010.">Arnold, 2010</a>]</span>, <span id="id8">[<a class="reference internal" href="references.html#id17" title="Hirotogu Akaike. Information theory and an extension of the maximum likelihood principle. In Selected papers of hirotugu akaike, pages 199–213. Springer, 1998.">Akaike, 1998</a>]</span>. Thereby, models with a lower AIC indicate less information loss.
 Since AIC is based on the chi-square statistic, it does not consider the standard deviation of the estimated parameters of a model. Therefore, standard deviation was additionally considered in model selection. Models with low standard deviation were therefore, preferred over models with a high standard deviation. Furthermore, fit quality was assessed visually by confirming that the model describes the progress curve of the experimental data.</p>
 </section>
 <section id="jupyter-notebook">
 <h2>Jupyter Notebook<a class="headerlink" href="#jupyter-notebook" title="Permalink to this headline">#</a></h2>
+<p>All developed tools were deployed in Jupyter Notebooks <span id="id9">[<a class="reference internal" href="references.html#id35">Kluyver <em>et al.</em>, 2016</a>]</span> for data analysis within an Python environment. A Jupyter Notebook is a digital document containing code cells and text cells. Thereby, executable code with its output can be supplemented with narrative text, figures, and equations. Hence, providing an entry level scientific programming environment. Due to the documentation capability the analysis is comprehensible even for non-programmers.<br />
+Jupyter notebooks</p>
 </section>
 <section id="jupyter-book">
 <h2>Jupyter Book<a class="headerlink" href="#jupyter-book" title="Permalink to this headline">#</a></h2>
