@@ -2,14 +2,16 @@
 
 ## Workflow for enzyme kinetics parameter estimation
 
-In this work, a Python-based analysis workflow for kinetic parameter estimation of enzyme reactions was developed. The workflow itself consists of the steps (i) data acquisition, (ii) raw data preparation, (iii) concentration calculation, (iv) quality control, (v) modeling, and (vi) saving of results. The workflow was deployed in Jupyter Notebooks, which combine scientific computing with extensive documentation capabilities and are thus conclusive for programmers as well as for non-programmers. For precise concentration calculations was well as kinetic parameter estimation the two Python modules CaliPytion and EnzymePynetics were respectively developed over the course of this work.
+In this work, a Python-based analysis workflow for kinetic parameter estimation of enzyme reactions was developed. The workflow itself consists of the steps (i) data acquisition, (ii) raw data preparation, (iii) concentration calculation, (iv) quality control, (v) modeling, and (vi) saving of results. For precise concentration calculations was well as kinetic parameter estimation the two Python modules CaliPytion and EnzymePynetics were respectively developed over the course of this work.
 The two packages were designed to seamlessly interact with EnzymeML documents which were modified using PyEnzyme and thus allowing an continuous data stream from analytical raw data to kinetic parameters.  
 Starting from raw data of photometric measurements, which are stored in an EnzymeML document, concentration values are calculated by CaliPytion, whereupon kinetic parameters are determined by EnzymePynetics. Finally, the modeling results are written back to the EnzymeML document via PyEnzyme (Fig. 1).
 
 ![Fig. 1](images/concept_workflow.png)
 _Fig. 1: Components of the kinetic parameter estimation workflow for enzyme reaction data._
 
-A key aspect of the workflow design was to enable reproducible analysis. Therefore, documentation of raw data treatment prior to modeling is vital. As a result, Jupyter Notebooks were used as a platform, since they allow to write text and code within the same document. In consequence, data analysis as well as documentation of data analysis are unified within the same document. Ultimately, each data treatment step from raw data to kinetic parameters is comprehensively documented.
+A key aspect of the workflow design was to enable reproducible analysis. Therefore, documentation of raw data treatment prior to modeling is vital. As a result, Jupyter Notebooks were used as a platform, since they allow to write text and code within the same document. In consequence, data analysis as well as the documentation of data analysis are unified within the same document. Ultimately, each data treatment step from raw data to kinetic parameters is comprehensively documented.
+
+xxx#TODO check necessity of packages here
 
 ### CaliPytion
 

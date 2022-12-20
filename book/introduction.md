@@ -6,7 +6,9 @@ Therefore, reproducibility is not an absolute term but rather relative, dependin
 
 ## Experimental reproducibility advances in data handling
 
-With scope on biocatalysis, all laboratory as well as data analytic procedures, need to be described for methodological reproducibility. Thereby, laboratory procedures include protocols how reagents as well as biological materials were crated, as well as protocols on measurement procedures. For that purpose, the STRENDA guidelines were developed, which define minimum reporting standards for enzyme experiments. The [guidelines]`https://www.beilstein-institut.de/en/projects/strenda/guidelines/` specify
+With regard to biocatalysis, all laboratory as well as data analytic procedures, need to be described for methodological reproducibility. Thereby, laboratory procedures include protocols how reagents as well as biological materials were crated, as well as protocols on measurement procedures. For that purpose, the STRENDA guidelines were developed, which define minimum reporting standards for enzyme experiments. The [guidelines](https://www.beilstein-institut.de/en/projects/strenda/guidelines/) specify
+
+FAIR guiding principles
 
 {cite}`pleiss2021standardized`
 
@@ -21,6 +23,8 @@ Same applies for kinetic parameter results from enzyme kinetics experiments. Kin
 The lack of raw data is therefore described as one of the reasons for the reproducibility crisis {cite}`miyakawa2020no`.
 
 Whereas procedures of wet-lab experiments are commonly described in a sufficient manner to technically repeat the experiment, data analysis procedures are not.
+
+According to Miyakawa et. al., 'absence of raw data means the absence of science' {cite}`miyakawa2020no`
 
 - misspractive of science HARKing p-hacking, selective reporting, poor research design
 - lack of raw data

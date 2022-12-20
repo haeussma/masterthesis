@@ -14,7 +14,7 @@ EnzymeML documents were created using the EnzymeML Excel template, in combinatio
 
 ### Saving of modeling results
 
-Modeling results from parameter estimation were written back to the EnzymeML document, containing the measurement data
+Modeling results from parameter estimation were written back to the EnzymeML document, which contained the measurement data by using PyEnzyme
 
 ## CaliPytion
 
@@ -129,8 +129,8 @@ Each kinetic models therefore consists of a set of ordinary differential equatio
 ### Run parameter estimation
 
 **Initialization**  
-Whereas the `EnzymeKineticsExperiment` object solely serves as data container,
-the `ParameterEstimator` harbors the functionalities for parameter estimation. Data can be provided as an `EnzymeKineticsExperiment` object. Alternatively, an `EnzymeMLDocument` documents can be provided as the data source via PyEnzyme by calling the `.from_EnzymeML()` method. Within the method, the id of the measured species needs to be specified according to the nomenclature within the `EnzymeMLDocument`. If the document contains information on an inhibitor, the respective id needs to be provided as well, if the inhibition constant should be estimated for the inhibitor.
+Whereas the `EnzymeKineticsExperiment` object solely serves as a data container,
+the `ParameterEstimator` harbors the functionalities for parameter estimation. Data can be provided as an `EnzymeKineticsExperiment` object. Alternatively, an `EnzymeMLDocument` documents can be provided as the data source via PyEnzyme by calling the `.from_EnzymeML()` method. Within the method, the id of the measured species needs to be specified according to the nomenclature of the `EnzymeMLDocument`. If the document contains information on an inhibitor, the respective id needs to be provided as well, if the inhibition constant should be estimated for the respective inhibitor.
 
 Initially, missing data for the fitting process is calculated based on the assumption of mass conservation. Thereby, missing product concentration $P$ is calculated based on the given substrate measurement data and the specified initial substrate concentration $S_{0}$ for each measurement $t$ ({eq}`missing_product`). If product data is provided, missing substrate concentrations are calculated accordingly ({eq}`missing_substrate`).
 
@@ -148,39 +148,10 @@ S_{t} = S_{0} - P_{t}
 After the `ParameterEstimator` is initialized, all kinetic models are initialized by calling the `.fit_models()` method. Furthermore, it can be determined whether enzyme inactivation should be considered for modeling. Depending on whether an inhibitor was specified, the models are initialized accordingly. If no inhibitor was specified, product and substrate inhibition models are initialized besides the irreversible Michaelis model. If inhibitor data was provided, the inhibition models are initialized with concentration data of the inhibitor. Thereafter, kinetic parameters of each model are initialized with estimates based on the highest reaction rate in the dataset. For minimization the parameter space is limited to ± 1000-fold of the initial parameter estimates.  
 After the all models are fitted, an overview table is printed which lists all the kinetic parameters of each model together with the respective 1σ standard deviation in percent. The table is sorted by ascending AIC.
 
-```python
-from EnzymePynetics.tools.parameterestimator import ParameterEstimator
-from EnzymePynetics.core.enzymekineticsexperiment import EnzymeKineticsExperiment
-import pyenzyme
-
-# Define data
-experimental_data = EnzymeKineticsExperiment(
-    pH=7,
-    reactant_name="test substance",
-    ...)
-
-enzymeml_document = pyenzyme.EnzymeMLDocument.fromFile("enzymeML_dataset.omex")
-
-# Initialize the parameter estimator from an 'EnzymeKineticsExperiment' instance
-estimator = ParameterEstimator(data=experimental_data)
-
-# ... or directly from an EnzymeML document.
-estimator = ParameterEstimator.from_EnzymeML(
-    enzmldoc=enzymeml_document,
-    reactant_id="s1",
-    measured_species="product",
-    inhibitor_id="s2")
-
-# Fit experimental data to kinetic models and get the fit report of all models
-estimator.fit_models()
-
-# Visualize data with the best fitting model
-estimator.visualize()
-```
-
 **Visualization**  
-After model fitting, the modeling results can be visualized by calling the `.visualize()` method. The visualize method was implemented utilizing Matplotlib {cite}`caswell2020matplotlib` and visualized the measurement data together with the fitted model. By default, the measurement data is visualized as mean values with the corresponding standard deviations, if enzyme reactions were carried out in replicates. If the experiment data contained reactions with different inhibitor concentrations, individual inhibitor concentrations are denoted by different markers.  
-By default the best fitting model according AIC is visualized. Different models can be visualized by passing the name of the respective model to the function call. Besides the figure, an detailed statistical fit report is printed by default.
+After model fitting, the modeling results can be visualized by calling the `.visualize()` method, which was implemented utilizing Matplotlib {cite}`caswell2020matplotlib`.
+Thereby, the measurement data is visualized together with the fitted kinetic model. If the experiment was carried out in replicates, mean values of the measurement data with the corresponding standard deviations are shown. If the experiment data contained reactions with different inhibitor concentrations, individual inhibitor concentrations are denoted by unique markers.  
+By default the best fitting model according AIC is visualized. Different models can be visualized by passing the name of the respective model to the function call. Besides the figure, an detailed statistical fit report is printed, if not specified otherwise.
 
 **Data units**
 So far, EnzymePynetics neither converts nor validates units of the measurement data. Hence, all data needs to be provided within the same molar or mass unit. Only the concentration unit of the inhibitor may differ from all other data units.
@@ -191,19 +162,19 @@ EnzymePynetics was published on the Python packaging index ([PyPI](https://pypi.
 
 ## Model comparison
 
-The kinetic model, which describes the experimental data the best, was selected based on AIC, standard deviation of parameter estimates, and visual fit between measurement data and fitted model. AIC served as a statistical metric for information loss, which allows to relatively compare different models with a different number of parameters for a given data set. Hence, AIC can be applied for model selection {cite}`arnold2010uninformative`, {cite}`akaike1998information`. Thereby, models with a lower AIC indicate less information loss.
-Since AIC is based on the chi-square statistic, it does not consider the standard deviation of the estimated parameters of a model. Therefore, standard deviation was additionally considered in model selection. Models with low standard deviation were therefore, preferred over models with a high standard deviation. Furthermore, fit quality was assessed visually by confirming that the model describes the progress curve of the experimental data.
+The kinetic model, which describes the experimental data the best, was selected based on AIC, standard deviation of parameter estimates, and visual fit between measurement data and fitted model. AIC served as a statistical metric for information loss, which allows to relatively compare different models with differing number of parameters for a given data set. Hence, AIC can be applied for model selection {cite}`arnold2010uninformative`, {cite}`akaike1998information`. Thereby, models with a lower AIC indicate less information loss.
+Since AIC is based on the chi-square statistic, it does not consider the standard deviation of the estimated parameters of a model. Therefore, standard deviation was additionally considered in model selection. Models with low standard deviation were therefore preferred over models with a high standard deviation. Furthermore, fit quality was assessed visually by confirming that the model describes the progress curve of the experimental data.
 
 ## Jupyter Notebook
 
-All developed tools were deployed in Jupyter Notebooks {cite}`kluyver2016jupyter` for data analysis within an Python environment. A Jupyter Notebook is a digital document containing code cells and text cells. Thereby, executable code with its output can be supplemented with narrative text, figures, and equations. Hence, providing an scientific programming environment with a low entry barrier.
+All developed tools were deployed in Jupyter Notebooks {cite}`kluyver2016jupyter` for data analysis within a Python environment. A Jupyter Notebook is a digital document containing code cells and text cells. Thereby, executable code with its corresponding output can be supplemented with narrative text, figures, and equations. Hence, providing an scientific programming environment with a low entry barrier.
 Besides the documentation capabilities, notebooks can be uploaded to platforms like GitHub or be deployed with Binder {cite}`ragan2018binder`.
-GitHub is a cloud-based Git repository, which enables versioning as well as collaborative working on projects involving any kind of code. Besides GitHub, sharing of Jupiter Notebooks is possible with the open-source project Binder, which allows hosting of notebooks. Thus, Jupyter Notebooks can be shared in an executable form, which is independent from the operating system and the location of the used. Only an internet connection and a browser is necessary.
-In result, Jupyter Notebooks, which are executable through Binder, form a user-friendly environment for scientific data analysis. Due to the extensive documentation capabilities of Jupyter Notebooks, the analysis workflow is comprehensible and accessible for non-programmers.
+GitHub is a cloud-based Git repository, which enables versioning as well as collaborative working on projects involving any kind of code. Besides GitHub, sharing of Jupiter Notebooks is possible with the open-source project Binder, which allows hosting of notebooks. Thus, Jupyter Notebooks can be shared in an executable form, which is independent from the operating system and the location of the user. Only an internet connection and a browser is necessary.
+In result, Jupyter Notebooks, which are executable through Binder, form a user-friendly environment for scientific data analysis. Due to the extensive documentation capabilities of Jupyter Notebooks, the analysis workflow is comprehensible and accessible for programmers as well as for non-programmers.
 
 ## Jupyter Book
 
-The written thesis, except for the cover page, was entirely conceptualized as a Jupyter Book, to enable reproducible data analysis of enzyme reaction which is compliant to FAIR data principles.
+The written thesis, except for the cover page, was entirely conceptualized as a Jupyter Book, enabling reproducible data analysis of enzyme reaction which is compliant to FAIR data principles.
 A Jupyter Book is an open-source tool to incorporate computational material in publication-quality books {cite}`jupyterbook_2020`. Thereby, Jupyter Notebooks can natively be integrated in Jupyter Books. Thus, making all advantages of the notebook also available in the book.
-Jupyter Books allow text formatting with Markdown, which is a simple markdown language. Furthermore, Jupyter Book supports cross-referencing, citations, and the numbering of equations.
-Along with all data, the final and interactive book was deployed on GitHub Pages. The printed versions were generated by exporting the html-version of the book to pdf.
+Jupyter Books allow text formatting with Markdown, which is a simple markdown language. Furthermore, Jupyter Book supports cross-referencing, citations, and numbering of equations.
+Along with all data, the final and interactive book was deployed on GitHub Pages whereas the print version was generated by exporting the html-version of the book to pdf.

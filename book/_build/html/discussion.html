@@ -359,17 +359,13 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#fairness-of-the-parameter-estimation-workflow">
-   FAIRness of the parameter estimation workflow
+  <a class="reference internal nav-link" href="#fairness">
+   FAIRness
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id4">
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#methods-reproducibility-of-the-parameter-estimation-workflow">
-   Methods reproducibility of the parameter estimation workflow
+  <a class="reference internal nav-link" href="#reproducibility-of-the-workflow-for-kinetic-parameter-estimation">
+   Reproducibility of the workflow for kinetic parameter estimation
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -412,17 +408,13 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#fairness-of-the-parameter-estimation-workflow">
-   FAIRness of the parameter estimation workflow
+  <a class="reference internal nav-link" href="#fairness">
+   FAIRness
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id4">
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#methods-reproducibility-of-the-parameter-estimation-workflow">
-   Methods reproducibility of the parameter estimation workflow
+  <a class="reference internal nav-link" href="#reproducibility-of-the-workflow-for-kinetic-parameter-estimation">
+   Reproducibility of the workflow for kinetic parameter estimation
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -466,8 +458,9 @@ In two projects the progress-curve of the reactions indicate a lag phase after r
 In another case, temperature incubation effects in MTP caused by prolonged assay preparation times resulted in an initial lag phase. Due to small reaction volumes and low mass, MTPs have a low heat capacity and thus high susceptibility to temperature change. Hence, project partners were advised to pre-incubate the MTP within the photometer at reaction temperature for 5 min and then start the reaction by adding enzyme as quick as possible.
 In another project, modeling results of the estimated <span class="math notranslate nohighlight">\(k_{cat}\)</span> and <span class="math notranslate nohighlight">\(K_{m}\)</span> were used to iteratively improve the design of the enzyme assay. In addition, the correlation between the aforementioned parameters was used as a measure to ensure that the highest substrate concentration applied was sufficiently high and thus the kinetic parameters could be determined independently.
 Thereby, the appropriate enzyme concentration and substrate concentration range were identified through multiple round of lab experimental with subsequent kinetic modeling.</p>
-<p>Assessing the data quality through modeling and enhancing assay designs proved to be a strength of the implemented progress curve method on which the parameter estimation of this workflow is based on. In contrast to the predominantly applied initial rates method <span id="id3">[<a class="reference internal" href="references.html#id24" title="Qingxiu Tang and Thomas S Leyh. Precise, facile initial rate measurements. The Journal of Physical Chemistry B, 114(49):16131–16136, 2010.">Tang and Leyh, 2010</a>]</span>, the progress curve method offers intrinsic advantages with regard to methods reproducibility providing that continuous assay data exist.
+<p>Assessing the data quality through modeling and enhancing assay designs proved to be a strength of the implemented progress curve method on which the parameter estimation of this workflow is based on. In contrast to the predominantly applied initial rates method <span id="id3">[<a class="reference internal" href="references.html#id24" title="Qingxiu Tang and Thomas S Leyh. Precise, facile initial rate measurements. The Journal of Physical Chemistry B, 114(49):16131–16136, 2010.">Tang and Leyh, 2010</a>]</span>, the progress curve method offers intrinsic advantages with regard to methods reproducibility.
 In initial rate kinetics no consensus on the linear reaction period on which the kinetic parameters are estimated exists. Hence, the linear period is manually determined or only assumed. Ultimately, the resulting parameters are influenced by the choice of linear period. For progress curve analysis the entire dataset of an enzyme assay is used. If the fit statistics reveal that the data is not in accordance with the model, either the assay should be repeated due to an underlying issue or the model should be questioned. Contrarily, initial rates method can always be applied by arbitrarily choosing any linear subset or only the initial two data points of an time course data set. In discussions with project partners this showed to be a common practice although scientifically at least questionable, depending on the circumstances.</p>
+<p><strong>importance of percise parameters and how my workflow helps</strong></p>
 <p>fggf #TODO Importance of precise kinetic parameters for biocatalysis
 With upcoming big data technologies like</p>
 <p>Cumulative error, which ultimately leads to unreproducible kinetic parameters</p>
@@ -475,37 +468,36 @@ With upcoming big data technologies like</p>
 <li><p>initial rates vs progress-curve analysis</p></li>
 </ul>
 </section>
-<section id="fairness-of-the-parameter-estimation-workflow">
-<h2>FAIRness of the parameter estimation workflow<a class="headerlink" href="#fairness-of-the-parameter-estimation-workflow" title="Permalink to this headline">#</a></h2>
-<p>fair data management comes along with fair science</p>
-<p>An secondary necessity for reproducibility is documentation. Thereby, both laboratory procedures as well as of data analytic procedures need to be documented sufficiently to make experimental</p>
+<section id="fairness">
+<h2>FAIRness<a class="headerlink" href="#fairness" title="Permalink to this headline">#</a></h2>
+<p>FAIR science</p>
+<p>FAIR guiding principles are not exclusive to data but include methods as well as entire workflows and are a best practice in data steward ship<span id="id4">[<a class="reference internal" href="references.html#id11" title="Mark D Wilkinson, Michel Dumontier, Ij J Aalbersberg, G Appleton, M Axton, A Baak, N Blomberg, JW Boiten, LB da Silva Santos, PE Bourne, and others. The fair guiding principles for scientific data management and stewardship. sci data 3: 160018. 2016.">Wilkinson <em>et al.</em>, 2016</a>]</span>. Thus, FAIR guiding principles were implemented on multiple levels of this thesis. On the data level, all experimental data as well as the modeling results were stored in EnzymeML files, which are compliant with FAIR data principles <span id="id5">[<a class="reference internal" href="references.html#id4" title="Jürgen Pleiss. Standardized data, scalable documentation, sustainable storage–enzymeml as a basis for fair data management in biocatalysis. ChemCatChem, 13(18):3909–3913, 2021.">Pleiss, 2021</a>]</span> <span id="id6">[]</span>. On a methods level, the workflow and all of its components were designed in a FAIR fashion.<br />
+The Python packages are findable and accessible on PyPI and GitHub, which present the most important distribution platforms for Python code. The software is interoperable with other software. This was achieved by segregating the data model from the functionality of the software. Hence other Python tools can utilize the functionalities of CaliPytion and EnzymePynetics by serving the underlying data models. Thus no modifications on the software functionalities are necessary. Furthermore, the data model and its vocabulary is described in the specifications of <a class="reference external" href="https://github.com/FAIRChemistry/CaliPytion/blob/main/specifications/CalibrationModel.md">CaliPytion</a> as well as <a class="reference external" href="https://github.com/haeussma/EnzymePynetics/blob/main/specifications/EnzymeKinetics.md">EnzymePynetics</a>. Furthermore, the developed software packages are reusable, since the software can be installed and applied by anyone due to the documentation.<br />
+Many of the FAIR software principles also apply on workflow level. Accessibility is provided by storing the Jupyter Notebooks on GitHub. Interoperability is given by the modular design, which allows to integrate the workflow in other Python-based workflows, which also makes it reusable.</p>
+<p>einschränkung longtherm</p>
 <p>Furthermore, progress curve analysis is more transparent about the underlying data compared</p>
 <p>sharing the raw data and comprehensive description of individual data treatment steps,</p>
-<p><strong>Findable</strong></p>
-<p><strong>Accessible</strong></p>
-<p><strong>Interoperable</strong></p>
-<p><strong>Reusable</strong></p>
 <ul class="simple">
-<li><p>Packages are reusable</p></li>
-<li><p>Precision of parameters</p></li>
 <li><p>sophisticated methods, otherwise wrong conclusions (italian group)</p></li>
 </ul>
 <p><strong>Jupyter Notebook and Book</strong></p>
 <p>contemporary</p>
-<p>Besides the data analysis, this entire thesis was conceptualized adhering to FAIR data principles . In consequence, this thesis was written was a Jupyter Book, which allow to combine multiple Jupyter Notebooks with text chapters in a structured document. Ultimately, this thesis is findable and accessible on GitHub, interoperable through Binder and the Jupyter Notebook format itself. Hence, making the work of this thesis reusable in a state of the art manner.</p>
+<p>Besides the data analysis, this entire thesis was conceptualized adhering to FAIR data principles . In consequence, this thesis was written was a Jupyter Book, which allow to combine multiple Jupyter Notebooks with text chapters in a structured document. Ultimately, this thesis is findable and accessible on GitHub, interoperable through Binder and the Jupyter Notebook format itself. Hence, making the work of this thesis reusable in a contemporary</p>
 <p>Printed version is read twice, digital version unlimited hence optimized for digital experience</p>
 <ul class="simple">
 <li><p>Besides the methodology documentation is bad</p></li>
 <li><p>Need for documentation without limiting experimental possibilities -&gt; Jupyter notebooks</p></li>
 <li><p>great documentation (FAIR)</p></li>
 </ul>
-<p>In this project, a robust and FAIR workflow from analytical raw-data to kinetic parameters was established. Thereby, the output of a analytical device was used directly as the input of the modeling pipeline.</p>
 </section>
-<section id="id4">
-<h2><a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
-</section>
-<section id="methods-reproducibility-of-the-parameter-estimation-workflow">
-<h2>Methods reproducibility of the parameter estimation workflow<a class="headerlink" href="#methods-reproducibility-of-the-parameter-estimation-workflow" title="Permalink to this headline">#</a></h2>
+<section id="reproducibility-of-the-workflow-for-kinetic-parameter-estimation">
+<h2>Reproducibility of the workflow for kinetic parameter estimation<a class="headerlink" href="#reproducibility-of-the-workflow-for-kinetic-parameter-estimation" title="Permalink to this headline">#</a></h2>
+<p>Besides FAIR, science should also be fair.</p>
+<p>Reproducibility is a relative term which needs reference.</p>
+<p>In sum minimizing errors copying method, manual handling errors and (calculation)
+<strong>Methods reproducibility</strong></p>
+<p><strong>Results reproducibility</strong></p>
+<p>An secondary necessity for reproducibility is documentation. Thereby, both laboratory procedures as well as of data analytic procedures need to be documented sufficiently to make experimental</p>
 <p>Methods reproducibility is given</p>
 <ul class="simple">
 <li><p>Lab vs computer documentation</p></li>
@@ -514,7 +506,6 @@ With upcoming big data technologies like</p>
 </section>
 <section id="results-reproducibility-of-the-parameter-estimation-workflow">
 <h2>Results reproducibility of the parameter estimation workflow<a class="headerlink" href="#results-reproducibility-of-the-parameter-estimation-workflow" title="Permalink to this headline">#</a></h2>
-<p>In sum minimizing errors copying method, manual handling errors and (calculation)</p>
 </section>
 <section id="opportunities">
 <h2>opportunities:<a class="headerlink" href="#opportunities" title="Permalink to this headline">#</a></h2>
