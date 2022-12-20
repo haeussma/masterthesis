@@ -117,18 +117,13 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="abstract.html">
-   Abstract
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="acknowledgements.html">
    Acknowledgements
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="abbreviations.html">
-   Abbreviations
+  <a class="reference internal" href="abstract.html">
+   Abstract
   </a>
  </li>
  <li class="toctree-l1">
@@ -364,13 +359,27 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#what-makes-the-workflow-repeatable-reproducible-and-fair">
-   What makes the workflow repeatable, reproducible, and FAIR?
+  <a class="reference internal nav-link" href="#fairness-of-the-parameter-estimation-workflow">
+   FAIRness of the parameter estimation workflow
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#importance-of-precise-kinetic-parameters-for-biocatalysis">
-   Importance of precise kinetic parameters for biocatalysis
+  <a class="reference internal nav-link" href="#id4">
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#methods-reproducibility-of-the-parameter-estimation-workflow">
+   Methods reproducibility of the parameter estimation workflow
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#results-reproducibility-of-the-parameter-estimation-workflow">
+   Results reproducibility of the parameter estimation workflow
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#opportunities">
+   opportunities:
   </a>
  </li>
 </ul>
@@ -403,13 +412,27 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#what-makes-the-workflow-repeatable-reproducible-and-fair">
-   What makes the workflow repeatable, reproducible, and FAIR?
+  <a class="reference internal nav-link" href="#fairness-of-the-parameter-estimation-workflow">
+   FAIRness of the parameter estimation workflow
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#importance-of-precise-kinetic-parameters-for-biocatalysis">
-   Importance of precise kinetic parameters for biocatalysis
+  <a class="reference internal nav-link" href="#id4">
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#methods-reproducibility-of-the-parameter-estimation-workflow">
+   Methods reproducibility of the parameter estimation workflow
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#results-reproducibility-of-the-parameter-estimation-workflow">
+   Results reproducibility of the parameter estimation workflow
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#opportunities">
+   opportunities:
   </a>
  </li>
 </ul>
@@ -424,15 +447,11 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="discussion">
 <h1>Discussion<a class="headerlink" href="#discussion" title="Permalink to this headline">#</a></h1>
-<p>reproducibility:</p>
-<ul class="simple">
-<li><p>Data integrity</p></li>
-<li><p>Modeling documentation</p></li>
-</ul>
-<p>Hence, the analysis workflow was conceptualized starting from photometric measurement data. For that purpose, discussing the output format of the analytical device with the experimental partners proved to be valuable to plan the data acquisition process. Hence, a project specific parser function was established, which transferred the measurement data to the respective EnzymeML containing information on the measurement conditions. Thereby, error-prone and tedious manual copying between files was avoided, ensuring raw data integrity.</p>
+<p>Availability of raw data is the prerequisite to reproduce results of an data analysis process and additionally reinforces confidence in the validity of scientific findings.
+Hence, the analysis workflow was conceptualized starting from photometric measurement data. For that purpose, discussing the output format of the analytical device with the experimental partners proved to be valuable to plan the data acquisition process. Hence, a project specific parser function was established, which transferred the measurement data to the respective EnzymeML containing information on the measurement conditions. Thereby, error-prone and tedious manual copying between files was avoided, ensuring raw data integrity from the very start of the workflow.</p>
 <section id="data-integrity-through-accurate-concentration-calculation">
 <h2>Data integrity through accurate concentration calculation<a class="headerlink" href="#data-integrity-through-accurate-concentration-calculation" title="Permalink to this headline">#</a></h2>
-<p>Another aspect of data integrity in the developed workflow is the accurate concentration calculation based on the measured absorption signal. The relation between concentration to absorption signal of an analyte can be linear as well as non-liner. Therefore, wrong assumption of a linear relationship albeit the relation is better described non-linearly, leads to avoidable inaccuracy in concentration calculation <span id="id1">[<a class="reference internal" href="references.html#id14" title="Kang-Hung Hsu and Chiachung Chen. The effect of calibration equations on the uncertainty of uv–vis spectrophotometric measurements. Measurement, 43(10):1525–1531, 2010.">Hsu and Chen, 2010</a>]</span> <span id="id2">[<a class="reference internal" href="references.html#id15" title="Julia Martin, Alberto Romero Gracia, Agustín G Asuero, and others. Fitting nonlinear calibration curves: no models perfect. Journal of Analytical Sciences, Methods and Instrumentation, 7(01):1, 2017.">Martin <em>et al.</em>, 2017</a>]</span> and thus imprecise kinetic parameter estimates.
+<p>Another aspect of data integrity is the accurate concentration calculation based on the measured absorption signal. The relation between concentration to absorption signal of an analyte can be linear as well as non-liner. Therefore, wrong assumption of a linear relationship albeit the relation is better described non-linearly, leads to avoidable inaccuracy in concentration calculation <span id="id1">[<a class="reference internal" href="references.html#id14" title="Kang-Hung Hsu and Chiachung Chen. The effect of calibration equations on the uncertainty of uv–vis spectrophotometric measurements. Measurement, 43(10):1525–1531, 2010.">Hsu and Chen, 2010</a>]</span> <span id="id2">[<a class="reference internal" href="references.html#id15" title="Julia Martin, Alberto Romero Gracia, Agustín G Asuero, and others. Fitting nonlinear calibration curves: no models perfect. Journal of Analytical Sciences, Methods and Instrumentation, 7(01):1, 2017.">Martin <em>et al.</em>, 2017</a>]</span> and thus imprecise kinetic parameter estimates.
 Hence, concentration calculation based on extinction coefficients was discouraged, if the underlying relation between absorption and concentration of an analyte was not self-determined for the respective reaction system.
 To enable precise concentration calculation of linear and non-linear absorption to concentration relationships, CaliPytion was applied with analyte standards provided by the experimental partners.
 All of the analyzed standard curves, except for scenario C ABTS at pH 5, were best described by non-linear calibration equations based on their fit quality determined by AIC. Hence, uncertainties from concentration calculation were reduced and therefore their impact on the kinetic parameters reduced.</p>
@@ -443,54 +462,38 @@ All of the analyzed standard curves, except for scenario C ABTS at pH 5, were be
 By this method, errors with pipetting, mixing, and temperature equilibration during experimental preparation as well as issues with the experimental design itself were identified in different scenarios.<br />
 Systematic pipetting errors were disclosed by systematic deviations between the measurement data and the fitted model.
 In scenario D individual enzyme reactions showed to have deviating substrate concentrations from the assay protocol, whereas modeling without the presumably erroneous measurements resulted in a good fit between data and model as well as low standard deviation on the parameter estimates. Hence the experimental partners were advised to repeat the deviating measurement.<br />
-In two projects the progress-curve of the reactions indicate a lag phase after reaction start. In one case, small pipetting volumes of enzyme to start the reaction led to inhomogeneous mixing and thus increasing reaction rates until the enzyme was distributed evenly. In result, the project partners were advised to increase the pipetting volume of the enzyme solution.
+In two projects the progress-curve of the reactions indicate a lag phase after reaction start. In one case, small pipetting volumes of enzyme to start the reaction led to inhomogeneous mixing and thus increasing reaction rates until the enzyme was distributed evenly. As a measure, the project partners were advised to increase the pipetting volume of the enzyme solution.
 In another case, temperature incubation effects in MTP caused by prolonged assay preparation times resulted in an initial lag phase. Due to small reaction volumes and low mass, MTPs have a low heat capacity and thus high susceptibility to temperature change. Hence, project partners were advised to pre-incubate the MTP within the photometer at reaction temperature for 5 min and then start the reaction by adding enzyme as quick as possible.
-In another project, modeling predictions of the estimated <span class="math notranslate nohighlight">\(k_{cat}\)</span> and <span class="math notranslate nohighlight">\(K_{m}\)</span> together with their correlation were used to iteratively improve the design of the enzyme assay. Thereby, the appropriate enzyme concentration and substrate concentration range were identified through multiple round of lab experimental with subsequent kinetic modeling.</p>
-<p>Assessing the data quality through modeling proved to be a strength of fitting integrated rate equations to continuous assay data from photometric measurements and hence the workflow. Besides quality control, the progress curve analysis method offers several advantages over the predominantly applied initial rates method <span id="id3">[<a class="reference internal" href="references.html#id24" title="Qingxiu Tang and Thomas S Leyh. Precise, facile initial rate measurements. The Journal of Physical Chemistry B, 114(49):16131–16136, 2010.">Tang and Leyh, 2010</a>]</span>, if more than two measurement points exist. A key advantage is reproducibility of the analysis. In initial rate kinetics no consensus on the linear reaction period on which the kinetic parameters are estimated exists. Hence, the linear period is manually determined or only assumed. Ultimately, the resulting parameters are influenced by the choice of linear period. Additionally, only a subset of all available data is utilized for parameter estimation, making the parameter estimation less robust for individual measurement errors.
-In contrast, progress curve analysis allows the utilization of reaction data beyond the linear period.<br />
-Furthermore, progress curve analysis is more transparent about the underlying data compared</p>
-<ul class="simple">
-<li><p>relative absolute</p></li>
-<li><p>linearization</p></li>
-</ul>
+In another project, modeling results of the estimated <span class="math notranslate nohighlight">\(k_{cat}\)</span> and <span class="math notranslate nohighlight">\(K_{m}\)</span> were used to iteratively improve the design of the enzyme assay. In addition, the correlation between the aforementioned parameters was used as a measure to ensure that the highest substrate concentration applied was sufficiently high and thus the kinetic parameters could be determined independently.
+Thereby, the appropriate enzyme concentration and substrate concentration range were identified through multiple round of lab experimental with subsequent kinetic modeling.</p>
+<p>Assessing the data quality through modeling and enhancing assay designs proved to be a strength of the implemented progress curve method on which the parameter estimation of this workflow is based on. In contrast to the predominantly applied initial rates method <span id="id3">[<a class="reference internal" href="references.html#id24" title="Qingxiu Tang and Thomas S Leyh. Precise, facile initial rate measurements. The Journal of Physical Chemistry B, 114(49):16131–16136, 2010.">Tang and Leyh, 2010</a>]</span>, the progress curve method offers intrinsic advantages with regard to methods reproducibility providing that continuous assay data exist.
+In initial rate kinetics no consensus on the linear reaction period on which the kinetic parameters are estimated exists. Hence, the linear period is manually determined or only assumed. Ultimately, the resulting parameters are influenced by the choice of linear period. For progress curve analysis the entire dataset of an enzyme assay is used. If the fit statistics reveal that the data is not in accordance with the model, either the assay should be repeated due to an underlying issue or the model should be questioned. Contrarily, initial rates method can always be applied by arbitrarily choosing any linear subset or only the initial two data points of an time course data set. In discussions with project partners this showed to be a common practice although scientifically at least questionable, depending on the circumstances.</p>
+<p>fggf #TODO Importance of precise kinetic parameters for biocatalysis
+With upcoming big data technologies like</p>
 <p>Cumulative error, which ultimately leads to unreproducible kinetic parameters</p>
 <ul class="simple">
-<li><p>Lab vs computer documentation</p></li>
 <li><p>initial rates vs progress-curve analysis</p></li>
 </ul>
 </section>
-<section id="what-makes-the-workflow-repeatable-reproducible-and-fair">
-<h2>What makes the workflow repeatable, reproducible, and FAIR?<a class="headerlink" href="#what-makes-the-workflow-repeatable-reproducible-and-fair" title="Permalink to this headline">#</a></h2>
-<p>Availability of raw data is the prerequisite to reproduce the results of an data analysis process.</p>
+<section id="fairness-of-the-parameter-estimation-workflow">
+<h2>FAIRness of the parameter estimation workflow<a class="headerlink" href="#fairness-of-the-parameter-estimation-workflow" title="Permalink to this headline">#</a></h2>
+<p>fair data management comes along with fair science</p>
 <p>An secondary necessity for reproducibility is documentation. Thereby, both laboratory procedures as well as of data analytic procedures need to be documented sufficiently to make experimental</p>
-<ul class="simple">
-<li><p>Currently: unfair initial rates, lineweaver burk
-sharing the raw data and comprehensive description of individual data treatment steps,</p></li>
-</ul>
+<p>Furthermore, progress curve analysis is more transparent about the underlying data compared</p>
+<p>sharing the raw data and comprehensive description of individual data treatment steps,</p>
 <p><strong>Findable</strong></p>
 <p><strong>Accessible</strong></p>
 <p><strong>Interoperable</strong></p>
 <p><strong>Reusable</strong></p>
 <ul class="simple">
-<li><p>Strenda guidelines are insufficient??</p></li>
+<li><p>Packages are reusable</p></li>
 <li><p>Precision of parameters</p></li>
-</ul>
-<p><strong>model selection and miss selection</strong></p>
-<ul class="simple">
-<li><p>kinetic and calibration</p></li>
-<li><p>correlation between parameters:</p></li>
-<li><p>short experimental time</p></li>
-<li><p>low initial substrate concenration</p></li>
-<li><p>how precise should parameters be</p></li>
-<li><p>randomized order in MTPs</p></li>
-<li><p>ENZYME INACTIVATION</p>
-<ul>
-<li><p>initial rates not suited to estimate conversion after 24 h.</p></li>
-</ul>
-</li>
 <li><p>sophisticated methods, otherwise wrong conclusions (italian group)</p></li>
 </ul>
 <p><strong>Jupyter Notebook and Book</strong></p>
+<p>contemporary</p>
+<p>Besides the data analysis, this entire thesis was conceptualized adhering to FAIR data principles . In consequence, this thesis was written was a Jupyter Book, which allow to combine multiple Jupyter Notebooks with text chapters in a structured document. Ultimately, this thesis is findable and accessible on GitHub, interoperable through Binder and the Jupyter Notebook format itself. Hence, making the work of this thesis reusable in a state of the art manner.</p>
+<p>Printed version is read twice, digital version unlimited hence optimized for digital experience</p>
 <ul class="simple">
 <li><p>Besides the methodology documentation is bad</p></li>
 <li><p>Need for documentation without limiting experimental possibilities -&gt; Jupyter notebooks</p></li>
@@ -498,9 +501,27 @@ sharing the raw data and comprehensive description of individual data treatment 
 </ul>
 <p>In this project, a robust and FAIR workflow from analytical raw-data to kinetic parameters was established. Thereby, the output of a analytical device was used directly as the input of the modeling pipeline.</p>
 </section>
-<section id="importance-of-precise-kinetic-parameters-for-biocatalysis">
-<h2>Importance of precise kinetic parameters for biocatalysis<a class="headerlink" href="#importance-of-precise-kinetic-parameters-for-biocatalysis" title="Permalink to this headline">#</a></h2>
-<p>With upcoming big data technologies like</p>
+<section id="id4">
+<h2><a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="methods-reproducibility-of-the-parameter-estimation-workflow">
+<h2>Methods reproducibility of the parameter estimation workflow<a class="headerlink" href="#methods-reproducibility-of-the-parameter-estimation-workflow" title="Permalink to this headline">#</a></h2>
+<p>Methods reproducibility is given</p>
+<ul class="simple">
+<li><p>Lab vs computer documentation</p></li>
+<li><p>Strenda guidelines are insufficient?? focused on lab, neglecting data analytic aspect</p></li>
+</ul>
+</section>
+<section id="results-reproducibility-of-the-parameter-estimation-workflow">
+<h2>Results reproducibility of the parameter estimation workflow<a class="headerlink" href="#results-reproducibility-of-the-parameter-estimation-workflow" title="Permalink to this headline">#</a></h2>
+<p>In sum minimizing errors copying method, manual handling errors and (calculation)</p>
+</section>
+<section id="opportunities">
+<h2>opportunities:<a class="headerlink" href="#opportunities" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>how precise should parameters be</p></li>
+<li><p>randomized order in MTPs</p></li>
+</ul>
 </section>
 </section>
 
