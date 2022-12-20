@@ -1,6 +1,5 @@
 # Discussion
 
-Availability of raw data is the prerequisite to reproduce results of an data analysis process and additionally reinforces confidence in the validity of scientific findings.
 Hence, the analysis workflow was conceptualized starting from photometric measurement data. For that purpose, discussing the output format of the analytical device with the experimental partners proved to be valuable to plan the data acquisition process. Hence, a project specific parser function was established, which transferred the measurement data to the respective EnzymeML containing information on the measurement conditions. Thereby, error-prone and tedious manual copying between files was avoided, ensuring raw data integrity from the very start of the workflow.
 
 ## Data integrity through accurate concentration calculation
@@ -24,36 +23,38 @@ Thereby, the appropriate enzyme concentration and substrate concentration range 
 Assessing the data quality through modeling and enhancing assay designs proved to be a strength of the implemented progress curve method on which the parameter estimation of this workflow is based on. In contrast to the predominantly applied initial rates method {cite}`tang2010precise`, the progress curve method offers intrinsic advantages with regard to methods reproducibility.
 In initial rate kinetics no consensus on the linear reaction period on which the kinetic parameters are estimated exists. Hence, the linear period is manually determined or only assumed. Ultimately, the resulting parameters are influenced by the choice of linear period. For progress curve analysis the entire dataset of an enzyme assay is used. If the fit statistics reveal that the data is not in accordance with the model, either the assay should be repeated due to an underlying issue or the model should be questioned. Contrarily, initial rates method can always be applied by arbitrarily choosing any linear subset or only the initial two data points of an time course data set. In discussions with project partners this showed to be a common practice although scientifically at least questionable, depending on the circumstances.
 
+The choice of the modeling method is just one decision which impacts kinetic parameters in the long chain of actions from enzyme expression all the way to data modeling. Each individual treatment step needs to be documented and later reported on in order to make the results of the experiment reproducible. The STRENDA guidelines offer an valuable orientation on the minimum reporting standards in order to make an enzyme kinetics experiment reproducible. Yet the guidelines are mainly focused on laboratory aspects and do not specify reporting standards for data treatment steps (XXX check strenda model). Hence methodological reproducibility is not given by solely adhering to STRENDA guidelines.
+The concentation calculation method should be included as well as the detailed description on which data by which method the kinetic parameters were calculated. Thereby, the data analytic aspect can get more conclusive and ultimately methodological reproducibility.
+
 **importance of percise parameters and how my workflow helps**
 
 fggf #TODO Importance of precise kinetic parameters for biocatalysis
 With upcoming big data technologies like
 
-Cumulative error, which ultimately leads to unreproducible kinetic parameters
-
 - initial rates vs progress-curve analysis
+- sophisticated methods, otherwise wrong conclusions (italian group)
+- how precise should parameters be
+- randomized order in MTPs
 
 ## FAIRness
 
-FAIR science
-
-FAIR guiding principles are not exclusive to data but include methods as well as entire workflows and are a best practice in data steward ship{cite}`wilkinson2016fair`. Thus, FAIR guiding principles were implemented on multiple levels of this thesis. On the data level, all experimental data as well as the modeling results were stored in EnzymeML files, which are compliant with FAIR data principles {cite}`pleiss2021standardized` {cite}`range2022enzymeml`. On a methods level, the workflow and all of its components were designed in a FAIR fashion.  
-The Python packages are findable and accessible on PyPI and GitHub, which present the most important distribution platforms for Python code. The software is interoperable with other software. This was achieved by segregating the data model from the functionality of the software. Hence other Python tools can utilize the functionalities of CaliPytion and EnzymePynetics by serving the underlying data models. Thus no modifications on the software functionalities are necessary. Furthermore, the data model and its vocabulary is described in the specifications of [CaliPytion](https://github.com/FAIRChemistry/CaliPytion/blob/main/specifications/CalibrationModel.md) as well as [EnzymePynetics](https://github.com/haeussma/EnzymePynetics/blob/main/specifications/EnzymeKinetics.md). Furthermore, the developed software packages are reusable, since the software can be installed and applied by anyone due to the documentation.  
-Many of the FAIR software principles also apply on workflow level. Accessibility is provided by storing the Jupyter Notebooks on GitHub. Interoperability is given by the modular design, which allows to integrate the workflow in other Python-based workflows, which also makes it reusable.
-
-einschränkung longtherm
-
-Furthermore, progress curve analysis is more transparent about the underlying data compared
+FAIR guiding principles are not exclusive to data but include methods as well as entire workflows and should find more application in research {cite}`wilkinson2016fair`. Thus, FAIR guiding principles were implemented on multiple levels of this thesis. On the data level, all experimental data as well as the modeling results were stored in EnzymeML files, which are compliant with FAIR data principles {cite}`pleiss2021standardized` {cite}`range2022enzymeml`. On a methods level, the workflow and all of its components were designed in a FAIR fashion.  
+The Python packages are findable and accessible on PyPI and GitHub, which present the most important distribution platforms for Python code. The software is interoperable with other software. This was achieved by segregating the data model from the functionality of the software. Hence other Python tools can utilize the functionalities of CaliPytion and EnzymePynetics by serving the underlying data models. Thus no modifications on the software functionalities are necessary. Furthermore, the data model and its vocabulary is described in the specifications of [CaliPytion](https://github.com/FAIRChemistry/CaliPytion/blob/main/specifications/CalibrationModel.md) as well as [EnzymePynetics](https://github.com/haeussma/EnzymePynetics/blob/main/specifications/EnzymeKinetics.md), making the data model comprehensive for others. Furthermore, the software packages are reusable, since the software can be installed and applied by anyone due to the documentation.  
+Many of the FAIR software principles also apply on workflow level. Accessibility is provided by storing the Jupyter Notebooks on GitHub and explored via Binder.
+Interoperability is given by the modular design, which allows to integrate the workflow in other Python-based workflows, which also makes it reusable.
+This also applies for this thesis, being available on GitHub and thus making all of the written code reusable Thereby the
 
 sharing the raw data and comprehensive description of individual data treatment steps,
 
-- sophisticated methods, otherwise wrong conclusions (italian group)
+## Repeatability and reproducibility of the developed workflow
+
+FAIR
+Availability of raw data is the prerequisite to repeat an data analysis process which additionally reinforces confidence in the validity of scientific findings and the process itself. Therefore, the established workflow was conceptualized starting from raw data. Thus, every data treatment is part of the workflow and documented within the Jupyter Notebook.
+Jupyter Notebooks proved to be an ideal environment for scientific computing as well as for deploying the parameter estimation workflow. Jupiter Notebooks offer a way to unify scientific data with analysis methods, alongside with documentation of the analysis. Hence offering an high integrity data analysis environment. Furthermore, the analysis can easily be replicated by launching the notebook with Binder, without any programming knowledge or tedious installation of software. In sum the use of Jupyter Notebooks promotes repeatability and thus supports reproducibility of data analysis.
 
 **Jupyter Notebook and Book**
 
-contemporary
-
-Besides the data analysis, this entire thesis was conceptualized adhering to FAIR data principles . In consequence, this thesis was written was a Jupyter Book, which allow to combine multiple Jupyter Notebooks with text chapters in a structured document. Ultimately, this thesis is findable and accessible on GitHub, interoperable through Binder and the Jupyter Notebook format itself. Hence, making the work of this thesis reusable in a contemporary
+Besides the data analysis, this entire thesis was conceptualized adhering to FAIR data principles . In consequence, this thesis was written was a Jupyter Book, which allow to combine multiple Jupyter Notebooks with text chapters in a structured document. Ultimately, this thesis is findable and accessible on GitHub, interoperable through Binder and the Jupyter Notebook format itself. Hence, making the work of this thesis reusable in a contemporary fashion
 
 Printed version is read twice, digital version unlimited hence optimized for digital experience
 
@@ -62,11 +63,7 @@ Printed version is read twice, digital version unlimited hence optimized for dig
 - Need for documentation without limiting experimental possibilities -> Jupyter notebooks
 - great documentation (FAIR)
 
-## Reproducibility of the workflow for kinetic parameter estimation
-
-Besides FAIR, science should also be fair.
-
-Reproducibility is a relative term which needs reference.
+fair
 
 In sum minimizing errors copying method, manual handling errors and (calculation)
 **Methods reproducibility**
@@ -79,10 +76,3 @@ Methods reproducibility is given
 
 - Lab vs computer documentation
 - Strenda guidelines are insufficient?? focused on lab, neglecting data analytic aspect
-
-## Results reproducibility of the parameter estimation workflow
-
-## opportunities:
-
-- how precise should parameters be
-- randomized order in MTPs
