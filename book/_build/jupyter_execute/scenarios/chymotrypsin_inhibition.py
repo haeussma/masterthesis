@@ -85,7 +85,7 @@ chymo_HSAM3 = product_standard.apply_to_EnzymeML(chymo_HSAM3, "s1")
 # In[46]:
 
 
-# Create copys of the data sets and delete measuremnts with inhibitor.
+# Create copies of the data sets and delete measurements with inhibitor.
 wt_control = copy.deepcopy(chymo_HSAwt)
 del wt_control.measurement_dict["m4"]
 del wt_control.measurement_dict["m5"]
