@@ -1,12 +1,8 @@
 # Methods
 
-## EnzymeML
+## EnzymeML and PyEnzyme
 
-EnzymeML serves as an exchange format for biocatalytic data between experimentalist, modelers and database providers. EnzymeML is based on the ontology of Systems Biology Markup Language {cite}`hucka2003systems` and adheres to STRENDA guidelines and thus suited for storing biocatalytic data sets in a FAIR data compliant fashion.
-Within an EnzymeML document information on the reaction conditions, obtained measurement data, as well as modeling results are stored. Thereby, reaction conditions contain information on the pH value, temperature and the reaction vessel. Additionally to a custom name, each represented species is uniquely labeled with an identifier, which allows referencing the specific species in databases. Thereby, proteins are labeled with their UniProtID, and reactants are labeled with their respective SMILES or InChI code.  
-Modeling results and information on model parameters and model equations can be stored alongside the respective measurement data on which the results are based on.
-
-In this work, EnzymeML documents were read, edited, and written via the Python API PyEnzyme {cite}`pyenzyme_2021`, providing the possibility to integrate PyEnzyme in Python-based data analysis workflows. Thereby, EnzymeML documents can be used as a data source, or modeling results can be written back to the document. Within PyEnzyme,
+In this work, EnzymeML documents were read, edited, and written via the Python API PyEnzyme {cite}`pyenzyme_2021`, providing the possibility to integrate PyEnzyme in Python-based data analysis workflows. Thereby, EnzymeML documents were used as a data source, or modeling results were written back to the document.
 
 ### Creation of EnzymeML documents
 
