@@ -9,7 +9,7 @@ Starting from raw data of photometric measurements, which are stored in an Enzym
 ![Fig. 1](images/concept_workflow.png)
 _Fig. 1: Components of the kinetic parameter estimation workflow for enzyme reaction data._
 
-A key aspect of the workflow design was to enable reproducible analysis. Therefore, documentation of raw data treatment prior to modeling is vital. As a result, Jupyter Notebooks were used as a platform, since they allow to write text and code within the same document. In consequence, data analysis as well as the documentation of data analysis are unified within the same document. Ultimately, each data treatment step from raw data to kinetic parameters is comprehensively documented.
+A key aspect of the workflow design was to enable reproducible analysis. Therefore, documentation of raw data treatment prior to modeling is vital. As a result, Jupyter Notebooks were used as a platform, since they allow to write text and code within the same document.
 
 xxx#TODO check necessity of packages here
 
@@ -34,5 +34,5 @@ In parallel, the Python modules CaliPytion and EnzymePynetics were developed. Th
 All data analysis of the project was carried out in Jupyter Notebook by applying the developed workflow for kinetic parameter estimation. Within the next chapters, the latest results of all four experimental scenarios are shown. Thereby, the applicability of the workflow is demonstrated while analyzing and discussing the results of the respective scenario.
 Since the analysis was conducted in Jupyter Notebooks, each of the following chapter is an executed Jupyter Notebook. Hence all figures and tables for data visualization are generated at runtime of the analysis.
 Thereby, the applicability of Jupyter Notebooks for reproducible and comprehensive computational workflows in an scientific environment is demonstrated.
-Every scenario consists of a short description of the project's background and methodology carried out by the project partners in the wet lab. Additionally, data preparation, kinetic modeling steps, as well as the results are shown and project specific results are discussed.
-All notebooks can be launched interactively by clicking on the {fa}`rocket`-icon in the upper section of each scenario page. As a result, the analysis itself is transparent, repeatable and compliant with FAIR data principles. Therefore, it is highly recommended to [read this work in its native form](https://haeussma.github.io/masterthesis/welcome.html).
+Every scenario consists of a short description of the project's background and methodology carried out by the project partners in the laboratory. Additionally, data preparation, kinetic modeling steps, as well as the results are shown and project specific results are discussed.
+All notebooks can be launched interactively by clicking on the {fa}`rocket`-icon in the upper section of each scenario page. As a result, the analysis itself is transparent, and the developed workflow is demonstrated in its native environment. Therefore, it is highly recommended to [read this work in its conceptualized form](https://haeussma.github.io/masterthesis/welcome.html).

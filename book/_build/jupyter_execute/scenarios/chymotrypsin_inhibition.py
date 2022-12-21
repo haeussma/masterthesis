@@ -21,7 +21,7 @@
 # 
 # ### Imports
 
-# In[43]:
+# In[1]:
 
 
 import numpy as np
@@ -42,7 +42,7 @@ warnings.filterwarnings('ignore')
 # 
 # Product standard data was imported directly from an Excel file. Then, a standard curve was created.
 
-# In[44]:
+# In[2]:
 
 
 product_standard = StandardCurve.from_excel(
@@ -65,7 +65,7 @@ product_standard.visualize()
 # 
 # The EnzymeML documents of each experiment were loaded and the standard curve was applied to the absorption data to calculate concentrations.
 
-# In[45]:
+# In[3]:
 
 
 # Load data from 
@@ -82,7 +82,7 @@ chymo_HSAM3 = product_standard.apply_to_EnzymeML(chymo_HSAM3, "s1")
 # Since experimental data with HSA(WT)-huFc and HSA(M3)-huFc originate from independent experiments, the control reactions without the respective inhibitor were compared by performing a parameter estimation (Fig. 3). Thereby, catalytic efficiency $\frac{k_{cat}}{K_{m}}$ was used to assess comparability between the data sets, since $k_{cat}$ and $K_{m}$ were highly correlated (corr > 0.98). High correlations between parameters indicate that the parameters cannot be determined independently with certainty. In this case, the highest initial substrate concentration is presumably too low, compared to the true $K_{m}$ of the enzyme under the given experimental conditions. However, higher substrate concentration were not applied for multiple reasons. On the one hand dimethyl sulfoxide (DMSO) was used as a co-solvent of the substrate, which inhibits enzyme activity {cite:t}`busby1999effect`. Hence, higher initial substrate concentrations would have led to higher enzyme inhibition, which would have distorted the assessment of $K_{i}$.
 # On the other hand, high substrate viscosity denied the application of higher concentrations without sacrificing pipetting precision.
 
-# In[46]:
+# In[4]:
 
 
 # Create copies of the data sets and delete measurements with inhibitor.
@@ -139,7 +139,7 @@ plt.tight_layout()
 # Experimental data of chymotrypsin inhibition by HSA(M3)-huFc contained negative absorption values for the first measurement point. Presumably sourcing from an incorrect blank measurement. Therefore, only measurement data from the second data point (minute 5 and onward) was considered for parameter estimation.
 # Parameter estimates for all applied kinetic models are displayed in the output below and visualized in Fig. 4.
 
-# In[47]:
+# In[5]:
 
 
 # Parameter estimation for HSA(wt) data set
@@ -181,7 +181,7 @@ plt.tight_layout()
 # 
 # Lastly, the modeling results are written to the EnzymeML documents and the files are exported.
 
-# In[52]:
+# In[6]:
 
 
 for result, enzmldoc in zip([kinetics_HSAwt, kinetics_HSAM3], [chymo_HSAwt, chymo_HSAM3]):

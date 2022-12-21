@@ -54,7 +54,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Conclusion" href="conclusion.html" />
+    <link rel="next" title="Conclusion and outlook" href="conclusion.html" />
     <link rel="prev" title="Scenario D:Time-dependent enzyme inactivation" href="scenarios/enzyme_inactivation.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -195,7 +195,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="conclusion.html">
-   Conclusion
+   Conclusion and outlook
   </a>
  </li>
  <li class="toctree-l1">
@@ -349,23 +349,13 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#data-integrity-through-accurate-concentration-calculation">
-   Data integrity through accurate concentration calculation
+  <a class="reference internal nav-link" href="#data-integrity-of-the-analysis-workflow">
+   Data integrity of the analysis workflow
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#quality-control-of-experimental-data-through-kinetic-modeling">
-   Quality control of experimental data through kinetic modeling
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#fairness">
-   FAIRness
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#repeatability-and-reproducibility-of-the-developed-workflow">
-   Repeatability and reproducibility of the developed workflow
+  <a class="reference internal nav-link" href="#repeatability-reproducibility-and-fairness-of-the-analysis-workflow">
+   Repeatability, reproducibility and FAIRness of the analysis workflow
   </a>
  </li>
 </ul>
@@ -388,23 +378,13 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#data-integrity-through-accurate-concentration-calculation">
-   Data integrity through accurate concentration calculation
+  <a class="reference internal nav-link" href="#data-integrity-of-the-analysis-workflow">
+   Data integrity of the analysis workflow
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#quality-control-of-experimental-data-through-kinetic-modeling">
-   Quality control of experimental data through kinetic modeling
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#fairness">
-   FAIRness
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#repeatability-and-reproducibility-of-the-developed-workflow">
-   Repeatability and reproducibility of the developed workflow
+  <a class="reference internal nav-link" href="#repeatability-reproducibility-and-fairness-of-the-analysis-workflow">
+   Repeatability, reproducibility and FAIRness of the analysis workflow
   </a>
  </li>
 </ul>
@@ -419,70 +399,39 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="discussion">
 <h1>Discussion<a class="headerlink" href="#discussion" title="Permalink to this headline">#</a></h1>
-<p>Hence, the analysis workflow was conceptualized starting from photometric measurement data. For that purpose, discussing the output format of the analytical device with the experimental partners proved to be valuable to plan the data acquisition process. Hence, a project specific parser function was established, which transferred the measurement data to the respective EnzymeML containing information on the measurement conditions. Thereby, error-prone and tedious manual copying between files was avoided, ensuring raw data integrity from the very start of the workflow.</p>
-<section id="data-integrity-through-accurate-concentration-calculation">
-<h2>Data integrity through accurate concentration calculation<a class="headerlink" href="#data-integrity-through-accurate-concentration-calculation" title="Permalink to this headline">#</a></h2>
-<p>Another aspect of data integrity is the accurate concentration calculation based on the measured absorption signal. The relation between concentration to absorption signal of an analyte can be linear as well as non-liner. Therefore, wrong assumption of a linear relationship albeit the relation is better described non-linearly, leads to avoidable inaccuracy in concentration calculation <span id="id1">[<a class="reference internal" href="references.html#id15" title="Kang-Hung Hsu and Chiachung Chen. The effect of calibration equations on the uncertainty of uv–vis spectrophotometric measurements. Measurement, 43(10):1525–1531, 2010.">Hsu and Chen, 2010</a>]</span> <span id="id2">[<a class="reference internal" href="references.html#id16" title="Julia Martin, Alberto Romero Gracia, Agustín G Asuero, and others. Fitting nonlinear calibration curves: no models perfect. Journal of Analytical Sciences, Methods and Instrumentation, 7(01):1, 2017.">Martin <em>et al.</em>, 2017</a>]</span> and thus imprecise kinetic parameter estimates.
+<p>Ensuring data integrity throughout an analysis workflow is important to yield trustworthy results. Hence, the analysis workflow was conceptualized starting from photometric measurement data, in order to control all data processing steps. For that purpose, discussing the output format of the analytical device with the experimental partners proved to be valuable to plan the data acquisition process. Thus, a project specific parser function was established, which transferred the measurement data to the respective EnzymeML containing information on the measurement conditions. Thereby, error-prone and tedious manual copying between files was avoided, ensuring raw data integrity from the very start of the workflow.</p>
+<section id="data-integrity-of-the-analysis-workflow">
+<h2>Data integrity of the analysis workflow<a class="headerlink" href="#data-integrity-of-the-analysis-workflow" title="Permalink to this headline">#</a></h2>
+<p>Another aspect of data integrity is accurate concentration calculation based on the measured absorption signal. The relation between concentration to absorption signal of an analyte can be linear as well as non-liner. Therefore, wrong assumption of a linear relationship albeit the relation is better described non-linearly, leads to avoidable inaccuracy in concentration calculation <span id="id1">[<a class="reference internal" href="references.html#id15" title="Kang-Hung Hsu and Chiachung Chen. The effect of calibration equations on the uncertainty of uv–vis spectrophotometric measurements. Measurement, 43(10):1525–1531, 2010.">Hsu and Chen, 2010</a>]</span> <span id="id2">[<a class="reference internal" href="references.html#id16" title="Julia Martin, Alberto Romero Gracia, Agustín G Asuero, and others. Fitting nonlinear calibration curves: no models perfect. Journal of Analytical Sciences, Methods and Instrumentation, 7(01):1, 2017.">Martin <em>et al.</em>, 2017</a>]</span> and thus imprecise kinetic parameter estimates.
 Hence, concentration calculation based on extinction coefficients was discouraged, if the underlying relation between absorption and concentration of an analyte was not self-determined for the respective reaction system.
 To enable precise concentration calculation of linear and non-linear absorption to concentration relationships, CaliPytion was applied with analyte standards provided by the experimental partners.
-All of the analyzed standard curves, except for scenario C ABTS at pH 5, were best described by non-linear calibration equations based on their fit quality determined by AIC. Hence, uncertainties from concentration calculation were reduced and therefore their impact on the kinetic parameters reduced.</p>
-</section>
-<section id="quality-control-of-experimental-data-through-kinetic-modeling">
-<h2>Quality control of experimental data through kinetic modeling<a class="headerlink" href="#quality-control-of-experimental-data-through-kinetic-modeling" title="Permalink to this headline">#</a></h2>
+All of the analyzed standard curves, except for scenario C ABTS at pH 5, were best described by non-linear calibration equations based on their fit quality determined by AIC. Hence, uncertainties from concentration calculation were reduced and thus their impact on the kinetic parameters.</p>
 <p>Besides data integrity, high quality data is required for accurate parameter estimates, whereas unnoticed experimental errors unintentionally distort the resulting kinetic parameters. Therefore, quality control of measurement data is an important aspect of every data analysis process. EnzymePynetics allows visualization of measurement data together with the fitted kinetic model. Ultimately, systematic deviations of single measurements were identified by simultaneously visualizing measurement data and the fitted model.
 By this method, errors with pipetting, mixing, and temperature equilibration during experimental preparation as well as issues with the experimental design itself were identified in different scenarios.<br />
 Systematic pipetting errors were disclosed by systematic deviations between the measurement data and the fitted model.
-In scenario D individual enzyme reactions showed to have deviating substrate concentrations from the assay protocol, whereas modeling without the presumably erroneous measurements resulted in a good fit between data and model as well as low standard deviation on the parameter estimates. Hence the experimental partners were advised to repeat the deviating measurement.<br />
-In two projects the progress-curve of the reactions indicate a lag phase after reaction start. In one case, small pipetting volumes of enzyme to start the reaction led to inhomogeneous mixing and thus increasing reaction rates until the enzyme was distributed evenly. As a measure, the project partners were advised to increase the pipetting volume of the enzyme solution.
-In another case, temperature incubation effects in MTP caused by prolonged assay preparation times resulted in an initial lag phase. Due to small reaction volumes and low mass, MTPs have a low heat capacity and thus high susceptibility to temperature change. Hence, project partners were advised to pre-incubate the MTP within the photometer at reaction temperature for 5 min and then start the reaction by adding enzyme as quick as possible.
+In scenario D individual enzyme reactions showed to have substrate concentrations which deviated from the assay protocol. Parameter estimation without the presumably erroneous measurements yielded a better fit between data and model based on lower standard deviation for the kinetic parameters. Hence the experimental partners were advised to repeat the deviating measurement.<br />
+In two projects the progress-curve of the reactions indicate a lag phase after reaction start. In one case, enzyme reactions were started by adding enzyme with low volume. In consequence, inhomogeneous mixing led to increasing reaction rates until the enzyme was distributed evenly. As a measure, the project partners were advised to increase the pipetting volume of the enzyme solution.
+In another case, temperature incubation effects in MTP caused by prolonged assay preparation time resulted in an initial lag phase. Due to small reaction volumes and low mass, MTPs have a low heat capacity and thus high susceptibility to temperature change. Hence, project partners were advised to pre-incubate the MTP within the photometer at reaction temperature for 5 min and then start the reaction by adding enzyme as quick as possible.
 In another project, modeling results of the estimated <span class="math notranslate nohighlight">\(k_{cat}\)</span> and <span class="math notranslate nohighlight">\(K_{m}\)</span> were used to iteratively improve the design of the enzyme assay. In addition, the correlation between the aforementioned parameters was used as a measure to ensure that the highest substrate concentration applied was sufficiently high and thus the kinetic parameters could be determined independently.
-Thereby, the appropriate enzyme concentration and substrate concentration range were identified through multiple round of lab experimental with subsequent kinetic modeling.</p>
+Thereby, the appropriate enzyme concentration and substrate concentration range were identified through multiple round of lab experiments with subsequent kinetic modeling.</p>
 <p>Assessing the data quality through modeling and enhancing assay designs proved to be a strength of the implemented progress curve method on which the parameter estimation of this workflow is based on. In contrast to the predominantly applied initial rates method <span id="id3">[<a class="reference internal" href="references.html#id26" title="Qingxiu Tang and Thomas S Leyh. Precise, facile initial rate measurements. The Journal of Physical Chemistry B, 114(49):16131–16136, 2010.">Tang and Leyh, 2010</a>]</span>, the progress curve method offers intrinsic advantages with regard to methods reproducibility.
-In initial rate kinetics no consensus on the linear reaction period on which the kinetic parameters are estimated exists. Hence, the linear period is manually determined or only assumed. Ultimately, the resulting parameters are influenced by the choice of linear period. For progress curve analysis the entire dataset of an enzyme assay is used. If the fit statistics reveal that the data is not in accordance with the model, either the assay should be repeated due to an underlying issue or the model should be questioned. Contrarily, initial rates method can always be applied by arbitrarily choosing any linear subset or only the initial two data points of an time course data set. In discussions with project partners this showed to be a common practice although scientifically at least questionable, depending on the circumstances.</p>
-<p>The choice of the modeling method is just one decision which impacts kinetic parameters in the long chain of actions from enzyme expression all the way to data modeling. Each individual treatment step needs to be documented and later reported on in order to make the results of the experiment reproducible. The STRENDA guidelines offer an valuable orientation on the minimum reporting standards in order to make an enzyme kinetics experiment reproducible. Yet the guidelines are mainly focused on laboratory aspects and do not specify reporting standards for data treatment steps (XXX check strenda model). Hence methodological reproducibility is not given by solely adhering to STRENDA guidelines.
-The concentation calculation method should be included as well as the detailed description on which data by which method the kinetic parameters were calculated. Thereby, the data analytic aspect can get more conclusive and ultimately methodological reproducibility.</p>
-<p><strong>importance of percise parameters and how my workflow helps</strong></p>
-<p>fggf #TODO Importance of precise kinetic parameters for biocatalysis
-With upcoming big data technologies like</p>
-<ul class="simple">
-<li><p>initial rates vs progress-curve analysis</p></li>
-<li><p>sophisticated methods, otherwise wrong conclusions (italian group)</p></li>
-<li><p>how precise should parameters be</p></li>
-<li><p>randomized order in MTPs</p></li>
-</ul>
+In initial rate kinetics no consensus on the linear reaction period on which the kinetic parameters are estimated exists. Hence, the linear period is manually determined or only assumed. Ultimately, the resulting parameters are influenced by the choice of linear period. For progress curve analysis the entire dataset of an continuous enzyme assay is used. If the fit statistics reveal that the data is not in accordance with the model, either the assay should be repeated due to an underlying issue or the model should be questioned. Contrarily, initial rates method can mostly be applied by arbitrarily choosing any linear subset or only the initial two data points of a time course data set. In discussions with project partners this showed to be a common practice although scientifically at least questionable.</p>
+<p>The choice of the modeling method is just one decision which impacts kinetic parameters in the long chain of actions from enzyme expression all the way to data modeling. Each individual treatment step needs to be documented and later reported in order to make the results of the experiment reproducible. The STRENDA guidelines offer an valuable orientation on the minimum reporting standards in order to make an enzyme kinetics experiment reproducible. Yet the guidelines are mainly focused on laboratory aspects and do not specify reporting standards for data treatment steps. Hence methodological reproducibility is not given by solely adhering to STRENDA guidelines. Therefore, the method for concentration calculation, as well as the method for parameter estimation should be added to the STRENDA guidelines. Thereby, the importance of data analytic aspects for methodologically reproducible kinetic parameters would receive more attention.</p>
 </section>
-<section id="fairness">
-<h2>FAIRness<a class="headerlink" href="#fairness" title="Permalink to this headline">#</a></h2>
-<p>FAIR guiding principles are not exclusive to data but include methods as well as entire workflows and should find more application in research <span id="id4">[<a class="reference internal" href="references.html#id12" title="Mark D Wilkinson, Michel Dumontier, Ij J Aalbersberg, G Appleton, M Axton, A Baak, N Blomberg, JW Boiten, LB da Silva Santos, PE Bourne, and others. The fair guiding principles for scientific data management and stewardship. sci data 3: 160018. 2016.">Wilkinson <em>et al.</em>, 2016</a>]</span>. Thus, FAIR guiding principles were implemented on multiple levels of this thesis. On the data level, all experimental data as well as the modeling results were stored in EnzymeML files, which are compliant with FAIR data principles <span id="id5">[<a class="reference internal" href="references.html#id4" title="Jürgen Pleiss. Standardized data, scalable documentation, sustainable storage–enzymeml as a basis for fair data management in biocatalysis. ChemCatChem, 13(18):3909–3913, 2021.">Pleiss, 2021</a>]</span> <span id="id6">[<a class="reference internal" href="references.html#id19" title="Jan Range, Colin Halupczok, Jens Lohmann, Neil Swainston, Carsten Kettner, Frank T Bergmann, Andreas Weidemann, Ulrike Wittig, Santiago Schnell, and Jürgen Pleiss. Enzymeml—a data exchange format for biocatalysis and enzymology. The FEBS Journal, 289(19):5864–5874, 2022.">Range <em>et al.</em>, 2022</a>]</span>. On a methods level, the workflow and all of its components were designed in a FAIR fashion.<br />
-The Python packages are findable and accessible on PyPI and GitHub, which present the most important distribution platforms for Python code. The software is interoperable with other software. This was achieved by segregating the data model from the functionality of the software. Hence other Python tools can utilize the functionalities of CaliPytion and EnzymePynetics by serving the underlying data models. Thus no modifications on the software functionalities are necessary. Furthermore, the data model and its vocabulary is described in the specifications of <a class="reference external" href="https://github.com/FAIRChemistry/CaliPytion/blob/main/specifications/CalibrationModel.md">CaliPytion</a> as well as <a class="reference external" href="https://github.com/haeussma/EnzymePynetics/blob/main/specifications/EnzymeKinetics.md">EnzymePynetics</a>, making the data model comprehensive for others. Furthermore, the software packages are reusable, since the software can be installed and applied by anyone due to the documentation.<br />
-Many of the FAIR software principles also apply on workflow level. Accessibility is provided by storing the Jupyter Notebooks on GitHub and explored via Binder.
-Interoperability is given by the modular design, which allows to integrate the workflow in other Python-based workflows, which also makes it reusable.
-This also applies for this thesis, being available on GitHub and thus making all of the written code reusable Thereby the</p>
-<p>sharing the raw data and comprehensive description of individual data treatment steps,</p>
-</section>
-<section id="repeatability-and-reproducibility-of-the-developed-workflow">
-<h2>Repeatability and reproducibility of the developed workflow<a class="headerlink" href="#repeatability-and-reproducibility-of-the-developed-workflow" title="Permalink to this headline">#</a></h2>
-<p>FAIR
-Availability of raw data is the prerequisite to repeat an data analysis process which additionally reinforces confidence in the validity of scientific findings and the process itself. Therefore, the established workflow was conceptualized starting from raw data. Thus, every data treatment is part of the workflow and documented within the Jupyter Notebook.
-Jupyter Notebooks proved to be an ideal environment for scientific computing as well as for deploying the parameter estimation workflow. Jupiter Notebooks offer a way to unify scientific data with analysis methods, alongside with documentation of the analysis. Hence offering an high integrity data analysis environment. Furthermore, the analysis can easily be replicated by launching the notebook with Binder, without any programming knowledge or tedious installation of software. In sum the use of Jupyter Notebooks promotes repeatability and thus supports reproducibility of data analysis.</p>
-<p><strong>Jupyter Notebook and Book</strong></p>
-<p>Besides the data analysis, this entire thesis was conceptualized adhering to FAIR data principles . In consequence, this thesis was written was a Jupyter Book, which allow to combine multiple Jupyter Notebooks with text chapters in a structured document. Ultimately, this thesis is findable and accessible on GitHub, interoperable through Binder and the Jupyter Notebook format itself. Hence, making the work of this thesis reusable in a contemporary fashion</p>
-<p>Printed version is read twice, digital version unlimited hence optimized for digital experience</p>
-<ul class="simple">
-<li><p>Besides the methodology documentation is bad</p></li>
-<li><p>Need for documentation without limiting experimental possibilities -&gt; Jupyter notebooks</p></li>
-<li><p>great documentation (FAIR)</p></li>
-</ul>
-<p>fair</p>
-<p>In sum minimizing errors copying method, manual handling errors and (calculation)
-<strong>Methods reproducibility</strong></p>
-<p><strong>Results reproducibility</strong></p>
-<p>An secondary necessity for reproducibility is documentation. Thereby, both laboratory procedures as well as of data analytic procedures need to be documented sufficiently to make experimental</p>
-<p>Methods reproducibility is given</p>
-<ul class="simple">
-<li><p>Lab vs computer documentation</p></li>
-<li><p>Strenda guidelines are insufficient?? focused on lab, neglecting data analytic aspect</p></li>
-</ul>
+<section id="repeatability-reproducibility-and-fairness-of-the-analysis-workflow">
+<h2>Repeatability, reproducibility and FAIRness of the analysis workflow<a class="headerlink" href="#repeatability-reproducibility-and-fairness-of-the-analysis-workflow" title="Permalink to this headline">#</a></h2>
+<p>Availability of raw data is the prerequisite to repeat an data analysis process which additionally reinforces trust in scientific findings and the process itself. The lack of raw data is therefore also described as one of the reasons for the reproducibility crisis, since reported findings cannot be verified <span id="id4">[<a class="reference internal" href="references.html#id22" title="Tsuyoshi Miyakawa. No raw data, no science: another possible source of the reproducibility crisis. 2020.">Miyakawa, 2020</a>]</span>.
+A second necessity for reanalysis is documentation to provide information on data treatment steps that led to a particular result. Furthermore, detailed documentation makes the analysis comprehensive for other.<br />
+The developed parameter estimation workflow unifies these two requirements. On the one hand, the workflow is based on raw data. On the other hand, the Jupyter Notebook facilitates the analysis, whilst containing documentation on all analysis steps. Thus the workflow is repeatable and reproducible on a methods and results level. Moreover, by unifying data with functional code the implementation of the analysis workflow satisfies the highest reproducibility standards in computer science <span id="id5">[<a class="reference internal" href="references.html#id23" title="Roger D Peng. Reproducible research in computational science. Science, 334(6060):1226–1227, 2011.">Peng, 2011</a>]</span>.
+In conclusion, the Jupyter Notebook with the implemented workflow can be understood as a graph, describing how experimental data is transform to yield kinetic parameters. Thereby, the measurement data and modeling results are stored within an EnzymeML document and the information of the modeling process in the notebook file.</p>
+<p>Starting from data, FAIR guiding principles were implemented on multiple levels of this thesis. On data level, all experimental data as well as the modeling results were stored as EnzymeML files, which are compliant with FAIR data principles <span id="id6">[<a class="reference internal" href="references.html#id4" title="Jürgen Pleiss. Standardized data, scalable documentation, sustainable storage–enzymeml as a basis for fair data management in biocatalysis. ChemCatChem, 13(18):3909–3913, 2021.">Pleiss, 2021</a>]</span> <span id="id7">[<a class="reference internal" href="references.html#id19" title="Jan Range, Colin Halupczok, Jens Lohmann, Neil Swainston, Carsten Kettner, Frank T Bergmann, Andreas Weidemann, Ulrike Wittig, Santiago Schnell, and Jürgen Pleiss. Enzymeml—a data exchange format for biocatalysis and enzymology. The FEBS Journal, 289(19):5864–5874, 2022.">Range <em>et al.</em>, 2022</a>]</span>. On a methods level, the workflow and all of its components were designed in FAIR fashion.<br />
+The Python packages are findable and accessible on PyPI and GitHub, which present the most important distribution platforms for Python code. Additionally, the software is interoperable with other software. This was achieved by segregating the data model from the functionality of the software. Hence other Python tools can utilize the functionalities of CaliPytion and EnzymePynetics by serving the underlying data models. Thus no modifications on the software functionalities are necessary. Furthermore, the data model and its vocabulary is described in the specifications of <a class="reference external" href="https://github.com/FAIRChemistry/CaliPytion/blob/main/specifications/CalibrationModel.md">CaliPytion</a> as well as <a class="reference external" href="https://github.com/haeussma/EnzymePynetics/blob/main/specifications/EnzymeKinetics.md">EnzymePynetics</a>, making the data model comprehensive for others. Furthermore, the software packages are reusable, since the software can be installed and applied by anyone due to the documentation.</p>
+<p>Since data integrity as well as reproducibility of analysis are integral parts of this work, the thesis itself was conceptualized to enable reproducible data analysis. Therefore, the Jupyter Notebooks were integrated into this Jupyter Book, which constitutes this thesis. Thus, all data analysis for this thesis is reproducible by launching the individual notebooks with Binder. As a result, a level of data integrity and transparency is achieved, which is not reachable with established word processing software. Furthermore, the Jupyter Book format allows to display computational content in its native form. Due to the toggle functionality of code cells, the readability of code and text is equally given.
+Since the thesis is centered around computational contend</p>
+<p>Since the Jupyter Book format is optimized for</p>
+<p>The printed version of this thesis demonstrates the restrictions which come along printed</p>
+<p>Book fair print not</p>
+<p>Ultimately, this thesis is findable and accessible on GitHub, interoperable through Binder and the Jupyter Notebook format itself. Hence, making the work of this thesis reusable in a contemporary fashion</p>
 </section>
 </section>
 
@@ -523,7 +472,7 @@ Jupyter Notebooks proved to be an ideal environment for scientific computing as 
     <a class='right-next' id="next-link" href="conclusion.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Conclusion</p>
+        <p class="prev-next-title">Conclusion and outlook</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

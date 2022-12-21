@@ -6,12 +6,10 @@
 # Data provided by Alaric Prins (Applied Microbial and Health Biotechnology Institute, Cape Peninsula University of Technology, Capetown, South Africa)
 # 
 # ## Project background
-# Laccases find industral application in pulp and paper industry. Thereby, the enzyme is used for its polymerization or depolymerization capabilities through oxidation of phenoclic compounds {cite}`widsten2008laccase`. Something about SLAC...
-# 
+# The small laccase from *Streptomyces coelicolor* (SLAC) is a member of the muticopper oxidase family. Due to their potential to oxidize various electron-rich substrates, laccases are of interest for industrial application for lignin degradation {cite}`widsten2008laccase`. In a previous study, mutations around T1 Cu of SLAC showed significant biochemical changes {cite}`prins2015effect`. Therefore, the catalytic properties of mutated SLAC were investigated in a broad pH and temperature range.
 # 
 # ### Experimental design
-# 
-# In this scenario, the catalytic properties of the small laccase from *Streptomyces coelicolor* (SLAC) were investigated. Therefore, the enzymatic oxidation of 2,2'-Azino-bis(3-ethylbenzothiazoline-6-sulfonic acid) (ABTS) to its radical form ABTS<sup>+·</sup> was studied in the pH range of pH 3&nbsp;-&nbsp;pH&nbsp;5.5 and temperature range of 25°C&nbsp;-&nbsp;45°C. In total 30 kinetic enzyme assays in a substrate range between 0&nbsp;-&nbsp;200&nbsp;uM of ABTS were conducted. Additionally, for each enzyme reaction with a given initial substrate concentration, a control reaction without enzyme was prepared.  
+# In this scenario the enzymatic oxidation of 2,2'-Azino-bis(3-ethylbenzothiazoline-6-sulfonic acid) (ABTS) to its radical form ABTS<sup>+·</sup> was studied in the pH range of pH 3&nbsp;-&nbsp;pH&nbsp;5.5 and temperature range of 25°C&nbsp;-&nbsp;45°C. In total 30 kinetic enzyme assays in a substrate range between 0&nbsp;-&nbsp;200&nbsp;uM of ABTS were conducted. Additionally, for each enzyme reaction with a given initial substrate concentration, a control reaction without enzyme was prepared.  
 # For each pH - temperature condition an individual ABTS standard curve and absorption spectrum was recorded to account for varying ABTS absorption properties due to reaction conditions. Each enzyme reaction was followed for 15 min photometrically at two wavelengths, measuring substrate depletion and product accumulation simultaneously. Preliminary experiments confirmed, that ABTS absorbs at 340 nm, whereas the ABTS<sup>+·</sup> absorbs at 420 nm in contrast to the substrate. Furthermore, cross absorbance of product at the substrate detection wavelength and vice versa was ruled out.
 # 
 # ### Data management
