@@ -1,9 +1,9 @@
-# Conclusion
+# Conclusion and Outlook
 
-Cumulative error, which ultimately leads to unreproducible kinetic parameters
+In this work, a reproducible and FAIR workflow for kinetic parameter estimation of enzyme reactions was established. Thereby, the output of an analytical device is directly used as the input of the modeling pipeline. By considering possible nonlinear relationships in the conversion of analytic data to concentration data, a possible source of inaccuracies is avoided. The parameter estimation is based on progress curve analysis. Since various kinetic models were implemented, models can be compared and insight into the kinetic mechanism can be obtained. Therefore, the implemented parameter estimator is suited for inhibition studies. After fitting of the models, visualization of the fit together with the underlying measurement data allows identification of individual systematic deviation between the model and data. Hence, providing a measure for quality control.
+The workflow is capable to process EnzymeML files by using the associated PyEnzyme application programming interface. The analysis workflow was implemented in a Jupyter Notebook, thus the workflow is conclusive, repeatable and reproducible.
+Due to the format and the associated Jupyter, Binder, and GitHub ecosystems, the analysis can be extensively documented, reanalyzed, and shared among scientists.
+The developed workflow supports the scientific community by making accurate and scalable progress curve analysis of enzyme reactions available which is additionally compliant with FAIR guiding principles.
+Application of the workflow to ongoing research projects demonstrated its capabilities to identify issues with the preparation of enzymatic assays, which might otherwise have remained unrecognized. Thus, the developments additionally support the field by potentially preventing the publication of incorrect kinetic parameters based on erroneous data.
 
-In combination with jupyternotebook the developed workflow is fair. The EnzymeMLdoument istselfe is not
-
-Analysis of the four scenarios proved the applicability and advantages of the developed workflow.
-
-In this project, a robust and FAIR workflow from analytical raw-data to kinetic parameters was established. Thereby, the output of a analytical device was used directly as the input of the modeling pipeline.
+In future developments, the workflow could be extended to enable parameter estimation of enzyme reactions with more than one substrate, by implementing more complex models. Furthermore, part of the quality control, which is currently carried out by visual analysis, could be automated. Thereby, the user would be informed about systematic errors in the dataset, which might have resulted from experimental errors. Moreover, tools could be implemented which assist scientists in assay design with focus on the design of minimal experiments. Hence, after an initial analysis round the user could be informed, if the given information is sufficient for parameter estimation, or if the data set contains to little information. In result, initial substrate concentrations for the next round of lab experiments could be suggested.

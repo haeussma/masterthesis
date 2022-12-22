@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Scenario A:Chymotrypsin inhibiton by a in silico designed albumin fusion protein &#8212; From raw data to kinetic parameters: an EnzymeML-based workflow for reproducible enzyme kinetics</title>
+    <title>Scenario A:Chymotrypsin inhibiton by an in silico designed albumin fusion protein &#8212; From raw data to kinetic parameters: an EnzymeML-based workflow for reproducible enzyme kinetics</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -152,7 +152,7 @@ const thebe_selector_output = ".output, .cell_output"
       Scenario A:
      </strong>
      <br/>
-     Chymotrypsin inhibiton by a
+     Chymotrypsin inhibiton by an
      <em>
       in silico
      </em>
@@ -195,7 +195,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../conclusion.html">
-   Conclusion
+   Conclusion and Outlook
   </a>
  </li>
  <li class="toctree-l1">
@@ -443,7 +443,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Scenario A:<br>Chymotrypsin inhibiton by a in silico designed albumin fusion protein</h1>
+                <h1>Scenario A:<br>Chymotrypsin inhibiton by an in silico designed albumin fusion protein</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -520,16 +520,16 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="scenario-a-br-chymotrypsin-inhibiton-by-a-in-silico-designed-albumin-fusion-protein">
-<h1><strong>Scenario A:</strong><br>Chymotrypsin inhibiton by a <em>in silico</em> designed albumin fusion protein<a class="headerlink" href="#scenario-a-br-chymotrypsin-inhibiton-by-a-in-silico-designed-albumin-fusion-protein" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="scenario-a-br-chymotrypsin-inhibiton-by-an-in-silico-designed-albumin-fusion-protein">
+<h1><strong>Scenario A:</strong><br>Chymotrypsin inhibiton by an <em>in silico</em> designed albumin fusion protein<a class="headerlink" href="#scenario-a-br-chymotrypsin-inhibiton-by-an-in-silico-designed-albumin-fusion-protein" title="Permalink to this headline">#</a></h1>
 <p>Data provided by Marwa Mohamed (Institute of Cell Biology and Immunology, University of Stuttgart, Germany)</p>
 <section id="project-background">
 <h2>Project background<a class="headerlink" href="#project-background" title="Permalink to this headline">#</a></h2>
-<p>In this scenario, the binding of an <em>in silico</em> designed protein to an enzyme was assessed by determining the  inhibitory constant <span class="math notranslate nohighlight">\(K_{i}\)</span>. Thereby, the efficiency of the newly developed approach for computational design of protein binders to deliberately chosen targets was demonstrated.
+<p>In this scenario, the binding of an <em>in silico</em> designed protein to an enzyme was assessed by determining the inhibitory constant <span class="math notranslate nohighlight">\(K_{i}\)</span>. Thereby, the efficiency of a newly developed approach to computationally design protein binders to deliberately chosen targets was demonstrated.
 This was done by comparing <span class="math notranslate nohighlight">\(K_{i}\)</span> of the designed human serum albumin variant (HSA(M3)) to the wild-type (HSA(WT)) by respectively applying the proteins to chymotrypsin enzyme reactions. Both designed proteins were individually dimerized into fusion proteins through a huFc.</p>
 <section id="experimental-design">
 <h3>Experimental design<a class="headerlink" href="#experimental-design" title="Permalink to this headline">#</a></h3>
-<p>Enzyme activity was monitored by measuring the product formation of p-Nitroanilin (p-NA) photometrically at 410 nm for 30 min at 30°C. Therefore, Succinyl-gly-gly-phe-p-nitroanilide (SGGPpNA) was applied as substrate in a concentration range of 0.25 - 2 mM. For concentration calculations, p-NA standard was prepared in the range of 0 - 0.3 mM in duplicates. <span class="math notranslate nohighlight">\(K_{i}\)</span> of HSA(WT)-huFc and HSA(M3)-huFc on chymotrypsin were investigated in independent experiments. Each experiment consisted of enzyme reactions with and without the respective HSA variant. Each enzyme reaction contained 0.2 µM of enzyme and 26.88 µM of the respective HSA variant, if inhibitor was applied. All enzyme reactions were prepared in duplicates.</p>
+<p>Enzyme activity was monitored by measuring the product formation of p-nitroanilin (p-NA) photometrically at 410 nm for 30 min at 30°C. Therefore, Succinyl-gly-gly-phe-p-nitroanilide (SGGPpNA) was applied as substrate in a concentration range of 0.25 - 2 mM. For concentration calculations, a p-NA standard was prepared in the range of 0 - 0.3 mM in duplicates. <span class="math notranslate nohighlight">\(K_{i}\)</span> of HSA(WT)-huFc and HSA(M3)-huFc on chymotrypsin were investigated in independent experiments. Each experiment consisted of enzyme reactions with and without the respective HSA variant. Each enzyme reaction contained 0.2 µM of enzyme and 26.88 µM of the respective HSA variant, if inhibitor was applied. All enzyme reactions were prepared in duplicates.</p>
 </section>
 <section id="data-management">
 <h3>Data management<a class="headerlink" href="#data-management" title="Permalink to this headline">#</a></h3>
@@ -621,7 +621,7 @@ This was done by comparing <span class="math notranslate nohighlight">\(K_{i}\)<
 </section>
 <section id="experimental-data">
 <h3>Experimental data<a class="headerlink" href="#experimental-data" title="Permalink to this headline">#</a></h3>
-<p>The EnzymeML documents of each experiment were loaded and the standard curve was applied to the absorption data to calculate concentrations.</p>
+<p>The EnzymeML documents of each experiment were loaded and the standard curve was applied to the absorption data to yield concentrations.</p>
 <div class="cell tag_hide_input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load data from </span>
@@ -639,7 +639,7 @@ This was done by comparing <span class="math notranslate nohighlight">\(K_{i}\)<
 </section>
 <section id="comparability-of-the-experiments">
 <h2>Comparability of the experiments<a class="headerlink" href="#comparability-of-the-experiments" title="Permalink to this headline">#</a></h2>
-<p>Since experimental data with HSA(WT)-huFc and HSA(M3)-huFc originate from independent experiments, the control reactions without the respective inhibitor were compared by performing a parameter estimation (Fig. 3). Thereby, catalytic efficiency <span class="math notranslate nohighlight">\(\frac{k_{cat}}{K_{m}}\)</span> was used to assess comparability between the data sets, since <span class="math notranslate nohighlight">\(k_{cat}\)</span> and <span class="math notranslate nohighlight">\(K_{m}\)</span> were highly correlated (corr &gt; 0.98). High correlations between parameters indicate that the parameters cannot be determined independently with certainty. In this case, the highest initial substrate concentration is presumably too low, compared to the true <span class="math notranslate nohighlight">\(K_{m}\)</span> of the enzyme under the given experimental conditions. However, higher substrate concentration were not applied for multiple reasons. On the one hand dimethyl sulfoxide (DMSO) was used as a co-solvent of the substrate, which inhibits enzyme activity <span id="id1">Busby <em>et al.</em> [<a class="reference internal" href="../references.html#id9" title="William F Busby, Joseph M Ackermann, and Charles L Crespi. Effect of methanol, ethanol, dimethyl sulfoxide, and acetonitrile on in vitro activities of cdna-expressed human cytochromes p-450. Drug Metabolism and Disposition, 27(2):246–249, 1999.">1999</a>]</span>. Hence, higher initial substrate concentrations would have led to higher enzyme inhibition, which would have distorted the assessment of <span class="math notranslate nohighlight">\(K_{i}\)</span>.
+<p>Since experimental data with HSA(WT)-huFc and HSA(M3)-huFc originate from independent experiments, the control reactions without the respective inhibitor were compared by performing a parameter estimation (Fig. 3). Thereby, catalytic efficiency <span class="math notranslate nohighlight">\(\frac{k_{cat}}{K_{m}}\)</span> was used to assess comparability between the data sets, since <span class="math notranslate nohighlight">\(k_{cat}\)</span> and <span class="math notranslate nohighlight">\(K_{m}\)</span> were highly correlated (<em>r<sup>2</sup></em> &gt; 0.98). High correlations between parameters indicate that the parameters cannot be determined independently with certainty. In this case, the highest initial substrate concentration is presumably too low, compared to the true <span class="math notranslate nohighlight">\(K_{m}\)</span> of the enzyme under the given experimental conditions. However, higher substrate concentration were not applied for multiple reasons. On the one hand dimethyl sulfoxide (DMSO) was used as a co-solvent of the substrate, which inhibits enzyme activity <span id="id1">[<a class="reference internal" href="../references.html#id9" title="William F Busby, Joseph M Ackermann, and Charles L Crespi. Effect of methanol, ethanol, dimethyl sulfoxide, and acetonitrile on in vitro activities of cdna-expressed human cytochromes p-450. Drug Metabolism and Disposition, 27(2):246–249, 1999.">Busby <em>et al.</em>, 1999</a>]</span>. Hence, higher initial substrate concentrations would have led to higher enzyme inhibition, which would have distorted the assessment of <span class="math notranslate nohighlight">\(K_{i}\)</span>.
 On the other hand, high substrate viscosity denied the application of higher concentrations without sacrificing pipetting precision.</p>
 <div class="cell tag_hide_input docutils container">
 <div class="cell_input docutils container">
@@ -823,12 +823,12 @@ On the other hand, high substrate viscosity denied the application of higher con
 </div>
 </div>
 <p><em>Fig. 3: Measurement data and fitted irreversible Michaelis-Menten model for chymotrypsin reactions without HSA inhibitor.</em></p>
-<p>The two dataset were fitted against kinetic models, which are displayed in the tables above.
-Each dataset is best described by the irreversible Michaelis-Menten model in terms of AIC and standard deviation on the estimated parameters. Models with product or substrate inhibition resulted in large uncertanties above 80 % on the parameter estimates. Therefore, irreversible Michaelis-Menten model was utilized for comparison of parameters.  <span class="math notranslate nohighlight">\(\frac{k_{cat}}{K_{m}}\)</span> was estimated to be 25.353 min<sup>-1</sup>mM<sup>-1</sup> ± 8.57% for the control reaction of the HSA(WT)-huFc data set and 24.776 min<sup>-1</sup>mM<sup>-1</sup> ± 4.35% for the HSA(M3)-huFc data set. As a result, the two experiments showed to be comparable, since the catalytic efficiency differs less than 3 % between the two data sets.</p>
+<p>The two datasets were fitted against all kinetic models, which are displayed in the tables above.
+Each dataset is best described by the irreversible Michaelis-Menten model in terms of AIC and standard deviation on the estimated parameters. Models with product or substrate inhibition resulted in large uncertainties above 80% on the parameter estimates. Therefore, irreversible Michaelis-Menten model was utilized for comparison of parameters. <span class="math notranslate nohighlight">\(\frac{k_{cat}}{K_{m}}\)</span> was estimated to be 25.353 min<sup>-1</sup>mM<sup>-1</sup> ± 8.57% for the control reaction of the HSA(WT)-huFc data set and 24.776 min<sup>-1</sup>mM<sup>-1</sup> ± 4.35% for the HSA(M3)-huFc data set. As a result, the two experiments showed to be comparable, since the catalytic efficiency differs less than 3 % between the two data sets.</p>
 </section>
 <section id="determination-and-comparison-of-k-i">
 <h2>Determination and comparison of <span class="math notranslate nohighlight">\(K_{i}\)</span><a class="headerlink" href="#determination-and-comparison-of-k-i" title="Permalink to this headline">#</a></h2>
-<p>Experimental data of chymotrypsin inhibition by HSA(M3)-huFc contained negative absorption values for the first measurement point. Presumably sourcing from an incorrect blank measurement. Therefore, only measurement data from the second data point (minute 5 and onward) was considered for parameter estimation.
+<p>Experimental data of chymotrypsin inhibition by HSA(M3)-huFc contained negative absorption values for the first measurement point, presumably sourcing from an incorrect blank measurement. Therefore, only measurement data from the second data point (minute 5 and onward) was considered for parameter estimation.
 Parameter estimates for all applied kinetic models are displayed in the output below and visualized in Fig. 4.</p>
 <div class="cell tag_hide_input docutils container">
 <div class="cell_input docutils container">
