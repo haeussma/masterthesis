@@ -10,7 +10,7 @@
 # In the following analysis, $\alpha$-glucosidase was exposed to fucoidan from *Ecklonia maxima*, *Ecklonia radiata*, *Fucus vesiculosus*, and *Schimmelmannia elegans* to test their respective capability of $\alpha$-glucosidase inhibiton by assessing their respective $K_{i}$ values.
 # 
 # ### Experimental design 
-# $\alpha$-glucosidase reactions, catalyzing the hydrolysis of p-nitrophenyl glucopyranoside (p-NPG) to p-nitrophenol (p-NP) were conducted with and without fucoidan from each seaweed species as well as acarbose. Fucoidan was applied in two different concentrations. p-NPG was applied in a range from 0.1 mM to 5 mM, to enzyme reactions containing 9.19 µM $\alpha$-glucosidase.
+# $\alpha$-glucosidase reactions, catalyzing the hydrolysis of p-nitrophenyl glucopyranoside (p-NPG) to p-nitrophenol (p-NP) were conducted with and without fucoidan from each seaweed species as well as acarbose. Fucoidan was applied in two different concentrations. p-NPG was applied in a range from 0.1 mM - 5 mM, to enzyme reactions containing 9.19 µM $\alpha$-glucosidase.
 # Product formation was recorded photometrically at 405 nm and 37°C for 20 min. Product concentrations were calculated utilizing a photometric p-NP standard. Additionally, control reactions without enzyme were prepared to subtract the absorption contribution of the respective inhibitor, buffer, enzyme and substrate from each measurement.
 # 
 # ## Data preparation
@@ -151,7 +151,7 @@ del enzml_docs[0].measurement_dict["m8"].getReactant("s1").replicates[0]
 # 
 # ### Concentration calculation
 # 
-# Standard data of p-NP was loaded from an excel file, and a standard curve was created. Then, the standard curve was applied to the EnzymeML documents.
+# Standard data of p-NP was loaded from an Excel file, and a standard curve was created. Then, the standard curve was applied to the EnzymeML documents.
 
 # In[5]:
 
@@ -182,8 +182,8 @@ for enzmldoc in enzml_docs:
 # Comparison between different inhibition models and thus determining the kinetic mechanism was not possible, as no model was consistently favored over the other based on AIC and standard deviations of the parameter estimates. 
 # 
 # 
-# Thus, different inhibition models cannot be compared, since information provided by the initial slopes is insufficient to distinguish kinetic inhibition mechanisms by modeling. In consequence, kinetic parameters were estimated based on initial rates, assuming competitive inhibition, since this kinetic mechanism has been proposed in literature {cite}`shan2016vitro`.  
-# Additionally, the faulty measurement with an initial substrate concentration of 0.5 mM from the 'a-glucosidase inhibition by acarbose' data set was excluded from parameter estimation. 
+# Thus, different inhibition models cannot be compared, since information provided by the initial slopes is insufficient to distinguish kinetic inhibition mechanisms by modeling. In consequence, kinetic parameters were estimated based on initial rates, assuming competitive inhibition, since this kinetic mechanism has been proposed {cite}`shan2016vitro`.  
+# Additionally, the faulty measurement with an initial substrate concentration of 0.5 mM from the acarbose data set was excluded from parameter estimation. 
 # Based on an initial parameter estimation run with subsequent visual analysis, severals measurements from the *E. maxima* dataset were excluded. Thereby, measurements from both applied inhibitor concentrations and an initial substrate concentration of 2.5 mM and 5 mM showed similar activity compared to reactions without inhibitor. In contrast, the reactions with inhibitor present showed inhibition, according to the difference in slope.
 
 # In[6]:
@@ -249,12 +249,12 @@ plt.tight_layout()
 
 # _Fig. 6: Estimated inhibitory constants for $\alpha$-glucosidase inhibition by fucoidan from different algae species and acarbose_
 # 
-# Fucoidan from *E. radiata*, *F. vesiculosus*, and *S. elegans* all showed a lower $K_{i}$ (28, 3, and 16 µg ml<sup>-1</sup> respectively) compared to the acarbose reference (112 µg ml<sup>-1</sup>). This resembles a 37-fold higher binding affinity of fucoidan from *F. vesiculosus* to $\alpha$-glucosidase compared to acarbose. In contrast to the previous study, fucoidan from *E. maxima* showed a more than 7-fold higher $K_{i}$ (858 µg ml<sup>-1</sup>) compared to acarbose. This likely originates from inconsistencies during experimental preparation. Additionally, 4 of 10 measurements with applied inhibitor were excluded from parameter estimation, since they showed higher activity compared to the respective reactions without inhibitor. Therefore, these measurement should be repeated. Estimated inhibition constants for each tested inhibitor are visualized in Fig. 6.
+# Fucoidan from *E. radiata*, *F. vesiculosus*, and *S. elegans* all showed a lower $K_{i}$ (28, 3, and 16 µg ml<sup>-1</sup>, respectively) compared to the acarbose reference (112 µg ml<sup>-1</sup>). This resembles a 37-fold higher binding affinity of fucoidan from *F. vesiculosus* to $\alpha$-glucosidase compared to acarbose. In contrast to the previous study, fucoidan from *E. maxima* showed a more than 7-fold higher $K_{i}$ (858 µg ml<sup>-1</sup>) compared to acarbose. This likely originates from inconsistencies during experimental preparation. Additionally, 4 of 10 measurements with applied inhibitor were excluded from parameter estimation, since they showed higher activity compared to the respective reactions without inhibitor. Therefore, these measurement should be repeated. Estimated inhibition constants for each tested inhibitor are visualized in Fig. 6.
 # 
 # ## Project discussion
 # 
 # In general, the estimated parameters are not reliable on a quantitative level, since the malfunction of the analytical device undermines the validity of the whole dataset. Therefore, it cannot be ruled out, that some of the calculated concentrations deviate from the real concentrations. Furthermore, all estimated parameters are only estimated based on three time points of measure. In addition each experimental condition was applied as duplicate repeats, which additionally showed deviations.
-# In conclusion the estimated parameters qualitatively confirm that fucoidan from different host organism, inhibits $\alpha$-glucosidase more strongly, compared to acarbose.
+# In conclusion, the estimated parameters qualitatively confirm that fucoidan from different host organisms, inhibit $\alpha$-glucosidase more strongly, compared to acarbose.
 # 
 # ## Save modeling results
 # 

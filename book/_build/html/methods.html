@@ -1,0 +1,725 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Methods &#8212; From raw data to kinetic parameters: an EnzymeML-based workflow for reproducible enzyme kinetics</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Results" href="results.html" />
+    <link rel="prev" title="Introduction" href="introduction.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">From raw data to kinetic parameters: an EnzymeML-based workflow for reproducible enzyme kinetics</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="welcome.html">
+                    Welcome to my master thesis
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="declaration.html">
+   Declaration of authorship
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="acknowledgements.html">
+   Acknowledgements
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="abstract.html">
+   Abstract
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Methods
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="results.html">
+   Results
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="scenarios/chymotrypsin_inhibition.html">
+     <strong>
+      Scenario A:
+     </strong>
+     <br/>
+     Chymotrypsin inhibiton by an
+     <em>
+      in silico
+     </em>
+     designed albumin fusion protein
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="scenarios/glycosidase_inhibition.html">
+     <strong>
+      Scenario B:
+     </strong>
+     <br/>
+     α-glucosidase inhibition by fucoidan
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="scenarios/SLAC_kinetic_characterization.html">
+     <strong>
+      Scenario C:
+     </strong>
+     <br/>
+     SLAC characterization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="scenarios/enzyme_inactivation.html">
+     <strong>
+      Scenario D:
+     </strong>
+     <br/>
+     Time-dependent enzyme inactivation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="discussion.html">
+   Discussion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="conclusion.html">
+   Conclusion and Outlook
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="references.html">
+   References
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+<a href="https://github.com/haeussma/masterthesis"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="bottom"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/methods.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#enzymeml-and-pyenzyme">
+   EnzymeML and PyEnzyme
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creation-of-enzymeml-documents">
+     Creation of EnzymeML documents
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#saving-of-modeling-results">
+     Saving of modeling results
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#calipytion">
+   CaliPytion
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-model">
+     Data model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#initialization">
+     Initialization
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#code-availability">
+     Code availability
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#enzymepynetics">
+   EnzymePynetics
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#enzymepynetics-datamodel">
+     Data model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#kinetic-models">
+     Kinetic models
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#run-parameter-estimation">
+     Run parameter estimation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id6">
+     Code availability
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-comparison">
+   Model comparison
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#jupyter-notebook">
+   Jupyter Notebook
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#jupyter-book">
+   Jupyter Book
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Methods</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#enzymeml-and-pyenzyme">
+   EnzymeML and PyEnzyme
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creation-of-enzymeml-documents">
+     Creation of EnzymeML documents
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#saving-of-modeling-results">
+     Saving of modeling results
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#calipytion">
+   CaliPytion
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-model">
+     Data model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#initialization">
+     Initialization
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#code-availability">
+     Code availability
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#enzymepynetics">
+   EnzymePynetics
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#enzymepynetics-datamodel">
+     Data model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#kinetic-models">
+     Kinetic models
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#run-parameter-estimation">
+     Run parameter estimation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id6">
+     Code availability
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-comparison">
+   Model comparison
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#jupyter-notebook">
+   Jupyter Notebook
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#jupyter-book">
+   Jupyter Book
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="methods">
+<h1>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">#</a></h1>
+<section id="enzymeml-and-pyenzyme">
+<h2>EnzymeML and PyEnzyme<a class="headerlink" href="#enzymeml-and-pyenzyme" title="Permalink to this headline">#</a></h2>
+<p>EnzymeML documents were read, edited, and written via the Python application programming interface PyEnzyme <span id="id1">[<a class="reference internal" href="references.html#id12" title="Jan Range, Frank Bergmann, and Neil Swainston. Pyenzyme 1.1.0-alpha. June 2021. URL: https://doi.org/10.5281/zenodo.5021263, doi:10.5281/zenodo.5021263.">Range <em>et al.</em>, 2021</a>]</span>, providing the possibility to integrate data from EnzymeML documents in Python-based data analysis workflows. Thereby, EnzymeML documents were used as a data source.</p>
+<section id="creation-of-enzymeml-documents">
+<h3>Creation of EnzymeML documents<a class="headerlink" href="#creation-of-enzymeml-documents" title="Permalink to this headline">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">EnzymeMLDocuments</span></code> were created using the EnzymeML Excel template, in combination with the <code class="docutils literal notranslate"><span class="pre">.fromTemplate()</span></code> method of PyEnzyme. Within the spreadsheet, data and metadata of an experiment were filled in the respective sheets. Alternatively, only metadata was entered to the spreadsheet, whereas measurement data was parsed by a custom Python function from the output file of the analytical device to the measurement data section of the EnzymeML document.</p>
+</section>
+<section id="saving-of-modeling-results">
+<h3>Saving of modeling results<a class="headerlink" href="#saving-of-modeling-results" title="Permalink to this headline">#</a></h3>
+<p>Modeling results from parameter estimation were written back to the EnzymeML document, which contained the measurement data by using PyEnzyme.</p>
+</section>
+</section>
+<section id="calipytion">
+<h2>CaliPytion<a class="headerlink" href="#calipytion" title="Permalink to this headline">#</a></h2>
+<p>CaliPytion was developed to provide an easy way to find the best model by which the relationship between analytical signal to analyte concentration of photometric measurements can be determined. The resulting <code class="docutils literal notranslate"><span class="pre">StandardCurve</span></code> is created based on a provided analyte standard. Besides a linear calibration equation, non-linear calibration models were implemented. All implemented calibration equations <a class="reference internal" href="#equation-linear">(1)</a>, <a class="reference internal" href="#equation-quadratic">(2)</a> <a class="reference internal" href="#equation-3rd-polynominal">(3)</a>, <a class="reference internal" href="#equation-poly-e">(4)</a> <a class="reference internal" href="#equation-fractional">(5)</a> are listed below, whereas <span class="math notranslate nohighlight">\(A\)</span> denotes the absorption, <span class="math notranslate nohighlight">\(x\)</span> the concentration, and <span class="math notranslate nohighlight">\(a, b, c\)</span> the respective parameters of each equation.
+During the fitting process, all calibration equations are fitted against the analyte standard by non-linear least-square minimization. Therefore, the Python library lmfit <span id="id2">[<a class="reference internal" href="references.html#id35" title="Matthew Newville, Till Stensitzki, Daniel B Allen, Michal Rawlik, Antonino Ingargiola, and Andrew Nelson. Lmfit: non-linear least-square minimization and curve-fitting for python. Astrophysics Source Code Library, pages ascl–1606, 2016.">Newville <em>et al.</em>, 2016</a>]</span> was utilized. The best fitting model is then selected based on the lowest Akaike information criterion (AIC). Furthermore the fit of the models can be visually assessed by calling the <code class="docutils literal notranslate"><span class="pre">.visualize()</span></code> method of the <code class="docutils literal notranslate"><span class="pre">StandardCurve</span></code> class. After the calibration curves are fitted, concentration of unknown samples are determined by calculating the root of the parameterized calibration model.</p>
+<div class="math notranslate nohighlight" id="equation-linear">
+<span class="eqno">(1)<a class="headerlink" href="#equation-linear" title="Permalink to this equation">#</a></span>\[A = ax\]</div>
+<div class="math notranslate nohighlight" id="equation-quadratic">
+<span class="eqno">(2)<a class="headerlink" href="#equation-quadratic" title="Permalink to this equation">#</a></span>\[A = ax^2 + bx\]</div>
+<div class="math notranslate nohighlight" id="equation-3rd-polynominal">
+<span class="eqno">(3)<a class="headerlink" href="#equation-3rd-polynominal" title="Permalink to this equation">#</a></span>\[A = ax^3 + bx^2 + cx\]</div>
+<div class="math notranslate nohighlight" id="equation-poly-e">
+<span class="eqno">(4)<a class="headerlink" href="#equation-poly-e" title="Permalink to this equation">#</a></span>\[A = ae^{\frac{b}{x}}\]</div>
+<div class="math notranslate nohighlight" id="equation-fractional">
+<span class="eqno">(5)<a class="headerlink" href="#equation-fractional" title="Permalink to this equation">#</a></span>\[A = \frac{ax}{b+x}\]</div>
+<section id="data-model">
+<span id="calipytion-datamodel"></span><h3>Data model<a class="headerlink" href="#data-model" title="Permalink to this headline">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">StandardCurve</span></code> functionality of CaliPythion is based on a <a class="reference external" href="https://github.com/FAIRChemistry/CaliPytion/blob/main/specifications/CalibrationModel.md">data model</a>, structuring data and metadata of calibration measurements. Thereby, calibration conditions like temperature, pH, and information about the analytical device can be provided. Furthermore, the name as well as an ID can be specified for the analyzed substance. All of this information is stored in the <code class="docutils literal notranslate"><span class="pre">Calibration</span></code> root object. Additionally, the root object can contain a <code class="docutils literal notranslate"><span class="pre">Standard</span></code> and a <code class="docutils literal notranslate"><span class="pre">Spectrum</span></code>.<br />
+A <code class="docutils literal notranslate"><span class="pre">Standard</span></code> contains measurements of multiple predefined concentrations and the wavelength at which the measurement was conducted. Additionally, a <code class="docutils literal notranslate"><span class="pre">Spectrum</span></code> can be defined by providing measurement data as well as the respective wavelengths at which the data was measured. The data model was generated using <a class="reference external" href="https://github.com/JR-1991/software-driven-rdm">sdRDM</a>, a Python tool allowing the creation and versioning of data models.</p>
+</section>
+<section id="initialization">
+<h3>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">#</a></h3>
+<p>A <code class="docutils literal notranslate"><span class="pre">StandardCurve</span></code> can be initialized directly from an Excel file by calling <code class="docutils literal notranslate"><span class="pre">StandardCurve.from_Excel()</span></code>
+Therefore, the first column must contain concentration data, whereas all following columns contain the respective measurement data. The first row is not considered and should be used to label the data.
+Alternatively a <code class="docutils literal notranslate"><span class="pre">StandardCurve</span></code> can be initialized by providing a <code class="docutils literal notranslate"><span class="pre">Calibration</span></code> object, containing the calibration data.</p>
+<p>After <code class="docutils literal notranslate"><span class="pre">StandardCurve</span></code> initialization, concentrations can be calculated by calling the <code class="docutils literal notranslate"><span class="pre">.get_concentration()</span></code> method. Alternatively, a <code class="docutils literal notranslate"><span class="pre">StandardCurve</span></code> can be directly applied to an <code class="docutils literal notranslate"><span class="pre">EnzymeMLDocument</span></code> by calling the <code class="docutils literal notranslate"><span class="pre">.apply_to_EnzymeML()</span></code> method.</p>
+</section>
+<section id="code-availability">
+<h3>Code availability<a class="headerlink" href="#code-availability" title="Permalink to this headline">#</a></h3>
+<p>CaliPytion was published on the Python packaging index (<a class="reference external" href="https://pypi.org/project/CaliPytion/">PyPI</a>) whereas the source code is accessible on <a class="reference external" href="https://github.com/FAIRChemistry/CaliPytion">GitHub</a>.</p>
+</section>
+</section>
+<section id="enzymepynetics">
+<span id="method-enzymepynetics"></span><h2>EnzymePynetics<a class="headerlink" href="#enzymepynetics" title="Permalink to this headline">#</a></h2>
+<p>EnzymePynetics is a Python package for kinetic parameter estimation of single-substrate enzyme reactions. The <code class="docutils literal notranslate"><span class="pre">ParameterEstimator</span></code> of EnzymePynetics estimates the turnover number and Michaelis-Menten constant by fitting time-course measurement data of enzyme reactions to different Michaelis-Menten models. Thereby, the residuals between measurement data and integrated Michaelis-Menten rate equations are minimized through a non-linear least-square algorithm utilizing the lmfit library. Additionally, the inhibition constant <span class="math notranslate nohighlight">\(K_{i}\)</span> can be assessed for potential substrate or product inhibition. Furthermore, <span class="math notranslate nohighlight">\(K_{i}\)</span> of an enzyme inhibitor apart from substrate or product can be determined for inhibitor studies.</p>
+<section id="enzymepynetics-datamodel">
+<span id="id3"></span><h3>Data model<a class="headerlink" href="#enzymepynetics-datamodel" title="Permalink to this headline">#</a></h3>
+<p>EnzymePynetics is based on a data model, resembling the experimental design of an enzyme kinetics assay. Thereby, all relevant data and metadata of a kinetic experiment are structured in the <code class="docutils literal notranslate"><span class="pre">EnzymeKineticsExperiment</span></code> base object. Therein, reaction temperature with its respective unit, pH value, and the name of the substance from which the measurement data originates are described. An <code class="docutils literal notranslate"><span class="pre">EnzymeKineticsExperiment</span></code> contains one or multiple <code class="docutils literal notranslate"><span class="pre">Measurements</span></code>, which contain the measurement data. Each measurement stores information of the experimental conditions of an enzyme reaction. Hence, each <code class="docutils literal notranslate"><span class="pre">Measurement</span></code> contains information on the initial substrate concentration, enzyme concentration, and inhibitor concentration, along with the respective concentration units. Each <code class="docutils literal notranslate"><span class="pre">Measurement</span></code> contains measured data, which itself consist of one or multiple replicates of the respective experimental condition.<br />
+The data model was generated using <a class="reference external" href="https://github.com/JR-1991/software-driven-rdm">sdRDM</a>.</p>
+<p>Extensive documentation of the data model is accessible in the <a class="reference external" href="https://github.com/haeussma/EnzymePynetics/blob/main/specifications/EnzymeKinetics.md">specifications</a> of the software package.</p>
+</section>
+<section id="kinetic-models">
+<h3>Kinetic models<a class="headerlink" href="#kinetic-models" title="Permalink to this headline">#</a></h3>
+<p>Besides the irreversible Michaelis-Menten rate equation <a class="reference internal" href="#equation-irreversible-mm">(6)</a> inhibition models for competitive <a class="reference internal" href="#equation-competitive-inhibition">(7)</a>, uncompetitive <a class="reference internal" href="#equation-uncompetitive-inhibition">(8)</a>, non-competitive <a class="reference internal" href="#equation-noncompetitive-inhibition">(9)</a> and partially competitive inhibition <a class="reference internal" href="#equation-partially-inhibition">(10)</a> were implemented, according to <span id="id4">[<a class="reference internal" href="references.html#id5" title="Hans Bisswanger. Enzyme kinetics: principles and methods. John Wiley &amp; Sons, 2017.">Bisswanger, 2017</a>]</span>. Thereby, <span class="math notranslate nohighlight">\(S\)</span>, <span class="math notranslate nohighlight">\(E\)</span>, and <span class="math notranslate nohighlight">\(I\)</span> respectively denote the concentration of substrate, enzyme, and inhibitor. In terms of kinetic parameters, <span class="math notranslate nohighlight">\(k_{cat}\)</span> denotes the turnover number, <span class="math notranslate nohighlight">\(K_{m}\)</span> the Michaelis-Menten constant of the substrate, whereas <span class="math notranslate nohighlight">\(K_{ic}\)</span> and <span class="math notranslate nohighlight">\(K_{iu}\)</span> respectively describe the competitive and uncompetitive inhibition constant.</p>
+<div class="math notranslate nohighlight" id="equation-irreversible-mm">
+<span class="eqno">(6)<a class="headerlink" href="#equation-irreversible-mm" title="Permalink to this equation">#</a></span>\[\frac{dS}{dt} = -\frac{k_{cat} * E * S}{K_{m} + S}\]</div>
+<div class="math notranslate nohighlight" id="equation-competitive-inhibition">
+<span class="eqno">(7)<a class="headerlink" href="#equation-competitive-inhibition" title="Permalink to this equation">#</a></span>\[\frac{dS}{dt} = -\frac{k_{cat} * E * S}{K_{m} * (1+\frac{I}{K_{ic}}) + S}\]</div>
+<div class="math notranslate nohighlight" id="equation-uncompetitive-inhibition">
+<span class="eqno">(8)<a class="headerlink" href="#equation-uncompetitive-inhibition" title="Permalink to this equation">#</a></span>\[\frac{dS}{dt} = -\frac{k_{cat} * E * S}{K_{m} * (1+\frac{I}{K_{iu}}) * S}\]</div>
+<div class="math notranslate nohighlight" id="equation-noncompetitive-inhibition">
+<span class="eqno">(9)<a class="headerlink" href="#equation-noncompetitive-inhibition" title="Permalink to this equation">#</a></span>\[\frac{dS}{dt} = -\frac{k_{cat} * E * S}{K_{m} * (1+\frac{I}{K_{ic}}) + (1+\frac{I}{K_{iu}}) + S}\]</div>
+<div class="math notranslate nohighlight" id="equation-partially-inhibition">
+<span class="eqno">(10)<a class="headerlink" href="#equation-partially-inhibition" title="Permalink to this equation">#</a></span>\[\frac{dS}{dt} = -\frac{k_{cat} * E * S}{K_{m} * \frac{(1+\frac{I}{K_{ic}})}{(1+\frac{I}{K_{iu}})} + S}\]</div>
+<p>By default, <span class="math notranslate nohighlight">\(E\)</span> is assumed to be constant throughout the reaction. If required, the kinetic models can be extended by the parameter <span class="math notranslate nohighlight">\(k_{inact}\)</span>, which describes the time-dependent inactivation rate of the enzyme. The decrease in active enzyme concentration is modeled as describe in equation <a class="reference internal" href="#equation-enzyme-inactivation">(11)</a>:</p>
+<div class="math notranslate nohighlight" id="equation-enzyme-inactivation">
+<span class="eqno">(11)<a class="headerlink" href="#equation-enzyme-inactivation" title="Permalink to this equation">#</a></span>\[\frac{dE}{dt} = -k_{inact} * E\]</div>
+<p>Each kinetic model therefore consists of a set of ordinary differential equations, describing the change in concentration of substrate, product and enzyme.</p>
+</section>
+<section id="run-parameter-estimation">
+<h3>Run parameter estimation<a class="headerlink" href="#run-parameter-estimation" title="Permalink to this headline">#</a></h3>
+<p><strong>Initialization</strong><br />
+The <code class="docutils literal notranslate"><span class="pre">EnzymeKineticsExperiment</span></code> object solely serves as a data container, whereas
+the <code class="docutils literal notranslate"><span class="pre">ParameterEstimator</span></code> harbors the functionalities for parameter estimation. Data can be provided as an <code class="docutils literal notranslate"><span class="pre">EnzymeKineticsExperiment</span></code> object. Alternatively, an <code class="docutils literal notranslate"><span class="pre">EnzymeMLDocument</span></code> document can be provided as the data source via PyEnzyme by calling the <code class="docutils literal notranslate"><span class="pre">.from_EnzymeML()</span></code> method. Within the method, the ID of the measured species needs to be specified according to the nomenclature of the <code class="docutils literal notranslate"><span class="pre">EnzymeMLDocument</span></code>. If the document contains information on an inhibitor, the respective id needs to be provided as well, if its inhibition constant should be estimated.</p>
+<p>Initially, missing data for the fitting process is calculated based on the assumption of mass conservation. As such, missing product concentration <span class="math notranslate nohighlight">\(P\)</span> is calculated based on the given substrate measurement data <span class="math notranslate nohighlight">\(S\)</span> and the specified initial substrate concentration <span class="math notranslate nohighlight">\(S_{0}\)</span> for each measurement <span class="math notranslate nohighlight">\(t\)</span> <a class="reference internal" href="#equation-missing-product">(12)</a>. If product data is provided, missing substrate concentrations are calculated accordingly <a class="reference internal" href="#equation-missing-substrate">(13)</a>.</p>
+<div class="math notranslate nohighlight" id="equation-missing-product">
+<span class="eqno">(12)<a class="headerlink" href="#equation-missing-product" title="Permalink to this equation">#</a></span>\[P_{t} = S_{0} - S_{t}\]</div>
+<div class="math notranslate nohighlight" id="equation-missing-substrate">
+<span class="eqno">(13)<a class="headerlink" href="#equation-missing-substrate" title="Permalink to this equation">#</a></span>\[S_{t} = S_{0} - P_{t}\]</div>
+<p><strong>Fitting of models</strong><br />
+After the <code class="docutils literal notranslate"><span class="pre">ParameterEstimator</span></code> is initialized, all kinetic models are initialized by calling the <code class="docutils literal notranslate"><span class="pre">.fit_models()</span></code> method. Furthermore, it can be specified if enzyme inactivation should be considered for modeling. Depending on whether an inhibitor was specified, the models are initialized accordingly. If no inhibitor was specified, product and substrate inhibition models are initialized besides the irreversible Michaelis model. If inhibitor data was provided, the inhibition models are initialized with concentration data of the inhibitor. Thereafter, kinetic parameters of each model are initialized with estimates based on the highest reaction rate in the dataset. For minimization, the parameter space is limited to ± 1000-fold of the initial parameter estimates.<br />
+After all models are fitted, an overview table is printed which lists all kinetic parameters of each model together with the respective 1σ standard deviation in percent. The table is sorted by ascending AIC.</p>
+<p><strong>Visualization</strong><br />
+After model fitting, the modeling results can be visualized by calling the <code class="docutils literal notranslate"><span class="pre">.visualize()</span></code> method, which was implemented utilizing Matplotlib <span id="id5">[<a class="reference internal" href="references.html#id36" title="Thomas A Caswell, Michael Droettboom, Antony Lee, John Hunter, Eric Firing, Elliott Sales De Andrade, Tim Hoffmann, David Stansby, Jody Klymak, Nelle Varoquaux, and others. Matplotlib/matplotlib: rel: v3. 3.1. Zenodo, 2020.">Caswell <em>et al.</em>, 2020</a>]</span>.
+Thereby, the measurement data is visualized together with the fitted kinetic model. If the experiment was carried out in replicates, mean values of the measurement data with the corresponding standard deviations are shown. If the experiment data contained reactions with different inhibitor concentrations, individual inhibitor concentrations are denoted by individual markers.<br />
+By default, the best fitting model according to its AIC is visualized. Different models can be visualized by passing the name of the respective model to the function call. Besides the figure, a detailed statistical fit report is printed, if not specified otherwise.</p>
+<p><strong>Data units</strong><br />
+So far, EnzymePynetics neither converts nor validates units of the measurement data. Hence, all data needs to be provided using the same molar or mass unit. Only the concentration unit of the inhibitor may differ from all other data units.</p>
+</section>
+<section id="id6">
+<h3>Code availability<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h3>
+<p>EnzymePynetics was published on the Python packaging index (<a class="reference external" href="https://pypi.org/project/EnzymePynetics/">PyPI</a>) whereas the source code is available on <a class="reference external" href="https://github.com/haeussma/EnzymePynetics">GitHub</a>.</p>
+</section>
+</section>
+<section id="model-comparison">
+<h2>Model comparison<a class="headerlink" href="#model-comparison" title="Permalink to this headline">#</a></h2>
+<p>The kinetic model, which best describes the experimental data, was selected based on AIC, standard deviation of parameter estimates, and visual fit between measurement data and fitted model. AIC serves as a statistical metric for information loss, which allows to relatively compare different models with differing number of parameters for a given data set. Hence, AIC can be applied for model selection <span id="id7">[<a class="reference internal" href="references.html#id16" title="Todd W Arnold. Uninformative parameters and model selection using akaike's information criterion. The Journal of Wildlife Management, 74(6):1175–1178, 2010.">Arnold, 2010</a>]</span>, <span id="id8">[<a class="reference internal" href="references.html#id17" title="Hirotogu Akaike. Information theory and an extension of the maximum likelihood principle. In Selected papers of hirotugu akaike, pages 199–213. Springer, 1998.">Akaike, 1998</a>]</span>. Thereby, models with a lower AIC indicate less information loss.
+Since AIC is based on the chi-square statistic, it does not consider the standard deviation of the estimated parameters of a model. Therefore, standard deviation was additionally considered in model selection. Models with low standard deviation were therefore preferred over models with high standard deviation. Furthermore, fit quality was assessed visually by confirming that the model describes the progress curve of the experimental data.</p>
+</section>
+<section id="jupyter-notebook">
+<h2>Jupyter Notebook<a class="headerlink" href="#jupyter-notebook" title="Permalink to this headline">#</a></h2>
+<p>All developed tools were deployed in Jupyter Notebooks <span id="id9">[<a class="reference internal" href="references.html#id37" title="Thomas Kluyver, Benjamin Ragan-Kelley, Fernando Pérez, Brian E Granger, Matthias Bussonnier, Jonathan Frederic, Kyle Kelley, Jessica B Hamrick, Jason Grout, Sylvain Corlay, and others. Jupyter Notebooks-a publishing format for reproducible computational workflows. Volume 2016. IOS Press, 2016.">Kluyver <em>et al.</em>, 2016</a>]</span> for data analysis within a Python environment. A Jupyter Notebook is a digital document containing code cells and text cells. Thereby, executable code with its corresponding output can be supplemented with narrative text, figures, and equations.
+Besides its documentation capabilities, notebooks can be uploaded to platforms like GitHub or be deployed with Binder <span id="id10">[<a class="reference internal" href="references.html#id20" title="Benjamin Ragan-Kelley, Carol Willing, F Akici, D Lippa, D Niederhut, and M Pacer. Binder 2.0-reproducible, interactive, sharable environments for science at scale. In Proceedings of the 17th python in science conference, 113–120. F. Akici, D. Lippa, D. Niederhut, and M. Pacer, eds., 2018.">Ragan-Kelley <em>et al.</em>, 2018</a>]</span>.
+GitHub is a cloud-based Git repository, which enables versioning as well as collaborative working on projects involving any kind of code. Besides GitHub, sharing of Jupiter Notebooks is possible with the open-source project Binder, which allows hosting of notebooks. Thus, Jupyter Notebooks can be shared in an executable form, which is independent from the operating system and the location of the user. Only an internet connection and a browser is required.
+As a result, Jupyter Notebooks, which are executable through Binder, form an user-friendly environment for scientific data analysis. Due to the extensive documentation capabilities of Jupyter Notebooks, the analysis workflow is comprehensible and accessible for programmers as well as for non-programmers.</p>
+</section>
+<section id="jupyter-book">
+<h2>Jupyter Book<a class="headerlink" href="#jupyter-book" title="Permalink to this headline">#</a></h2>
+<p>This written thesis, except for the cover page, was entirely conceptualized as a Jupyter Book, which is an open-source tool that allows to incorporate computational material in publication-quality books <span id="id11">[<a class="reference internal" href="references.html#id38" title="Executable Books Community. Jupyter book. February 2020. URL: https://doi.org/10.5281/zenodo.4539666, doi:10.5281/zenodo.4539666.">Community, 2020</a>]</span>. Thereby, Jupyter Notebooks can natively be integrated in Jupyter Books, thus making all advantages of the notebook also available in the book.
+Jupyter Books allow text formatting with Markdown, which is a simple markdown language. Furthermore, Jupyter Book supports cross-referencing, citations, and numbering of equations.
+Together with all data, the final and interactive book was deployed on GitHub Pages whereas the print version was generated by exporting the html-version of the book to pdf.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="introduction.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Introduction</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="results.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Results</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Max Häußler<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

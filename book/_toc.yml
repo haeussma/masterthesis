@@ -1,10 +1,12 @@
 # Table of contents
 # Learn more at https://jupyterbook.org/customize/toc.html
 
+root: welcome
+
 format: jb-book
 root: welcome
 chapters:
-  #  - file: declaration
+  - file: declaration
   - file: acknowledgements
   - file: abstract
   - file: introduction

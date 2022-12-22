@@ -1,0 +1,510 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>References &#8212; From raw data to kinetic parameters: an EnzymeML-based workflow for reproducible enzyme kinetics</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Conclusion and Outlook" href="conclusion.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">From raw data to kinetic parameters: an EnzymeML-based workflow for reproducible enzyme kinetics</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="welcome.html">
+                    Welcome to my master thesis
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="declaration.html">
+   Declaration of authorship
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="acknowledgements.html">
+   Acknowledgements
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="abstract.html">
+   Abstract
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="methods.html">
+   Methods
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="results.html">
+   Results
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="scenarios/chymotrypsin_inhibition.html">
+     <strong>
+      Scenario A:
+     </strong>
+     <br/>
+     Chymotrypsin inhibiton by an
+     <em>
+      in silico
+     </em>
+     designed albumin fusion protein
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="scenarios/glycosidase_inhibition.html">
+     <strong>
+      Scenario B:
+     </strong>
+     <br/>
+     α-glucosidase inhibition by fucoidan
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="scenarios/SLAC_kinetic_characterization.html">
+     <strong>
+      Scenario C:
+     </strong>
+     <br/>
+     SLAC characterization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="scenarios/enzyme_inactivation.html">
+     <strong>
+      Scenario D:
+     </strong>
+     <br/>
+     Time-dependent enzyme inactivation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="discussion.html">
+   Discussion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="conclusion.html">
+   Conclusion and Outlook
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   References
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+<a href="https://github.com/haeussma/masterthesis"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="bottom"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/references.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>References</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="references">
+<h1>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h1>
+<div class="docutils container" id="id1">
+<dl class="citation">
+<dt class="label" id="id17"><span class="brackets">Aka98</span></dt>
+<dd><p>Hirotogu Akaike. Information theory and an extension of the maximum likelihood principle. In <em>Selected papers of hirotugu akaike</em>, pages 199–213. Springer, 1998.</p>
+</dd>
+<dt class="label" id="id16"><span class="brackets">Arn10</span></dt>
+<dd><p>Todd W Arnold. Uninformative parameters and model selection using akaike's information criterion. <em>The Journal of Wildlife Management</em>, 74(6):1175–1178, 2010.</p>
+</dd>
+<dt class="label" id="id32"><span class="brackets">Bak16</span></dt>
+<dd><p>Monya Baker. Reproducibility crisis. <em>Nature</em>, 533(26):353–66, 2016.</p>
+</dd>
+<dt class="label" id="id33"><span class="brackets">BI15</span></dt>
+<dd><p>C Glenn Begley and John PA Ioannidis. Reproducibility in science: improving the standard for basic and preclinical research. <em>Circulation research</em>, 116(1):116–126, 2015.</p>
+</dd>
+<dt class="label" id="id42"><span class="brackets">BFF+21</span></dt>
+<dd><p>Elizabeth L. Bell, William Finnigan, Scott P. France, Anthony P. Green, Martin A. Hayes, Lorna J. Hepworth, Sarah L. Lovelock, Haruka Niikura, S\'ılvia Osuna, Elvira Romero, Katherine S. Ryan, Nicholas J. Turner, and Sabine L. Flitsch. Biocatalysis. <em>Nature Reviews Methods Primers</em>, June 2021. URL: <a class="reference external" href="https://doi.org/10.1038/s43586-021-00044-z">https://doi.org/10.1038/s43586-021-00044-z</a>, <a class="reference external" href="https://doi.org/10.1038/s43586-021-00044-z">doi:10.1038/s43586-021-00044-z</a>.</p>
+</dd>
+<dt class="label" id="id5"><span class="brackets">Bis17</span></dt>
+<dd><p>Hans Bisswanger. <em>Enzyme kinetics: principles and methods</em>. John Wiley &amp; Sons, 2017.</p>
+</dd>
+<dt class="label" id="id9"><span class="brackets">BAC99</span></dt>
+<dd><p>William F Busby, Joseph M Ackermann, and Charles L Crespi. Effect of methanol, ethanol, dimethyl sulfoxide, and acetonitrile on in vitro activities of cdna-expressed human cytochromes p-450. <em>Drug Metabolism and Disposition</em>, 27(2):246–249, 1999.</p>
+</dd>
+<dt class="label" id="id8"><span class="brackets">Bux15</span></dt>
+<dd><p>Engelbert Buxbaum. <em>Enzyme Kinetics: Special Cases</em>, pages 185–191. Springer International Publishing, Cham, 2015. URL: <a class="reference external" href="https://doi.org/10.1007/978-3-319-19920-7_8">https://doi.org/10.1007/978-3-319-19920-7_8</a>, <a class="reference external" href="https://doi.org/10.1007/978-3-319-19920-7_8">doi:10.1007/978-3-319-19920-7_8</a>.</p>
+</dd>
+<dt class="label" id="id36"><span class="brackets">CDL+20</span></dt>
+<dd><p>Thomas A Caswell, Michael Droettboom, Antony Lee, John Hunter, Eric Firing, Elliott Sales De Andrade, Tim Hoffmann, David Stansby, Jody Klymak, Nelle Varoquaux, and others. Matplotlib/matplotlib: rel: v3. 3.1. <em>Zenodo</em>, 2020.</p>
+</dd>
+<dt class="label" id="id38"><span class="brackets">Com20</span></dt>
+<dd><p>Executable Books Community. Jupyter book. February 2020. URL: <a class="reference external" href="https://doi.org/10.5281/zenodo.4539666">https://doi.org/10.5281/zenodo.4539666</a>, <a class="reference external" href="https://doi.org/10.5281/zenodo.4539666">doi:10.5281/zenodo.4539666</a>.</p>
+</dd>
+<dt class="label" id="id6"><span class="brackets">DMMP20</span></dt>
+<dd><p>Chantal Désirée Daub, Blessing Mabate, Samkelo Malgas, and Brett Ivan Pletschke. Fucoidan from ecklonia maxima is a powerful inhibitor of the diabetes-related enzyme, α-glucosidase. <em>International journal of biological macromolecules</em>, 151:412–420, 2020.</p>
+</dd>
+<dt class="label" id="id31"><span class="brackets">GFI16</span></dt>
+<dd><p>Steven N Goodman, Daniele Fanelli, and John PA Ioannidis. What does research reproducibility mean? <em>Science translational medicine</em>, 8(341):341ps12–341ps12, 2016.</p>
+</dd>
+<dt class="label" id="id14"><span class="brackets">HC10</span></dt>
+<dd><p>Kang-Hung Hsu and Chiachung Chen. The effect of calibration equations on the uncertainty of uv–vis spectrophotometric measurements. <em>Measurement</em>, 43(10):1525–1531, 2010.</p>
+</dd>
+<dt class="label" id="id37"><span class="brackets">KRKPerez+16</span></dt>
+<dd><p>Thomas Kluyver, Benjamin Ragan-Kelley, Fernando Pérez, Brian E Granger, Matthias Bussonnier, Jonathan Frederic, Kyle Kelley, Jessica B Hamrick, Jason Grout, Sylvain Corlay, and others. <em>Jupyter Notebooks-a publishing format for reproducible computational workflows.</em> Volume 2016. IOS Press, 2016.</p>
+</dd>
+<dt class="label" id="id7"><span class="brackets">LLWZ08</span></dt>
+<dd><p>Bo Li, Fei Lu, Xinjun Wei, and Ruixiang Zhao. Fucoidan: structure and bioactivity. <em>Molecules</em>, 13(8):1671–1695, 2008.</p>
+</dd>
+<dt class="label" id="id15"><span class="brackets">MGA+17</span></dt>
+<dd><p>Julia Martin, Alberto Romero Gracia, Agustín G Asuero, and others. Fitting nonlinear calibration curves: no models perfect. <em>Journal of Analytical Sciences, Methods and Instrumentation</em>, 7(01):1, 2017.</p>
+</dd>
+<dt class="label" id="id21"><span class="brackets">Miy20</span></dt>
+<dd><p>Tsuyoshi Miyakawa. No raw data, no science: another possible source of the reproducibility crisis. 2020.</p>
+</dd>
+<dt class="label" id="id34"><span class="brackets">MunafoNB+17</span></dt>
+<dd><p>Marcus R Munafò, Brian A Nosek, Dorothy VM Bishop, Katherine S Button, Christopher D Chambers, Nathalie Percie du Sert, Uri Simonsohn, Eric-Jan Wagenmakers, Jennifer J Ware, and John Ioannidis. A manifesto for reproducible science. <em>Nature human behaviour</em>, 1(1):1–9, 2017.</p>
+</dd>
+<dt class="label" id="id35"><span class="brackets">NSA+16</span></dt>
+<dd><p>Matthew Newville, Till Stensitzki, Daniel B Allen, Michal Rawlik, Antonino Ingargiola, and Andrew Nelson. Lmfit: non-linear least-square minimization and curve-fitting for python. <em>Astrophysics Source Code Library</em>, pages ascl–1606, 2016.</p>
+</dd>
+<dt class="label" id="id22"><span class="brackets">Pen11</span></dt>
+<dd><p>Roger D Peng. Reproducible research in computational science. <em>Science</em>, 334(6060):1226–1227, 2011.</p>
+</dd>
+<dt class="label" id="id4"><span class="brackets">Ple21</span></dt>
+<dd><p>Jürgen Pleiss. Standardized data, scalable documentation, sustainable storage–enzymeml as a basis for fair data management in biocatalysis. <em>ChemCatChem</em>, 13(18):3909–3913, 2021.</p>
+</dd>
+<dt class="label" id="id30"><span class="brackets">PKK+15</span></dt>
+<dd><p>Alaric Prins, L Kleinsmidt, Nuraan Khan, Bronwyn Kirby, Tukayi Kudanga, Jannik Vollmer, Juergen Pleiss, Stephanie Burton, and M Le Roes-Hill. The effect of mutations near the t1 copper site on the biochemical characteristics of the small laccase from streptomyces coelicolor a3 (2). <em>Enzyme and microbial technology</em>, 68:23–32, 2015.</p>
+</dd>
+<dt class="label" id="id20"><span class="brackets">RKWA+18</span></dt>
+<dd><p>Benjamin Ragan-Kelley, Carol Willing, F Akici, D Lippa, D Niederhut, and M Pacer. Binder 2.0-reproducible, interactive, sharable environments for science at scale. In <em>Proceedings of the 17th python in science conference</em>, 113–120. F. Akici, D. Lippa, D. Niederhut, and M. Pacer, eds., 2018.</p>
+</dd>
+<dt class="label" id="id12"><span class="brackets">RBS21</span></dt>
+<dd><p>Jan Range, Frank Bergmann, and Neil Swainston. Pyenzyme 1.1.0-alpha. June 2021. URL: <a class="reference external" href="https://doi.org/10.5281/zenodo.5021263">https://doi.org/10.5281/zenodo.5021263</a>, <a class="reference external" href="https://doi.org/10.5281/zenodo.5021263">doi:10.5281/zenodo.5021263</a>.</p>
+</dd>
+<dt class="label" id="id18"><span class="brackets">RHL+22</span></dt>
+<dd><p>Jan Range, Colin Halupczok, Jens Lohmann, Neil Swainston, Carsten Kettner, Frank T Bergmann, Andreas Weidemann, Ulrike Wittig, Santiago Schnell, and Jürgen Pleiss. Enzymeml—a data exchange format for biocatalysis and enzymology. <em>The FEBS Journal</em>, 289(19):5864–5874, 2022.</p>
+</dd>
+<dt class="label" id="id26"><span class="brackets">SLH+16</span></dt>
+<dd><p>Xindi Shan, Xin Liu, Jiejie Hao, Chao Cai, Fei Fan, Yunlou Dun, Xiaoliang Zhao, Xiaoxiao Liu, Chunxia Li, and Guangli Yu. In vitro and in vivo hypoglycemic effects of brown algal fucoidans. <em>International Journal of Biological Macromolecules</em>, 82:249–255, 2016.</p>
+</dd>
+<dt class="label" id="id25"><span class="brackets">TL10</span></dt>
+<dd><p>Qingxiu Tang and Thomas S Leyh. Precise, facile initial rate measurements. <em>The Journal of Physical Chemistry B</em>, 114(49):16131–16136, 2010.</p>
+</dd>
+<dt class="label" id="id11"><span class="brackets">TAB+14</span></dt>
+<dd><p>Keith F Tipton, Richard N Armstrong, Barbara M Bakker, Amos Bairoch, Athel Cornish-Bowden, Peter J Halling, Jan-Hendrik Hofmeyr, Thomas S Leyh, Carsten Kettner, Frank M Raushel, and others. Standards for reporting enzyme data: the strenda consortium: what it aims to do and why it should be helpful. <em>Perspectives in Science</em>, 1(1-6):131–137, 2014.</p>
+</dd>
+<dt class="label" id="id29"><span class="brackets">WTWL14</span></dt>
+<dd><p>Yang Wei, Aby A Thyparambil, Yonnie Wu, and Robert A Latour. Adsorption-induced changes in ribonuclease a structure and enzymatic activity on solid surfaces. <em>Langmuir</em>, 30(49):14849–14858, 2014.</p>
+</dd>
+<dt class="label" id="id13"><span class="brackets">WK08</span></dt>
+<dd><p>Petri Widsten and Andreas Kandelbauer. Laccase applications in the forest products industry: a review. <em>Enzyme and microbial technology</em>, 42(4):293–307, 2008.</p>
+</dd>
+<dt class="label" id="id40"><span class="brackets">WDA+16</span></dt>
+<dd><p>Mark D Wilkinson, Michel Dumontier, IJsbrand Jan Aalbersberg, Gabrielle Appleton, Myles Axton, Arie Baak, Niklas Blomberg, Jan-Willem Boiten, Luiz Bonino da Silva Santos, Philip E Bourne, and others. The fair guiding principles for scientific data management and stewardship. <em>Scientific data</em>, 3(1):1–9, 2016.</p>
+</dd>
+</dl>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="conclusion.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Conclusion and Outlook</p>
+        </div>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Max Häußler<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
