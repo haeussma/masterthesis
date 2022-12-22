@@ -6,7 +6,7 @@
 # Data provided by Alaric Prins (Applied Microbial and Health Biotechnology Institute, Cape Peninsula University of Technology, Capetown, South Africa)
 # 
 # ## Project background
-# The small laccase from *Streptomyces coelicolor* (SLAC) is a member of the muticopper oxidase family. Due to their potential to oxidize various electron-rich substrates, laccases are of interest for industrial application for lignin degradation {cite}`widsten2008laccase`. In a previous study, mutations around T1 Cu of SLAC showed significant biochemical changes {cite}`prins2015effect`. Therefore, the catalytic properties of mutated SLAC were investigated in a broad pH and temperature range.
+# The small laccase from *Streptomyces coelicolor* (SLAC) is a member of the muticopper oxidase family. Due to their potential to oxidize various electron-rich substrates, laccases are of interest for industrial application for lignin degradation {cite}`widsten2008laccase`. SLAC is currently used in ongoing biocatalysis and synergy projects. Recently, the wild-type SLAC was synthesised (previously cloned by restriction cloning) and codon-optimized for expression in *E. coli*. Therefore, the catalytic properties of the codon-optimized SLAC were investigated in a broad pH and temperature range, for rapid and accurate determination of biochemical data, which is useful for downstream applications.
 # 
 # ### Experimental design
 # In this scenario the enzymatic oxidation of 2,2'-Azino-bis(3-ethylbenzothiazoline-6-sulfonic acid) (ABTS) to its radical form ABTS<sup>+·</sup> was studied in the pH range of pH 3&nbsp;-&nbsp;pH&nbsp;5.5 and temperature range of 25°C&nbsp;-&nbsp;45°C. In total 30 kinetic enzyme assays in a substrate range between 0&nbsp;-&nbsp;200&nbsp;uM of ABTS were conducted. Additionally, for each enzyme reaction with a given initial substrate concentration, a control reaction without enzyme was prepared.  
@@ -211,7 +211,7 @@ for standard_curve, abso_enzmldoc in zip(standard_curves, absortion_enzymemldocs
 # :label: mass_balance
 # 0 = S_{(t)} + P_{(t)} - S_{0}
 # ```
-# Thereby, $S_{0}$ denotes the initial substrate concentration, whereas $S_{(t)}$ and $P_{(t)}$ describe the substrate and product concentration for each time point $t$. $S_{t}$ and $S_{0}$ were individually measured. Thus each enzyme reaction with a given initial substrate concentration had a control reaction with identical substrate concentration. In contrast to the substrate, no calibration standard was available for the product. Therefore, an additional parameter $k$ was introduced to the mass balance equation, assuming linear relationship between the product concentration and its signal:  
+# Where, $S_{0}$ denotes the initial substrate concentration, whereas $S_{(t)}$ and $P_{(t)}$ describe the substrate and product concentration for each time point $t$. $S_{t}$ and $S_{0}$ were individually measured. Thus each enzyme reaction with a given initial substrate concentration had a control reaction with identical substrate concentration. In contrast to the substrate, no calibration standard was available for the product. Therefore, an additional parameter $k$ was introduced to the mass balance equation, assuming linear relationship between the product concentration and its signal:  
 # 
 # ```{math}
 # :label: mass_balance_with_k
@@ -300,7 +300,7 @@ plt.tight_layout()
 
 # _Fig. 9: Quality control of each experiment through modeled mass balance._
 # 
-# For all experiments, except for pH 4, 45°C and pH 4.5, 35°C, the product and substrate is in qualitatively in balance over the reaction time-course, by visual analysis of Fig. 9. Mass balances, differing from 0 uM originate from differing substrate concentration in the enzyme reaction and the substrate control. In the reactions at pH 4, 45°C and pH 4.5, 35°C the mass balance slopes are not linear. This indicates issues with the measurement. Therefore, the respective measurements likely result in wrong parameter estimations.
+# For all experiments, except for pH 4, 45°C and pH 4.5, 35°C, the product and substrate is, qualitatively, in balance over the reaction time-course (Fig. 9). Mass balances, differing from 0 uM originate from differing substrate concentration in the enzyme reaction and the substrate control. In the reactions at pH 4, 45°C and pH 4.5, 35°C the mass balance slopes are not linear. This indicates issues with the measurement. Therefore, the respective measurements likely result in wrong parameter estimations.
 
 # ## Kinetic parameter estimation
 # 
@@ -370,7 +370,7 @@ plt.tight_layout()
 # _Fig. 11: Experimental data and fitted irreversible Michaelis-Menten model with time-dependent enzyme inactivation of SLAC reactions under various conditions._
 # 
 # Experimental data as well as the fitted model are visualized in Fig 11. Based on the reaction slopes, no catalytic activity was observed for reactions at pH 5 or higher.
-# As in the mass balance analysis, the reactions at pH 4, 45°C and pH 4.5, 35°C differed from other experiments with identical pH. In both cases, all applied substrate concentration were higher than intended in the design of the experiment. Furthermore, the resulting parameter estimates have a high uncertainty. Therefore, the respective measurements were excluded from further analysis. Additionally, the results from pH 5.5, 35°C were excluded, since the uncertainty of the parameters could not be estimated. All calculated kinetic parameters are listed in the table below.
+# As in the mass balance analysis, the reactions at pH 4, 45°C and pH 4.5, 35°C differed from other experiments with identical pH. In both cases, all applied substrate concentrations were higher than intended in the design of the experiment. Furthermore, the resulting parameter estimates have a high uncertainty. Therefore, the respective measurements were excluded from further analysis. Additionally, the results from pH 5.5, 35°C were excluded, since the uncertainty of the parameters could not be estimated. All calculated kinetic parameters are listed in the table below.
 
 # In[13]:
 
@@ -516,7 +516,7 @@ p = pval.applymap(lambda x: ''.join(['*' for t in [.05] if x<=t]))
 rho.round(2).astype(str) + p
 
 
-# The above table shows correlation between between kinetic parameters and experimental conditions. Thereby, significant (p < 0.05) correlations are labeled with '*'. The half life of SLAC is significantly correlated to $\frac{k_{cat}}{K_{m}}$ as well as to pH. Due to correlation between $k_{cat}$ and $K_{m}$, the enzyme's half life is also correlated to $K_{m}$. Multiple reasons might be the reason for this observation. On the one hand, the observed correlation might be of technical origin. As such, the system of ordinary differential equations, describing the change in substrate and enzyme concentration, are not an accurate model for the reaction system. Therefore, high cross-correlation occurs, since individual observations cannot be attributed to individual parameters. On the other hand, enzyme activity and enzyme inactivation might be causally related. In this case, the formed ABTS radical might inactivate the enzyme by potential suicide inhibition, or the enzyme deteriorates through catalysis.
+# The above table shows correlation between kinetic parameters and experimental conditions. Thereby, significant (p < 0.05) correlations are labeled with '*'. The half life of SLAC is significantly correlated to $\frac{k_{cat}}{K_{m}}$ as well as to pH. Due to correlation between $k_{cat}$ and $K_{m}$, the enzyme's half life is also correlated to $K_{m}$. Multiple reasons might be the reason for this observation. On the one hand, the observed correlation might be of technical origin. As such, the system of ordinary differential equations, describing the change in substrate and enzyme concentration, are not an accurate model for the reaction system. Therefore, high cross-correlation occurs, since individual observations cannot be attributed to individual parameters. On the other hand, enzyme activity and enzyme inactivation might be causally related. In this case, the formed ABTS radical might inactivate the enzyme by potential suicide inhibition, or the enzyme deteriorates through catalysis.
 # 
 # ## Conclusion
 # 
