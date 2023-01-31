@@ -4,18 +4,17 @@
 format: jb-book
 root: welcome
 chapters:
-- file: declaration
-- file: acknowledgements
-- file: abstract
-- file: introduction
-- file: methods
-- file: results
-  sections:
-    - file: scenarios/chymotrypsin_inhibition
-    - file: scenarios/glycosidase_inhibition
-    - file: scenarios/SLAC_kinetic_characterization
-    - file: scenarios/enzyme_inactivation
-- file: discussion
-- file: conclusion
-- file: references
-
+  - file: declaration
+  - file: acknowledgements
+  - file: abstract
+  - file: introduction
+  - file: methods
+  - file: results
+    sections:
+      - file: scenarios/chymotrypsin_inhibition
+      - file: scenarios/glycosidase_inhibition
+      - file: scenarios/SLAC_kinetic_characterization
+      - file: scenarios/enzyme_inactivation
+  - file: discussion
+  - file: conclusion
+  - file: references

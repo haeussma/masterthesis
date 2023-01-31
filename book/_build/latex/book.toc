@@ -1,0 +1,88 @@
+\selectlanguage *{english}
+\contentsline {chapter}{\numberline {1}Declaration of authorship}{1}{chapter.1}%
+\contentsline {chapter}{\numberline {2}Acknowledgements}{2}{chapter.2}%
+\contentsline {chapter}{\numberline {3}Abstract}{3}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Abstract (deutsch)}{3}{section.3.1}%
+\contentsline {chapter}{\numberline {4}Introduction}{4}{chapter.4}%
+\contentsline {chapter}{\numberline {5}Methods}{6}{chapter.5}%
+\contentsline {section}{\numberline {5.1}EnzymeML and PyEnzyme}{6}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}Creation of EnzymeML documents}{6}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.2}Saving of modeling results}{6}{subsection.5.1.2}%
+\contentsline {section}{\numberline {5.2}CaliPytion}{6}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Data model}{7}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Initialization}{7}{subsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.2.3}Code availability}{8}{subsection.5.2.3}%
+\contentsline {section}{\numberline {5.3}EnzymePynetics}{8}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Data model}{8}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}Kinetic models}{8}{subsection.5.3.2}%
+\contentsline {subsection}{\numberline {5.3.3}Run parameter estimation}{9}{subsection.5.3.3}%
+\contentsline {subsection}{\numberline {5.3.4}Code availability}{10}{subsection.5.3.4}%
+\contentsline {section}{\numberline {5.4}Model comparison}{10}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Jupyter Notebook}{11}{section.5.5}%
+\contentsline {section}{\numberline {5.6}Jupyter Book}{11}{section.5.6}%
+\contentsline {chapter}{\numberline {6}Results}{12}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Workflow for enzyme kinetics parameter estimation}{12}{section.6.1}%
+\contentsline {subsection}{\numberline {6.1.1}CaliPytion}{13}{subsection.6.1.1}%
+\contentsline {subsection}{\numberline {6.1.2}EnzymePynetics}{13}{subsection.6.1.2}%
+\contentsline {section}{\numberline {6.2}Scenario\sphinxhyphen {}driven workflow development}{13}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Data analysis with Jupyter Notebooks}{14}{section.6.3}%
+\contentsline {section}{\numberline {6.4}Scenario A: Chymotrypsin inhibiton by an \sphinxstyleemphasis {in silico} designed albumin fusion protein}{14}{section.6.4}%
+\contentsline {subsection}{\numberline {6.4.1}Project background}{14}{subsection.6.4.1}%
+\contentsline {subsubsection}{Experimental design}{14}{subsubsection*.2}%
+\contentsline {subsubsection}{Data management}{15}{subsubsection*.3}%
+\contentsline {subsection}{\numberline {6.4.2}Data preparation}{15}{subsection.6.4.2}%
+\contentsline {subsubsection}{Imports}{15}{subsubsection*.4}%
+\contentsline {subsubsection}{Concentration calculation}{15}{subsubsection*.5}%
+\contentsline {subsubsection}{Experimental data}{16}{subsubsection*.6}%
+\contentsline {subsection}{\numberline {6.4.3}Comparability of the experiments}{17}{subsection.6.4.3}%
+\contentsline {subsection}{\numberline {6.4.4}Determination and comparison of \(K_{i}\)}{19}{subsection.6.4.4}%
+\contentsline {subsection}{\numberline {6.4.5}Save modeling results}{21}{subsection.6.4.5}%
+\contentsline {section}{\numberline {6.5}Scenario B: α\sphinxhyphen {}glucosidase inhibition by fucoidan}{22}{section.6.5}%
+\contentsline {subsection}{\numberline {6.5.1}Project background}{22}{subsection.6.5.1}%
+\contentsline {subsubsection}{Experimental design}{23}{subsubsection*.7}%
+\contentsline {subsection}{\numberline {6.5.2}Data preparation}{23}{subsection.6.5.2}%
+\contentsline {subsubsection}{Imports and parser function}{23}{subsubsection*.8}%
+\contentsline {subsubsection}{Data quality}{26}{subsubsection*.9}%
+\contentsline {subsubsection}{Concentration calculation}{32}{subsubsection*.10}%
+\contentsline {subsection}{\numberline {6.5.3}Parameter estimation}{33}{subsection.6.5.3}%
+\contentsline {subsection}{\numberline {6.5.4}Project discussion}{37}{subsection.6.5.4}%
+\contentsline {subsection}{\numberline {6.5.5}Save modeling results}{37}{subsection.6.5.5}%
+\contentsline {section}{\numberline {6.6}Scenario C: SLAC characterization}{38}{section.6.6}%
+\contentsline {subsection}{\numberline {6.6.1}Project background}{38}{subsection.6.6.1}%
+\contentsline {subsubsection}{Experimental design}{38}{subsubsection*.11}%
+\contentsline {subsubsection}{Data management}{38}{subsubsection*.12}%
+\contentsline {subsection}{\numberline {6.6.2}Data preparation}{39}{subsection.6.6.2}%
+\contentsline {subsubsection}{Imports}{39}{subsubsection*.13}%
+\contentsline {subsubsection}{Experimental data}{39}{subsubsection*.14}%
+\contentsline {subsubsection}{Concentration calculation}{41}{subsubsection*.15}%
+\contentsline {subsection}{\numberline {6.6.3}Quality control through mass balance analysis}{46}{subsection.6.6.3}%
+\contentsline {subsection}{\numberline {6.6.4}Kinetic parameter estimation}{50}{subsection.6.6.4}%
+\contentsline {subsubsection}{Choice of kinetic model}{50}{subsubsection*.16}%
+\contentsline {subsubsection}{Parameter estimates for \(k_{cat}\) and \(K_{m}\)}{59}{subsubsection*.17}%
+\contentsline {subsubsection}{Time\sphinxhyphen {}dependent enzyme inactivation}{60}{subsubsection*.18}%
+\contentsline {subsection}{\numberline {6.6.5}Project discussion}{62}{subsection.6.6.5}%
+\contentsline {subsubsection}{Data management}{62}{subsubsection*.19}%
+\contentsline {subsubsection}{Correlation between parameters}{63}{subsubsection*.20}%
+\contentsline {subsubsection}{Enzyme inactivation}{63}{subsubsection*.21}%
+\contentsline {subsection}{\numberline {6.6.6}Save modeling results}{63}{subsection.6.6.6}%
+\contentsline {section}{\numberline {6.7}Scenario D: Time\sphinxhyphen {}dependent enzyme inactivation}{64}{section.6.7}%
+\contentsline {subsection}{\numberline {6.7.1}Project background}{64}{subsection.6.7.1}%
+\contentsline {subsubsection}{Experimental design}{65}{subsubsection*.22}%
+\contentsline {subsubsection}{Experimental data}{65}{subsubsection*.23}%
+\contentsline {subsection}{\numberline {6.7.2}Adsorption of enzyme to micro titer plate surface}{65}{subsection.6.7.2}%
+\contentsline {subsubsection}{Imports}{65}{subsubsection*.24}%
+\contentsline {subsubsection}{Calculation of inactivation rate}{66}{subsubsection*.25}%
+\contentsline {subsection}{\numberline {6.7.3}Enzyme kinetics experiment}{68}{subsection.6.7.3}%
+\contentsline {subsubsection}{Experimental data}{68}{subsubsection*.26}%
+\contentsline {subsection}{\numberline {6.7.4}Kinetic parameter estimation}{71}{subsection.6.7.4}%
+\contentsline {subsubsection}{Quality control through modeling}{71}{subsubsection*.27}%
+\contentsline {subsubsection}{Parameter estimation with and without considering enzyme inactivation}{73}{subsubsection*.28}%
+\contentsline {subsection}{\numberline {6.7.5}Project discussion}{75}{subsection.6.7.5}%
+\contentsline {subsubsection}{Data quality}{75}{subsubsection*.29}%
+\contentsline {subsubsection}{Enzyme inactivation}{76}{subsubsection*.30}%
+\contentsline {subsection}{\numberline {6.7.6}Save modeling results}{76}{subsection.6.7.6}%
+\contentsline {chapter}{\numberline {7}Discussion}{78}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Data integrity of the analysis workflow}{78}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Repeatability, reproducibility and FAIRness of the analysis workflow}{80}{section.7.2}%
+\contentsline {chapter}{\numberline {8}Conclusion and Outlook}{81}{chapter.8}%
+\contentsline {chapter}{Bibliography}{82}{chapter*.31}%

@@ -3,8 +3,6 @@
 
 title: "From raw data to kinetic parameters: an EnzymeML-based workflow for reproducible enzyme kinetics"
 author: Max Häußler
-logo: ../images/logo.png
-copyright: "2022"
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
@@ -17,8 +15,6 @@ latex:
     targetname: book.tex
 
 # Add a bibtex file so that we can create citations
-bibtex_bibfiles:
-  - references.bib
 
 # Information about where the book exists on the web
 repository:
@@ -33,8 +29,17 @@ html:
   use_repository_button: true
 
 sphinx:
+  local_extensions:
+    apastyle: _citations/
+    bracket_citation_style: _citations/
   config:
-    bibtex_reference_style: author_year
+    bibtex_default_style: myapastyle
+    bibtex_reference_style: author_year_round
+    html_show_copyright: false
+
+bibtex_reference_style: author_year_round
+bibtex_default_style: myapastyle
+bibtex_bibfiles: references.bib
 
 parse:
   myst_enable_extensions:
