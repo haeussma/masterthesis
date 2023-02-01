@@ -491,7 +491,7 @@ plot(df, xdata="kcat/Km [1/s * uM]", ydata="half life [min]", xerror="kcat/Km st
 plt.show()
 
 
-# _Fig. 13: SLAC half-life in relation to catalytic efficiency_
+# _Fig. 13: SLAC half-life in relation to catalytic efficiency._
 # 
 # The enzyme's calculated half life was between 8 - 18 min for reactions at pH 3 and pH 3.5, whereas enzyme reactions at higher pH values showed a half life between 15 - 35 min. Generally, reactions with higher catalytic efficiency showed a shorter half life compared to reactions with lower catalytic efficiency (Fig 13).
 # In order to check for corrections between $k_{inact}$, $k_{cat}$, $K_{m}$, $\frac{k_{cat}}{K_{m}}$, as well as the reaction temperature and pH, a correlation analysis was conducted across all datasets.
