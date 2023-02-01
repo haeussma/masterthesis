@@ -56,8 +56,8 @@
 \contentsline {subsubsection}{Choice of kinetic model}{51}{subsubsection*.19}%
 \contentsline {subsubsection}{Parameter estimates for \(k_{cat}\) and \(K_{m}\)}{60}{subsubsection*.20}%
 \contentsline {subsubsection}{Time\sphinxhyphen {}dependent enzyme inactivation}{61}{subsubsection*.21}%
-\contentsline {subsection}{\numberline {3.6.5}Project discussion}{63}{subsection.3.6.5}%
-\contentsline {subsubsection}{Data management}{63}{subsubsection*.22}%
+\contentsline {subsection}{\numberline {3.6.5}Project discussion}{64}{subsection.3.6.5}%
+\contentsline {subsubsection}{Data management}{64}{subsubsection*.22}%
 \contentsline {subsubsection}{Correlation between parameters}{64}{subsubsection*.23}%
 \contentsline {subsubsection}{Enzyme inactivation}{64}{subsubsection*.24}%
 \contentsline {subsection}{\numberline {3.6.6}Save modeling results}{64}{subsection.3.6.6}%
