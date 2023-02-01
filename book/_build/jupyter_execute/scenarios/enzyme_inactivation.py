@@ -123,11 +123,11 @@ axes[1].text(1.1, 1.1, string.ascii_uppercase[1], transform=axes[0].transAxes,
 plt.show()
 
 
-# _Fig. 13: Experimental data and regression results of CotA reaction with different enzyme incubation times._
+# _Fig. 14: Experimental data and regression results of CotA reaction with different enzyme incubation times._
 # 
-# Enzyme reactions without prior incubation showed the fastest reaction rate, whereas all reactions with prior incubation showed an approximately halved reaction rate (Fig. 13A). Thereby, reactions with longer incubation time showed gradually reduced reaction rates with increased incubation time. Enzyme reactions without incubation showed large deviations across all replicates. This presumably resulted from inhomogeneous mixing or deviating enzyme concentration due to the small volume of enzyme solution, which was used to start the reactions.  
+# Enzyme reactions without prior incubation showed the fastest reaction rate, whereas all reactions with prior incubation showed an approximately halved reaction rate (Fig. 14A). Thereby, reactions with longer incubation time showed gradually reduced reaction rates with increased incubation time. Enzyme reactions without incubation showed large deviations across all replicates. This presumably resulted from inhomogeneous mixing or deviating enzyme concentration due to the small volume of enzyme solution, which was used to start the reactions.  
 # Since the true reaction rate of reactions without prior incubation was highly uncertain and showed mixing issues, the respective data was not used to estimate the enzyme's inactivation rate.
-# Based on linear regression of the initial reaction rates, excluding the reaction without prior incubation, the enzyme activity is approximately halved after 105 min (Fig. 13B). This assumes validity of extrapolation.
+# Based on linear regression of the initial reaction rates, excluding the reaction without prior incubation, the enzyme activity is approximately halved after 105 min (Fig. 14B). This assumes validity of extrapolation.
 # 
 # ## Enzyme kinetics experiment
 # 
@@ -215,10 +215,10 @@ axes[1].text(1.1, 1.1, string.ascii_uppercase[1], transform=axes[0].transAxes,
 fig.show()
 
 
-# _Fig 14. ABTS radical concentration over the time-course of CotA reaction._
+# _Fig 15. ABTS radical concentration over the time-course of CotA reaction._
 # 
-# The provided reaction data showed large deviations between individual repeats of reactions with identical initial ABTS concentrations. Especially for initial ABTS concentrations above 0.1 mM (Fig. 14A).
-# Furthermore, visual analysis of the initial measurement points indicated that reactions with an initial substrate concentration of 0.1 mM had an increased enzyme concentration compared to others. This is evident, because the mentioned reactions show the highest concentration at the initial measurement time (Fig. 14B). The order of initial measurement points is expected to reflect the initial substrate concentrations, since the substrate slightly absorbs at the product detection wavelength. The substrate of the mentioned reaction was likely applied correctly, since the final concentration at 70 min is between reactions with the next lower and next higher initial substrate concentration.
+# The provided reaction data showed large deviations between individual repeats of reactions with identical initial ABTS concentrations. Especially for initial ABTS concentrations above 0.1 mM (Fig. 15A).
+# Furthermore, visual analysis of the initial measurement points indicated that reactions with an initial substrate concentration of 0.1 mM had an increased enzyme concentration compared to others. This is evident, because the mentioned reactions show the highest concentration at the initial measurement time (Fig. 15B). The order of initial measurement points is expected to reflect the initial substrate concentrations, since the substrate slightly absorbs at the product detection wavelength. The substrate of the mentioned reaction was likely applied correctly, since the final concentration at 70 min is between reactions with the next lower and next higher initial substrate concentration.
 # 
 # ## Kinetic parameter estimation
 # 
@@ -257,9 +257,9 @@ axes[1].text(1.1, 1.1, string.ascii_uppercase[1], transform=axes[0].transAxes,
 plt.tight_layout()
 
 
-# _Fig 15: Identification of systematic deviations through kinetic modeling._
+# _Fig 16: Identification of systematic deviations through kinetic modeling._
 # 
-# By excluding the mentioned measurements with systematic issues, the model fit was improved (Fig 15B). Additionally, the correlation between parameter estimates for $k_{cat}$ and $K_{m}$ was reduced from *r<sup>2</sup>* = 0.518 to 0.204.
+# By excluding the mentioned measurements with systematic issues, the model fit was improved (Fig 16B). Additionally, the correlation between parameter estimates for $k_{cat}$ and $K_{m}$ was reduced from *r<sup>2</sup>* = 0.518 to 0.204.
 # ### Parameter estimation with and without considering enzyme inactivation
 # 
 
@@ -281,7 +281,7 @@ display(results.style.set_table_attributes('style="font-size: 12px"'))
 # All models with an additional parameter for enzyme inactivation resulted in lower AIC values, indicating a better fit of the experimental data to inactivation models.  
 # When comparing models, an additional parameter in a model is informative, if the difference in AIC between the two models is larger than 2 . Accordingly, two additional parameters in a model compared to another model are informative, if the difference in AIC is larger than 4 {cite}`arnold2010uninformative`. Thus, the additional parameters in inhibition models considering enzyme activation were uninformative and did not enhance the fit quality. Additionally, the mentioned models showed high standard deviations above 80% for the respective $K_{i}$ estimates. 
 # Without considering enzyme inactivation, product inhibition models were favoured over the irreversible Michaelis-Menten model, 
-# whereas irreversible Michaelis-Menten with enzyme inactivation showed the best fit statistic compared to all other models (Fig 16A). Thereby, $k_{cat}$ was estimated to 3.003 min<sup>-1</sup> ± 0.77% whereas 30 µM ± 1.99%  was estimated for $K_{m}$. The respective half life of CotA was estimated at 95 min ± 4 min using equation [](enzyme_halflife), whereas $k_{cat}$ and $k_{inact}$ were highly correlated (*r<sup>2</sup>* > 0.95). Irreversible Michelis-Menten model without enzyme concentration did not fit the measurement data, since the reaction rate is initially underestimated, and overestimated in later stages of the reaction (Fig 16B).  
+# whereas irreversible Michaelis-Menten with enzyme inactivation showed the best fit statistic compared to all other models (Fig 17A). Thereby, $k_{cat}$ was estimated to 3.003 min<sup>-1</sup> ± 0.77% whereas 30 µM ± 1.99%  was estimated for $K_{m}$. The respective half life of CotA was estimated at 95 min ± 4 min using equation [](enzyme_halflife), whereas $k_{cat}$ and $k_{inact}$ were highly correlated (*r<sup>2</sup>* > 0.95). Irreversible Michelis-Menten model without enzyme concentration did not fit the measurement data, since the reaction rate is initially underestimated, and overestimated in later stages of the reaction (Fig 17B).  
 
 # In[ ]:
 
@@ -310,9 +310,9 @@ axes[1][1].set_xlabel("time [min]")
 plt.tight_layout()
 
 
-# _Fig. 16: Different kinetic models fitted to CotA reaction data_
+# _Fig. 17: Different kinetic models fitted to CotA reaction data_
 # 
-# Out of the models without enzyme inactivation, product inhibition models showed the lowest AIC. Qualitatively, the inhibition models  described the progress curve of the reaction (Fig. 16C and 16D) similarly to the best fitting model (Fig. 16A)
+# Out of the models without enzyme inactivation, product inhibition models showed the lowest AIC. Qualitatively, the inhibition models  described the progress curve of the reaction (Fig. 17C and 17D) similarly to the best fitting model (Fig. 17A)
 # 
 # ## Project discussion
 # 
@@ -323,7 +323,7 @@ plt.tight_layout()
 # ### Enzyme inactivation 
 # The observed time-dependent decrease in enzyme activity can be explained by enzyme inactivation and product inhibition. In the case of time-dependent enzyme inactivation, the catalytic activity decreases, since the catalyst becomes inactive. Thereby, the decrease in relative reaction rate is independent from product concentration.
 # In the case of product inhibition, the formed product reduces the reaction rate. Hence, the observed enzyme inactivation is dependent on product concentration.
-# Since both phenomena express themselves in an apparent decrease of reaction rate, they bare the potential to be confused, as the results of the enzyme kinetics experiment show. Visually, product inhibition models without enzyme inactivation and irreversible Michaelis-Menten model with enzyme inactivation are able to qualitatively describe the observed progress curve (Fig 16C, 16D). 
+# Since both phenomena express themselves in an apparent decrease of reaction rate, they bare the potential to be confused, as the results of the enzyme kinetics experiment show. Visually, product inhibition models without enzyme inactivation and irreversible Michaelis-Menten model with enzyme inactivation are able to qualitatively describe the observed progress curve (Fig 17C, 17D). 
 # 
 # Both independent and methodologically different experiments resulted in a comparable time period, in which the enzyme's activity is halved. Whereas in the inactivation experiment the enzyme's activity was halved after approximately 105 min, half the activity was left in the enzyme kinetics experiment after 95 min. Due to the design of the incubation experiment, the loss of enzyme activity showed to be independent from the catalysis itself. In consequence, product inhibition is not a conclusive explanation for the observed behavior. Product inhibition is further disfavored based on the modeling results, since the AIC of all inhibition models was higher compared the irreversible Michaelis-Menten model with time-dependent enzyme inactivation.
 # 

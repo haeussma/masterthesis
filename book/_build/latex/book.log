@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2023.1.25)  31 JAN 2023 10:10
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2023.1.25)  31 JAN 2023 13:16
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1671,282 +1671,276 @@ LaTeX Info: Redefining \rmfamily on input line 1.
 LaTeX Info: Redefining \sffamily on input line 1.
 LaTeX Info: Redefining \ttfamily on input line 1.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 8.40088pt on input line 5.
+(Font)              scaled to size 8.40088pt on input line 4.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 6.00064pt on input line 5.
+(Font)              scaled to size 6.00064pt on input line 4.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 8.3991pt on input line 5.
+(Font)              scaled to size 8.3991pt on input line 4.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 5.99936pt on input line 5.
-)
-\tf@toc=\write7
-\openout7 = `book.toc'.
-
+(Font)              scaled to size 5.99936pt on input line 4.
  [1
 
 
 
+] [2])
+\tf@toc=\write7
+\openout7 = `book.toc'.
+
+ [3] [1
+
+
+] [2
+
+] [3
+
 ]
 Chapter 1.
-[1
-
-
-]
-Chapter 2.
-[2
-
-]
-Chapter 3.
-[3
-
-]
-Chapter 4.
 [4
 
 ] [5]
-Chapter 5.
+Chapter 2.
 [6
 
 ] [7] [8] [9] [10] [11]
-Chapter 6.
+Chapter 3.
 File: concept_workflow.png Graphic file (type bmp)
 <concept_workflow.png>
 [12
 
 ] [13] [14]
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 5.00053pt on input line 422.
+(Font)              scaled to size 5.00053pt on input line 421.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 4.99947pt on input line 422.
+(Font)              scaled to size 4.99947pt on input line 421.
  [15]
 File: chymotrypsin_inhibition_3_2.png Graphic file (type bmp)
 <chymotrypsin_inhibition_3_2.png>
  [16] [17]
+Underfull \vbox (badness 2626) detected at line 565
+ []
+
+
+Overfull \vbox (4.73943pt too high) detected at line 565
+ []
+
+[18]
 File: chymotrypsin_inhibition_8_4.png Graphic file (type bmp)
 <chymotrypsin_inhibition_8_4.png>
- [18]
+ [19]
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 10.00107pt on input line 602.
+(Font)              scaled to size 10.00107pt on input line 601.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 7.00075pt on input line 602.
+(Font)              scaled to size 7.00075pt on input line 601.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 9.99893pt on input line 602.
+(Font)              scaled to size 9.99893pt on input line 601.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 6.99925pt on input line 602.
+(Font)              scaled to size 6.99925pt on input line 601.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 602.
+(hyperref)                removing `math shift' on input line 601.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 602.
+(hyperref)                removing `subscript' on input line 601.
 
 
-Overfull \vbox (0.77234pt too high) detected at line 641
+Overfull \vbox (0.77234pt too high) detected at line 640
  []
 
-[19]
+[20]
 File: chymotrypsin_inhibition_10_4.png Graphic file (type bmp)
 <chymotrypsin_inhibition_10_4.png>
- [20]
-Overfull \vbox (2.70023pt too high) detected at line 717
+ [21]
+Overfull \vbox (2.70023pt too high) detected at line 716
  []
 
-[21] [22]
-Overfull \vbox (13.3661pt too high) detected at line 803
+[22] [23] [24] [25]
+Underfull \vbox (badness 10000) detected at line 865
  []
 
-[23]
-Underfull \vbox (badness 10000) detected at line 866
- []
-
-[24]
-Underfull \vbox (badness 10000) detected at line 866
- []
-
-
-Underfull \vbox (badness 10000) detected at line 866
- []
-
-[25]
+[26]
 File: glycosidase_inhibition_5_1.png Graphic file (type bmp)
 <glycosidase_inhibition_5_1.png>
- [26]
+ [27]
 File: glycosidase_inhibition_5_3.png Graphic file (type bmp)
 <glycosidase_inhibition_5_3.png>
- [27]
+ [28]
 File: glycosidase_inhibition_5_5.png Graphic file (type bmp)
 <glycosidase_inhibition_5_5.png>
- [28]
+ [29]
 File: glycosidase_inhibition_5_7.png Graphic file (type bmp)
 <glycosidase_inhibition_5_7.png>
- [29]
+ [30]
 File: glycosidase_inhibition_5_9.png Graphic file (type bmp)
 <glycosidase_inhibition_5_9.png>
- [30] [31]
+ [31] [32]
 File: glycosidase_inhibition_9_2.png Graphic file (type bmp)
 <glycosidase_inhibition_9_2.png>
- [32] [33] [34]
+ [33] [34] [35]
 File: glycosidase_inhibition_14_0.png Graphic file (type bmp)
 <glycosidase_inhibition_14_0.png>
- [35] [36] [37]
+ [36] [37] [38]
 File: workflow_SLAC.png Graphic file (type bmp)
 <workflow_SLAC.png>
- [38] [39]
-Underfull \vbox (badness 10000) detected at line 1278
+ [39] [40]
+Underfull \vbox (badness 10000) detected at line 1277
  []
 
 
-Underfull \vbox (badness 10000) detected at line 1278
+Underfull \vbox (badness 10000) detected at line 1277
  []
 
-[40]
-Underfull \hbox (badness 7777) in paragraph at lines 1287--1290
+[41]
+Underfull \hbox (badness 7777) in paragraph at lines 1286--1289
 \TU/FreeSerif(0)/m/n/12 Calibration data was loaded and converted into individu
 al instances of the calibration
  []
 
-[41]
+[42]
 File: SLAC_kinetic_characterization_6_0.png Graphic file (type bmp)
 <SLAC_kinetic_characterization_6_0.png>
- [42] [43]
-Overfull \vbox (13.72992pt too high) detected at line 1421
+ [43] [44]
+Overfull \vbox (13.72992pt too high) detected at line 1420
  []
 
-[44]
-Underfull \vbox (badness 10000) detected at line 1421
- []
-
-
-Overfull \vbox (10.98987pt too high) detected at line 1421
- []
-
-[45] [46]
-Underfull \vbox (badness 10000) detected at line 1520
+[45]
+Underfull \vbox (badness 10000) detected at line 1420
  []
 
 
-Underfull \vbox (badness 10000) detected at line 1520
+Overfull \vbox (10.98987pt too high) detected at line 1420
  []
 
-[47]
+[46] [47]
+Underfull \vbox (badness 10000) detected at line 1519
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1519
+ []
+
+[48]
 File: SLAC_kinetic_characterization_10_0.png Graphic file (type bmp)
 <SLAC_kinetic_characterization_10_0.png>
- [48] [49]
-Overfull \vbox (8.866pt too high) detected at line 1572
+ [49] [50]
+Overfull \vbox (8.866pt too high) detected at line 1571
  []
 
-[50]
+[51]
 File: SLAC_kinetic_characterization_13_4.png Graphic file (type bmp)
 <SLAC_kinetic_characterization_13_4.png>
- [51]
-Overfull \vbox (16.23454pt too high) detected at line 1649
+ [52]
+Overfull \vbox (16.23454pt too high) detected at line 1648
  []
 
-[52]
+[53]
 File: SLAC_kinetic_characterization_15_0.png Graphic file (type bmp)
 <SLAC_kinetic_characterization_15_0.png>
- [53] [54]
-Underfull \vbox (badness 10000) detected at line 1738
- []
-
-[55]
-Underfull \vbox (badness 10000) detected at line 1831
+ [54] [55]
+Underfull \vbox (badness 10000) detected at line 1737
  []
 
 [56]
-Underfull \vbox (badness 10000) detected at line 1831
- []
-
-
-Underfull \vbox (badness 10000) detected at line 1831
+Underfull \vbox (badness 10000) detected at line 1830
  []
 
 [57]
-Underfull \vbox (badness 10000) detected at line 1831
+Underfull \vbox (badness 10000) detected at line 1830
  []
 
 
-Underfull \vbox (badness 10000) detected at line 1831
+Underfull \vbox (badness 10000) detected at line 1830
  []
 
 [58]
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1839.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 1839.
+Underfull \vbox (badness 10000) detected at line 1830
+ []
 
 
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1839.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 1839.
+Underfull \vbox (badness 10000) detected at line 1830
+ []
 
 [59]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1838.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `subscript' on input line 1838.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1838.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `subscript' on input line 1838.
+
+[60]
 File: SLAC_kinetic_characterization_19_0.png Graphic file (type bmp)
 <SLAC_kinetic_characterization_19_0.png>
 
-Overfull \vbox (4.3137pt too high) detected at line 1905
+Overfull \vbox (4.3137pt too high) detected at line 1904
  []
 
-[60]
+[61]
 File: SLAC_kinetic_characterization_21_0.png Graphic file (type bmp)
 <SLAC_kinetic_characterization_21_0.png>
 
-Overfull \vbox (2.63895pt too high) detected at line 1941
+Overfull \vbox (2.63895pt too high) detected at line 1940
  []
 
-[61] [62] [63] [64] [65] [66] [67]
-File: enzyme_inactivation_3_1.png Graphic file (type bmp)
-<enzyme_inactivation_3_1.png>
+[62] [63] [64] [65] [66] [67]
+Underfull \vbox (badness 10000) detected at line 2188
+ []
 
-Overfull \vbox (15.45071pt too high) detected at line 2299
+
+Underfull \vbox (badness 10000) detected at line 2188
  []
 
 [68]
+File: enzyme_inactivation_3_1.png Graphic file (type bmp)
+<enzyme_inactivation_3_1.png>
+ [69] [70]
 Underfull \vbox (badness 10000) detected at line 2299
  []
 
 
-Overfull \vbox (10.99019pt too high) detected at line 2299
- []
-
-[69]
-File: enzyme_inactivation_5_0.png Graphic file (type bmp)
-<enzyme_inactivation_5_0.png>
- [70]
-Overfull \vbox (2.48486pt too high) detected at line 2359
+Underfull \vbox (badness 10000) detected at line 2299
  []
 
 [71]
-File: enzyme_inactivation_7_0.png Graphic file (type bmp)
-<enzyme_inactivation_7_0.png>
+File: enzyme_inactivation_5_0.png Graphic file (type bmp)
+<enzyme_inactivation_5_0.png>
  [72]
-
-LaTeX Warning: Hyper reference `scenarios/SLAC_kinetic_characterization:equatio
-n-enzyme-halflife' on page 73 undefined on input line 2412.
+Overfull \vbox (2.48486pt too high) detected at line 2359
+ []
 
 [73]
+File: enzyme_inactivation_7_0.png Graphic file (type bmp)
+<enzyme_inactivation_7_0.png>
+ [74]
+
+LaTeX Warning: Hyper reference `scenarios/SLAC_kinetic_characterization:equatio
+n-enzyme-halflife' on page 75 undefined on input line 2412.
+
+[75]
 File: enzyme_inactivation_11_0.png Graphic file (type bmp)
 <enzyme_inactivation_11_0.png>
- [74] [75] [76] [77]
-Chapter 7.
-[78
+ [76] [77] [78] [79]
+Chapter 4.
+[80
 
-] [79] [80]
-Chapter 8.
-[81
+] [81] [82]
+Chapter 5.
+[83
 
-] [82
+] [84
 
 
-] [83]
+] [85]
 Underfull \hbox (badness 10000) in paragraph at lines 2675--2677
 []\TU/FreeSerif(0)/m/n/12 Engelbert Buxbaum. \TU/FreeSerif(0)/m/it/12 Enzyme Ki
 netics: Special Cases\TU/FreeSerif(0)/m/n/12 , pages 185–191.
@@ -1999,7 +1993,7 @@ braces):
 >  {english/babelname}  =>  {american}
 >  {english/localnumeral}  =>  {polyglossia@C@localnumeral}
 >  {english/Localnumeral}  =>  {polyglossia@C@localnumeral}.
-[84] (./book.aux
+[86] (./book.aux
 LaTeX Info: Redefining \rmfamily on input line 19.
 LaTeX Info: Redefining \sffamily on input line 19.
 LaTeX Info: Redefining \ttfamily on input line 19.
@@ -2011,15 +2005,15 @@ LaTeX Warning: There were undefined references.
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
 Package rerunfilecheck Info: File `book.out' has not changed.
-(rerunfilecheck)             Checksum: AEEA788B07F789C4C24FFE13EDD97E69;7263.
+(rerunfilecheck)             Checksum: 5E6A6C6CA5A1C3C05A06FAA49380357F;7033.
  ) 
 Here is how much of TeX's memory you used:
- 43269 strings out of 476179
- 1003320 string characters out of 5809544
+ 43266 strings out of 476179
+ 1003275 string characters out of 5809544
  1782620 words of memory out of 5000000
- 63189 multiletter control sequences out of 15000+600000
+ 63186 multiletter control sequences out of 15000+600000
  478127 words of font info for 129 fonts, out of 8000000 for 9000
  1349 hyphenation exceptions out of 8191
- 99i,18n,115p,1650b,2303s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 99i,18n,115p,1651b,2303s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on book.pdf (86 pages).
+Output written on book.pdf (90 pages).
